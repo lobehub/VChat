@@ -1,7 +1,8 @@
-import { Layout, ThemeProvider } from '@lobehub/ui';
+import { ThemeProvider } from '@lobehub/ui';
 import VrmViewer from '@/components/VrmViewer';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import SideNav from '@/components/SideNav';
 import { useThemeStore } from '@/store/useThemeStore';
 
 export default function Home() {
@@ -10,9 +11,12 @@ export default function Home() {
     <ThemeProvider themeMode={themeMode}>
       <Header />
       <main>
-        <VrmViewer />
+        <div style={{ display: 'flex', height: '100%' }}>
+          <SideNav />
+          <VrmViewer />
+        </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </ThemeProvider>
   );
 }

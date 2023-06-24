@@ -9,7 +9,7 @@ interface Store {
 export const useThemeStore = create<Store>()(
   persist(
     (set) => ({
-      themeMode: 'auto' as ThemeMode,
+      themeMode: 'dark' as ThemeMode,
       setThemeMode: (themeMode: ThemeMode) => set({ themeMode }),
     }),
     { name: 'VIDOL_THEME_MODE' },
