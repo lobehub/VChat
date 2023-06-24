@@ -4,42 +4,19 @@ const columns: FooterProps['columns'] = [
   {
     items: [
       {
-        description: 'AIGC Components',
+        description: 'Vidol Ghost',
         openExternal: true,
-        title: '🤯 Lobe UI',
-        url: 'https://github.com/lobehub/lobe-ui',
+        title: 'Ghost',
+        url: 'https://github.com/v-idol/ghost',
       },
       {
-        description: 'Chatbot Client',
+        description: 'Vidol Shell',
         openExternal: true,
-        title: '🤯 Lobe Chat',
-        url: 'https://github.com/lobehub/lobe-chat',
-      },
-      {
-        description: 'Node Flow Editor',
-        openExternal: true,
-        title: '🤯 Lobe Flow',
-        url: 'https://github.com/lobehub/lobe-flow',
+        title: 'Shell',
+        url: 'https://github.com/v-idol/shell',
       },
     ],
     title: 'Resources',
-  },
-  {
-    items: [
-      {
-        description: 'AI Commit CLI',
-        openExternal: true,
-        title: '💌 Lobe Commit',
-        url: 'https://github.com/lobehub/lobe-commit',
-      },
-      {
-        description: 'Lint Config',
-        openExternal: true,
-        title: '📐 Lobe Lint',
-        url: 'https://github.com/lobehub/lobe-lint',
-      },
-    ],
-    title: 'More Products',
   },
 ];
 
