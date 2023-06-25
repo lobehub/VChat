@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 
 interface Store {
   themeMode: ThemeMode;
-  setThemeMode: (themeMode: ThemeMode) => void,
+  setThemeMode: (themeMode: ThemeMode) => void;
 }
 export const useThemeStore = create<Store>()(
   persist(
