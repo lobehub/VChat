@@ -1,8 +1,8 @@
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button } from 'antd';
-import { Archive, Eraser, Languages, Mic } from 'lucide-react';
-import { useEffect, useState, useCallback } from 'react';
 import { useTheme } from 'antd-style';
+import { Archive, Eraser, Languages, Mic } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 import ChatList from './ChatList';
 import { useStyles } from './style';
 
