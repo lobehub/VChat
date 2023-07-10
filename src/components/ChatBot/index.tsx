@@ -4,6 +4,7 @@ import { useTheme } from 'antd-style';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import ChatList from './ChatList';
+import { sendMessage } from '../../lib/Agent';
 import { useStyles } from './style';
 
 const ChatBot = () => {
@@ -21,7 +22,7 @@ const ChatBot = () => {
 
     if (event.results[0].isFinal) {
       setMessage(text);
-      // onChatProcessStart(text);
+      sendMessage(text);
     }
   }, []);
 
@@ -61,7 +62,6 @@ const ChatBot = () => {
         <ChatList />
       </div>
       <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
-        <div>{message}</div>
         <ChatInputArea
           actions={
             <>
@@ -71,13 +71,14 @@ const ChatBot = () => {
               <TokenTag maxValue={5000} value={1000} />
             </>
           }
+          value={message}
           style={{ background: theme.colorBgContainer }}
           expand={expand}
           footer={<Button icon={<Icon icon={Archive} />} />}
           minHeight={200}
           onExpandChange={setExpand}
           onSend={(value) => {
-            console.log('value', value);
+            sendMessage(value);
           }}
         />
       </DraggablePanel>
