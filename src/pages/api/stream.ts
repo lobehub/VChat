@@ -1,27 +1,33 @@
-import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { Configuration, OpenAIApi } from 'openai-edge';
+import { Configuration, OpenAIApi } from 'openai';
 
-// Create an OpenAI API client (that's edge friendly!)
-const config = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(config);
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-// IMPORTANT! Set the runtime to edge
-export const runtime = 'edge';
+type Data = {
+  message: string;
+};
 
-export async function POST(req: Request) {
-  // Extract the `messages` from the body of the request
-  const { messages } = await req.json();
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+  const apiKey = req.body.apiKey || process.env.OPEN_AI_KEY;
 
-  // Ask OpenAI for a streaming chat completion given the prompt
-  const response = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    stream: true,
-    messages,
+  if (!apiKey) {
+    res.status(400).json({ message: '"API 密钥错误或未设置。' });
+
+    return;
+  }
+
+  const configuration = new Configuration({
+    apiKey: apiKey,
   });
-  // Convert the response into a friendly text-stream
-  const stream = OpenAIStream(response);
-  // Respond with the stream
-  return new StreamingTextResponse(stream);
+
+  const openai = new OpenAIApi(configuration);
+
+  const { data } = await openai.createChatCompletion({
+    model: 'gpt-3.5-turbo',
+    messages: req.body.messages,
+  });
+
+  const [aiRes] = data.choices;
+  const message = aiRes.message?.content || '发生错误';
+
+  res.status(200).json({ message: message });
 }
