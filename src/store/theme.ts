@@ -2,11 +2,12 @@ import type { ThemeMode } from 'antd-style';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface Store {
+interface ThemeStore {
   themeMode: ThemeMode;
   setThemeMode: (themeMode: ThemeMode) => void;
 }
-export const useThemeStore = create<Store>()(
+
+export const useThemeStore = create<ThemeStore>()(
   persist(
     (set) => ({
       themeMode: 'dark' as ThemeMode,

@@ -4,7 +4,6 @@ import { useTheme } from 'antd-style';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import ChatList from './ChatList';
-import { sendMessage } from '../../lib/Agent';
 import { useStyles } from './style';
 
 const ChatBot = () => {
@@ -13,6 +12,17 @@ const ChatBot = () => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
+
+  const sendMessage = async (messages: string) => {
+    const res = await fetch('/api/stream', {
+      method: 'POST',
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: messages,
+      }),
+    });
+    return res;
+  };
 
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
 
