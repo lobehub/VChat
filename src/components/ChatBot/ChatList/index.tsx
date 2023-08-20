@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ChatMessage } from '@lobehub/ui';
 
 export const data: ChatMessage[] = [
@@ -75,10 +76,12 @@ export const data: ChatMessage[] = [
   //   },
 ];
 
+=======
+>>>>>>> 2be3b03 (chore:使用环境变量)
 import { ChatList as LobeChatList } from '@lobehub/ui';
 
 const ChatList = () => {
-  return <LobeChatList data={data} showTitle={true} type="chat" />;
+  return <LobeChatList data={[]} showTitle={true} type="chat" />;
 };
 
 export default ChatList;
