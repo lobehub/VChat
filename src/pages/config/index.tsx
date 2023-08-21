@@ -1,20 +1,17 @@
 import { Form, FormFooter, FormGroup, FormItem } from '@lobehub/ui';
-import { Button, InputNumber, Segmented, Select, Switch } from 'antd';
-import { Palette, PanelLeftClose } from 'lucide-react';
+import { Button, Input, InputNumber, Segmented, Select } from 'antd';
+import { BotIcon, Monitor } from 'lucide-react';
 
 const setting = {
   i18n: 'en',
-  liteAnimation: false,
-  sidebarExpand: true,
-  sidebarFixedMode: 'float',
-  sidebarWidth: 300,
+  model: 'gpt-3.5-turb',
 };
 
 const Config = () => {
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ padding: 24, width: '50%' }}>
       <Form initialValues={setting} onFinish={console.table}>
-        <FormGroup icon={Palette} title={'Theme Settings'}>
+        <FormGroup icon={Monitor} title={'Common Settings'}>
           <FormItem desc={'Editor language'} label={'Language'} name="i18n">
             <Select
               options={[
@@ -29,26 +26,24 @@ const Config = () => {
               ]}
             />
           </FormItem>
-          <FormItem
-            desc={
-              'Reduce the blur effect and background flow color, which can improve smoothness and save CPU usage'
-            }
-            divider
-            label={'Reduce Animation'}
-            name="liteAnimation"
-            valuePropName="checked"
-          >
-            <Switch />
+          <FormItem desc={'Please use your own GPT Key'} divider label={'API Key'} name="apikey">
+            <Input placeholder="sk-" style={{ width: 480 }} />
           </FormItem>
         </FormGroup>
-        <FormGroup icon={PanelLeftClose} title={'Quick Setting Sidebar'}>
-          <FormItem
-            desc={'Whether to expand the sidebar by default when starting'}
-            label={'Default Expand'}
-            name="sidebarExpand"
-            valuePropName="checked"
-          >
-            <Switch />
+        <FormGroup icon={BotIcon} title={'Model Setting'}>
+          <FormItem desc={'which gpt model you are using'} label={'GPT Model'} name="model">
+            <Select
+              options={[
+                {
+                  label: 'gpt-3.5-turb',
+                  value: 'gpt-3.5-turb',
+                },
+                {
+                  label: 'gpt-4',
+                  value: 'gpt-4',
+                },
+              ]}
+            />
           </FormItem>
           <FormItem
             desc={
