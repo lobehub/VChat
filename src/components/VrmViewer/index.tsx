@@ -1,6 +1,7 @@
-import { useContext, useCallback } from 'react';
 import { ViewerContext } from '@/features/vrmViewer/viewerContext';
 import { buildUrl } from '@/utils/buildUrl';
+import { Spin } from 'antd';
+import { useCallback, useContext } from 'react';
 import { useStyles } from './style';
 
 export default function VrmViewer() {
@@ -45,6 +46,7 @@ export default function VrmViewer() {
 
   return (
     <div className={styles.vrm}>
+      <div className={styles.loading}>{!viewer.isReady && <Spin />}</div>
       <canvas ref={canvasRef}></canvas>
     </div>
   );
