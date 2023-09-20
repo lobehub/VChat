@@ -1,5 +1,6 @@
-import { Header as LobeHeader, TabsNav, ThemeSwitch } from '@lobehub/ui';
 import { useThemeStore } from '@/store/theme';
+import { Header as LobeHeader, ThemeSwitch } from '@lobehub/ui';
+import { memo } from 'react';
 
 const Header = () => {
   const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
@@ -11,4 +12,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

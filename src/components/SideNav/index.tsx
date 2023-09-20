@@ -1,5 +1,5 @@
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
-import { MessageSquare, Settings2 } from 'lucide-react';
+import { MessageSquare, Settings2, User } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -23,6 +23,15 @@ const SideNav = () => {
       }
       topActions={
         <>
+          <ActionIcon
+            active={tab === 'role'}
+            icon={User}
+            onClick={() => {
+              setTab('role');
+              router.push('/role');
+            }}
+            size="large"
+          />
           <ActionIcon
             active={tab === 'chat'}
             icon={MessageSquare}

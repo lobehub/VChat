@@ -1,18 +1,18 @@
-import { ViewerContext } from '@/features/vrmViewer/viewerContext';
-import { buildUrl } from '@/utils/buildUrl';
+import { useAgentStore } from '@/store/role';
+
 import { Spin } from 'antd';
-import { useCallback, useContext } from 'react';
+import { memo, useCallback } from 'react';
 import { useStyles } from './style';
 
-export default function VrmViewer() {
-  const { viewer } = useContext(ViewerContext);
+function VrmViewer() {
+  const { viewer, currentRole } = useAgentStore();
   const { styles } = useStyles();
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
       if (canvas) {
         viewer.setup(canvas);
-        viewer.loadVrm(buildUrl('/AvatarSample_B.vrm'));
+        viewer.loadVrm(currentRole);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
@@ -41,7 +41,7 @@ export default function VrmViewer() {
         });
       }
     },
-    [viewer],
+    [viewer, currentRole],
   );
 
   return (
@@ -51,3 +51,5 @@ export default function VrmViewer() {
     </div>
   );
 }
+
+export default memo(VrmViewer);
