@@ -1,6 +1,6 @@
 import { useAgentStore } from '@/store/role';
 import { EmptyCard } from '@lobehub/ui';
-const roleList = ['sample', 'qiqi'];
+const roleList = ['AvatarSample_B', 'qiqi'];
 
 const Role = () => {
   const { setCurrentRole } = useAgentStore();
