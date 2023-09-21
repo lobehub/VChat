@@ -1,14 +1,29 @@
-const roleList = ['sample'];
+import { useAgentStore } from '@/store/role';
+import { EmptyCard } from '@lobehub/ui';
+const roleList = ['sample', 'qiqi'];
 
-const Config = () => {
+const Role = () => {
+  const { setCurrentRole } = useAgentStore();
   return (
     <div style={{ padding: 24, width: '50%' }}>
       <div>角色列表</div>
       {roleList.map((role) => {
-        return <div key={role}>{role}</div>;
+        return (
+          <EmptyCard
+            key={role}
+            cover={
+              'https://registry.npmmirror.com/@lobehub/assets-emoji/1.3.0/files/assets/convenience-store.webp'
+            }
+            onClick={() => {
+              setCurrentRole(role);
+            }}
+            desc={'description'}
+            title={role}
+          />
+        );
       })}
     </div>
   );
 };
 
-export default Config;
+export default Role;
