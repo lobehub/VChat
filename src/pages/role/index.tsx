@@ -1,10 +1,14 @@
-const setting = {
-  i18n: 'en',
-  model: 'gpt-3.5-turb',
-};
+const roleList = ['sample'];
 
 const Config = () => {
-  return <div style={{ padding: 24, width: '50%' }}>角色列表</div>;
+  return (
+    <div style={{ padding: 24, width: '50%' }}>
+      <div>角色列表</div>
+      {roleList.map((role) => {
+        return <div key={role}>{role}</div>;
+      })}
+    </div>
+  );
 };
 
 export default Config;
