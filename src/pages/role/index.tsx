@@ -1,24 +1,26 @@
 import { useAgentStore } from '@/store/role';
 import { EmptyCard } from '@lobehub/ui';
-const roleList = ['AvatarSample_B', 'qiqi'];
+const roleList = ['lilia', 'MimiMechanism'];
 
 const Role = () => {
   const { setCurrentRole } = useAgentStore();
   return (
     <div style={{ padding: 24, width: '50%' }}>
-      <div>角色列表</div>
+      <div style={{ marginBottom: 12 }}>角色列表</div>
       {roleList.map((role) => {
         return (
           <EmptyCard
             key={role}
-            cover={
-              'https://registry.npmmirror.com/@lobehub/assets-emoji/1.3.0/files/assets/convenience-store.webp'
-            }
+            width={200}
+            cover={`https://raw.githubusercontent.com/v-idol/shell/master/src/${role}/model.png`}
             onClick={() => {
-              setCurrentRole(role);
+              setCurrentRole(
+                `https://raw.githubusercontent.com/v-idol/shell/master/src/${role}/model.vrm`,
+              );
             }}
             desc={'description'}
             title={role}
+            style={{ marginBottom: 12 }}
           />
         );
       })}

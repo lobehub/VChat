@@ -1,5 +1,4 @@
 import { Viewer } from '@/features/vrmViewer/viewer';
-import { buildUrl } from '@/utils/buildUrl';
 import { create } from 'zustand';
 
 interface RoleStore {
@@ -9,9 +8,9 @@ interface RoleStore {
 }
 
 export const useAgentStore = create<RoleStore>()((set) => ({
-  currentRole: buildUrl('/AvatarSample_B.vrm'),
+  currentRole: 'https://raw.githubusercontent.com/v-idol/shell/master/src/lilia/model.vrm',
   viewer: new Viewer(),
   setCurrentRole: (role: string) => {
-    set({ currentRole: buildUrl(`/${role}.vrm`) });
+    set({ currentRole: role });
   },
 }));
