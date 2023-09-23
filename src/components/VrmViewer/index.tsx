@@ -12,7 +12,7 @@ function VrmViewer() {
     (canvas: HTMLCanvasElement) => {
       if (canvas && currentRole) {
         viewer.setup(canvas);
-        viewer.loadVrm(currentRole.modelPath);
+        viewer.loadVrm(currentRole.path);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
