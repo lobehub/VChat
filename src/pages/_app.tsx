@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Header />
       <main style={{ display: 'flex', width: '100%' }}>
         <SideNav />
-        <div style={{ display: 'flex', height: '100%', flexGrow: 1 }}>
+        <div style={{ flexGrow: 1 }}>
           <Component {...pageProps} />
         </div>
         <div style={{ flexBasis: '50%' }}>

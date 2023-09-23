@@ -10,9 +10,9 @@ function VrmViewer() {
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
-      if (canvas) {
+      if (canvas && currentRole) {
         viewer.setup(canvas);
-        viewer.loadVrm(currentRole);
+        viewer.loadVrm(currentRole.modelPath);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
