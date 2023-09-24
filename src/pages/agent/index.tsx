@@ -1,8 +1,8 @@
-import AgentList from '@/components/AgentList';
-import SideBar from '@/pages/agent/SideBar';
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { Center, Flexbox } from 'react-layout-kit';
+import AgentCard from './components/AgentCard';
+import AgentList from './components/AgentList';
 
 const useStyles = createStyles(({ css }) => ({
   background: css`
@@ -33,7 +33,7 @@ const Agent = () => {
         </Center>
         <AgentList />
       </div>
-      <SideBar />
+      <AgentCard />
     </Flexbox>
   );
 };
