@@ -1,55 +1,35 @@
-import { getAgentList } from '@/services/agent';
-import { useAgentStore } from '@/store/agent';
-import { ActionIcon } from '@lobehub/ui';
-import { useRequest } from 'ahooks';
-import { Card, List, Space, Typography } from 'antd';
-import { Loader2Icon } from 'lucide-react';
+import AgentList from '@/components/AgentList';
+import { GridBackground } from '@lobehub/ui';
+import { createStyles } from 'antd-style';
+import { Center } from 'react-layout-kit';
 
-const { Text } = Typography;
-
-const { Meta } = Card;
+const useStyles = createStyles(({ css }) => ({
+  background: css`
+    width: 90%;
+    margin: -24px 0 -12px;
+  `,
+  title: css`
+    z-index: 2;
+    margin-top: 24px;
+    font-size: 56px;
+    font-weight: 800;
+  `,
+}));
 
 const Agent = () => {
-  const { setCurrentAgent, agentList, setAgentList } = useAgentStore();
-
-  const { loading, run } = useRequest(getAgentList, {
-    onSuccess: (data) => {
-      setAgentList(data);
-    },
-  });
-
+  const { theme, styles } = useStyles();
   return (
-    <div style={{ paddingLeft: 24, paddingRight: 24 }}>
-      <Space style={{ marginTop: 12, marginBottom: 12 }}>
-        角色列表
-        <ActionIcon icon={Loader2Icon} onClick={run} loading={loading} title="重新加载" />
-      </Space>
-      <List
-        loading={loading}
-        grid={{ gutter: 12, column: 4 }}
-        dataSource={agentList}
-        renderItem={(item) => (
-          <List.Item>
-            <Card
-              hoverable
-              // eslint-disable-next-line @next/next/no-img-element,
-              cover={<img src={item.cover} alt="cover" />}
-              onClick={() => {
-                setCurrentAgent(item);
-              }}
-            >
-              <Meta
-                title={item.cnName}
-                description={
-                  <Text style={{ width: 200 }} ellipsis={{ tooltip: item.description }}>
-                    {item.description}
-                  </Text>
-                }
-              />
-            </Card>
-          </List.Item>
-        )}
-      />
+    <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
+      <Center>
+        <h1 className={styles.title}>Find & Use The Best Agents</h1>
+        <GridBackground
+          animation
+          className={styles.background}
+          colorFront={theme.colorText}
+          random
+        />
+      </Center>
+      <AgentList />
     </div>
   );
 };
