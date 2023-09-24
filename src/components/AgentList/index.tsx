@@ -8,7 +8,7 @@ const { Text } = Typography;
 const { Meta } = Card;
 
 const AgentList = () => {
-  const { setCurrentAgent, agentList, setAgentList } = useAgentStore();
+  const { agentList, setAgentList, activateAgent } = useAgentStore();
 
   const { loading, run } = useRequest(getAgentList, {
     onSuccess: (data) => {
@@ -28,7 +28,7 @@ const AgentList = () => {
             // eslint-disable-next-line @next/next/no-img-element,
             cover={<img src={item.cover} alt="cover" />}
             onClick={() => {
-              setCurrentAgent(item);
+              activateAgent(item.name);
             }}
           >
             <Meta
