@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
         {currentAgent ? (
-          <div style={{ flexBasis: '50%' }}>
+          <div style={{ flexBasis: '50%', flexShrink: 0 }}>
             <VrmViewer />
           </div>
         ) : null}

@@ -1,7 +1,9 @@
 import { getAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
+import { ActionIcon } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Card, List } from 'antd';
+import { Card, List, Space } from 'antd';
+import { Loader2Icon } from 'lucide-react';
 
 const { Meta } = Card;
 
@@ -18,15 +20,13 @@ const Agent = () => {
     <div style={{ padding: 24 }}>
       <List
         header={
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Space>
             角色列表
-            <Button type="primary" onClick={run} size="small">
-              重新加载角色列表
-            </Button>
-          </div>
+            <ActionIcon icon={Loader2Icon} onClick={run} loading={loading} title="重新加载" />
+          </Space>
         }
         loading={loading}
-        grid={{ gutter: 16, column: 4 }}
+        grid={{ gutter: 12, column: 6 }}
         dataSource={agentList}
         renderItem={(item) => (
           <List.Item>
