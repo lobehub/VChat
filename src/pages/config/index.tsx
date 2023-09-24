@@ -9,7 +9,7 @@ const setting = {
 
 const Config = () => {
   return (
-    <div style={{ padding: 24, width: '50%' }}>
+    <div style={{ padding: 24 }}>
       <Form initialValues={setting} onFinish={console.table}>
         <FormGroup icon={Monitor} title={'Common Settings'}>
           <FormItem desc={'Editor language'} label={'Language'} name="i18n">

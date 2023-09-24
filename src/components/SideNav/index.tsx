@@ -4,8 +4,14 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const SideNav = () => {
-  const [tab, setTab] = useState<string>('chat');
   const router = useRouter();
+  const path = router.pathname.startsWith('/config')
+    ? 'config'
+    : router.pathname.startsWith('/chat')
+    ? 'chat'
+    : 'agents';
+
+  const [tab, setTab] = useState<string>(path);
 
   return (
     <LobeSideNav
@@ -28,7 +34,7 @@ const SideNav = () => {
             icon={User}
             onClick={() => {
               setTab('agents');
-              router.push('/agents');
+              router.push('/');
             }}
             size="large"
           />
@@ -37,7 +43,7 @@ const SideNav = () => {
             icon={MessageSquare}
             onClick={() => {
               setTab('chat');
-              router.push('/');
+              router.push('/chat');
             }}
             size="large"
           />
