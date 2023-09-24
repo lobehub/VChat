@@ -2,8 +2,10 @@ import { getAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
 import { ActionIcon } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Card, List, Space } from 'antd';
+import { Card, List, Space, Typography } from 'antd';
 import { Loader2Icon } from 'lucide-react';
+
+const { Text } = Typography;
 
 const { Meta } = Card;
 
@@ -17,16 +19,14 @@ const Agent = () => {
   });
 
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ paddingLeft: 24, paddingRight: 24 }}>
+      <Space style={{ marginTop: 12, marginBottom: 12 }}>
+        角色列表
+        <ActionIcon icon={Loader2Icon} onClick={run} loading={loading} title="重新加载" />
+      </Space>
       <List
-        header={
-          <Space>
-            角色列表
-            <ActionIcon icon={Loader2Icon} onClick={run} loading={loading} title="重新加载" />
-          </Space>
-        }
         loading={loading}
-        grid={{ gutter: 12, column: 6 }}
+        grid={{ gutter: 12, column: 4 }}
         dataSource={agentList}
         renderItem={(item) => (
           <List.Item>
@@ -38,7 +38,14 @@ const Agent = () => {
                 setCurrentAgent(item);
               }}
             >
-              <Meta title={item.cnName} description={item.description} />
+              <Meta
+                title={item.cnName}
+                description={
+                  <Text style={{ width: 200 }} ellipsis={{ tooltip: item.description }}>
+                    {item.description}
+                  </Text>
+                }
+              />
             </Card>
           </List.Item>
         )}

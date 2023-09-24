@@ -4,7 +4,7 @@ import VrmViewer from '@/components/VrmViewer';
 import { useAgentStore } from '@/store/agent';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
-import { ThemeProvider } from '@lobehub/ui';
+import { DraggablePanel, ThemeProvider } from '@lobehub/ui';
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,14 +15,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <Header />
       <main style={{ display: 'flex', width: '100%' }}>
         <SideNav />
-        <div style={{ flexGrow: 1 }}>
+        <div style={{ height: `calc(100vh - 64px)`, overflow: 'scroll' }}>
           <Component {...pageProps} />
         </div>
-        {currentAgent ? (
-          <div style={{ flexBasis: '50%', flexShrink: 0 }}>
-            <VrmViewer />
-          </div>
-        ) : null}
+
+        <DraggablePanel placement="left" minWidth={800}>
+          {currentAgent ? <VrmViewer /> : <div>请从角色列表中选择角色</div>}
+        </DraggablePanel>
       </main>
     </ThemeProvider>
   );
