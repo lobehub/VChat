@@ -1,14 +1,5 @@
 import { create } from 'zustand';
-
-interface Agent {
-  name: string;
-  cnName: string;
-  description: string;
-  homepage: string;
-  path: string;
-  cover: string;
-  avatar: string;
-}
+import { Agent } from './type';
 
 interface AgentStore {
   activateAgent: (identifier: string) => void;

@@ -1,13 +1,14 @@
 import { Viewer } from '@/features/vrmViewer/viewer';
 import { create } from 'zustand';
+import { Agent } from './type';
 
 interface SessionStore {
-  currentAgent: any;
+  currentAgent: Agent | null;
   viewer: any;
-  setCurrentAgent: (role: string) => void;
+  setCurrentAgent: (agent: Agent) => void;
 }
 
-export const useAgentStore = create<SessionStore>()((set) => ({
+export const useSessionStore = create<SessionStore>()((set) => ({
   currentAgent: null,
   viewer: new Viewer(),
   setCurrentAgent: (agent) => {

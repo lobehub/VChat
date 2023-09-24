@@ -1,29 +1,30 @@
 import { createStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token, responsive }) => ({
-  avatar: css``,
+export const useStyles = createStyles(({ css, token }) => ({
+  author: css`
+    font-size: 12px;
+  `,
 
+  avatar: css`
+    flex: none;
+  `,
   container: css`
     position: relative;
-    overflow: hidden;
-    border-radius: 11px;
+    padding: 16px 16px 24px;
+    border-bottom: 1px solid ${token.colorBorderSecondary};
+  `,
+  date: css`
+    font-size: 12px;
+    color: ${token.colorTextDescription};
   `,
   desc: css`
     color: ${token.colorTextDescription};
+    text-align: center;
   `,
-  inner: css`
-    padding: 16px;
-  `,
-  subTitle: css`
-    font-size: 24px;
-    font-weight: 600;
-    ${responsive.mobile} {
-      font-size: 20px;
-    }
-  `,
+
   title: css`
-    margin-bottom: 0 !important;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
+    text-align: center;
   `,
 }));

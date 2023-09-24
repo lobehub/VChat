@@ -1,11 +1,11 @@
-import { useAgentStore } from '@/store/agent';
+import { useSessionStore } from '@/store/session';
 
 import { Spin } from 'antd';
 import { memo, useCallback } from 'react';
 import { useStyles } from './style';
 
 function VrmViewer() {
-  const { viewer, currentAgent } = useAgentStore();
+  const { viewer, currentAgent } = useSessionStore();
   const { styles } = useStyles();
 
   const canvasRef = useCallback(

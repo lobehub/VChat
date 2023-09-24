@@ -49,7 +49,7 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
       <DraggablePanelContainer
         style={{
           flex: 'none',
-          height: '100vh',
+          height: 'calc(100vh - 64px)',
           minWidth: 400,
         }}
       >

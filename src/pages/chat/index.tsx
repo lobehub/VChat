@@ -1,10 +1,10 @@
 import ChatBot from '@/components/ChatBot';
 import VrmViewer from '@/components/VrmViewer';
-import { useAgentStore } from '@/store/agent';
+import { useSessionStore } from '@/store/session';
 import { Button, Empty } from 'antd';
 
 export default function Chat() {
-  const { currentAgent } = useAgentStore();
+  const { currentAgent } = useSessionStore();
   return (
     <div style={{ display: 'flex', width: '100%' }}>
       <div style={{ flex: 1 }}>
