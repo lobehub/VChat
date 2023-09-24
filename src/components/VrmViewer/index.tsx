@@ -1,18 +1,18 @@
-import { useAgentStore } from '@/store/role';
+import { useAgentStore } from '@/store/agent';
 
 import { Spin } from 'antd';
 import { memo, useCallback } from 'react';
 import { useStyles } from './style';
 
 function VrmViewer() {
-  const { viewer, currentRole } = useAgentStore();
+  const { viewer, currentAgent } = useAgentStore();
   const { styles } = useStyles();
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
-      if (canvas && currentRole) {
+      if (canvas && currentAgent) {
         viewer.setup(canvas);
-        viewer.loadVrm(currentRole.path);
+        viewer.loadVrm(currentAgent.path);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
@@ -41,7 +41,7 @@ function VrmViewer() {
         });
       }
     },
-    [viewer, currentRole],
+    [viewer, currentAgent],
   );
 
   return (

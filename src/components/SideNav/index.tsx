@@ -24,11 +24,11 @@ const SideNav = () => {
       topActions={
         <>
           <ActionIcon
-            active={tab === 'role'}
+            active={tab === 'agents'}
             icon={User}
             onClick={() => {
-              setTab('role');
-              router.push('/role');
+              setTab('agents');
+              router.push('/agents');
             }}
             size="large"
           />
