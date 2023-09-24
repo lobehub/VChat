@@ -38,3 +38,4 @@ package-lock.json
 .vscode
 
 /agents/
+/public/agents/

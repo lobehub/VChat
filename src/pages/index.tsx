@@ -1,14 +1,31 @@
+import { getAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
-import { Card, List } from 'antd';
+import { useRequest } from 'ahooks';
+import { Button, Card, List } from 'antd';
 
 const { Meta } = Card;
 
 const Agent = () => {
-  const { setCurrentAgent, agentList } = useAgentStore();
+  const { setCurrentAgent, agentList, setAgentList } = useAgentStore();
+
+  const { loading, run } = useRequest(getAgentList, {
+    onSuccess: (data) => {
+      setAgentList(data);
+    },
+  });
+
   return (
     <div style={{ padding: 24 }}>
-      <div style={{ marginBottom: 12 }}>角色列表(所使用的模型均符合 Vroid 个人商业用途规范)</div>
       <List
+        header={
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            角色列表
+            <Button type="primary" onClick={run} size="small">
+              重新加载角色列表
+            </Button>
+          </div>
+        }
+        loading={loading}
         grid={{ gutter: 16, column: 4 }}
         dataSource={agentList}
         renderItem={(item) => (
