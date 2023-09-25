@@ -74,7 +74,7 @@ export class Viewer {
   }
 
   /**
-   * Reactで管理しているCanvasを後から設定する
+   * Rectで管理しているCanvasを後から設定する
    */
   public setup(canvas: HTMLCanvasElement) {
     const parentElement = canvas.parentElement;

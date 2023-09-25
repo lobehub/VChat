@@ -9,10 +9,10 @@ export default function Chat() {
   const { currentAgent, setCurrentAgent } = useSessionStore();
   return (
     <div style={{ display: 'flex', width: '100%' }}>
-      <div style={{ flex: 1 }}>
+      <div style={{ flexBasis: '50%', flexShrink: 0 }}>
         <ChatBot />
       </div>
-      <div style={{ flex: 1 }}>
+      <div style={{ flexBasis: '50%', flexShrink: 0 }}>
         {currentAgent ? (
           <VrmViewer />
         ) : (
