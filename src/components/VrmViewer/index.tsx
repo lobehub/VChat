@@ -1,3 +1,4 @@
+import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { Expand, RotateCw, Trash } from 'lucide-react';
@@ -80,6 +81,12 @@ function VrmViewer() {
             const blob = new Blob([file], { type: 'application/octet-stream' });
             const url = window.URL.createObjectURL(blob);
             viewer.loadVrm(url);
+          } else if (file_type === 'vrma') {
+            const blob = new Blob([file], { type: 'application/octet-stream' });
+            const url = window.URL.createObjectURL(blob);
+            loadVRMAnimation(url).then((vrma) => {
+              viewer.model.loadAnimation(vrma);
+            });
           }
         });
       }
