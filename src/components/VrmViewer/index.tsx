@@ -1,8 +1,42 @@
 import { useSessionStore } from '@/store/session';
-
-import { Spin } from 'antd';
+import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
+import { Copy, RotateCw, Trash } from 'lucide-react';
 import { memo, useCallback } from 'react';
 import { useStyles } from './style';
+
+export const items: ActionIconGroupProps['items'] = [
+  {
+    icon: Copy,
+    key: 'copy',
+    label: 'Copy',
+  },
+  {
+    icon: RotateCw,
+    key: 'regenerate',
+    label: 'Regenerate',
+  },
+];
+
+export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
+  {
+    icon: Copy,
+    key: 'copy',
+    label: 'Copy',
+  },
+  {
+    icon: RotateCw,
+    key: 'regenerate',
+    label: 'Regenerate',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    icon: Trash,
+    key: 'delete',
+    label: 'Delete',
+  },
+];
 
 function VrmViewer() {
   const { viewer, currentAgent } = useSessionStore();
@@ -46,7 +80,17 @@ function VrmViewer() {
 
   return (
     <div className={styles.vrm}>
-      <div className={styles.loading}>{!viewer.isReady && <Spin />}</div>
+      <ActionIconGroup
+        style={{
+          position: 'absolute',
+          right: 24,
+          bottom: '50%',
+        }}
+        dropdownMenu={dropdownMenu}
+        items={items}
+        direction="column"
+        onActionClick={(key) => console.log(key)}
+      />
       <canvas ref={canvasRef}></canvas>
     </div>
   );
