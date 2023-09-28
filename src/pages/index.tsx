@@ -1,4 +1,3 @@
-import Loading from '@/components/Loading';
 import Router from 'next/router';
 import { useEffect } from 'react';
 
@@ -7,7 +6,7 @@ const Home = () => {
     Router.push('/agent');
   }, []);
 
-  return <Loading />;
+  return null;
 };
 
 export default Home;

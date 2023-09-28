@@ -1,5 +1,5 @@
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
-import { MessageSquare, Settings2, User } from 'lucide-react';
+import { MessageSquare, Music2, Settings2, User } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -9,6 +9,8 @@ const SideNav = () => {
     ? 'config'
     : router.pathname.startsWith('/chat')
     ? 'chat'
+    : router.pathname.startsWith('/dance')
+    ? 'dance'
     : 'agents';
 
   const [tab, setTab] = useState<string>(path);
@@ -35,6 +37,15 @@ const SideNav = () => {
             onClick={() => {
               setTab('agents');
               router.push('/');
+            }}
+            size="large"
+          />
+          <ActionIcon
+            active={tab === 'dance'}
+            icon={Music2}
+            onClick={() => {
+              setTab('dance');
+              router.push('/dance');
             }}
             size="large"
           />

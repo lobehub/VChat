@@ -5,7 +5,7 @@ import { buildUrl } from '@/utils/buildUrl';
 import { Button, Empty, Space } from 'antd';
 import Router from 'next/router';
 
-export default function Chat() {
+export default function Dance() {
   const { currentAgent, setCurrentAgent } = useSessionStore();
   return (
     <div style={{ display: 'flex', width: '100%' }}>
