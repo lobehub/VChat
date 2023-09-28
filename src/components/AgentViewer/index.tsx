@@ -43,8 +43,9 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
 function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
   const ref = useRef<HTMLDivElement>(null);
-  const { styles } = useStyles();
+
   const isHover = useHover(ref);
+  const { styles } = useStyles({ isHover });
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {

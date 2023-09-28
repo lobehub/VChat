@@ -40,7 +40,11 @@ export const useDanceStore = create<DanceStore>()((set, get) => ({
   },
   addAndPlayItem: (dance) => {
     const { playlist, setCurrentDance, setIsPlaying } = get();
-    playlist.unshift(dance);
+    const danceInList = playlist.find((item) => item.name === dance.name);
+    // 如果已有，就不再添加
+    if (!danceInList) {
+      playlist.unshift(dance);
+    }
     setCurrentDance(dance);
     setIsPlaying(true);
   },
