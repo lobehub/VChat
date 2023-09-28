@@ -39,7 +39,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
   },
 ];
 
-function VrmViewer() {
+function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
   const ref = useRef<HTMLDivElement>(null);
   const { styles } = useStyles();
@@ -119,4 +119,4 @@ function VrmViewer() {
   );
 }
 
-export default memo(VrmViewer);
+export default memo(AgentViewer);

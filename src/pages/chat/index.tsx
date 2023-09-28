@@ -1,5 +1,5 @@
+import AgentViewer from '@/components/AgentViewer';
 import ChatBot from '@/components/ChatBot';
-import VrmViewer from '@/components/VrmViewer';
 import { useSessionStore } from '@/store/session';
 import { buildUrl } from '@/utils/buildUrl';
 import { Button, Empty, Space } from 'antd';
@@ -14,7 +14,7 @@ export default function Chat() {
       </div>
       <div style={{ flexBasis: '50%', flexShrink: 0 }}>
         {currentAgent ? (
-          <VrmViewer />
+          <AgentViewer />
         ) : (
           <div
             style={{
