@@ -1,13 +1,17 @@
 import { useDanceStore } from '@/store/dance';
 import { Avatar } from '@lobehub/ui';
 import { PauseCircle, PlayCircle } from 'lucide-react';
-import { memo, useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { useStyles } from './style';
 
 function Player() {
   const ref = useRef<HTMLAudioElement>(null);
+  const [isReady, setIsReady] = useState(false);
+  const [duration, setDuration] = useState(0);
+
   const { currentDance, isPlaying, setIsPlaying } = useDanceStore();
+
   const { styles } = useStyles();
 
   useEffect(() => {
@@ -23,6 +27,9 @@ function Player() {
       <audio
         src={currentDance?.audio}
         ref={ref}
+        onCanPlay={(e) => {
+          setIsReady(true);
+        }}
         onPause={() => setIsPlaying(false)}
         onPlay={() => {}}
       />

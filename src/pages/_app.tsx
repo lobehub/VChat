@@ -1,3 +1,4 @@
+import AgentViewer from '@/components/AgentViewer';
 import Header from '@/components/Header';
 import SideNav from '@/components/SideNav';
 import { useThemeStore } from '@/store/theme';
@@ -16,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </main>
+      <AgentViewer />
     </ThemeProvider>
   );
 }

@@ -1,6 +1,7 @@
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
+import { useHover } from 'ahooks';
 import { Expand, RotateCw, Trash } from 'lucide-react';
 import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
@@ -43,6 +44,7 @@ function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
   const ref = useRef<HTMLDivElement>(null);
   const { styles } = useStyles();
+  const isHover = useHover(ref);
 
   function toggleFullScreen() {
     if (!document.fullscreenElement) {
@@ -100,6 +102,7 @@ function AgentViewer() {
       <ActionIconGroup
         style={{
           position: 'absolute',
+          display: isHover ? 'flex' : 'none',
           left: 24,
           bottom: '50%',
         }}
