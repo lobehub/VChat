@@ -4,8 +4,8 @@ const useStyles = createStyles(({ token, cx, css }, { isHover }: { isHover: bool
   vrm: cx(
     css`
       position: fixed;
-      backdrop-filter: saturate(180%) blur(10px);
-      background-color: ${isHover ? token.colorFillTertiary : 'transparent'};
+      /* backdrop-filter: saturate(180%) blur(10px); */
+      /* background-color: ${isHover ? token.colorFillTertiary : 'transparent'}; */
       width: 400px;
       z-index: 1048;
       height: 50vh;
