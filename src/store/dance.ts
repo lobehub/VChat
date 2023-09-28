@@ -2,15 +2,26 @@ import { create } from 'zustand';
 import { Dance } from './type';
 
 interface DanceStore {
+  currentIdentifier: string;
+  currentDance: Dance | undefined;
+  danceList: any[];
+  playlist: Dance[];
+  isPlaying: boolean;
   activateDance: (identifier: string) => void;
   deactivateDance: () => void;
-  currentIdentifier: string;
-  danceList: any[];
+  setPlayList: (playlist: Dance[]) => void;
+  addAndPlayItem: (dance: Dance) => void;
+  removePlayItem: (name: string) => void;
   setDanceList: (danceList: any[]) => void;
+  setCurrentDance: (dance: Dance) => void;
+  setIsPlaying: (play: boolean) => void;
 }
 
-export const useDanceStore = create<DanceStore>()((set) => ({
+export const useDanceStore = create<DanceStore>()((set, get) => ({
+  playlist: [],
+  isPlaying: false,
   currentIdentifier: '',
+  currentDance: undefined,
   danceList: [],
   setDanceList: (danceList) => {
     set({ danceList: danceList });
@@ -21,9 +32,31 @@ export const useDanceStore = create<DanceStore>()((set) => ({
   deactivateDance: () => {
     set({ currentIdentifier: undefined }, false);
   },
+  setPlayList: (playlist) => {
+    set({ playlist: playlist });
+  },
+  setCurrentDance: (dance) => {
+    set({ currentDance: dance });
+  },
+  addAndPlayItem: (dance) => {
+    const { playlist, setCurrentDance, setIsPlaying } = get();
+    playlist.unshift(dance);
+    setCurrentDance(dance);
+    setIsPlaying(true);
+  },
+  setIsPlaying: (play) => {
+    set({ isPlaying: play });
+  },
+  removePlayItem: (name) => {
+    const playlist = get().playlist;
+    playlist.splice(
+      playlist.findIndex((dance) => dance.name === name),
+      1,
+    );
+  },
 }));
 
-export const DEFAULT_AGENT_ITEM: Dance = {
+export const DEFAULT_DANCE_ITEM: Dance = {
   name: '',
   cover: '',
   src: '',
@@ -36,10 +69,10 @@ const showSideBar = (s: DanceStore) => !!s.currentIdentifier;
 
 const currentDanceItem = (s: DanceStore): Dance => {
   const { danceList, currentIdentifier } = s;
-  const currentAgent = danceList.find((item) => item.name === currentIdentifier);
-  if (!currentAgent) return DEFAULT_AGENT_ITEM;
+  const currentDance = danceList.find((item) => item.name === currentIdentifier);
+  if (!currentDance) return DEFAULT_DANCE_ITEM;
 
-  return currentAgent;
+  return currentDance;
 };
 
 export const danceListSelectors = {

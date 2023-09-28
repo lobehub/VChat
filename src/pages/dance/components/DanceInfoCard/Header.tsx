@@ -10,8 +10,9 @@ import { useStyles } from './style';
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
+  const { addAndPlayItem } = useDanceStore();
 
-  const { cover, name, readme } = currentDance;
+  const { cover, name } = currentDance;
 
   return (
     <Center className={styles.container} gap={16}>
@@ -27,10 +28,11 @@ const Header = memo(() => {
         block
         onClick={() => {
           // Router.push('/chat');
+          addAndPlayItem(currentDance);
         }}
         type={'primary'}
       >
-        添加到播放列表
+        播放并添加到歌单
       </Button>
     </Center>
   );

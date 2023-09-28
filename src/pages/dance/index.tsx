@@ -1,6 +1,7 @@
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { Center, Flexbox } from 'react-layout-kit';
+import AudioPlayer from './components/AudioPlayer';
 import DanceInfoCard from './components/DanceInfoCard';
 import DanceList from './components/DanceList';
 
@@ -20,20 +21,23 @@ const useStyles = createStyles(({ css }) => ({
 const Agent = () => {
   const { theme, styles } = useStyles();
   return (
-    <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>
-      <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
-        <Center>
-          <h1 className={styles.title}>Find your favorite Dance</h1>
-          <GridBackground
-            animation
-            className={styles.background}
-            colorFront={theme.colorText}
-            random
-          />
-        </Center>
-        <DanceList />
-      </div>
-      <DanceInfoCard />
+    <Flexbox flex={1} height={'calc(100vh - 64px)'}>
+      <Flexbox flex={1} horizontal height={'calc(100vh - 128px)'}>
+        <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
+          <Center>
+            <h1 className={styles.title}>Find your favorite Dance</h1>
+            <GridBackground
+              animation
+              className={styles.background}
+              colorFront={theme.colorText}
+              random
+            />
+          </Center>
+          <DanceList />
+        </div>
+        <DanceInfoCard />
+      </Flexbox>
+      <AudioPlayer />
     </Flexbox>
   );
 };
