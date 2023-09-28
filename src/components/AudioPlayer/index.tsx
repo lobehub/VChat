@@ -18,6 +18,7 @@ function Player() {
   const ref = useRef<HTMLAudioElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [volume, setVolume] = useState(0.2);
+  const [tempVolume, setTempVolume] = useState(null);
   const [duration, setDuration] = useState(0);
 
   const { currentDance, isPlaying, setIsPlaying } = useDanceStore();
@@ -33,20 +34,21 @@ function Player() {
   }, [isPlaying, currentDance]);
 
   return (
-    <div className={styles.player}>
+    <div className={styles.container}>
       <audio
         src={currentDance?.audio}
         ref={ref}
         preload="metadata"
+        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
         onCanPlay={(e) => {
           e.currentTarget.volume = volume;
           setIsReady(true);
         }}
       />
-      <Flexbox horizontal style={{ width: '100%' }}>
+      <div className={styles.player}>
         <Avatar src={currentDance?.cover} size={96} shape="square" />
-        <Flexbox vertical style={{ marginLeft: 12 }}>
-          <Flexbox className={styles.top} horizontal distribution="between">
+        <Flexbox vertical style={{ marginLeft: 12, flexGrow: 1 }}>
+          <div className={styles.top}>
             <div className={styles.name}>{currentDance?.name}</div>
             <div className={styles.control}>
               <SkipBack style={{ marginRight: 24 }} />
@@ -69,27 +71,44 @@ function Player() {
                 />
               )}
               <SkipForward style={{ marginLeft: 24 }} />
-              <div className={styles.volume} style={{ marginLeft: 12 }}>
-                {volume === 0 ? <VolumeXIcon /> : <Volume2 />}
-                <Slider
-                  min={0}
-                  max={1}
-                  tooltip={{ open: false }}
-                  step={0.05}
-                  style={{ width: 80, marginLeft: 12 }}
-                  value={volume}
-                  onChange={(volume) => {
-                    if (!ref.current) return;
-                    ref.current.volume = volume;
-                    setVolume(volume);
+            </div>
+            <div className={styles.volume} style={{ marginLeft: 12 }}>
+              {volume === 0 ? (
+                <VolumeXIcon onClick={() => setVolume(tempVolume)} />
+              ) : (
+                <Volume2
+                  onClick={() => {
+                    setTempVolume(volume);
+                    setVolume(0);
                   }}
                 />
-              </div>
+              )}
+              <Slider
+                min={0}
+                max={1}
+                tooltip={{ open: false }}
+                step={0.05}
+                style={{ width: 80, marginLeft: 12 }}
+                value={volume}
+                onChange={(volume) => {
+                  if (!ref.current) return;
+                  ref.current.volume = volume;
+                  setVolume(volume);
+                }}
+              />
             </div>
+          </div>
+          <Flexbox>
+            <Slider
+              min={0}
+              max={duration}
+              tooltip={{ open: false }}
+              step={0.05}
+              style={{ width: '100%' }}
+            />
           </Flexbox>
-          <Flexbox>进度条</Flexbox>
         </Flexbox>
-      </Flexbox>
+      </div>
     </div>
   );
 }
