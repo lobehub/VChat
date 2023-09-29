@@ -1,38 +1,30 @@
-import { useDanceStore } from '@/store/dance';
+import { playListSelectors, useDanceStore } from '@/store/dance';
 import { Avatar, Icon } from '@lobehub/ui';
-import { Slider } from 'antd';
-import {
-  Loader2,
-  PauseCircle,
-  PlayCircle,
-  SkipBack,
-  SkipForward,
-  Volume2,
-  VolumeXIcon,
-} from 'lucide-react';
+import { Slider, Typography } from 'antd';
+import { PauseCircle, PlayCircle, SkipBack, SkipForward, Volume2, VolumeXIcon } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { useStyles } from './style';
 
 function Player() {
   const ref = useRef<HTMLAudioElement>(null);
-  const [isReady, setIsReady] = useState(false);
   const [volume, setVolume] = useState(0.2);
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currrentProgress, setCurrrentProgress] = useState(0);
+  const currentPlay = useDanceStore(playListSelectors.currentPlayItem);
 
-  const { currentDance, isPlaying, setIsPlaying } = useDanceStore();
+  const { isPlaying, setIsPlaying, prevDance, nextDance } = useDanceStore();
 
   const { styles } = useStyles();
 
   useEffect(() => {
-    if (isPlaying && currentDance) {
+    if (isPlaying && currentPlay) {
       ref.current && ref.current.play();
     } else {
       ref.current && ref.current.pause();
     }
-  }, [isPlaying, currentDance]);
+  }, [isPlaying, currentPlay]);
 
   const togglePlayPause = () => {
     if (isPlaying) {
@@ -52,35 +44,34 @@ function Player() {
   return (
     <div className={styles.container}>
       <audio
-        src={currentDance?.audio}
+        src={currentPlay?.audio}
         ref={ref}
         preload="metadata"
         onDurationChange={(e) => setDuration(e.currentTarget.duration)}
         onCanPlay={(e) => {
           e.currentTarget.volume = volume;
-          setIsReady(true);
         }}
+        onEnded={nextDance}
         onTimeUpdate={(e) => {
           setCurrrentProgress(e.currentTarget.currentTime);
         }}
       />
       <div className={styles.player}>
-        <Avatar src={currentDance?.cover} size={96} shape="square" />
+        <Avatar src={currentPlay?.cover} size={96} shape="square" />
         <Flexbox vertical style={{ margin: '0px 12px', flexGrow: 1 }}>
           <div className={styles.top}>
-            <div className={styles.name}>{currentDance?.name}</div>
+            <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
+              {currentPlay?.name}
+            </Typography.Text>
+
             <div className={styles.control}>
-              <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} />
-              {!isReady && currentDance ? (
-                <Icon icon={Loader2} style={{ fontSize: 48, cursor: 'pointer' }} />
-              ) : (
-                <Icon
-                  icon={isPlaying ? PauseCircle : PlayCircle}
-                  style={{ fontSize: 48, cursor: 'pointer' }}
-                  onClick={togglePlayPause}
-                />
-              )}
-              <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} />
+              <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} onClick={prevDance} />
+              <Icon
+                icon={isPlaying ? PauseCircle : PlayCircle}
+                style={{ fontSize: 48, cursor: 'pointer' }}
+                onClick={togglePlayPause}
+              />
+              <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} onClick={nextDance} />
             </div>
             <div className={styles.volume} style={{ marginLeft: 12 }}>
               {volume === 0 ? (

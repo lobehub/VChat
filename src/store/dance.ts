@@ -3,7 +3,7 @@ import { Dance } from './type';
 
 interface DanceStore {
   currentIdentifier: string;
-  currentDance: Dance | undefined;
+  currentPlayIndex: number;
   danceList: any[];
   playlist: Dance[];
   isPlaying: boolean;
@@ -11,17 +11,19 @@ interface DanceStore {
   deactivateDance: () => void;
   setPlayList: (playlist: Dance[]) => void;
   addAndPlayItem: (dance: Dance) => void;
-  removePlayItem: (name: string) => void;
+  removePlayItem: (index: number) => void;
   setDanceList: (danceList: any[]) => void;
-  setCurrentDance: (dance: Dance) => void;
+  setCurrentPlayIndex: (index: number) => void;
   setIsPlaying: (play: boolean) => void;
+  prevDance: () => void;
+  nextDance: () => void;
 }
 
 export const useDanceStore = create<DanceStore>()((set, get) => ({
   playlist: [],
   isPlaying: false,
   currentIdentifier: '',
-  currentDance: undefined,
+  currentPlayIndex: 0,
   danceList: [],
   setDanceList: (danceList) => {
     set({ danceList: danceList });
@@ -35,28 +37,44 @@ export const useDanceStore = create<DanceStore>()((set, get) => ({
   setPlayList: (playlist) => {
     set({ playlist: playlist });
   },
-  setCurrentDance: (dance) => {
-    set({ currentDance: dance });
+  setCurrentPlayIndex: (index: number) => {
+    set({ currentPlayIndex: index });
   },
   addAndPlayItem: (dance) => {
-    const { playlist, setCurrentDance, setIsPlaying } = get();
-    const danceInList = playlist.find((item) => item.name === dance.name);
-    // 如果已有，就不再添加
-    if (!danceInList) {
+    const { playlist, setCurrentPlayIndex, setIsPlaying } = get();
+    const index = playlist.findIndex((item) => item.name === dance.name);
+
+    if (index === -1) {
       playlist.unshift(dance);
+      setCurrentPlayIndex(0);
+    } else {
+      // 如果已有，就不再添加
+      setCurrentPlayIndex(index);
     }
-    setCurrentDance(dance);
     setIsPlaying(true);
   },
   setIsPlaying: (play) => {
     set({ isPlaying: play });
   },
-  removePlayItem: (name) => {
+  removePlayItem: (index) => {
     const playlist = get().playlist;
-    playlist.splice(
-      playlist.findIndex((dance) => dance.name === name),
-      1,
-    );
+    playlist.splice(index, 1);
+  },
+  prevDance: () => {
+    const { currentPlayIndex, setCurrentPlayIndex, playlist } = get();
+    if (currentPlayIndex > 0) {
+      setCurrentPlayIndex(currentPlayIndex - 1);
+    } else {
+      setCurrentPlayIndex(playlist.length - 1);
+    }
+  },
+  nextDance: () => {
+    const { currentPlayIndex, setCurrentPlayIndex, playlist } = get();
+    if (currentPlayIndex < playlist.length - 1) {
+      setCurrentPlayIndex(currentPlayIndex + 1);
+    } else {
+      setCurrentPlayIndex(0);
+    }
   },
 }));
 
@@ -79,7 +97,19 @@ const currentDanceItem = (s: DanceStore): Dance => {
   return currentDance;
 };
 
+const currentPlayItem = (s: DanceStore): Dance => {
+  const { playlist, currentPlayIndex } = s;
+  const currentDance = playlist[currentPlayIndex];
+  if (!currentDance) return DEFAULT_DANCE_ITEM;
+
+  return currentDance;
+};
+
 export const danceListSelectors = {
   showSideBar,
   currentDanceItem,
+};
+
+export const playListSelectors = {
+  currentPlayItem,
 };

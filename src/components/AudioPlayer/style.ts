@@ -18,20 +18,25 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   top: css`
     display: flex;
+
     align-items: center;
     justify-content: space-between;
   `,
+  name: css`
+    flex: 1;
+    justify-content: flex-start;
+  `,
   control: css`
     display: flex;
+    flex: 1;
+    justify-content: center;
     align-items: center;
   `,
   volume: css`
+    flex: 1;
     display: flex;
+    justify-content: flex-end;
     align-items: center;
-  `,
-  name: css`
-    font-size: 16px;
-    font-weight: 500;
   `,
 }));
 
