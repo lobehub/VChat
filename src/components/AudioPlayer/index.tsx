@@ -20,6 +20,7 @@ function Player() {
   const [volume, setVolume] = useState(0.2);
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [currrentProgress, setCurrrentProgress] = useState(0);
 
   const { currentDance, isPlaying, setIsPlaying } = useDanceStore();
 
@@ -41,6 +42,13 @@ function Player() {
     }
   };
 
+  function formatDurationDisplay(duration: number) {
+    const min = Math.floor(duration / 60);
+    const sec = Math.floor(duration - min * 60);
+    const formatted = [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':'); // format - mm:ss
+    return formatted;
+  }
+
   return (
     <div className={styles.container}>
       <audio
@@ -52,10 +60,13 @@ function Player() {
           e.currentTarget.volume = volume;
           setIsReady(true);
         }}
+        onTimeUpdate={(e) => {
+          setCurrrentProgress(e.currentTarget.currentTime);
+        }}
       />
       <div className={styles.player}>
         <Avatar src={currentDance?.cover} size={96} shape="square" />
-        <Flexbox vertical style={{ marginLeft: 12, flexGrow: 1 }}>
+        <Flexbox vertical style={{ margin: '0px 12px', flexGrow: 1 }}>
           <div className={styles.top}>
             <div className={styles.name}>{currentDance?.name}</div>
             <div className={styles.control}>
@@ -97,14 +108,16 @@ function Player() {
               />
             </div>
           </div>
-          <Flexbox>
+          <Flexbox horizontal align="center">
+            <span style={{ marginRight: 8 }}>{formatDurationDisplay(currrentProgress)}</span>
             <Slider
               min={0}
               max={duration}
+              value={currrentProgress}
               tooltip={{ open: false }}
-              step={0.05}
               style={{ width: '100%' }}
             />
+            <span style={{ marginLeft: 8 }}>{formatDurationDisplay(duration)}</span>
           </Flexbox>
         </Flexbox>
       </div>

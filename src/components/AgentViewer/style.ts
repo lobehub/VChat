@@ -8,7 +8,7 @@ const useStyles = createStyles(({ token, cx, css }, { isHover }: { isHover: bool
       /* background-color: ${isHover ? token.colorFillTertiary : 'transparent'}; */
       width: 400px;
       z-index: 10;
-      height: 50vh;
+      height: 60vh;
       min-height: 480px;
       right: 0;
       bottom: 0;
