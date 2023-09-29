@@ -18,7 +18,7 @@ function Player() {
   const ref = useRef<HTMLAudioElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [volume, setVolume] = useState(0.2);
-  const [tempVolume, setTempVolume] = useState(null);
+  const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
 
   const { currentDance, isPlaying, setIsPlaying } = useDanceStore();
@@ -32,6 +32,14 @@ function Player() {
       ref.current && ref.current.pause();
     }
   }, [isPlaying, currentDance]);
+
+  const togglePlayPause = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -51,26 +59,17 @@ function Player() {
           <div className={styles.top}>
             <div className={styles.name}>{currentDance?.name}</div>
             <div className={styles.control}>
-              <SkipBack style={{ marginRight: 24 }} />
+              <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} />
               {!isReady && currentDance ? (
-                <Icon icon={Loader2} style={{ fontSize: 48 }} />
-              ) : isPlaying ? (
-                <Icon
-                  icon={PauseCircle}
-                  style={{ fontSize: 48 }}
-                  onClick={() => {
-                    setIsPlaying(false);
-                  }}
-                />
+                <Icon icon={Loader2} style={{ fontSize: 48, cursor: 'pointer' }} />
               ) : (
-                <PlayCircle
-                  size={48}
-                  onClick={() => {
-                    setIsPlaying(true);
-                  }}
+                <Icon
+                  icon={isPlaying ? PauseCircle : PlayCircle}
+                  style={{ fontSize: 48, cursor: 'pointer' }}
+                  onClick={togglePlayPause}
                 />
               )}
-              <SkipForward style={{ marginLeft: 24 }} />
+              <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} />
             </div>
             <div className={styles.volume} style={{ marginLeft: 12 }}>
               {volume === 0 ? (

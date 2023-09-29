@@ -2,7 +2,6 @@ import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { Button } from 'antd';
-import Router from 'next/router';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
@@ -30,11 +29,10 @@ const Header = memo(() => {
         block
         onClick={() => {
           setCurrentAgent(currentAgent);
-          Router.push('/chat');
         }}
         type={'primary'}
       >
-        开始对话
+        加载角色
       </Button>
     </Center>
   );

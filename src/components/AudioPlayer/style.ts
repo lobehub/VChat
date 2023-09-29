@@ -6,6 +6,8 @@ const useStyles = createStyles(({ token, css }) => ({
     bottom: 0;
     border-top: 1px solid ${token.colorBorderSecondary};
     left: 64px;
+    backdrop-filter: saturate(180%) blur(10px);
+    background-color: ${token.colorFillTertiary};
     width: calc(100vw - 64px);
     z-index: 12;
     height: 96px;

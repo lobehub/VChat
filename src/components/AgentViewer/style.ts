@@ -7,7 +7,7 @@ const useStyles = createStyles(({ token, cx, css }, { isHover }: { isHover: bool
       /* backdrop-filter: saturate(180%) blur(10px); */
       /* background-color: ${isHover ? token.colorFillTertiary : 'transparent'}; */
       width: 400px;
-      z-index: 1048;
+      z-index: 10;
       height: 50vh;
       min-height: 480px;
       right: 0;
