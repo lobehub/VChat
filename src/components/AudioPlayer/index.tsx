@@ -12,11 +12,14 @@ import {
 } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
+import PlayList from './PlayList';
 import { useStyles } from './style';
 
 function Player() {
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
+  const [open, setOpen] = useState(false);
+
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currrentProgress, setCurrrentProgress] = useState(0);
@@ -51,6 +54,7 @@ function Player() {
 
   return (
     <div className={styles.container}>
+      <PlayList open={open} onClose={() => setOpen(false)} />
       <audio
         src={currentPlay?.audio}
         ref={ref}
@@ -83,7 +87,7 @@ function Player() {
             </div>
 
             <div className={styles.right}>
-              <ListMusic style={{ cursor: 'pointer' }} />
+              <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
               <div className={styles.volume} style={{ marginLeft: 18 }}>
                 {volume === 0 ? (
                   <VolumeXIcon
