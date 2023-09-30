@@ -26,7 +26,7 @@ const AgentList = () => {
           <Card
             hoverable
             // eslint-disable-next-line @next/next/no-img-element,
-            cover={<img src={item.thumb} alt="thumb" />}
+            cover={<img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />}
             onClick={() => {
               activateDance(item.name);
             }}

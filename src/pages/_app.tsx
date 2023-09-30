@@ -1,6 +1,7 @@
 import AgentViewer from '@/components/AgentViewer';
 import Header from '@/components/Header';
 import SideNav from '@/components/SideNav';
+import { useSessionStore } from '@/store/session';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@lobehub/ui';
@@ -8,6 +9,7 @@ import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
   const themeMode = useThemeStore((s) => s.themeMode);
+  const { currentAgent } = useSessionStore();
   return (
     <ThemeProvider themeMode={themeMode}>
       <Header />
@@ -17,7 +19,7 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </main>
-      <AgentViewer />
+      {currentAgent ? <AgentViewer /> : null}
     </ThemeProvider>
   );
 }

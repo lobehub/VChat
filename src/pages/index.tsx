@@ -1,9 +1,12 @@
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const Home = () => {
+  const router = useRouter();
   useEffect(() => {
-    Router.push('/agent');
+    if (router.pathname === '/') {
+      Router.push('/agent');
+    }
   }, []);
 
   return null;
