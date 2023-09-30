@@ -32,10 +32,14 @@ const useStyles = createStyles(({ token, css }) => ({
     justify-content: center;
     align-items: center;
   `,
-  volume: css`
+  right: css`
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+  `,
+  volume: css`
+    display: flex;
     align-items: center;
   `,
 }));

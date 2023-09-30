@@ -1,7 +1,15 @@
 import { playListSelectors, useDanceStore } from '@/store/dance';
 import { Avatar, Icon } from '@lobehub/ui';
 import { Slider, Typography } from 'antd';
-import { PauseCircle, PlayCircle, SkipBack, SkipForward, Volume2, VolumeXIcon } from 'lucide-react';
+import {
+  ListMusic,
+  PauseCircle,
+  PlayCircle,
+  SkipBack,
+  SkipForward,
+  Volume2,
+  VolumeXIcon,
+} from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { useStyles } from './style';
@@ -73,32 +81,41 @@ function Player() {
               />
               <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} onClick={nextDance} />
             </div>
-            <div className={styles.volume} style={{ marginLeft: 12 }}>
-              {volume === 0 ? (
-                <VolumeXIcon onClick={() => setVolume(tempVolume)} />
-              ) : (
-                <Volume2
-                  onClick={() => {
-                    setTempVolume(volume);
-                    setVolume(0);
+
+            <div className={styles.right}>
+              <ListMusic style={{ cursor: 'pointer' }} />
+              <div className={styles.volume} style={{ marginLeft: 18 }}>
+                {volume === 0 ? (
+                  <VolumeXIcon
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setVolume(tempVolume)}
+                  />
+                ) : (
+                  <Volume2
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setTempVolume(volume);
+                      setVolume(0);
+                    }}
+                  />
+                )}
+                <Slider
+                  min={0}
+                  max={1}
+                  tooltip={{ open: false }}
+                  step={0.05}
+                  style={{ width: 80, marginLeft: 12 }}
+                  value={volume}
+                  onChange={(volume) => {
+                    if (!ref.current) return;
+                    ref.current.volume = volume;
+                    setVolume(volume);
                   }}
                 />
-              )}
-              <Slider
-                min={0}
-                max={1}
-                tooltip={{ open: false }}
-                step={0.05}
-                style={{ width: 80, marginLeft: 12 }}
-                value={volume}
-                onChange={(volume) => {
-                  if (!ref.current) return;
-                  ref.current.volume = volume;
-                  setVolume(volume);
-                }}
-              />
+              </div>
             </div>
           </div>
+
           <Flexbox horizontal align="center">
             <span style={{ marginRight: 8 }}>{formatDurationDisplay(currrentProgress)}</span>
             <Slider
