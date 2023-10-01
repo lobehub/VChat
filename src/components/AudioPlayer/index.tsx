@@ -52,6 +52,8 @@ function Player() {
     return formatted;
   }
 
+  if (!currentPlay) return null;
+
   return (
     <div className={styles.container}>
       <PlayList open={open} onClose={() => setOpen(false)} />

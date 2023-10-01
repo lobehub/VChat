@@ -44,6 +44,9 @@ import path from 'path';
 export default function handler(req, res) {
   const agentList = [];
   const agentsDir = path.join(process.cwd(), '/public/agents');
+  if (!fs.existsSync(agentsDir)) {
+    fs.mkdirSync(agentsDir);
+  }
   const agents = fs.readdirSync(agentsDir, { withFileTypes: true });
   for (const agent of agents) {
     const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');

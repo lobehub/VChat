@@ -97,12 +97,12 @@ const currentDanceItem = (s: DanceStore): Dance => {
   return currentDance;
 };
 
-const currentPlayItem = (s: DanceStore): Dance => {
+const currentPlayItem = (s: DanceStore): Dance | undefined => {
   const { playlist, currentPlayIndex } = s;
-  const currentDance = playlist[currentPlayIndex];
-  if (!currentDance) return DEFAULT_DANCE_ITEM;
+  const currentPlay = playlist[currentPlayIndex];
+  if (!currentPlay) return undefined;
 
-  return currentDance;
+  return currentPlay;
 };
 
 export const danceListSelectors = {

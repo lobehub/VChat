@@ -4,6 +4,9 @@ import path from 'path';
 export default function handler(req, res) {
   const danceList = [];
   const danceDir = path.join(process.cwd(), '/public/dance');
+  if (!fs.existsSync(danceDir)) {
+    fs.mkdirSync(danceDir);
+  }
   const dances = fs.readdirSync(danceDir, { withFileTypes: true });
   for (const dance of dances) {
     const danceMeta = fs.readFileSync(path.join(danceDir, dance.name, 'meta.json'), 'utf8');
