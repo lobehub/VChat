@@ -1,5 +1,6 @@
-import { GridBackground } from '@lobehub/ui';
+import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
+import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 import AgentCard from './components/AgentCard';
 import AgentIndex from './components/AgentIndex';
@@ -20,6 +21,7 @@ const useStyles = createStyles(({ css }) => ({
 
 const Agent = () => {
   const { theme, styles } = useStyles();
+  const [tab, setTab] = useState('installed');
   return (
     <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>
       <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
@@ -32,8 +34,26 @@ const Agent = () => {
             random
           />
         </Center>
-        <AgentList />
-        <AgentIndex />
+        <Center>
+          <TabsNav
+            activeKey={tab}
+            onChange={(key) => {
+              setTab(key);
+            }}
+            items={[
+              {
+                key: 'installed',
+                label: '本地安装',
+              },
+              {
+                key: 'index',
+                label: '角色列表',
+              },
+            ]}
+          />
+        </Center>
+        {tab === 'installed' ? <AgentList /> : null}
+        {tab === 'index' ? <AgentIndex /> : null}
       </div>
       <AgentCard />
     </Flexbox>

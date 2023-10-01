@@ -8,7 +8,9 @@ interface DownloadButtonProps {
 
 const DownloadButton = (props: DownloadButtonProps) => {
   const { url } = props;
-  const { loading: downloading } = useRequest(downloadGithubAgent);
+  const { loading: downloading, run } = useRequest(downloadGithubAgent, {
+    manual: true,
+  });
 
   return (
     <Button
@@ -16,7 +18,7 @@ const DownloadButton = (props: DownloadButtonProps) => {
       disabled={downloading}
       loading={downloading}
       onClick={() => {
-        downloadGithubAgent(url);
+        run(url);
       }}
     >
       下载
