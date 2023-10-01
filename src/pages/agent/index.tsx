@@ -2,6 +2,7 @@ import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { Center, Flexbox } from 'react-layout-kit';
 import AgentCard from './components/AgentCard';
+import AgentIndex from './components/AgentIndex';
 import AgentList from './components/AgentList';
 
 const useStyles = createStyles(({ css }) => ({
@@ -32,6 +33,7 @@ const Agent = () => {
           />
         </Center>
         <AgentList />
+        <AgentIndex />
       </div>
       <AgentCard />
     </Flexbox>

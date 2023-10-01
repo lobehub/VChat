@@ -1,4 +1,4 @@
-import { getAgentList } from '@/services/agent';
+import { getLocalAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
 import { useRequest } from 'ahooks';
 import { Card, List, Typography } from 'antd';
@@ -10,9 +10,9 @@ const { Meta } = Card;
 const AgentList = () => {
   const { agentList, setAgentList, activateAgent } = useAgentStore();
 
-  const { loading, run } = useRequest(getAgentList, {
+  const { loading, run } = useRequest(getLocalAgentList, {
     onSuccess: (data) => {
-      setAgentList(data);
+      setAgentList(data.agents);
     },
   });
 
