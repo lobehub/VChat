@@ -29,6 +29,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-layout-kit": "^1.7.3",
+    "simple-git": "^3.20.0",
     "styled-components": "6.0.0-rc.6",
     "three": "^0.154.0",
     "typescript": "5.1.3",
