@@ -1,4 +1,4 @@
-import { playListSelectors, useDanceStore } from '@/store/dance';
+import { useDanceStore } from '@/store/dance';
 import { Avatar, Icon } from '@lobehub/ui';
 import { Slider, Typography } from 'antd';
 import {
@@ -23,7 +23,7 @@ function Player() {
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currrentProgress, setCurrrentProgress] = useState(0);
-  const currentPlay = useDanceStore(playListSelectors.currentPlayItem);
+  const { currentPlay } = useDanceStore();
 
   const { isPlaying, setIsPlaying, prevDance, nextDance } = useDanceStore();
 

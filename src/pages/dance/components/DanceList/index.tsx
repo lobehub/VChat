@@ -1,9 +1,7 @@
 import { getDanceList } from '@/services/dance';
 import { useDanceStore } from '@/store/dance';
 import { useRequest } from 'ahooks';
-import { Card, List, Typography } from 'antd';
-
-const { Text } = Typography;
+import { Card, List } from 'antd';
 
 const { Meta } = Card;
 

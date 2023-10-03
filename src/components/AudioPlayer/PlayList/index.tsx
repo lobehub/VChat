@@ -37,24 +37,19 @@ const PlayList = (props: PlayListProps) => {
       <List
         size="small"
         dataSource={playlist}
-        renderItem={(item, index) => (
+        renderItem={(item) => (
           <List.Item
             actions={[
-              <ActionIcon
-                icon={PlayIcon}
-                key="play"
-                onClick={() => playItem(index)}
-                size="small"
-              />,
+              <ActionIcon icon={PlayIcon} key="play" onClick={() => playItem(item)} size="small" />,
               <ActionIcon
                 icon={XIcon}
                 key="delete"
-                onClick={() => removePlayItem(index)}
+                onClick={() => removePlayItem(item)}
                 size="small"
               />,
             ]}
             style={{ cursor: 'pointer' }}
-            onDoubleClick={() => playItem(index)}
+            onDoubleClick={() => playItem(item)}
           >
             <Meta
               title={
