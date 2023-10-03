@@ -2,7 +2,7 @@
 import { useDanceStore } from '@/store/dance';
 import { DeleteOutlined } from '@ant-design/icons';
 import { ActionIcon } from '@lobehub/ui';
-import { Button, Drawer, List, Typography } from 'antd';
+import { Button, Drawer, List, Typography, theme } from 'antd';
 import { PlayIcon, XIcon } from 'lucide-react';
 import { memo } from 'react';
 
@@ -17,7 +17,8 @@ interface PlayListProps {
 
 const PlayList = (props: PlayListProps) => {
   const { open = false, onClose } = props;
-  const { playlist, playItem, removePlayItem, setPlayList } = useDanceStore();
+  const { token } = theme.useToken();
+  const { playlist, playItem, removePlayItem, setPlayList, currentPlay } = useDanceStore();
 
   return (
     <Drawer
@@ -37,29 +38,41 @@ const PlayList = (props: PlayListProps) => {
       <List
         size="small"
         dataSource={playlist}
-        renderItem={(item) => (
-          <List.Item
-            actions={[
-              <ActionIcon icon={PlayIcon} key="play" onClick={() => playItem(item)} size="small" />,
-              <ActionIcon
-                icon={XIcon}
-                key="delete"
-                onClick={() => removePlayItem(item)}
-                size="small"
-              />,
-            ]}
-            style={{ cursor: 'pointer' }}
-            onDoubleClick={() => playItem(item)}
-          >
-            <Meta
-              title={
-                <Text style={{ width: 600 }} ellipsis={{ tooltip: item.name }}>
-                  {item.name}
-                </Text>
-              }
-            />
-          </List.Item>
-        )}
+        renderItem={(item) => {
+          const mark = currentPlay ? currentPlay!.name === item.name : false;
+
+          return (
+            <List.Item
+              actions={[
+                <ActionIcon
+                  icon={PlayIcon}
+                  key="play"
+                  onClick={() => playItem(item)}
+                  size="small"
+                />,
+                <ActionIcon
+                  icon={XIcon}
+                  key="delete"
+                  onClick={() => removePlayItem(item)}
+                  size="small"
+                />,
+              ]}
+              style={{
+                cursor: 'pointer',
+                backgroundColor: mark ? token.colorBgSpotlight : undefined,
+              }}
+              onDoubleClick={() => playItem(item)}
+            >
+              <Meta
+                title={
+                  <Text style={{ width: 600 }} ellipsis={{ tooltip: item.name }}>
+                    {item.name}
+                  </Text>
+                }
+              />
+            </List.Item>
+          );
+        }}
       />
     </Drawer>
   );
