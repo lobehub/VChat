@@ -10,6 +10,7 @@ interface DanceStore {
   activateDance: (identifier: string) => void;
   deactivateDance: () => void;
   setPlayList: (playlist: Dance[]) => void;
+  playItem: (index: number) => void;
   addAndPlayItem: (dance: Dance) => void;
   removePlayItem: (index: number) => void;
   setDanceList: (danceList: any[]) => void;
@@ -39,6 +40,9 @@ export const useDanceStore = create<DanceStore>()((set, get) => ({
   },
   setCurrentPlayIndex: (index: number) => {
     set({ currentPlayIndex: index });
+  },
+  playItem: (index: number) => {
+    set({ currentPlayIndex: index, isPlaying: true });
   },
   addAndPlayItem: (dance) => {
     const { playlist, setCurrentPlayIndex, setIsPlaying } = get();

@@ -1,4 +1,4 @@
-import { downloadGithubAgent, getAgentIndex } from '@/services/agent';
+import { getAgentIndex } from '@/services/agent';
 import { useRequest } from 'ahooks';
 import { List, Typography } from 'antd';
 import { useState } from 'react';
@@ -23,8 +23,6 @@ const AgentIndex = () => {
       setAgentList(data.agents);
     },
   });
-
-  const { loading: downloading } = useRequest(downloadGithubAgent);
 
   return (
     <List
