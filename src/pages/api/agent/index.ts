@@ -14,8 +14,8 @@ export default function handler(req, res) {
     agentList.push({
       ...JSON.parse(agentMeta),
       path: `/agents/${agent.name}/model.vrm`,
-      cover: `/agents/${agent.name}/cover.webp`,
-      avatar: `/agents/${agent.name}/avatar.webp`,
+      cover: `/agents/${agent.name}/cover.jpg`,
+      avatar: `/agents/${agent.name}/avatar.jpg`,
     });
   }
 

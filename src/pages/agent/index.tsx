@@ -34,7 +34,7 @@ const Agent = () => {
             random
           />
         </Center>
-        <Center>
+        <Center style={{ marginBottom: 12 }}>
           <TabsNav
             activeKey={tab}
             onChange={(key) => {
