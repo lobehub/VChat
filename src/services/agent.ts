@@ -19,7 +19,13 @@ export const getAgentIndex = async () => {
 };
 
 export const downloadGithubAgent = async (url: string) => {
-  const res = await fetch('/api/download', { method: 'POST', body: JSON.stringify({ url }) });
+  const res = await fetch('/api/agent/download', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ url }),
+  });
 
   return res.json();
 };

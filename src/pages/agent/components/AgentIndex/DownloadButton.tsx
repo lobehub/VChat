@@ -1,6 +1,6 @@
 import { downloadGithubAgent } from '@/services/agent';
 import { useRequest } from 'ahooks';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 
 interface DownloadButtonProps {
   url: string;
@@ -8,8 +8,16 @@ interface DownloadButtonProps {
 
 const DownloadButton = (props: DownloadButtonProps) => {
   const { url } = props;
-  const { loading: downloading, run } = useRequest(downloadGithubAgent, {
+  const { loading: downloading, run } = useRequest((url) => downloadGithubAgent(url), {
     manual: true,
+    onSuccess: (data) => {
+      const { success, errorMessage } = data;
+      if (success) {
+        message.success('下载成功');
+      } else {
+        message.error(errorMessage);
+      }
+    },
   });
 
   return (
