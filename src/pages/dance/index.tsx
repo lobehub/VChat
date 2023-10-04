@@ -1,7 +1,9 @@
 import AudioPlayer from '@/components/AudioPlayer';
-import { GridBackground } from '@lobehub/ui';
+import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
+import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
+import DanceIndex from './components/DanceIndex';
 import DanceInfoCard from './components/DanceInfoCard';
 import DanceList from './components/DanceList';
 
@@ -19,6 +21,7 @@ const useStyles = createStyles(({ css }) => ({
 }));
 
 const Agent = () => {
+  const [tab, setTab] = useState('installed');
   const { theme, styles } = useStyles();
   return (
     <Flexbox flex={1} height={'calc(100vh - 64px)'}>
@@ -33,7 +36,26 @@ const Agent = () => {
               random
             />
           </Center>
-          <DanceList />
+          <Center style={{ marginBottom: 12 }}>
+            <TabsNav
+              activeKey={tab}
+              onChange={(key) => {
+                setTab(key);
+              }}
+              items={[
+                {
+                  key: 'installed',
+                  label: '本地安装',
+                },
+                {
+                  key: 'index',
+                  label: '舞蹈列表',
+                },
+              ]}
+            />
+          </Center>
+          {tab === 'installed' ? <DanceList /> : null}
+          {tab === 'index' ? <DanceIndex /> : null}
         </div>
         <DanceInfoCard />
       </Flexbox>

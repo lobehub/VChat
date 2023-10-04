@@ -3,7 +3,7 @@ import path from 'path';
 
 export default function handler(req, res) {
   const danceList = [];
-  const danceDir = path.join(process.cwd(), '/public/dance');
+  const danceDir = path.join(process.cwd(), '/public/dances');
   if (!fs.existsSync(danceDir)) {
     fs.mkdirSync(danceDir);
   }
@@ -15,10 +15,10 @@ export default function handler(req, res) {
     const { src, audio } = meta;
     danceList.push({
       ...meta,
-      src: `/dance/${dance.name}/${src}`,
-      audio: `/dance/${dance.name}/${audio}`,
-      cover: `/dance/${dance.name}/cover.jpg`,
-      thumb: `/dance/${dance.name}/thumb.jpg`,
+      src: `/dances/${dance.name}/${src}`,
+      audio: `/dances/${dance.name}/${audio}`,
+      cover: `/dances/${dance.name}/cover.jpg`,
+      thumb: `/dances/${dance.name}/thumb.jpg`,
       readme,
     });
   }

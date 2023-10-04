@@ -1,4 +1,4 @@
-import { getDanceList } from '@/services/dance';
+import { getLocalDanceList } from '@/services/dance';
 import { useDanceStore } from '@/store/dance';
 import { useRequest } from 'ahooks';
 import { Card, List } from 'antd';
@@ -8,7 +8,7 @@ const { Meta } = Card;
 const AgentList = () => {
   const { danceList, setDanceList, activateDance } = useDanceStore();
 
-  const { loading, run } = useRequest(getDanceList, {
+  const { loading, run } = useRequest(getLocalDanceList, {
     onSuccess: (data) => {
       setDanceList(data);
     },

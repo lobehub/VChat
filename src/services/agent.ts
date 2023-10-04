@@ -2,7 +2,7 @@
  * 请求本地 Agent 列表
  */
 export const getLocalAgentList = async () => {
-  const res = await fetch('/api/agent');
+  const res = await fetch('/api/agent/list');
 
   return res.json();
 };
