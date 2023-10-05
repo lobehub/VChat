@@ -1,8 +1,9 @@
 import fs from 'fs';
+import { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 import { simpleGit } from 'simple-git';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { url } = req.body;
   const git = simpleGit();
 

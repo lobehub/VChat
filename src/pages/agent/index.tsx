@@ -1,7 +1,5 @@
-import { getLocalAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
 import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
-import { useRequest } from 'ahooks';
 import { Space } from 'antd';
 import { createStyles } from 'antd-style';
 import { Loader2Icon } from 'lucide-react';
@@ -28,12 +26,6 @@ const Agent = () => {
   const { theme, styles } = useStyles();
   const [tab, setTab] = useState('installed');
   const { setAgentList, agentList } = useAgentStore();
-
-  const { loading, run: reloadAgentList } = useRequest(getLocalAgentList, {
-    onSuccess: (data) => {
-      setAgentList(data.agents);
-    },
-  });
 
   return (
     <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>

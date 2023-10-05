@@ -1,7 +1,8 @@
 import fs from 'fs';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import path from 'path';
 
-export default function handler(req, res) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const danceList = [];
   const danceDir = path.join(process.cwd(), '/public/dances');
   if (!fs.existsSync(danceDir)) {
@@ -15,6 +16,7 @@ export default function handler(req, res) {
     const { src, audio } = meta;
     danceList.push({
       ...meta,
+      dirname: dance.name,
       src: `/dances/${dance.name}/${src}`,
       audio: `/dances/${dance.name}/${audio}`,
       cover: `/dances/${dance.name}/cover.jpg`,

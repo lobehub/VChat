@@ -8,6 +8,17 @@ export const getLocalDanceList = async () => {
 };
 
 /**
+ * 删除本地 Agent 目录
+ */
+export const deleteLocalDance = async (dirname: string) => {
+  const res = await fetch(`/api/dance/${dirname}`, {
+    method: 'DELETE',
+  });
+
+  return res.json();
+};
+
+/**
  * 请求线上 Dance index
  */
 export const getDanceIndex = async () => {
