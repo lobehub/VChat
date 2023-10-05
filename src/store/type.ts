@@ -1,10 +1,31 @@
 export interface Agent {
+  /**
+   * 角色名
+   */
   name: string;
-  cnName: string;
+  /**
+   * 本地目录
+   */
+  dirname?: string;
+  /**
+   * 角色描述
+   */
   description: string;
+  /**
+   * 主页地址，一般为 Vroid Hub 的地址
+   */
   homepage: string;
-  path: string;
+  /**
+   * 模型文件路径
+   */
+  model: string;
+  /**
+   * 封面图片路径
+   */
   cover: string;
+  /**
+   * 头像图片路径
+   */
   avatar: string;
 }
 

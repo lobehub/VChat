@@ -32,7 +32,7 @@ const AgentList = () => {
             }}
           >
             <Meta
-              title={item.cnName}
+              title={item.name}
               description={
                 <Text style={{ width: 200 }} ellipsis={{ tooltip: item.description }}>
                   {item.description}

@@ -151,8 +151,9 @@ export class Viewer {
     if (this.model) {
       this.model.update(delta);
     }
-
-    this._cameraHelper.update();
+    if (this._cameraHelper) {
+      this._cameraHelper.update();
+    }
 
     if (this._renderer && this._camera) {
       this._renderer.render(this._scene, this._camera);

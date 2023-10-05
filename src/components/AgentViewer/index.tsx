@@ -62,7 +62,7 @@ function AgentViewer() {
     (canvas: HTMLCanvasElement) => {
       if (canvas && currentAgent) {
         viewer.setup(canvas);
-        viewer.loadVrm(currentAgent.path);
+        viewer.loadVrm(currentAgent.model);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {

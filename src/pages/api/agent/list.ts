@@ -13,7 +13,8 @@ export default function handler(req, res) {
     const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');
     agentList.push({
       ...JSON.parse(agentMeta),
-      path: `/agents/${agent.name}/model.vrm`,
+      dirname: agent.name,
+      model: `/agents/${agent.name}/model.vrm`,
       cover: `/agents/${agent.name}/cover.jpg`,
       avatar: `/agents/${agent.name}/avatar.jpg`,
     });

@@ -13,7 +13,7 @@ const Header = memo(() => {
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const { setCurrentAgent } = useSessionStore();
 
-  const { avatar, cnName, description } = currentAgent;
+  const { avatar, name, description } = currentAgent;
 
   return (
     <Center className={styles.container} gap={16}>
@@ -23,7 +23,7 @@ const Header = memo(() => {
         className={styles.avatar}
         size={100}
       />
-      <div className={styles.title}>{cnName}</div>
+      <div className={styles.title}>{name}</div>
       <div className={styles.desc}>{description}</div>
       <Button
         block

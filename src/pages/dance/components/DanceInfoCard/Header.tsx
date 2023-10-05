@@ -34,6 +34,9 @@ const Header = memo(() => {
       >
         播放并添加到歌单
       </Button>
+      <Button block onClick={() => {}}>
+        删除
+      </Button>
     </Center>
   );
 });

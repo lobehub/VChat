@@ -25,10 +25,9 @@ export const useAgentStore = create<AgentStore>()((set) => ({
 
 export const DEFAULT_AGENT_ITEM: Agent = {
   name: '',
-  cnName: '',
   description: '',
   homepage: '',
-  path: '',
+  model: '',
   cover: '',
   avatar: '',
 };
