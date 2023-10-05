@@ -9,8 +9,13 @@ import { Center } from 'react-layout-kit';
 
 import { useStyles } from './style';
 
+interface HeaderProps {
+  reloadAgentList: () => void;
+}
+
 // eslint-disable-next-line react/display-name
-const Header = memo(() => {
+const Header = memo((props: HeaderProps) => {
+  const { reloadAgentList } = props;
   const { styles, theme } = useStyles();
   const { deactivateAgent } = useAgentStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
@@ -25,6 +30,8 @@ const Header = memo(() => {
       if (success) {
         message.success('删除成功');
         deactivateAgent();
+        // retrive list
+        reloadAgentList();
       } else {
         message.error(errorMessage);
       }

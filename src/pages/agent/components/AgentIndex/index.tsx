@@ -15,7 +15,12 @@ interface AgentIndexItem {
   created: string;
 }
 
-const AgentIndex = () => {
+interface AgentIndexProps {
+  reloadAgentList: () => void;
+}
+
+const AgentIndex = (props: AgentIndexProps) => {
+  const { reloadAgentList } = props;
   const [agentList, setAgentList] = useState<AgentIndexItem[]>([]);
 
   const { loading } = useRequest(getAgentIndex, {
@@ -29,7 +34,11 @@ const AgentIndex = () => {
       loading={loading}
       dataSource={agentList}
       renderItem={(item) => (
-        <List.Item actions={[<DownloadButton url={item.url} key={item.name} />]}>
+        <List.Item
+          actions={[
+            <DownloadButton url={item.url} key={item.name} reloadAgentList={reloadAgentList} />,
+          ]}
+        >
           <Meta
             title={item.name}
             description={

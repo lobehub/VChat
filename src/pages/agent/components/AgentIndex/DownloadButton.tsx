@@ -4,16 +4,19 @@ import { Button, message } from 'antd';
 
 interface DownloadButtonProps {
   url: string;
+  reloadAgentList: () => void;
 }
 
 const DownloadButton = (props: DownloadButtonProps) => {
-  const { url } = props;
+  const { url, reloadAgentList } = props;
+
   const { loading: downloading, run } = useRequest((url) => downloadGithubAgent(url), {
     manual: true,
     onSuccess: (data) => {
       const { success, errorMessage } = data;
       if (success) {
         message.success('下载成功');
+        reloadAgentList();
       } else {
         message.error(errorMessage);
       }

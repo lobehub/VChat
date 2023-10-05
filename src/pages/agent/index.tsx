@@ -1,5 +1,10 @@
-import { GridBackground, TabsNav } from '@lobehub/ui';
+import { getLocalAgentList } from '@/services/agent';
+import { useAgentStore } from '@/store/agent';
+import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
+import { useRequest } from 'ahooks';
+import { Space } from 'antd';
 import { createStyles } from 'antd-style';
+import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 import AgentCard from './components/AgentCard';
@@ -22,6 +27,14 @@ const useStyles = createStyles(({ css }) => ({
 const Agent = () => {
   const { theme, styles } = useStyles();
   const [tab, setTab] = useState('installed');
+  const { setAgentList, agentList } = useAgentStore();
+
+  const { loading, run: reloadAgentList } = useRequest(getLocalAgentList, {
+    onSuccess: (data) => {
+      setAgentList(data.agents);
+    },
+  });
+
   return (
     <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>
       <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
@@ -34,7 +47,12 @@ const Agent = () => {
             random
           />
         </Center>
-        <Center style={{ marginBottom: 12 }}>
+        <Flexbox
+          style={{ marginBottom: 12 }}
+          horizontal
+          align="center"
+          distribution="space-between"
+        >
           <TabsNav
             activeKey={tab}
             onChange={(key) => {
@@ -43,19 +61,30 @@ const Agent = () => {
             items={[
               {
                 key: 'installed',
-                label: '本地安装',
+                label: '已下载',
               },
               {
                 key: 'index',
-                label: '在线下载',
+                label: '在线列表',
               },
             ]}
           />
-        </Center>
-        {tab === 'installed' ? <AgentList /> : null}
-        {tab === 'index' ? <AgentIndex /> : null}
+          {tab === 'installed' ? (
+            <Space>
+              共 {agentList.length} 项{' '}
+              <ActionIcon
+                icon={Loader2Icon}
+                loading={loading}
+                title="重新加载"
+                onClick={reloadAgentList}
+              />
+            </Space>
+          ) : null}
+        </Flexbox>
+        {tab === 'installed' ? <AgentList loading={loading} /> : null}
+        {tab === 'index' ? <AgentIndex reloadAgentList={reloadAgentList} /> : null}
       </div>
-      <AgentCard />
+      <AgentCard reloadAgentList={reloadAgentList} />
     </Flexbox>
   );
 };

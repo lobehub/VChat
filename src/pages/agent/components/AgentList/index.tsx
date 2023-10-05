@@ -1,20 +1,17 @@
-import { getLocalAgentList } from '@/services/agent';
 import { useAgentStore } from '@/store/agent';
-import { useRequest } from 'ahooks';
 import { Card, List, Typography } from 'antd';
 
 const { Text } = Typography;
 
 const { Meta } = Card;
 
-const AgentList = () => {
-  const { agentList, setAgentList, activateAgent } = useAgentStore();
+interface AgentListProps {
+  loading: boolean;
+}
 
-  const { loading, run } = useRequest(getLocalAgentList, {
-    onSuccess: (data) => {
-      setAgentList(data.agents);
-    },
-  });
+const AgentList = (props: AgentListProps) => {
+  const { loading = false } = props;
+  const { agentList, activateAgent } = useAgentStore();
 
   return (
     <List
