@@ -15,7 +15,7 @@ const DEFAULT_AGENT = {
 
 interface SessionStore {
   currentAgent: Agent | null;
-  viewer: any;
+  viewer: Viewer;
   setCurrentAgent: (agent: Agent) => void;
 }
 

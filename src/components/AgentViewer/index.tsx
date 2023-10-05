@@ -1,3 +1,7 @@
+import { bindToVRM } from '@/lib/VMDAnimation/bindToVRM';
+import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
+import { toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
+
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
@@ -88,7 +92,21 @@ function AgentViewer() {
             const blob = new Blob([file], { type: 'application/octet-stream' });
             const url = window.URL.createObjectURL(blob);
             loadVRMAnimation(url).then((vrma) => {
-              viewer.model.loadAnimation(vrma);
+              if (vrma) viewer.model?.loadAnimation(vrma);
+            });
+          } else if (file_type === 'vmd') {
+            const blob = new Blob([file]);
+            blob.arrayBuffer().then((vmd) => {
+              // convert animation to AnimationClip
+              const animation = convert(vmd, toOffset(viewer.model.vrm));
+              console.log('animation', animation);
+              const clip = bindToVRM(animation, viewer.model.vrm);
+              console.log('clip', clip);
+              const animate = viewer.model.mixer.clipAction(clip);
+
+              //       animate.setLoop(THREE.LoopOnce);
+              //       animate.clampWhenFinished = true; // don't reset pos after animation ends
+              animate.play(); // play animation
             });
           }
         });

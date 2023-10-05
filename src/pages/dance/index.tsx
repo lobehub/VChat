@@ -49,7 +49,7 @@ const Agent = () => {
                 },
                 {
                   key: 'index',
-                  label: '舞蹈列表',
+                  label: '在线下载',
                 },
               ]}
             />
