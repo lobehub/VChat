@@ -1,6 +1,5 @@
-import { bindToVRM } from '@/lib/VMDAnimation/bindToVRM';
 import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
-import { toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
+import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
 
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
@@ -97,6 +96,7 @@ function AgentViewer() {
           } else if (file_type === 'vmd') {
             const blob = new Blob([file]);
             blob.arrayBuffer().then((vmd) => {
+              console.log('data', vmd);
               // convert animation to AnimationClip
               const animation = convert(vmd, toOffset(viewer.model.vrm));
               console.log('animation', animation);
