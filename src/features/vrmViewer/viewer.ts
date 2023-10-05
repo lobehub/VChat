@@ -16,6 +16,7 @@ export class Viewer {
   private _renderer?: THREE.WebGLRenderer;
   private _clock: THREE.Clock;
   private _scene: THREE.Scene;
+  private _cameraHelper?: THREE.CameraHelper;
   private _camera?: THREE.PerspectiveCamera;
   private _cameraControls?: OrbitControls;
 
@@ -91,14 +92,19 @@ export class Viewer {
     this._renderer.setPixelRatio(window.devicePixelRatio);
 
     // camera
-    this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
-    this._camera.position.set(0, 1.3, 1.8);
+    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+    this._camera.position.set(0, 10, 1);
     this._cameraControls?.target.set(0, 1.3, 0);
     this._cameraControls?.update();
+
     // camera controls
     this._cameraControls = new OrbitControls(this._camera, this._renderer.domElement);
     this._cameraControls.screenSpacePanning = true;
     this._cameraControls.update();
+
+    this._cameraHelper = new THREE.CameraHelper(this._camera);
+
+    this._scene.add(this._cameraHelper);
 
     window.addEventListener('resize', () => {
       this.resize();
@@ -145,6 +151,8 @@ export class Viewer {
     if (this.model) {
       this.model.update(delta);
     }
+
+    this._cameraHelper.update();
 
     if (this._renderer && this._camera) {
       this._renderer.render(this._scene, this._camera);

@@ -20,3 +20,9 @@
 - [ ] 支持聊天功能。
 - [ ] 设置页面配置。
 - [ ] 支持触摸交互。
+
+## 参考
+
+- [mmd-parser](https://github.com/takahirox/mmd-parser)
+- [mmd-viewer-js](https://github.com/takahirox/mmd-viewer-js)
+- [vrm-helper](https://www.npmjs.com/package/vrm-helper)
