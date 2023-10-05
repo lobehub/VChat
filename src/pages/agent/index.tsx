@@ -25,7 +25,7 @@ const useStyles = createStyles(({ css }) => ({
 const Agent = () => {
   const { theme, styles } = useStyles();
   const [tab, setTab] = useState('installed');
-  const { setAgentList, agentList } = useAgentStore();
+  const { fetchAgentList, agentList, loading } = useAgentStore();
 
   return (
     <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>
@@ -68,15 +68,15 @@ const Agent = () => {
                 icon={Loader2Icon}
                 loading={loading}
                 title="重新加载"
-                onClick={reloadAgentList}
+                onClick={fetchAgentList}
               />
             </Space>
           ) : null}
         </Flexbox>
-        {tab === 'installed' ? <AgentList loading={loading} /> : null}
-        {tab === 'index' ? <AgentIndex reloadAgentList={reloadAgentList} /> : null}
+        {tab === 'installed' ? <AgentList /> : null}
+        {tab === 'index' ? <AgentIndex /> : null}
       </div>
-      <AgentCard reloadAgentList={reloadAgentList} />
+      <AgentCard />
     </Flexbox>
   );
 };

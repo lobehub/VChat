@@ -1,19 +1,11 @@
-import { useRef } from 'react';
 import Header from './Header';
 import SideBar from './SideBar';
 
-interface AgentCardProps {
-  reloadAgentList: () => void;
-}
-
-const AgentCard = (props: AgentCardProps) => {
-  const ref = useRef(null);
-  const { reloadAgentList } = props;
-
+const AgentCard = () => {
   return (
     <div>
       <SideBar>
-        <Header reloadAgentList={reloadAgentList} />
+        <Header />
       </SideBar>
     </div>
   );

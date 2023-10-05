@@ -1,19 +1,24 @@
+import { getLocalAgentList } from '@/services/agent';
 import { create } from 'zustand';
 import { Agent } from './type';
 
 interface AgentStore {
+  loading: boolean;
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   currentIdentifier: string;
   agentList: any[];
-  setAgentList: (agentList: any[]) => void;
+  fetchAgentList: () => void;
 }
 
 export const useAgentStore = create<AgentStore>()((set) => ({
   currentIdentifier: '',
+  loading: false,
   agentList: [],
-  setAgentList: (agentList) => {
-    set({ agentList: agentList });
+  fetchAgentList: async () => {
+    set({ loading: true });
+    const data = await getLocalAgentList();
+    set({ agentList: data.agents, loading: false });
   },
   activateAgent: (identifier) => {
     set({ currentIdentifier: identifier });

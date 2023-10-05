@@ -1,14 +1,15 @@
 import { downloadGithubAgent } from '@/services/agent';
+import { useAgentStore } from '@/store/agent';
 import { useRequest } from 'ahooks';
 import { Button, message } from 'antd';
 
 interface DownloadButtonProps {
   url: string;
-  reloadAgentList: () => void;
 }
 
 const DownloadButton = (props: DownloadButtonProps) => {
-  const { url, reloadAgentList } = props;
+  const { url } = props;
+  const { fetchAgentList } = useAgentStore();
 
   const { loading: downloading, run } = useRequest((url) => downloadGithubAgent(url), {
     manual: true,
@@ -16,7 +17,7 @@ const DownloadButton = (props: DownloadButtonProps) => {
       const { success, errorMessage } = data;
       if (success) {
         message.success('下载成功');
-        reloadAgentList();
+        fetchAgentList();
       } else {
         message.error(errorMessage);
       }

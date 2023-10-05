@@ -1,17 +1,17 @@
 import { useAgentStore } from '@/store/agent';
 import { Card, List, Typography } from 'antd';
+import { useEffect } from 'react';
 
 const { Text } = Typography;
 
 const { Meta } = Card;
 
-interface AgentListProps {
-  loading: boolean;
-}
+const AgentList = () => {
+  const { agentList, activateAgent, loading, fetchAgentList } = useAgentStore();
 
-const AgentList = (props: AgentListProps) => {
-  const { loading = false } = props;
-  const { agentList, activateAgent } = useAgentStore();
+  useEffect(() => {
+    fetchAgentList();
+  }, [fetchAgentList]);
 
   return (
     <List
