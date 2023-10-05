@@ -1,4 +1,5 @@
 import { downloadGithubDance } from '@/services/dance';
+import { useDanceStore } from '@/store/dance';
 import { useRequest } from 'ahooks';
 import { Button, message } from 'antd';
 
@@ -8,12 +9,14 @@ interface DownloadButtonProps {
 
 const DownloadButton = (props: DownloadButtonProps) => {
   const { url } = props;
+  const { fetchDanceList } = useDanceStore();
   const { loading: downloading, run } = useRequest((url) => downloadGithubDance(url), {
     manual: true,
     onSuccess: (data) => {
       const { success, errorMessage } = data;
       if (success) {
         message.success('下载成功');
+        fetchDanceList();
       } else {
         message.error(errorMessage);
       }

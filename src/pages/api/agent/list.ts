@@ -20,5 +20,5 @@ export default function handler(req, res) {
     });
   }
 
-  res.status(200).json({ agents: agentList });
+  res.status(200).json({ data: agentList });
 }

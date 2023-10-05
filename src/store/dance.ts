@@ -1,32 +1,37 @@
+import { getLocalDanceList } from '@/services/dance';
 import { create } from 'zustand';
 import { Dance } from './type';
 
 interface DanceStore {
+  loading: boolean;
   currentIdentifier: string;
   currentPlay: Dance | null;
-  danceList: any[];
+  danceList: Dance[];
   playlist: Dance[];
   isPlaying: boolean;
+  fetchDanceList: () => void;
   activateDance: (identifier: string) => void;
   deactivateDance: () => void;
   setPlayList: (playlist: Dance[]) => void;
   playItem: (dance: Dance) => void;
   addAndPlayItem: (dance: Dance) => void;
   removePlayItem: (dance: Dance) => void;
-  setDanceList: (danceList: any[]) => void;
   setIsPlaying: (play: boolean) => void;
   prevDance: () => void;
   nextDance: () => void;
 }
 
 export const useDanceStore = create<DanceStore>()((set, get) => ({
+  loading: false,
   playlist: [],
   isPlaying: false,
   currentIdentifier: '',
   currentPlay: null,
   danceList: [],
-  setDanceList: (danceList) => {
-    set({ danceList: danceList });
+  fetchDanceList: async () => {
+    set({ loading: true });
+    const res = await getLocalDanceList();
+    set({ danceList: res.data, loading: false });
   },
   activateDance: (identifier) => {
     set({ currentIdentifier: identifier });

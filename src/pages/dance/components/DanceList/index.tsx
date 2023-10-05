@@ -1,18 +1,15 @@
-import { getLocalDanceList } from '@/services/dance';
 import { useDanceStore } from '@/store/dance';
-import { useRequest } from 'ahooks';
 import { Card, List } from 'antd';
+import { useEffect } from 'react';
 
 const { Meta } = Card;
 
-const AgentList = () => {
-  const { danceList, setDanceList, activateDance } = useDanceStore();
+const DanceList = () => {
+  const { danceList, fetchDanceList, activateDance, loading } = useDanceStore();
 
-  const { loading, run } = useRequest(getLocalDanceList, {
-    onSuccess: (data) => {
-      setDanceList(data);
-    },
-  });
+  useEffect(() => {
+    fetchDanceList();
+  }, [fetchDanceList]);
 
   return (
     <List
@@ -37,4 +34,4 @@ const AgentList = () => {
   );
 };
 
-export default AgentList;
+export default DanceList;

@@ -14,7 +14,7 @@ import { useStyles } from './style';
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
-  const { addAndPlayItem, deactivateDance } = useDanceStore();
+  const { addAndPlayItem, deactivateDance, fetchDanceList } = useDanceStore();
 
   const { loading, run } = useRequest((dirname) => deleteLocalDance(dirname), {
     manual: true,
@@ -23,7 +23,7 @@ const Header = memo(() => {
       if (success) {
         message.success('删除成功');
         deactivateDance();
-        // retrive list
+        fetchDanceList();
       } else {
         message.error(errorMessage);
       }

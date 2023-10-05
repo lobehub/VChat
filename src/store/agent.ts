@@ -17,8 +17,8 @@ export const useAgentStore = create<AgentStore>()((set) => ({
   agentList: [],
   fetchAgentList: async () => {
     set({ loading: true });
-    const data = await getLocalAgentList();
-    set({ agentList: data.agents, loading: false });
+    const res = await getLocalAgentList();
+    set({ agentList: res.data, loading: false });
   },
   activateAgent: (identifier) => {
     set({ currentIdentifier: identifier });
