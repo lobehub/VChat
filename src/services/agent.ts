@@ -8,6 +8,17 @@ export const getLocalAgentList = async () => {
 };
 
 /**
+ * 删除本地 Agent 目录
+ */
+export const deleteLocalAgent = async (dirname: string) => {
+  const res = await fetch(`/api/agent/${dirname}`, {
+    method: 'DELETE',
+  });
+
+  return res.json();
+};
+
+/**
  * 请求线上 Agent index
  */
 export const getAgentIndex = async () => {
