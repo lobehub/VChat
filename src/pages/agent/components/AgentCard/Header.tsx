@@ -3,7 +3,7 @@ import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, message } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
@@ -53,15 +53,17 @@ const Header = memo(() => {
         加载角色
       </Button>
       {dirname ? (
-        <Button
-          block
-          onClick={() => {
-            run(dirname);
-          }}
-          loading={loading}
+        <Popconfirm
+          title="确定删除？"
+          description="确定删除本地角色文件吗？"
+          onConfirm={() => run(dirname)}
+          okText="确定"
+          cancelText="取消"
         >
-          删除
-        </Button>
+          <Button block loading={loading}>
+            删除
+          </Button>
+        </Popconfirm>
       ) : null}
     </Center>
   );

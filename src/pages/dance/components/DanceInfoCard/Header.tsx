@@ -1,6 +1,6 @@
 import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { Avatar } from '@lobehub/ui';
-import { Button } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
@@ -52,15 +52,17 @@ const Header = memo(() => {
       >
         播放并添加到歌单
       </Button>
-      <Button
-        block
-        onClick={() => {
-          run(dirname);
-        }}
-        loading={loading}
+      <Popconfirm
+        title="确定删除？"
+        description="确定删除本地舞蹈文件吗？"
+        onConfirm={() => run(dirname)}
+        okText="确定"
+        cancelText="取消"
       >
-        删除
-      </Button>
+        <Button block loading={loading}>
+          删除
+        </Button>
+      </Popconfirm>
     </Center>
   );
 });

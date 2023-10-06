@@ -73,6 +73,7 @@ function Player() {
           e.currentTarget.volume = volume;
         }}
         onEnded={(e) => {
+          viewer.model?.stopDance();
           nextDance();
         }}
         onTimeUpdate={(e) => {
