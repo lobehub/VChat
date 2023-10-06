@@ -86,6 +86,7 @@ export class Model {
   public async dance(buffer: ArrayBuffer) {
     const { vrm, mixer } = this;
     if (vrm && mixer) {
+      mixer.stopAllAction();
       const animation = convert(buffer, toOffset(vrm));
       const clip = bindToVRM(animation, vrm);
       const action = mixer.clipAction(clip);

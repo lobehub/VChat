@@ -1,6 +1,3 @@
-import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
-import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
-
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
@@ -96,11 +93,7 @@ function AgentViewer() {
           } else if (file_type === 'vmd') {
             const blob = new Blob([file]);
             blob.arrayBuffer().then((vmd) => {
-              // convert animation to AnimationClips
-              const animation = convert(vmd, toOffset(viewer.model.vrm));
-              const clip = bindToVRM(animation, viewer.model.vrm);
-              const animate = viewer.model.mixer.clipAction(clip);
-              animate.play(); // play animation
+              viewer.model?.dance(vmd);
             });
           }
         });

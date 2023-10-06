@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { GridHelper, Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Model } from './model';
 
@@ -32,6 +33,10 @@ export class Viewer {
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
     scene.add(ambientLight);
+
+    // const ambiantLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+    // ambiantLight.position.set(0, 20, 0);
+    // scene.add(ambiantLight);
 
     // animate
     this._clock = new THREE.Clock();
@@ -89,7 +94,7 @@ export class Viewer {
 
     // camera
     this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    this._camera.position.set(0, 10, 1);
+    this._camera.position.set(0, 1.5, 1.5);
     this._cameraControls?.target.set(0, 1.3, 0);
     this._cameraControls?.update();
 
@@ -100,6 +105,23 @@ export class Viewer {
 
     // this._cameraHelper = new THREE.CameraHelper(this._camera);
     // this._scene.add(this._cameraHelper);
+
+    // floor
+    const floor = new Mesh(
+      new PlaneGeometry(100, 100),
+      new MeshLambertMaterial({
+        color: 0x999999,
+        depthWrite: true,
+      }),
+    );
+    floor.position.y = -0.5;
+    floor.rotation.x = -Math.PI / 2;
+
+    this._scene.add(floor);
+
+    // grid
+    const grid = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
+    this._scene.add(grid);
 
     window.addEventListener('resize', () => {
       this.resize();

@@ -72,8 +72,7 @@ function Player() {
         onCanPlay={(e) => {
           e.currentTarget.volume = volume;
         }}
-        onEnded={() => {
-          setIsPlaying(false);
+        onEnded={(e) => {
           nextDance();
         }}
         onTimeUpdate={(e) => {
@@ -82,7 +81,7 @@ function Player() {
       />
       <div className={styles.player}>
         <Avatar src={currentPlay?.cover} size={96} shape="square" />
-        <Flexbox vertical style={{ margin: '0px 12px', flexGrow: 1 }}>
+        <Flexbox style={{ margin: '0px 12px', flexGrow: 1 }}>
           <div className={styles.top}>
             <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
               {currentPlay?.name}

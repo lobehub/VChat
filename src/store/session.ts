@@ -4,10 +4,10 @@ import { create } from 'zustand';
 import { Agent } from './type';
 
 const DEFAULT_AGENT: Agent = {
-  name: 'Sample_B',
-  description: '默认角色 B',
+  name: 'Sample_A',
+  description: '默认角色 A',
   homepage: 'https://hub.vroid.com/characters/8492290223992997626/models/1864405023120034389',
-  model: buildUrl('/AvatarSample_B.vrm'),
+  model: buildUrl('/AvatarSample_A.vrm'),
   avatar: '',
   cover: '',
 };
