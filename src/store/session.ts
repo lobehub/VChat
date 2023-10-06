@@ -16,6 +16,8 @@ interface SessionStore {
   currentAgent: Agent | null;
   viewer: Viewer;
   setCurrentAgent: (agent: Agent) => void;
+  startDance: (buffer: ArrayBuffer) => void;
+  stopDance: () => void;
 }
 
 export const useSessionStore = create<SessionStore>()((set) => ({
@@ -23,5 +25,11 @@ export const useSessionStore = create<SessionStore>()((set) => ({
   viewer: new Viewer(),
   setCurrentAgent: (agent) => {
     set({ currentAgent: agent });
+  },
+  startDance(buffer) {
+    this.viewer.model?.dance(buffer);
+  },
+  stopDance() {
+    this.viewer.model?.stopDance();
   },
 }));

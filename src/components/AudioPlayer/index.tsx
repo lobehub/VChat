@@ -1,4 +1,5 @@
 import { useDanceStore } from '@/store/dance';
+import { useSessionStore } from '@/store/session';
 import { Avatar, Icon } from '@lobehub/ui';
 import { Slider, Typography } from 'antd';
 import {
@@ -26,16 +27,23 @@ function Player() {
   const { currentPlay } = useDanceStore();
 
   const { isPlaying, setIsPlaying, prevDance, nextDance } = useDanceStore();
+  const { viewer } = useSessionStore();
 
   const { styles } = useStyles();
 
   useEffect(() => {
     if (isPlaying && currentPlay) {
-      ref.current && ref.current.play();
+      fetch(currentPlay.src)
+        .then((res) => res.arrayBuffer())
+        .then((buffer) => {
+          viewer.model?.dance(buffer);
+          ref.current && ref.current.play();
+        });
     } else {
       ref.current && ref.current.pause();
+      viewer.model?.stopDance();
     }
-  }, [isPlaying, currentPlay]);
+  }, [isPlaying, currentPlay, viewer]);
 
   const togglePlayPause = () => {
     if (isPlaying) {

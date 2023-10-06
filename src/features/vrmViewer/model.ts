@@ -1,3 +1,5 @@
+import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
+import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
 import { VRM, VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -68,6 +70,29 @@ export class Model {
     const clip = vrmAnimation.createAnimationClip(vrm);
     const action = mixer.clipAction(clip);
     action.play();
+  }
+
+  /**
+   * 播放舞蹈
+   * @param buffer ArrayBuffer
+   */
+  public async dance(buffer: ArrayBuffer) {
+    const { vrm, mixer } = this;
+    if (vrm == null || mixer == null) {
+      throw new Error('You have to load VRM first');
+    }
+    const animation = convert(buffer, toOffset(vrm));
+    const clip = bindToVRM(animation, vrm);
+    const action = mixer.clipAction(clip);
+    action.play(); // play animation
+  }
+
+  public async stopDance() {
+    const { mixer } = this;
+    if (mixer == null) {
+      throw new Error('You have to load VRM first');
+    }
+    mixer.stopAllAction();
   }
 
   /**

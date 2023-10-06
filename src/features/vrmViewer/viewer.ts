@@ -102,9 +102,8 @@ export class Viewer {
     this._cameraControls.screenSpacePanning = true;
     this._cameraControls.update();
 
-    this._cameraHelper = new THREE.CameraHelper(this._camera);
-
-    this._scene.add(this._cameraHelper);
+    // this._cameraHelper = new THREE.CameraHelper(this._camera);
+    // this._scene.add(this._cameraHelper);
 
     window.addEventListener('resize', () => {
       this.resize();

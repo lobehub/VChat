@@ -96,16 +96,10 @@ function AgentViewer() {
           } else if (file_type === 'vmd') {
             const blob = new Blob([file]);
             blob.arrayBuffer().then((vmd) => {
-              console.log('data', vmd);
-              // convert animation to AnimationClip
+              // convert animation to AnimationClips
               const animation = convert(vmd, toOffset(viewer.model.vrm));
-              console.log('animation', animation);
               const clip = bindToVRM(animation, viewer.model.vrm);
-              console.log('clip', clip);
               const animate = viewer.model.mixer.clipAction(clip);
-
-              //       animate.setLoop(THREE.LoopOnce);
-              //       animate.clampWhenFinished = true; // don't reset pos after animation ends
               animate.play(); // play animation
             });
           }
