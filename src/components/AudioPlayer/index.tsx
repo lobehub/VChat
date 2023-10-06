@@ -41,6 +41,7 @@ function Player() {
         });
     } else {
       ref.current && ref.current.pause();
+      ref.current && (ref.current.currentTime = 0);
       viewer.model?.stopDance();
     }
   }, [isPlaying, currentPlay, viewer]);
@@ -71,7 +72,10 @@ function Player() {
         onCanPlay={(e) => {
           e.currentTarget.volume = volume;
         }}
-        onEnded={nextDance}
+        onEnded={() => {
+          setIsPlaying(false);
+          nextDance();
+        }}
         onTimeUpdate={(e) => {
           setCurrrentProgress(e.currentTarget.currentTime);
         }}

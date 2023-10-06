@@ -1,5 +1,7 @@
 import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
 import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
+import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
+import { buildUrl } from '@/utils/buildUrl';
 import { VRM, VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -72,27 +74,31 @@ export class Model {
     action.play();
   }
 
+  public async loadIdleAnimation() {
+    const vrma = await loadVRMAnimation(buildUrl('/idle_loop.vrma'));
+    if (vrma) this.loadAnimation(vrma);
+  }
+
   /**
    * 播放舞蹈
    * @param buffer ArrayBuffer
    */
   public async dance(buffer: ArrayBuffer) {
     const { vrm, mixer } = this;
-    if (vrm == null || mixer == null) {
-      throw new Error('You have to load VRM first');
+    if (vrm && mixer) {
+      const animation = convert(buffer, toOffset(vrm));
+      const clip = bindToVRM(animation, vrm);
+      const action = mixer.clipAction(clip);
+      action.play(); // play animation
     }
-    const animation = convert(buffer, toOffset(vrm));
-    const clip = bindToVRM(animation, vrm);
-    const action = mixer.clipAction(clip);
-    action.play(); // play animation
   }
 
   public async stopDance() {
-    const { mixer } = this;
-    if (mixer == null) {
-      throw new Error('You have to load VRM first');
+    const { vrm, mixer } = this;
+    if (vrm && mixer) {
+      mixer.stopAllAction();
+      this.loadIdleAnimation();
     }
-    mixer.stopAllAction();
   }
 
   /**

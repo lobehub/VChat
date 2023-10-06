@@ -1,5 +1,3 @@
-import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
-import { buildUrl } from '@/utils/buildUrl';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Model } from './model';
@@ -56,9 +54,7 @@ export class Viewer {
       });
 
       this._scene.add(this.model.vrm.scene);
-
-      const vrma = await loadVRMAnimation(buildUrl('/idle_loop.vrma'));
-      if (vrma) this.model.loadAnimation(vrma);
+      this.model.loadIdleAnimation();
 
       // HACK: アニメーションの原点がずれているので再生後にカメラ位置を調整する
       requestAnimationFrame(() => {
