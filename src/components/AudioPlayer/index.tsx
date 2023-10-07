@@ -32,7 +32,9 @@ function Player() {
   const { styles } = useStyles();
 
   useEffect(() => {
-    if (isPlaying && currentPlay) {
+    if (!currentPlay) return;
+
+    if (isPlaying) {
       fetch(currentPlay.src)
         .then((res) => res.arrayBuffer())
         .then((buffer) => {
