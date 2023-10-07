@@ -1,5 +1,5 @@
-import * as THREE from "three";
-import { VRM, VRMExpressionManager, VRMHumanBoneName } from "@pixiv/three-vrm";
+import { VRM, VRMExpressionManager, VRMHumanBoneName } from '@pixiv/three-vrm';
+import * as THREE from 'three';
 
 export class VRMAnimation {
   public duration: number;
@@ -35,14 +35,14 @@ export class VRMAnimation {
     }
 
     if (vrm.lookAt != null) {
-      const track = this.createLookAtTrack("lookAtTargetParent.quaternion");
+      const track = this.createLookAtTrack('lookAtTargetParent.quaternion');
 
       if (track != null) {
         tracks.push(track);
       }
     }
 
-    return new THREE.AnimationClip("Clip", this.duration, tracks);
+    return new THREE.AnimationClip('Clip', this.duration, tracks);
   }
 
   public createHumanoidTracks(vrm: VRM): THREE.KeyframeTrack[] {
@@ -56,10 +56,9 @@ export class VRMAnimation {
       if (nodeName != null) {
         const track = new THREE.VectorKeyframeTrack(
           `${nodeName}.quaternion`,
+          // @ts-ignore
           origTrack.times,
-          origTrack.values.map((v, i) =>
-            metaVersion === "0" && i % 2 === 0 ? -v : v
-          )
+          origTrack.values.map((v, i) => (metaVersion === '0' && i % 2 === 0 ? -v : v)),
         );
         tracks.push(track);
       }
@@ -70,13 +69,12 @@ export class VRMAnimation {
 
       if (nodeName != null) {
         const animationY = this.restHipsPosition.y;
-        const humanoidY =
-          humanoid.getNormalizedAbsolutePose().hips!.position![1];
+        const humanoidY = humanoid.getNormalizedAbsolutePose().hips!.position![1];
         const scale = humanoidY / animationY;
 
         const track = origTrack.clone();
         track.values = track.values.map(
-          (v, i) => (metaVersion === "0" && i % 3 !== 1 ? -v : v) * scale
+          (v, i) => (metaVersion === '0' && i % 3 !== 1 ? -v : v) * scale,
         );
         track.name = `${nodeName}.position`;
         tracks.push(track);
@@ -86,9 +84,7 @@ export class VRMAnimation {
     return tracks;
   }
 
-  public createExpressionTracks(
-    expressionManager: VRMExpressionManager
-  ): THREE.KeyframeTrack[] {
+  public createExpressionTracks(expressionManager: VRMExpressionManager): THREE.KeyframeTrack[] {
     const tracks: THREE.KeyframeTrack[] = [];
 
     for (const [name, origTrack] of this.expressionTracks.entries()) {

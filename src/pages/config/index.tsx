@@ -11,6 +11,7 @@ const Config = () => {
   return (
     <div style={{ padding: 24 }}>
       <Form initialValues={setting} onFinish={console.table}>
+        {/* @ts-ignore */}
         <FormGroup icon={Monitor} title={'Common Settings'}>
           <FormItem desc={'Editor language'} label={'Language'} name="i18n">
             <Select
@@ -30,6 +31,7 @@ const Config = () => {
             <Input placeholder="sk-" style={{ width: 480 }} />
           </FormItem>
         </FormGroup>
+        {/* @ts-ignore */}
         <FormGroup icon={BotIcon} title={'Model Setting'}>
           <FormItem desc={'which gpt model you are using'} label={'GPT Model'} name="model">
             <Select

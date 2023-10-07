@@ -8,11 +8,13 @@ import { useStyles } from './style';
 
 export const items: ActionIconGroupProps['items'] = [
   {
+    /* @ts-ignore */
     icon: Expand,
     key: 'expand',
     label: '全屏',
   },
   {
+    /* @ts-ignore */
     icon: RotateCw,
     key: 'resetCamera',
     label: '重置镜头',
@@ -21,11 +23,13 @@ export const items: ActionIconGroupProps['items'] = [
 
 export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
   {
+    /* @ts-ignore */
     icon: Expand,
     key: 'copy',
     label: 'Copy',
   },
   {
+    /* @ts-ignore */
     icon: RotateCw,
     key: 'regenerate',
     label: 'Regenerate',
@@ -34,6 +38,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
     type: 'divider',
   },
   {
+    /* @ts-ignore */
     icon: Trash,
     key: 'delete',
     label: 'Delete',

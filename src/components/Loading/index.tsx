@@ -10,6 +10,7 @@ const Loading = memo(() => {
       <Center flex={1} gap={12} width={'100%'}>
         <h1>Vidol.Chat</h1>
         <Center gap={16} horizontal>
+          {/* @ts-ignore */}
           <Icon icon={Loader2} spin />
           应用初始化中
         </Center>

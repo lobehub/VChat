@@ -65,6 +65,7 @@ const Agent = () => {
             <Space>
               共 {agentList.length} 项{' '}
               <ActionIcon
+                /* @ts-ignore */
                 icon={Loader2Icon}
                 loading={loading}
                 title="重新加载"

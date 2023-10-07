@@ -3,7 +3,7 @@ import { DraggablePanel, DraggablePanelBody, DraggablePanelContainer } from '@lo
 import { createStyles } from 'antd-style';
 import { ReactNode, memo, useState } from 'react';
 
-const useStyles = createStyles(({ css, token, stylish }) => ({
+const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
     flex-direction: column;
@@ -14,7 +14,6 @@ const useStyles = createStyles(({ css, token, stylish }) => ({
   header: css`
     border-bottom: 1px solid ${token.colorBorder};
   `,
-  noScrollbar: stylish.noScrollbar,
 }));
 
 // eslint-disable-next-line react/display-name
@@ -53,10 +52,7 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
           minWidth: 400,
         }}
       >
-        <DraggablePanelBody
-          className={styles.noScrollbar}
-          style={{ padding: 0, position: 'relative' }}
-        >
+        <DraggablePanelBody style={{ padding: 0, position: 'relative' }}>
           {children}
         </DraggablePanelBody>
       </DraggablePanelContainer>

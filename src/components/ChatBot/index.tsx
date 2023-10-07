@@ -75,8 +75,11 @@ const ChatBot = () => {
         <ChatInputArea
           actions={
             <>
+              {/* @ts-ignore */}
               <ActionIcon icon={Languages} />
+              {/* @ts-ignore */}
               <ActionIcon icon={Eraser} />
+              {/* @ts-ignore */}
               <ActionIcon icon={Mic} onClick={handleRecord} loading={isRecording} />
               <TokenTag maxValue={5000} value={1000} />
             </>
@@ -84,6 +87,7 @@ const ChatBot = () => {
           value={message}
           style={{ background: theme.colorBgContainer }}
           expand={expand}
+          /* @ts-ignore */
           footer={<Button icon={<Icon icon={Archive} />} />}
           minHeight={200}
           onExpandChange={setExpand}

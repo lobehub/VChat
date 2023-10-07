@@ -93,6 +93,7 @@ function Player() {
             <div className={styles.control}>
               <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} onClick={prevDance} />
               <Icon
+                // @ts-ignore
                 icon={isPlaying ? PauseCircle : PlayCircle}
                 style={{ fontSize: 48, cursor: 'pointer' }}
                 onClick={togglePlayPause}

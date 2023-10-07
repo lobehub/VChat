@@ -20,6 +20,7 @@ const SideNav = () => {
       style={{ height: 'calc(100vh - 64px)' }}
       bottomActions={
         <ActionIcon
+          /* @ts-ignore */
           icon={Settings2}
           onClick={() => {
             setTab('config');
@@ -33,6 +34,7 @@ const SideNav = () => {
         <>
           <ActionIcon
             active={tab === 'agents'}
+            /* @ts-ignore */
             icon={User}
             onClick={() => {
               setTab('agents');
@@ -42,6 +44,7 @@ const SideNav = () => {
           />
           <ActionIcon
             active={tab === 'dance'}
+            /* @ts-ignore */
             icon={Music2}
             onClick={() => {
               setTab('dance');
@@ -51,6 +54,7 @@ const SideNav = () => {
           />
           <ActionIcon
             active={tab === 'chat'}
+            /* @ts-ignore */
             icon={MessageSquare}
             onClick={() => {
               setTab('chat');

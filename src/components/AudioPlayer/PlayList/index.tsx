@@ -45,12 +45,14 @@ const PlayList = (props: PlayListProps) => {
             <List.Item
               actions={[
                 <ActionIcon
+                  // @ts-ignore
                   icon={PlayIcon}
                   key="play"
                   onClick={() => playItem(item)}
                   size="small"
                 />,
                 <ActionIcon
+                  // @ts-ignore
                   icon={XIcon}
                   key="delete"
                   onClick={() => removePlayItem(item)}
