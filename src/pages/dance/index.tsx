@@ -1,11 +1,11 @@
 import AudioPlayer from '@/components/AudioPlayer';
+import DanceIndex from '@/components/DanceIndex';
+import DanceInfoCard from '@/components/DanceInfoCard';
+import DanceList from '@/components/DanceList';
 import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
-import DanceIndex from './components/DanceIndex';
-import DanceInfoCard from './components/DanceInfoCard';
-import DanceList from './components/DanceList';
 
 const useStyles = createStyles(({ css }) => ({
   background: css`

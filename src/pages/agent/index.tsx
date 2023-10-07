@@ -1,3 +1,6 @@
+import AgentCard from '@/components/AgentCard';
+import AgentIndex from '@/components/AgentIndex';
+import AgentList from '@/components/AgentList';
 import { useAgentStore } from '@/store/agent';
 import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
 import { Space } from 'antd';
@@ -5,9 +8,6 @@ import { createStyles } from 'antd-style';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
-import AgentCard from './components/AgentCard';
-import AgentIndex from './components/AgentIndex';
-import AgentList from './components/AgentList';
 
 const useStyles = createStyles(({ css }) => ({
   background: css`
