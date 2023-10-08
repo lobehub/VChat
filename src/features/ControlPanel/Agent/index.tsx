@@ -43,7 +43,7 @@ const Agent = () => {
     <View>
       <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
         <Center>
-          <h1 className={styles.title}>Find & Chat with Virtual Idol</h1>
+          <h1 className={styles.title}>Select Your Virtual Idol</h1>
           <GridBackground
             animation
             className={styles.background}

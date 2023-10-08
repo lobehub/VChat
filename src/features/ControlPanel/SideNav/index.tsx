@@ -17,6 +17,8 @@ const SideNav = () => {
 
   return (
     <LobeSideNav
+      className="handle"
+      style={{ cursor: 'move' }}
       bottomActions={
         <ActionIcon
           /* @ts-ignore */

@@ -124,16 +124,7 @@ function AgentViewer() {
 
   return (
     <div className={styles.vrm} ref={ref}>
-      {open ? (
-        <ControlPanel
-          style={{
-            position: 'absolute',
-            left: 64,
-            top: 24,
-          }}
-          tab={tab}
-        />
-      ) : null}
+      {open ? <ControlPanel tab={tab} /> : null}
       <ActionIconGroup
         style={{
           position: 'absolute',
