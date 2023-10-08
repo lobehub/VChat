@@ -8,7 +8,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!fs.existsSync(danceDir)) {
     fs.mkdirSync(danceDir);
   }
-  const dances = fs.readdirSync(danceDir, { withFileTypes: true });
+  const dances = fs
+    .readdirSync(danceDir, { withFileTypes: true })
+    .filter((item) => !/(^|\/)\.[^\/\.]/g.test(item.name))
+    .filter((item) => item.isDirectory());
+
   for (const dance of dances) {
     const danceMeta = fs.readFileSync(path.join(danceDir, dance.name, 'meta.json'), 'utf8');
     const readme = fs.readFileSync(path.join(danceDir, dance.name, 'readme.txt'), 'utf8');
