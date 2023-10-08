@@ -5,7 +5,17 @@ import DanceList from '@/components/DanceList';
 import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { useState } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Center } from 'react-layout-kit';
+
+import styled from 'styled-components';
+
+const View = styled.div`
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+`;
 
 const useStyles = createStyles(({ css }) => ({
   background: css`
@@ -20,48 +30,46 @@ const useStyles = createStyles(({ css }) => ({
   `,
 }));
 
-const Agent = () => {
+const Dance = () => {
   const [tab, setTab] = useState('installed');
   const { theme, styles } = useStyles();
   return (
-    <Flexbox flex={1} height={'calc(100vh - 64px)'}>
-      <Flexbox flex={1} horizontal>
-        <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
-          <Center>
-            <h1 className={styles.title}>Find your favorite Dance</h1>
-            <GridBackground
-              animation
-              className={styles.background}
-              colorFront={theme.colorText}
-              random
-            />
-          </Center>
-          <Center style={{ marginBottom: 12 }}>
-            <TabsNav
-              activeKey={tab}
-              onChange={(key) => {
-                setTab(key);
-              }}
-              items={[
-                {
-                  key: 'installed',
-                  label: '本地安装',
-                },
-                {
-                  key: 'index',
-                  label: '在线下载',
-                },
-              ]}
-            />
-          </Center>
-          {tab === 'installed' ? <DanceList /> : null}
-          {tab === 'index' ? <DanceIndex /> : null}
-        </div>
-        <DanceInfoCard />
-      </Flexbox>
+    <View>
+      <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
+        <Center>
+          <h1 className={styles.title}>Find your favorite Dance</h1>
+          <GridBackground
+            animation
+            className={styles.background}
+            colorFront={theme.colorText}
+            random
+          />
+        </Center>
+        <Center style={{ marginBottom: 12 }}>
+          <TabsNav
+            activeKey={tab}
+            onChange={(key) => {
+              setTab(key);
+            }}
+            items={[
+              {
+                key: 'installed',
+                label: '本地安装',
+              },
+              {
+                key: 'index',
+                label: '在线下载',
+              },
+            ]}
+          />
+        </Center>
+        {tab === 'installed' ? <DanceList /> : null}
+        {tab === 'index' ? <DanceIndex /> : null}
+      </div>
+      <DanceInfoCard />
       <AudioPlayer />
-    </Flexbox>
+    </View>
   );
 };
 
-export default Agent;
+export default Dance;

@@ -2,13 +2,13 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    position: fixed;
+    position: absolute;
     bottom: 0;
+    left: 0;
     border-top: 1px solid ${token.colorBorderSecondary};
-    left: 64px;
     backdrop-filter: saturate(180%) blur(10px);
     background-color: ${token.colorFillTertiary};
-    width: calc(100vw - 64px);
+    width: 100%;
     z-index: 12;
     height: 96px;
   `,
@@ -18,7 +18,6 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   top: css`
     display: flex;
-
     align-items: center;
     justify-content: space-between;
   `,

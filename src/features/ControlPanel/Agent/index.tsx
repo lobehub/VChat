@@ -41,7 +41,7 @@ const Agent = () => {
 
   return (
     <View>
-      <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
+      <div style={{ paddingLeft: 24, paddingRight: 24 }}>
         <Center>
           <h1 className={styles.title}>Select Your Virtual Idol</h1>
           <GridBackground
