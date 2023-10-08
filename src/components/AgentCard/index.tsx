@@ -3,11 +3,9 @@ import SideBar from './SideBar';
 
 const AgentCard = () => {
   return (
-    <div>
-      <SideBar>
-        <Header />
-      </SideBar>
-    </div>
+    <SideBar>
+      <Header />
+    </SideBar>
   );
 };
 

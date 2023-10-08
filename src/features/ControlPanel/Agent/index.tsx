@@ -9,6 +9,18 @@ import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 
+import styled from 'styled-components';
+
+const View = styled.div`
+  position: relative;
+
+  display: flex;
+
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+`;
+
 const useStyles = createStyles(({ css }) => ({
   background: css`
     width: 90%;
@@ -28,8 +40,8 @@ const Agent = () => {
   const { fetchAgentList, agentList, loading } = useAgentStore();
 
   return (
-    <Flexbox flex={1} height={'calc(100vh - 64px)'} horizontal>
-      <div style={{ paddingLeft: 24, paddingRight: 24, width: 1024, margin: ' 0 auto' }}>
+    <View>
+      <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
         <Center>
           <h1 className={styles.title}>Find & Chat with Virtual Idol</h1>
           <GridBackground
@@ -78,7 +90,7 @@ const Agent = () => {
         {tab === 'index' ? <AgentIndex /> : null}
       </div>
       <AgentCard />
-    </Flexbox>
+    </View>
   );
 };
 

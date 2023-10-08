@@ -2,13 +2,12 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   box: css`
-    background: #fff;
+    backdrop-filter: saturate(180%) blur(10px);
+    background-color: ${token.colorFillTertiary};
     border: 1px solid #999;
-    border-radius: 3px;
-    width: 180px;
-    height: 180px;
-    margin: 10px;
-    padding: 10px;
-    float: left;
+    border-radius: ${token.borderRadius}px;
+    overflow-y: scroll;
+    width: 1024px;
+    height: 800px;
   `,
 }));

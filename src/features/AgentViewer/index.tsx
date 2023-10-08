@@ -23,7 +23,7 @@ export const items: ActionIconGroupProps['items'] = [
   {
     /* @ts-ignore */
     icon: User,
-    key: 'user',
+    key: 'agent',
     label: '角色选择',
   },
 ];
@@ -55,7 +55,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
 function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
   const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<string>('user'); // ['user', 'dance', 'chat']
+  const [tab, setTab] = useState<string>('agent'); // ['user', 'dance', 'chat']
   const ref = useRef<HTMLDivElement>(null);
 
   const isHover = useHover(ref);
@@ -70,9 +70,8 @@ function AgentViewer() {
   }
 
   function toggleOpenPanel(tab: string) {
-    if (tab === 'user') {
-      setOpen((open) => !open);
-    }
+    setOpen((open) => !open);
+    setTab(tab);
   }
 
   const canvasRef = useCallback(
@@ -151,8 +150,8 @@ function AgentViewer() {
           } else if (key === 'expand') {
             toggleFullScreen();
           }
-          if (key === 'user') {
-            toggleOpenPanel('user');
+          if (key === 'agent') {
+            toggleOpenPanel('agent');
           }
         }}
       />
