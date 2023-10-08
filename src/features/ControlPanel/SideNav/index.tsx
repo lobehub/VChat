@@ -17,7 +17,6 @@ const SideNav = () => {
 
   return (
     <LobeSideNav
-      style={{ height: 'calc(100vh - 64px)' }}
       bottomActions={
         <ActionIcon
           /* @ts-ignore */

@@ -1,6 +1,6 @@
 import AgentViewer from '@/components/AgentViewer';
 import Header from '@/components/Header';
-import SideNav from '@/components/SideNav';
+import SideNav from '@/features/ControlPanel/SideNav';
 import { useSessionStore } from '@/store/session';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
