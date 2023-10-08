@@ -129,7 +129,7 @@ function AgentViewer() {
         <ControlPanel
           style={{
             position: 'absolute',
-            left: 24,
+            left: 64,
             top: 24,
           }}
           tab={tab}
