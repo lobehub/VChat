@@ -43,9 +43,14 @@ const ControlPanel = (props: ControlPanelProps) => {
       onStart={(event, uiData) => onStart(event, uiData)}
     >
       <div className={classNames(styles.box, className)} style={style} ref={draggleRef}>
-        <SideNav />
-        {tab === 'dance' ? <Dance /> : null}
-        {tab === 'agent' ? <Agent /> : null}
+        <div className={classNames(styles.header, 'handle')}></div>
+        <div className={styles.container}>
+          <SideNav className="handle" />
+          <div className={styles.content}>
+            {tab === 'dance' ? <Dance /> : null}
+            {tab === 'agent' ? <Agent /> : null}
+          </div>
+        </div>
       </div>
     </Draggable>
   );

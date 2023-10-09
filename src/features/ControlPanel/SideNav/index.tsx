@@ -2,13 +2,17 @@ import { useConfigStore } from '@/store/config';
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
 import { MessageSquare, Music2, Settings2, User } from 'lucide-react';
 
-const SideNav = () => {
+interface SideNavProps {
+  className?: string;
+}
+
+const SideNav = (props: SideNavProps) => {
   const { tab, setTab } = useConfigStore();
+  const { className } = props;
 
   return (
     <LobeSideNav
-      className="handle"
-      style={{ cursor: 'move' }}
+      className={className}
       bottomActions={
         <ActionIcon
           /* @ts-ignore */

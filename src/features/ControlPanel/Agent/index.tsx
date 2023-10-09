@@ -13,9 +13,7 @@ import styled from 'styled-components';
 
 const View = styled.div`
   position: relative;
-
   display: flex;
-
   width: 100%;
   height: 100%;
   min-height: 500px;
@@ -41,7 +39,7 @@ const Agent = () => {
 
   return (
     <View>
-      <div style={{ paddingLeft: 24, paddingRight: 24 }}>
+      <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
         <Center>
           <h1 className={styles.title}>Select Your Virtual Idol</h1>
           <GridBackground

@@ -7,9 +7,9 @@ const useStyles = createStyles(({ token, css }) => ({
     left: 0;
     border-top: 1px solid ${token.colorBorderSecondary};
     backdrop-filter: saturate(180%) blur(10px);
-    background-color: ${token.colorFillTertiary};
+    background-color: ${token.colorBgBase};
     width: 100%;
-    z-index: 12;
+    z-index: 2000;
     height: 96px;
   `,
   player: css`
