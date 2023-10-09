@@ -1,3 +1,4 @@
+import { useConfigStore } from '@/store/config';
 import { Space, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { useRef, useState } from 'react';
@@ -18,6 +19,7 @@ interface ControlPanelProps {
 const ControlPanel = (props: ControlPanelProps) => {
   const { style, className, tab = 'agent' } = props;
   const { styles } = useStyles();
+  const { controlPanelOpen, setControlPanelOpen } = useConfigStore();
   const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 });
 
   const draggleRef = useRef<HTMLDivElement>(null);
@@ -29,10 +31,10 @@ const ControlPanel = (props: ControlPanelProps) => {
       return;
     }
     setBounds({
-      left: -targetRect.left + uiData.x,
-      right: clientWidth - (targetRect.right - uiData.x),
+      left: -targetRect.left + uiData.x - 800,
+      right: clientWidth - (targetRect.right - uiData.x) + 800,
       top: -targetRect.top + uiData.y + 64,
-      bottom: clientHeight - (targetRect.bottom - uiData.y),
+      bottom: clientHeight - (targetRect.bottom - uiData.y) + 600,
     });
   };
 
@@ -55,13 +57,23 @@ const ControlPanel = (props: ControlPanelProps) => {
         <div className={classNames(styles.header, 'handle')} onDoubleClick={toggleFullScreen}>
           <Space>
             <Tooltip title="关闭">
-              <div className={classNames(styles.button, styles.close)} onClick={() => {}} />
+              <div
+                className={classNames(styles.button, styles.close)}
+                onClick={() => {
+                  setControlPanelOpen(false);
+                }}
+              />
             </Tooltip>
             <Tooltip title="最大化">
               <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
             </Tooltip>
             <Tooltip title="最小化">
-              <div className={classNames(styles.button, styles.min)}></div>
+              <div
+                className={classNames(styles.button, styles.min)}
+                onClick={() => {
+                  setControlPanelOpen(false);
+                }}
+              ></div>
             </Tooltip>
           </Space>
         </div>

@@ -5,7 +5,7 @@ import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
 import { Expand, Music2, RotateCw, User } from 'lucide-react';
-import { memo, useCallback, useRef, useState } from 'react';
+import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
 
 export const items: ActionIconGroupProps['items'] = [
@@ -39,8 +39,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
-  const { tab, setTab } = useConfigStore();
-  const [open, setOpen] = useState(false);
+  const { tab, setTab, controlPanelOpen, setControlPanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 
   const isHover = useHover(ref);
@@ -55,7 +54,7 @@ function AgentViewer() {
   }
 
   function openPanel(tab: tabType) {
-    setOpen(true);
+    setControlPanelOpen(true);
     setTab(tab);
   }
 
@@ -109,7 +108,7 @@ function AgentViewer() {
 
   return (
     <div className={styles.vrm} ref={ref}>
-      {<ControlPanel tab={tab} style={{ display: open ? 'flex' : 'none' }} />}
+      {<ControlPanel tab={tab} style={{ display: controlPanelOpen ? 'flex' : 'none' }} />}
       <ActionIconGroup
         style={{
           position: 'absolute',
