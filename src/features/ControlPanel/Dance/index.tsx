@@ -30,11 +30,17 @@ const useStyles = createStyles(({ css }) => ({
   `,
 }));
 
-const Dance = () => {
+interface DanceProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const Dance = (props: DanceProps) => {
+  const { style, className } = props;
   const [tab, setTab] = useState('installed');
   const { theme, styles } = useStyles();
   return (
-    <View>
+    <View style={style} className={className}>
       <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
         <Center>
           <h1 className={styles.title}>Find your favorite Dance</h1>
@@ -67,7 +73,13 @@ const Dance = () => {
         {tab === 'index' ? <DanceIndex /> : null}
       </div>
       <DanceInfoCard />
-      <AudioPlayer />
+      <AudioPlayer
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+        }}
+      />
     </View>
   );
 };

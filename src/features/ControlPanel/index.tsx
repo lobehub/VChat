@@ -1,3 +1,4 @@
+import { Space, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { useRef, useState } from 'react';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
@@ -35,6 +36,14 @@ const ControlPanel = (props: ControlPanelProps) => {
     });
   };
 
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      draggleRef.current && draggleRef.current.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
   return (
     <Draggable
       handle=".handle"
@@ -43,12 +52,24 @@ const ControlPanel = (props: ControlPanelProps) => {
       onStart={(event, uiData) => onStart(event, uiData)}
     >
       <div className={classNames(styles.box, className)} style={style} ref={draggleRef}>
-        <div className={classNames(styles.header, 'handle')}></div>
+        <div className={classNames(styles.header, 'handle')} onDoubleClick={toggleFullScreen}>
+          <Space>
+            <Tooltip title="关闭">
+              <div className={classNames(styles.button, styles.close)} onClick={() => {}} />
+            </Tooltip>
+            <Tooltip title="最大化">
+              <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
+            </Tooltip>
+            <Tooltip title="最小化">
+              <div className={classNames(styles.button, styles.min)}></div>
+            </Tooltip>
+          </Space>
+        </div>
         <div className={styles.container}>
           <SideNav className="handle" />
           <div className={styles.content}>
-            {tab === 'dance' ? <Dance /> : null}
-            {tab === 'agent' ? <Agent /> : null}
+            <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
+            <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
           </div>
         </div>
       </div>

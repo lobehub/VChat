@@ -32,13 +32,19 @@ const useStyles = createStyles(({ css }) => ({
   `,
 }));
 
-const Agent = () => {
+interface AgentProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
+  const { style, className } = props;
   const [tab, setTab] = useState('installed');
   const { fetchAgentList, agentList, loading } = useAgentStore();
 
   return (
-    <View>
+    <View style={style} className={className}>
       <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
         <Center>
           <h1 className={styles.title}>Select Your Virtual Idol</h1>

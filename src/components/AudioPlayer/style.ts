@@ -2,12 +2,10 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    position: absolute;
-    bottom: 0;
-    left: 0;
     border-top: 1px solid ${token.colorBorderSecondary};
     backdrop-filter: saturate(180%) blur(10px);
     background-color: ${token.colorBgBase};
+    box-sizing: content-box;
     width: 100%;
     z-index: 2000;
     height: 96px;

@@ -16,9 +16,27 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   header: css`
     border-bottom: 1px solid #999;
-    height: 36px;
+    height: 32px;
+    padding: 10px;
     width: 100%;
+    display: flex;
   `,
+  button: css`
+    border-radius: 8px;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+  `,
+  close: css`
+    background-color: ${token['red-7']};
+  `,
+  min: css`
+    background-color: ${token['yellow-7']};
+  `,
+  max: css`
+    background-color: ${token['green-7']};
+  `,
+
   content: css`
     display: flex;
     flex-direction: row;
