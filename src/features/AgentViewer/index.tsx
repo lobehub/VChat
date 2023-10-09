@@ -1,9 +1,10 @@
+import ControlPanel from '@/features/ControlPanel';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
-import { Expand, RotateCw, Trash } from 'lucide-react';
-import { memo, useCallback, useRef } from 'react';
+import { Expand, RotateCw, Trash, User } from 'lucide-react';
+import { memo, useCallback, useRef, useState } from 'react';
 import { useStyles } from './style';
 
 export const items: ActionIconGroupProps['items'] = [
@@ -18,6 +19,12 @@ export const items: ActionIconGroupProps['items'] = [
     icon: RotateCw,
     key: 'resetCamera',
     label: '重置镜头',
+  },
+  {
+    /* @ts-ignore */
+    icon: User,
+    key: 'agent',
+    label: '角色选择',
   },
 ];
 
@@ -47,6 +54,8 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
 
 function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
+  const [open, setOpen] = useState(false);
+  const [tab, setTab] = useState<string>('agent'); // ['user', 'dance', 'chat']
   const ref = useRef<HTMLDivElement>(null);
 
   const isHover = useHover(ref);
@@ -58,6 +67,11 @@ function AgentViewer() {
     } else if (document.exitFullscreen) {
       document.exitFullscreen();
     }
+  }
+
+  function toggleOpenPanel(tab: string) {
+    setOpen((open) => !open);
+    setTab(tab);
   }
 
   const canvasRef = useCallback(
@@ -110,6 +124,16 @@ function AgentViewer() {
 
   return (
     <div className={styles.vrm} ref={ref}>
+      {open ? (
+        <ControlPanel
+          style={{
+            position: 'absolute',
+            left: 64,
+            top: 24,
+          }}
+          tab={tab}
+        />
+      ) : null}
       <ActionIconGroup
         style={{
           position: 'absolute',
@@ -125,6 +149,9 @@ function AgentViewer() {
             viewer.resetCamera();
           } else if (key === 'expand') {
             toggleFullScreen();
+          }
+          if (key === 'agent') {
+            toggleOpenPanel('agent');
           }
         }}
       />

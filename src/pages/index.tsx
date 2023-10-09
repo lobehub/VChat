@@ -1,15 +1,9 @@
-import Router, { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import AgentViewer from '@/features/AgentViewer';
+import { useSessionStore } from '@/store/session';
 
 const Home = () => {
-  const router = useRouter();
-  useEffect(() => {
-    if (router.pathname === '/') {
-      Router.push('/agent');
-    }
-  }, []);
-
-  return null;
+  const { currentAgent } = useSessionStore();
+  return currentAgent ? <AgentViewer /> : null;
 };
 
 export default Home;

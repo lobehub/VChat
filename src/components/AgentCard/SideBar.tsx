@@ -1,5 +1,5 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
-import { DraggablePanel, DraggablePanelBody, DraggablePanelContainer } from '@lobehub/ui';
+import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { ReactNode, memo, useState } from 'react';
 
@@ -7,9 +7,6 @@ const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
     flex-direction: column;
-  `,
-  drawer: css`
-    background: ${token.colorBgLayout};
   `,
   header: css`
     border-bottom: 1px solid ${token.colorBorder};
@@ -28,12 +25,9 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
 
   return (
     <DraggablePanel
-      className={styles.drawer}
-      classNames={{
-        content: styles.content,
-      }}
+      className={styles.content}
       expand={showAgentSidebar}
-      minWidth={400}
+      minWidth={240}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
@@ -45,17 +39,7 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
       }}
       placement={'right'}
     >
-      <DraggablePanelContainer
-        style={{
-          flex: 'none',
-          height: 'calc(100vh - 64px)',
-          minWidth: 400,
-        }}
-      >
-        <DraggablePanelBody style={{ padding: 0, position: 'relative' }}>
-          {children}
-        </DraggablePanelBody>
-      </DraggablePanelContainer>
+      {children}
     </DraggablePanel>
   );
 });
