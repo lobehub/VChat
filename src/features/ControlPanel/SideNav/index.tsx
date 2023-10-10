@@ -1,30 +1,26 @@
+import { useConfigStore } from '@/store/config';
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
 import { MessageSquare, Music2, Settings2, User } from 'lucide-react';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 
-const SideNav = () => {
-  const router = useRouter();
-  const path = router.pathname.startsWith('/config')
-    ? 'config'
-    : router.pathname.startsWith('/chat')
-    ? 'chat'
-    : router.pathname.startsWith('/dance')
-    ? 'dance'
-    : 'agents';
+interface SideNavProps {
+  className?: string;
+}
 
-  const [tab, setTab] = useState<string>(path);
+const SideNav = (props: SideNavProps) => {
+  const { tab, setTab } = useConfigStore();
+  const { className } = props;
 
   return (
     <LobeSideNav
+      className={className}
       bottomActions={
         <ActionIcon
           /* @ts-ignore */
           icon={Settings2}
           onClick={() => {
             setTab('config');
-            router.push('/config');
           }}
+          s
           size="large"
           active={tab === 'config'}
         />
@@ -32,12 +28,11 @@ const SideNav = () => {
       topActions={
         <>
           <ActionIcon
-            active={tab === 'agents'}
+            active={tab === 'agent'}
             /* @ts-ignore */
             icon={User}
             onClick={() => {
-              setTab('agents');
-              router.push('/');
+              setTab('agent');
             }}
             size="large"
           />
@@ -47,7 +42,6 @@ const SideNav = () => {
             icon={Music2}
             onClick={() => {
               setTab('dance');
-              router.push('/dance');
             }}
             size="large"
           />
@@ -57,7 +51,6 @@ const SideNav = () => {
             icon={MessageSquare}
             onClick={() => {
               setTab('chat');
-              router.push('/chat');
             }}
             size="large"
           />

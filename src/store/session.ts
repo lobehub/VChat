@@ -20,7 +20,7 @@ interface SessionStore {
   stopDance: () => void;
 }
 
-export const useSessionStore = create<SessionStore>()((set) => ({
+export const useSessionStore = create<SessionStore>()((set, get) => ({
   currentAgent: DEFAULT_AGENT,
   viewer: new Viewer(),
   setCurrentAgent: (agent) => {

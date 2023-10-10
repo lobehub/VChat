@@ -1,5 +1,6 @@
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
@@ -13,6 +14,7 @@ import { useStyles } from './style';
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
+  const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const { setCurrentAgent } = useSessionStore();
 
@@ -47,6 +49,7 @@ const Header = memo(() => {
         block
         onClick={() => {
           setCurrentAgent(currentAgent);
+          setIsPlaying(false);
         }}
         type={'primary'}
       >

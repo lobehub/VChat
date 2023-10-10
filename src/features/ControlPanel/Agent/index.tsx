@@ -13,9 +13,7 @@ import styled from 'styled-components';
 
 const View = styled.div`
   position: relative;
-
   display: flex;
-
   width: 100%;
   height: 100%;
   min-height: 500px;
@@ -34,16 +32,22 @@ const useStyles = createStyles(({ css }) => ({
   `,
 }));
 
-const Agent = () => {
+interface AgentProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
+  const { style, className } = props;
   const [tab, setTab] = useState('installed');
   const { fetchAgentList, agentList, loading } = useAgentStore();
 
   return (
-    <View>
-      <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
+    <View style={style} className={className}>
+      <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
         <Center>
-          <h1 className={styles.title}>Find & Chat with Virtual Idol</h1>
+          <h1 className={styles.title}>Select Your Virtual Idol</h1>
           <GridBackground
             animation
             className={styles.background}

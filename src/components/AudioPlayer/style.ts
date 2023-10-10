@@ -2,14 +2,12 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    position: fixed;
-    bottom: 0;
     border-top: 1px solid ${token.colorBorderSecondary};
-    left: 64px;
     backdrop-filter: saturate(180%) blur(10px);
-    background-color: ${token.colorFillTertiary};
-    width: calc(100vw - 64px);
-    z-index: 12;
+    background-color: ${token.colorBgBase};
+    box-sizing: content-box;
+    width: 100%;
+    z-index: 2000;
     height: 96px;
   `,
   player: css`
@@ -18,7 +16,6 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   top: css`
     display: flex;
-
     align-items: center;
     justify-content: space-between;
   `,

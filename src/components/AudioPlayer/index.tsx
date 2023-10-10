@@ -1,6 +1,7 @@
 import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { Avatar, Icon } from '@lobehub/ui';
+import classNames from 'classnames';
 import { Slider, Typography } from 'antd';
 import {
   ListMusic,
@@ -16,7 +17,13 @@ import { Flexbox } from 'react-layout-kit';
 import PlayList from './PlayList';
 import { useStyles } from './style';
 
-function Player() {
+interface PlayerProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+function Player(props: PlayerProps) {
+  const {style, className} = props;
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
   const [open, setOpen] = useState(false);
@@ -64,7 +71,7 @@ function Player() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)} style={style}>
       <PlayList open={open} onClose={() => setOpen(false)} />
       <audio
         src={currentPlay?.audio}

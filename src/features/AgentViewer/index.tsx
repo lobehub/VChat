@@ -1,10 +1,11 @@
 import ControlPanel from '@/features/ControlPanel';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
+import { tabType, useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
-import { Expand, RotateCw, Trash, User } from 'lucide-react';
-import { memo, useCallback, useRef, useState } from 'react';
+import { Expand, Music2, RotateCw, User } from 'lucide-react';
+import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
 
 export const items: ActionIconGroupProps['items'] = [
@@ -26,36 +27,19 @@ export const items: ActionIconGroupProps['items'] = [
     key: 'agent',
     label: '角色选择',
   },
+  {
+    /* @ts-ignore */
+    icon: Music2,
+    key: 'dance',
+    label: '舞蹈选择',
+  },
 ];
 
-export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [
-  {
-    /* @ts-ignore */
-    icon: Expand,
-    key: 'copy',
-    label: 'Copy',
-  },
-  {
-    /* @ts-ignore */
-    icon: RotateCw,
-    key: 'regenerate',
-    label: 'Regenerate',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    /* @ts-ignore */
-    icon: Trash,
-    key: 'delete',
-    label: 'Delete',
-  },
-];
+export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 function AgentViewer() {
   const { viewer, currentAgent } = useSessionStore();
-  const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<string>('agent'); // ['user', 'dance', 'chat']
+  const { tab, setTab, controlPanelOpen, setControlPanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 
   const isHover = useHover(ref);
@@ -69,8 +53,8 @@ function AgentViewer() {
     }
   }
 
-  function toggleOpenPanel(tab: string) {
-    setOpen((open) => !open);
+  function openPanel(tab: tabType) {
+    setControlPanelOpen(true);
     setTab(tab);
   }
 
@@ -124,16 +108,7 @@ function AgentViewer() {
 
   return (
     <div className={styles.vrm} ref={ref}>
-      {open ? (
-        <ControlPanel
-          style={{
-            position: 'absolute',
-            left: 64,
-            top: 24,
-          }}
-          tab={tab}
-        />
-      ) : null}
+      {<ControlPanel tab={tab} style={{ display: controlPanelOpen ? 'flex' : 'none' }} />}
       <ActionIconGroup
         style={{
           position: 'absolute',
@@ -149,9 +124,10 @@ function AgentViewer() {
             viewer.resetCamera();
           } else if (key === 'expand') {
             toggleFullScreen();
-          }
-          if (key === 'agent') {
-            toggleOpenPanel('agent');
+          } else if (key === 'agent') {
+            openPanel('agent');
+          } else if (key === 'dance') {
+            openPanel('dance');
           }
         }}
       />

@@ -1,5 +1,5 @@
 import { danceListSelectors, useDanceStore } from '@/store/dance';
-import { DraggablePanel, DraggablePanelBody, DraggablePanelContainer } from '@lobehub/ui';
+import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { ReactNode, memo, useState } from 'react';
 
@@ -7,9 +7,6 @@ const useStyles = createStyles(({ css, token, stylish }) => ({
   content: css`
     display: flex;
     flex-direction: column;
-  `,
-  drawer: css`
-    background: ${token.colorBgLayout};
   `,
   header: css`
     border-bottom: 1px solid ${token.colorBorder};
@@ -28,13 +25,10 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
 
   return (
     <DraggablePanel
-      className={styles.drawer}
-      classNames={{
-        content: styles.content,
-      }}
-      expand={showDanceSidebar}
-      minWidth={400}
+      className={styles.content}
+      minWidth={240}
       mode={'fixed'}
+      expand={showDanceSidebar}
       onExpandChange={(show) => {
         if (!show) {
           setTempId(useDanceStore.getState().currentIdentifier);
@@ -45,17 +39,7 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
       }}
       placement={'right'}
     >
-      <DraggablePanelContainer
-        style={{
-          flex: 'none',
-          height: 'calc(100vh - 64px - 96px)',
-          minWidth: 400,
-        }}
-      >
-        <DraggablePanelBody style={{ padding: 0, position: 'relative' }}>
-          {children}
-        </DraggablePanelBody>
-      </DraggablePanelContainer>
+      {children}
     </DraggablePanel>
   );
 });
