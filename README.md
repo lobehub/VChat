@@ -20,6 +20,8 @@ Make Virtual Idols Accessible To EveryOne!
 
 ## ✨ Features
 
+![](./preview.png)
+
 - [x] 💨 **Vroid Model Preview**: Using the Vroid Editor, you can create and upload your own virtual idol to the website, play with them;
 - [x] 💎 **Exquisite UI Design**: With a carefully designed interface, it offers an elegant appearance and smooth interaction. It supports light and dark themes. PWA support provides a more native-like experience;
 - [x] 🗣️ **MMD Dance Support**: With the support of mmd-parser, you can play vmd files with your favarite idol; Just Dance!
