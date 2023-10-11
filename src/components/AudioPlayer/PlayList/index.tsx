@@ -3,7 +3,7 @@ import { useDanceStore } from '@/store/dance';
 import { DeleteOutlined } from '@ant-design/icons';
 import { ActionIcon } from '@lobehub/ui';
 import { Button, Drawer, List, Typography, theme } from 'antd';
-import { PlayIcon, XIcon } from 'lucide-react';
+import { Pause, PlayIcon, XIcon } from 'lucide-react';
 import { memo } from 'react';
 
 const { Text } = Typography;
@@ -18,7 +18,8 @@ interface PlayListProps {
 const PlayList = (props: PlayListProps) => {
   const { open = false, onClose } = props;
   const { token } = theme.useToken();
-  const { playlist, playItem, removePlayItem, setPlayList, currentPlay } = useDanceStore();
+  const { isPlaying, playlist, playItem, removePlayItem, setPlayList, setIsPlaying, currentPlay } =
+    useDanceStore();
 
   return (
     <Drawer
@@ -44,13 +45,23 @@ const PlayList = (props: PlayListProps) => {
           return (
             <List.Item
               actions={[
-                <ActionIcon
-                  // @ts-ignore
-                  icon={PlayIcon}
-                  key="play"
-                  onClick={() => playItem(item)}
-                  size="small"
-                />,
+                mark && isPlaying ? (
+                  <ActionIcon
+                    // @ts-ignore
+                    icon={Pause}
+                    key="pause"
+                    onClick={() => setIsPlaying(false)}
+                    size="small"
+                  />
+                ) : (
+                  <ActionIcon
+                    // @ts-ignore
+                    icon={PlayIcon}
+                    key="play"
+                    onClick={() => playItem(item)}
+                    size="small"
+                  />
+                ),
                 <ActionIcon
                   // @ts-ignore
                   icon={XIcon}
