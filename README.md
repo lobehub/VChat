@@ -18,6 +18,47 @@ Make Virtual Idols Accessible To EveryOne!
 
 </div>
 
+## ✨ Features
+
+- [x] 💨 **Vroid Model Preview**: Using the Vroid Editor, you can create and upload your own virtual idol to the website, play with them;
+- [x] 💎 **Exquisite UI Design**: With a carefully designed interface, it offers an elegant appearance and smooth interaction. It supports light and dark themes. PWA support provides a more native-like experience;
+- [x] 🗣️ **MMD Dance Support**: With the support of mmd-parser, you can play vmd files with your favarite idol; Just Dance!
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+## ⌨️ Local Development
+
+You can use Github Codespaces for online development:
+
+[![][github-codespace-shield]][github-codespace-link]
+
+Or clone it for local development:
+
+[![][bun-shield]][bun-link]
+
+```bash
+$ git clone https://github.com/v-idol/vidol.chat.git
+$ cd vidol.chat
+$ bun install
+$ bun dev
+```
+
+<div align="right">
+
+[![][back-to-top]](#readme-top)
+
+</div>
+
+[github-codespace-shield]: https://github.com/codespaces/badge.svg
+[github-codespace-link]: https://codespaces.new/v-idol/vidol.chat
+[bun-shield]: https://img.shields.io/badge/-speedup%20with%20bun-black?logo=bun&style=for-the-badge
+[bun-link]: https://bun.sh
+[back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
+[back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
 [github-contributors-shield]: https://img.shields.io/github/contributors/v-idol/vidol.chat?color=c4f042&labelColor=black&style=flat-square
 [github-contributors-link]: https://github.com/v-idol/vidol.chat/graphs/contributors
 [github-forks-shield]: https://img.shields.io/github/forks/v-idol/vidol.chat?color=8ae8ff&labelColor=black&style=flat-square
