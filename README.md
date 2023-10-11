@@ -87,6 +87,14 @@ Contributions of all types are more than welcome, if you are interested in contr
 
 </div>
 
+---
+
+#### 📝 License
+
+Copyright © 2023 [v-idol][profile-link]. <br />
+This project is [MIT](./LICENSE) licensed.
+
+[profile-link]: https://github.com/v-idol
 [back-to-top]: https://img.shields.io/badge/-BACK_TO_TOP-black?style=flat-square
 [github-issues-link]: https://github.com/v-idol/vidol.chat/issues
 [pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
