@@ -1,3 +1,4 @@
+import { Parser } from 'mmd-parser';
 import * as THREE from 'three';
 import { GridHelper, Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -41,6 +42,15 @@ export class Viewer {
     // animate
     this._clock = new THREE.Clock();
     this._clock.start();
+  }
+
+  /**
+   * 加载舞台
+   * @param url
+   */
+  public async loadStage(buffer: ArrayBuffer) {
+    const pmx = new Parser().parsePmx(buffer);
+    this._scene.add(pmx);
   }
 
   public loadVrm(url: string) {

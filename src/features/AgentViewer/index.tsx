@@ -98,6 +98,11 @@ function AgentViewer() {
             blob.arrayBuffer().then((vmd) => {
               viewer.model?.dance(vmd);
             });
+          } else if (file_type === 'pmx') {
+            const blob = new Blob([file]);
+            blob.arrayBuffer().then((pmx) => {
+              viewer.loadStage(pmx);
+            });
           }
         });
       }
