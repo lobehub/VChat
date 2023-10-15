@@ -4,8 +4,8 @@ const useStyles = createStyles(({ token, css }) => ({
   chatbot: css`
     position: relative;
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
-    height: calc(100vh - 64px);
   `,
 }));
 

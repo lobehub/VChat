@@ -6,6 +6,7 @@ import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
 
 import Agent from './Agent';
+import Chat from './Chat';
 import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
@@ -84,6 +85,7 @@ const ControlPanel = (props: ControlPanelProps) => {
             <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
             <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
             <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
+            <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
           </div>
         </div>
       </div>

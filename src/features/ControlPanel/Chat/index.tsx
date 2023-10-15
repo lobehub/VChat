@@ -1,12 +1,19 @@
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
+import classNames from 'classnames';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import ChatList from './ChatList';
 import { useStyles } from './style';
 
-const ChatBot = () => {
+interface ChatBotProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const ChatBot = (props: ChatBotProps) => {
+  const { style, className } = props;
   const [expand, setExpand] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('123');
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -67,7 +74,7 @@ const ChatBot = () => {
     setIsRecording(true);
   };
   return (
-    <div className={styles.chatbot}>
+    <div className={classNames(styles.chatbot, className)} style={style}>
       <div style={{ flex: 1, overflow: 'scroll' }}>
         <ChatList />
       </div>
