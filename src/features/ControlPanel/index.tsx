@@ -6,6 +6,7 @@ import type { DraggableData, DraggableEvent } from 'react-draggable';
 import Draggable from 'react-draggable';
 
 import Agent from './Agent';
+import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
 import { useStyles } from './style';
@@ -82,6 +83,7 @@ const ControlPanel = (props: ControlPanelProps) => {
           <div className={styles.content}>
             <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
             <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
+            <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
           </div>
         </div>
       </div>

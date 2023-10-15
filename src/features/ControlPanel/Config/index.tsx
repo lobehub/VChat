@@ -7,10 +7,20 @@ const setting = {
   model: 'gpt-3.5-turb',
 };
 
-const Config = () => {
+interface ConfigProps {
+  style?: React.CSSProperties;
+  className?: string;
+}
+
+const Config = (props: ConfigProps) => {
+  const { style, className } = props;
   return (
-    <div style={{ padding: 24 }}>
-      <Form initialValues={setting} onFinish={console.table}>
+    <div style={{ padding: 24, display: 'flex', flexGrow: 1, ...style }} className={className}>
+      <Form
+        initialValues={setting}
+        onFinish={console.table}
+        style={{ display: 'flex', flexGrow: 1 }}
+      >
         {/* @ts-ignore */}
         <FormGroup icon={Monitor} title={'Common Settings'}>
           <FormItem desc={'Editor language'} label={'Language'} name="i18n">
@@ -25,6 +35,7 @@ const Config = () => {
                   value: 'zh_CN',
                 },
               ]}
+              style={{ width: 180 }}
             />
           </FormItem>
           <FormItem desc={'Please use your own GPT Key'} divider label={'API Key'} name="apikey">
