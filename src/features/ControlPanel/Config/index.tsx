@@ -1,5 +1,7 @@
 import { Form, FormFooter, FormGroup, FormItem } from '@lobehub/ui';
 import { Button, Input, InputNumber, Segmented, Select } from 'antd';
+import { createStyles } from 'antd-style';
+import classNames from 'classnames';
 import { BotIcon, Monitor } from 'lucide-react';
 
 const setting = {
@@ -12,10 +14,20 @@ interface ConfigProps {
   className?: string;
 }
 
+const useStyles = createStyles(({ css }) => ({
+  config: css`
+    justify-content: center;
+    padding: 24px;
+    display: flex;
+    flex-grow: 1;
+  `,
+}));
+
 const Config = (props: ConfigProps) => {
   const { style, className } = props;
+  const { styles } = useStyles();
   return (
-    <div style={{ padding: 24, display: 'flex', flexGrow: 1, ...style }} className={className}>
+    <div style={style} className={classNames(styles.config, className)}>
       <Form
         initialValues={setting}
         onFinish={console.table}
@@ -36,26 +48,6 @@ const Config = (props: ConfigProps) => {
                 },
               ]}
               style={{ width: 180 }}
-            />
-          </FormItem>
-          <FormItem desc={'Please use your own GPT Key'} divider label={'API Key'} name="apikey">
-            <Input placeholder="sk-" style={{ width: 480 }} />
-          </FormItem>
-        </FormGroup>
-        {/* @ts-ignore */}
-        <FormGroup icon={BotIcon} title={'Model Setting'}>
-          <FormItem desc={'which gpt model you are using'} label={'GPT Model'} name="model">
-            <Select
-              options={[
-                {
-                  label: 'gpt-3.5-turb',
-                  value: 'gpt-3.5-turb',
-                },
-                {
-                  label: 'gpt-4',
-                  value: 'gpt-4',
-                },
-              ]}
             />
           </FormItem>
           <FormItem
@@ -86,6 +78,26 @@ const Config = (props: ConfigProps) => {
             name="sidebarWidth"
           >
             <InputNumber />
+          </FormItem>
+        </FormGroup>
+        {/* @ts-ignore */}
+        <FormGroup icon={BotIcon} title={'Model Setting'}>
+          <FormItem desc={'which gpt model you are using'} label={'GPT Model'} name="model">
+            <Select
+              options={[
+                {
+                  label: 'gpt-3.5-turb',
+                  value: 'gpt-3.5-turb',
+                },
+                {
+                  label: 'gpt-4',
+                  value: 'gpt-4',
+                },
+              ]}
+            />
+          </FormItem>
+          <FormItem desc={'Please use your own GPT Key'} divider label={'API Key'} name="apikey">
+            <Input placeholder="sk-" style={{ width: 480 }} />
           </FormItem>
         </FormGroup>
         <FormFooter>
