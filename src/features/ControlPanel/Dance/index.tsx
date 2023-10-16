@@ -2,10 +2,15 @@ import AudioPlayer from '@/components/AudioPlayer';
 import DanceIndex from '@/components/DanceIndex';
 import DanceInfoCard from '@/components/DanceInfoCard';
 import DanceList from '@/components/DanceList';
+import { useDanceStore } from '@/store/dance';
 import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { useState } from 'react';
-import { Center } from 'react-layout-kit';
+import { Center, Flexbox } from 'react-layout-kit';
+
+import { ActionIcon } from '@lobehub/ui';
+import { Space } from 'antd';
+import { Loader2Icon } from 'lucide-react';
 
 import styled from 'styled-components';
 
@@ -38,6 +43,7 @@ interface DanceProps {
 const Dance = (props: DanceProps) => {
   const { style, className } = props;
   const [tab, setTab] = useState('installed');
+  const { danceList, fetchDanceList, loading } = useDanceStore();
   const { theme, styles } = useStyles();
   return (
     <View style={style} className={className}>
@@ -51,7 +57,12 @@ const Dance = (props: DanceProps) => {
             random
           />
         </Center>
-        <Center style={{ marginBottom: 12 }}>
+        <Flexbox
+          style={{ marginBottom: 12 }}
+          horizontal
+          align="center"
+          distribution="space-between"
+        >
           <TabsNav
             activeKey={tab}
             onChange={(key) => {
@@ -60,15 +71,27 @@ const Dance = (props: DanceProps) => {
             items={[
               {
                 key: 'installed',
-                label: '本地安装',
+                label: '已下载',
               },
               {
                 key: 'index',
-                label: '在线下载',
+                label: '在线列表',
               },
             ]}
           />
-        </Center>
+          {tab === 'installed' ? (
+            <Space>
+              共 {danceList.length} 项{' '}
+              <ActionIcon
+                /* @ts-ignore */
+                icon={Loader2Icon}
+                loading={loading}
+                title="重新加载"
+                onClick={fetchDanceList}
+              />
+            </Space>
+          ) : null}
+        </Flexbox>
         {tab === 'installed' ? <DanceList /> : null}
         {tab === 'index' ? <DanceIndex /> : null}
       </div>
