@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type tabType = 'agent' | 'config' | 'dance' | 'chat';
+export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'voice';
 
 interface ConfigStore {
   openAiKey: string;

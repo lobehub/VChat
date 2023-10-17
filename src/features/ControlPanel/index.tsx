@@ -10,6 +10,7 @@ import Chat from './Chat';
 import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
+import Voice from './Voice';
 import { useStyles } from './style';
 
 interface ControlPanelProps {
@@ -84,8 +85,9 @@ const ControlPanel = (props: ControlPanelProps) => {
           <div className={styles.content}>
             <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
             <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
-            <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
             <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
+            <Voice style={{ display: tab === 'voice' ? 'flex' : 'none' }} />
+            <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
           </div>
         </div>
       </div>
