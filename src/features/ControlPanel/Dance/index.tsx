@@ -1,12 +1,12 @@
-import AudioPlayer from '@/components/AudioPlayer';
-import DanceIndex from '@/components/DanceIndex';
-import DanceInfoCard from '@/components/DanceInfoCard';
-import DanceList from '@/components/DanceList';
 import { useDanceStore } from '@/store/dance';
 import { GridBackground, TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
+import AudioPlayer from './AudioPlayer';
+import DanceIndex from './DanceIndex';
+import DanceInfoCard from './DanceInfoCard';
+import DanceList from './DanceList';
 
 import { ActionIcon } from '@lobehub/ui';
 import { Space } from 'antd';
