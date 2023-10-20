@@ -5,7 +5,6 @@ const SessionList = () => {
   return (
     <SideBar>
       <Header />
-      123
     </SideBar>
   );
 };

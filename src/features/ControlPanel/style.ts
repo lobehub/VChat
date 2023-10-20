@@ -41,6 +41,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     display: flex;
     flex-direction: row;
     overflow-y: auto;
+    width: 100%;
     flex-grow: 1;
   `,
   container: css`

@@ -1,6 +1,6 @@
-import { Input } from '@lobehub/ui';
+import { SearchBar } from '@lobehub/ui';
 import { memo } from 'react';
-import { Center } from 'react-layout-kit';
+import { Flexbox } from 'react-layout-kit';
 
 import { useStyles } from './style';
 
@@ -9,9 +9,9 @@ const Header = memo(() => {
   const { styles, theme } = useStyles();
 
   return (
-    <Center className={styles.container} gap={16}>
-      <Input></Input>
-    </Center>
+    <Flexbox className={styles.container} gap={16}>
+      <SearchBar shortKey="f" enableShortKey />
+    </Flexbox>
   );
 });
 

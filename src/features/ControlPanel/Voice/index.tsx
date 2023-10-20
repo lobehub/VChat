@@ -1,22 +1,20 @@
 import { TabsNav } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
+import classNames from 'classnames';
 import { useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import Awake from './Awake';
 import Model from './Model';
 import Order from './Order';
 
-import styled from 'styled-components';
-
-const View = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-`;
-
 const useStyles = createStyles(({ css }) => ({
+  container: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+  `,
   background: css`
     width: 90%;
     margin: -24px 0 -12px;
@@ -40,7 +38,7 @@ const Voice = (props: VoiceProps) => {
   const [tab, setTab] = useState('awake');
 
   return (
-    <View style={style} className={className}>
+    <div style={style} className={classNames(className, styles.container)}>
       <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
         <Flexbox
           style={{ marginBottom: 12 }}
@@ -73,7 +71,7 @@ const Voice = (props: VoiceProps) => {
         {tab === 'order' ? <Order /> : null}
         {tab === 'model' ? <Model /> : null}
       </div>
-    </View>
+    </div>
   );
 };
 

@@ -1,6 +1,9 @@
 import { useDanceStore } from '@/store/dance';
-import { GridBackground, TabsNav } from '@lobehub/ui';
+import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
+import { Space } from 'antd';
 import { createStyles } from 'antd-style';
+import classNames from 'classnames';
+import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
@@ -8,21 +11,14 @@ import DanceIndex from './DanceIndex';
 import DanceInfoCard from './DanceInfoCard';
 import DanceList from './DanceList';
 
-import { ActionIcon } from '@lobehub/ui';
-import { Space } from 'antd';
-import { Loader2Icon } from 'lucide-react';
-
-import styled from 'styled-components';
-
-const View = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-`;
-
 const useStyles = createStyles(({ css }) => ({
+  container: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+  `,
   background: css`
     width: 90%;
     margin: -24px 0 -12px;
@@ -46,7 +42,7 @@ const Dance = (props: DanceProps) => {
   const { danceList, fetchDanceList, loading } = useDanceStore();
   const { theme, styles } = useStyles();
   return (
-    <View style={style} className={className}>
+    <div style={style} className={classNames(className, styles.container)}>
       <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
         <Center>
           <h1 className={styles.title}>Find your favorite Dance</h1>
@@ -103,7 +99,7 @@ const Dance = (props: DanceProps) => {
           left: 0,
         }}
       />
-    </View>
+    </div>
   );
 };
 

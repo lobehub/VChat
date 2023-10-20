@@ -2,22 +2,13 @@ import { useAgentStore } from '@/store/agent';
 import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
 import { Space } from 'antd';
 import { createStyles } from 'antd-style';
+import classNames from 'classnames';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 import AgentCard from './AgentCard';
 import AgentIndex from './AgentIndex';
 import AgentList from './AgentList';
-
-import styled from 'styled-components';
-
-const View = styled.div`
-  position: relative;
-  display: flex;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-`;
 
 const useStyles = createStyles(({ css }) => ({
   background: css`
@@ -29,6 +20,13 @@ const useStyles = createStyles(({ css }) => ({
     margin-top: 24px;
     font-size: 56px;
     font-weight: 800;
+  `,
+  container: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
   `,
 }));
 
@@ -44,7 +42,7 @@ const Agent = (props: AgentProps) => {
   const { fetchAgentList, agentList, loading } = useAgentStore();
 
   return (
-    <View style={style} className={className}>
+    <div style={style} className={classNames(className, styles.container)}>
       <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
         <Center>
           <h1 className={styles.title}>Select Your Virtual Idol</h1>
@@ -94,7 +92,7 @@ const Agent = (props: AgentProps) => {
         {tab === 'index' ? <AgentIndex /> : null}
       </div>
       <AgentCard />
-    </View>
+    </div>
   );
 };
 
