@@ -1,6 +1,8 @@
 import { Viewer } from '@/features/vrmViewer/viewer';
 import { buildUrl } from '@/utils/buildUrl';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { StateCreator } from 'zustand/vanilla';
 import { Agent } from './type';
 
 const DEFAULT_AGENT: Agent = {
@@ -26,13 +28,16 @@ interface SessionStore {
   stopDance: () => void;
 }
 
-export const useSessionStore = create<SessionStore>()((set, get) => ({
+const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
+  set,
+  get,
+) => ({
   currentAgent: DEFAULT_AGENT,
   viewer: new Viewer(),
   sessionList: [],
   setCurrentAgent: (agent) => {
     const { sessionList } = get();
-    if (!sessionList.find((session) => session.agent.name === agent.name)) {
+    if (!sessionList.find((session) => session.agent.dirname === agent.dirname)) {
       sessionList.push({
         agent,
         history: [],
@@ -46,4 +51,10 @@ export const useSessionStore = create<SessionStore>()((set, get) => ({
   stopDance() {
     this.viewer.model?.stopDance();
   },
-}));
+});
+
+export const useSessionStore = create<SessionStore>()(
+  devtools(createSessonStore, {
+    name: 'SESSION_STORE',
+  }),
+);

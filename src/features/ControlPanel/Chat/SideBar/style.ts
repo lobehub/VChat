@@ -8,9 +8,8 @@ export const useStyles = createStyles(({ css, token }) => ({
   avatar: css`
     flex: none;
   `,
-  container: css`
-    position: relative;
-    padding: 16px 16px 24px;
+  header: css`
+    padding: 16px 8px;
     border-bottom: 1px solid ${token.colorBorderSecondary};
   `,
   date: css`

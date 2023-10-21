@@ -12,7 +12,7 @@ const Header = memo(() => {
   const { setTab } = useConfigStore();
 
   return (
-    <Flexbox className={styles.container} direction="horizontal" gap={16}>
+    <Flexbox className={styles.header} direction="horizontal" gap={8}>
       <SearchBar shortKey="f" enableShortKey placeholder="搜索" />
       {/* @ts-ignore */}
       <ActionIcon icon={Plus} onClick={() => setTab('agent')} />
