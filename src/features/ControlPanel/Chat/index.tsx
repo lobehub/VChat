@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import ChatBot from './ChatBot';
-import SessionList from './SessionList';
+import SideBar from './SideBar';
 
 const useStyles = createStyles(({ css }) => ({
   container: css`
@@ -24,7 +24,7 @@ const Chat = (props: ChatProps) => {
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
-      <SessionList />
+      <SideBar />
       <ChatBot />
     </div>
   );

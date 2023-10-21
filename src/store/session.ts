@@ -12,8 +12,14 @@ const DEFAULT_AGENT: Agent = {
   cover: '',
 };
 
+interface Session {
+  agent: Agent;
+  history: string[];
+}
+
 interface SessionStore {
   currentAgent: Agent | null;
+  sessionList: Session[];
   viewer: Viewer;
   setCurrentAgent: (agent: Agent) => void;
   startDance: (buffer: ArrayBuffer) => void;
@@ -23,7 +29,15 @@ interface SessionStore {
 export const useSessionStore = create<SessionStore>()((set, get) => ({
   currentAgent: DEFAULT_AGENT,
   viewer: new Viewer(),
+  sessionList: [],
   setCurrentAgent: (agent) => {
+    const { sessionList } = get();
+    if (!sessionList.find((session) => session.agent.name === agent.name)) {
+      sessionList.push({
+        agent,
+        history: [],
+      });
+    }
     set({ currentAgent: agent });
   },
   startDance(buffer) {
