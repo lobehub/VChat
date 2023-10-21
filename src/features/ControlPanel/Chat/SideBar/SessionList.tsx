@@ -14,13 +14,15 @@ const useStyles = createStyles(({ css, token }) => ({
     }
   `,
   active: css`
-    background-color: ${token.controlItemBgActive};
+    background-color: ${token.colorPrimaryActive};
   `,
 }));
 
 const SessionList = () => {
   const { sessionList, setCurrentAgent, currentAgent } = useSessionStore();
   const { styles } = useStyles();
+
+  // TODO: 滚动到当前 agent
 
   return (
     <List
