@@ -1,4 +1,3 @@
-import { Viewer } from '@/features/vrmViewer/viewer';
 import { buildUrl } from '@/utils/buildUrl';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
@@ -22,10 +21,7 @@ interface Session {
 interface SessionStore {
   currentAgent: Agent | null;
   sessionList: Session[];
-  viewer: Viewer;
   setCurrentAgent: (agent: Agent) => void;
-  startDance: (buffer: ArrayBuffer) => void;
-  stopDance: () => void;
 }
 
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
@@ -33,7 +29,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   get,
 ) => ({
   currentAgent: DEFAULT_AGENT,
-  viewer: new Viewer(),
   sessionList: [],
   setCurrentAgent: (agent) => {
     const { sessionList } = get();
@@ -44,12 +39,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       });
     }
     set({ currentAgent: agent });
-  },
-  startDance(buffer) {
-    this.viewer.model?.dance(buffer);
-  },
-  stopDance() {
-    this.viewer.model?.stopDance();
   },
 });
 

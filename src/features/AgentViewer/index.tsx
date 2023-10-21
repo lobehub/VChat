@@ -2,6 +2,7 @@ import ControlPanel from '@/features/ControlPanel';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { tabType, useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
+import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
 import { Expand, Music2, RotateCw, User } from 'lucide-react';
@@ -38,7 +39,8 @@ export const items: ActionIconGroupProps['items'] = [
 export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 function AgentViewer() {
-  const { viewer, currentAgent } = useSessionStore();
+  const { viewer } = useViewerStore();
+  const { currentAgent } = useSessionStore();
   const { tab, setTab, controlPanelOpen, setControlPanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 

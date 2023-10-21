@@ -1,8 +1,8 @@
 import { useDanceStore } from '@/store/dance';
-import { useSessionStore } from '@/store/session';
+import { useViewerStore } from '@/store/viewer';
 import { Avatar, Icon } from '@lobehub/ui';
-import classNames from 'classnames';
 import { Slider, Typography } from 'antd';
+import classNames from 'classnames';
 import {
   ListMusic,
   PauseCircle,
@@ -23,7 +23,7 @@ interface PlayerProps {
 }
 
 function Player(props: PlayerProps) {
-  const {style, className} = props;
+  const { style, className } = props;
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
   const [open, setOpen] = useState(false);
@@ -34,7 +34,7 @@ function Player(props: PlayerProps) {
   const { currentPlay } = useDanceStore();
 
   const { isPlaying, setIsPlaying, prevDance, nextDance } = useDanceStore();
-  const { viewer } = useSessionStore();
+  const { viewer } = useViewerStore();
 
   const { styles } = useStyles();
 
