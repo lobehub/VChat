@@ -15,9 +15,16 @@ const useStyles = createStyles(({ css }) => ({
   container: css`
     position: relative;
     display: flex;
+    padding-bottom: 96px;
     width: 100%;
     height: 100%;
     min-height: 500px;
+  `,
+  content: css`
+    padding-left: 24px;
+    padding-right: 24px;
+    flex-grow: 1;
+    overflow-y: auto;
   `,
   background: css`
     width: 90%;
@@ -43,7 +50,7 @@ const Dance = (props: DanceProps) => {
   const { theme, styles } = useStyles();
   return (
     <div style={style} className={classNames(className, styles.container)}>
-      <div style={{ paddingLeft: 24, paddingRight: 24, flex: 1 }}>
+      <div className={styles.content}>
         <Center>
           <h1 className={styles.title}>Find your favorite Dance</h1>
           <GridBackground
