@@ -18,7 +18,7 @@ const useStyles = createStyles(({ css }) => ({
   title: css`
     z-index: 2;
     margin-top: 24px;
-    font-size: 56px;
+    font-size: 36px;
     font-weight: 800;
   `,
   container: css`
@@ -27,6 +27,12 @@ const useStyles = createStyles(({ css }) => ({
     width: 100%;
     height: 100%;
     min-height: 500px;
+  `,
+  content: css`
+    padding-left: 24px;
+    padding-right: 24px;
+    flex-grow: 1;
+    overflow-y: auto;
   `,
 }));
 
@@ -43,7 +49,7 @@ const Agent = (props: AgentProps) => {
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
-      <div style={{ paddingLeft: 24, paddingRight: 24, flexGrow: 1 }}>
+      <div className={styles.content}>
         <Center>
           <h1 className={styles.title}>Select Your Virtual Idol</h1>
           <GridBackground

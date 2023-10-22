@@ -26,7 +26,7 @@ const useStyles = createStyles(({ css }) => ({
   title: css`
     z-index: 2;
     margin-top: 24px;
-    font-size: 56px;
+    font-size: 36px;
     font-weight: 800;
   `,
 }));
