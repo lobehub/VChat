@@ -2,7 +2,6 @@ import { useConfigStore } from '@/store/config';
 import { ActionIcon, SearchBar } from '@lobehub/ui';
 import { Plus } from 'lucide-react';
 import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
 
 import { useStyles } from './style';
 
@@ -12,11 +11,11 @@ const Header = memo(() => {
   const { setTab } = useConfigStore();
 
   return (
-    <Flexbox className={styles.header} direction="horizontal" gap={8}>
-      <SearchBar shortKey="f" enableShortKey placeholder="搜索" />
+    <div className={styles.header}>
+      <SearchBar shortKey="f" enableShortKey placeholder="搜索" style={{ width: '220px' }} />
       {/* @ts-ignore */}
       <ActionIcon icon={Plus} onClick={() => setTab('agent')} />
-    </Flexbox>
+    </div>
   );
 });
 

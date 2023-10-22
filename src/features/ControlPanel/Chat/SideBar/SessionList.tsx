@@ -9,12 +9,11 @@ const { Text } = Typography;
 const useStyles = createStyles(({ css, token }) => ({
   listItem: css`
     &:hover {
-      background-color: ${token.controlItemBgActiveHover};
       cursor: pointer;
     }
   `,
   active: css`
-    background-color: ${token.colorPrimaryActive};
+    background-color: ${token.controlItemBgActiveHover};
   `,
 }));
 
