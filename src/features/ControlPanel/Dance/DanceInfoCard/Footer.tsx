@@ -1,6 +1,5 @@
 import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { memo } from 'react';
-import { Center } from 'react-layout-kit';
 
 import { useStyles } from './style';
 
@@ -12,9 +11,9 @@ const Footer = memo(() => {
   const { readme } = currentDance;
 
   return (
-    <Center className={styles.footer} gap={16}>
+    <div className={styles.footer}>
       <div className={styles.desc}>{readme}</div>
-    </Center>
+    </div>
   );
 });
 

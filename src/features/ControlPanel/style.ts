@@ -8,11 +8,10 @@ export const useStyles = createStyles(({ css, token }) => ({
     display: flex;
     flex-direction: column;
     border-radius: ${token.borderRadius}px;
-    position: absolute;
+    position: fixed;
     top: 25%;
     left: 25%;
-    width: 1024px;
-    height: 800px;
+    width: 800px;
   `,
   header: css`
     border-bottom: 1px solid #999;
@@ -20,6 +19,12 @@ export const useStyles = createStyles(({ css, token }) => ({
     padding: 10px;
     width: 100%;
     display: flex;
+  `,
+  container: css`
+    display: flex;
+    height: 640px;
+    flex-direction: row;
+    flex-grow: 1;
   `,
   button: css`
     border-radius: 8px;
@@ -40,13 +45,8 @@ export const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
     flex-direction: row;
-    overflow-y: auto;
+    height: 100%;
     width: 100%;
-    flex-grow: 1;
-  `,
-  container: css`
-    display: flex;
-    flex-direction: row;
     flex-grow: 1;
   `,
 }));

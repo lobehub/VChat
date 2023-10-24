@@ -4,7 +4,7 @@ import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Popconfirm, message } from 'antd';
+import { Button, Popconfirm, Space, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
@@ -45,29 +45,28 @@ const Header = memo(() => {
       />
       <div className={styles.title}>{name}</div>
       <div className={styles.desc}>{description}</div>
-      <Button
-        block
-        onClick={() => {
-          setCurrentAgent(currentAgent);
-          setIsPlaying(false);
-        }}
-        type={'primary'}
-      >
-        加载角色
-      </Button>
-      {dirname ? (
-        <Popconfirm
-          title="确定删除？"
-          description="确定删除本地角色文件吗？"
-          onConfirm={() => run(dirname)}
-          okText="确定"
-          cancelText="取消"
+      <Space>
+        <Button
+          onClick={() => {
+            setCurrentAgent(currentAgent);
+            setIsPlaying(false);
+          }}
+          type={'primary'}
         >
-          <Button block loading={loading}>
-            删除
-          </Button>
-        </Popconfirm>
-      ) : null}
+          加载角色
+        </Button>
+        {dirname ? (
+          <Popconfirm
+            title="确定删除？"
+            description="确定删除本地角色文件吗？"
+            onConfirm={() => run(dirname)}
+            okText="确定"
+            cancelText="取消"
+          >
+            <Button loading={loading}>删除</Button>
+          </Popconfirm>
+        ) : null}
+      </Space>
     </Center>
   );
 });

@@ -14,7 +14,7 @@ const DanceList = () => {
   return (
     <List
       loading={loading}
-      grid={{ gutter: 12, column: 5 }}
+      grid={{ gutter: 8, column: 4 }}
       dataSource={danceList}
       renderItem={(item) => (
         <List.Item>

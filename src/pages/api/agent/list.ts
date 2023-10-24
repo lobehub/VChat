@@ -11,14 +11,16 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   const agents = fs.readdirSync(agentsDir, { withFileTypes: true });
   for (const agent of agents) {
-    const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');
-    agentList.push({
-      ...JSON.parse(agentMeta),
-      dirname: agent.name,
-      model: `/agents/${agent.name}/model.vrm`,
-      cover: `/agents/${agent.name}/cover.jpg`,
-      avatar: `/agents/${agent.name}/avatar.jpg`,
-    });
+    if (agent.isDirectory()) {
+      const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');
+      agentList.push({
+        ...JSON.parse(agentMeta),
+        dirname: agent.name,
+        model: `/agents/${agent.name}/model.vrm`,
+        cover: `/agents/${agent.name}/cover.jpg`,
+        avatar: `/agents/${agent.name}/avatar.jpg`,
+      });
+    }
   }
 
   res.status(200).json({ data: agentList });
