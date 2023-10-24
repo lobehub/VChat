@@ -1,6 +1,6 @@
 import { buildUrl } from '@/utils/buildUrl';
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { StateCreator } from 'zustand/vanilla';
 import { Agent } from './type';
 
@@ -43,7 +43,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 });
 
 export const useSessionStore = create<SessionStore>()(
-  devtools(createSessonStore, {
-    name: 'SESSION_STORE',
-  }),
+  persist(
+    devtools(createSessonStore, {
+      name: 'SESSION_STORE',
+    }),
+    {
+      name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
+    },
+  ),
 );

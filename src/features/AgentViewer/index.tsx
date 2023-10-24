@@ -1,4 +1,3 @@
-import ControlPanel from '@/features/ControlPanel';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { tabType, useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
@@ -6,8 +5,11 @@ import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
 import { Expand, Music2, RotateCw, User } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
+
+const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 
 export const items: ActionIconGroupProps['items'] = [
   {
