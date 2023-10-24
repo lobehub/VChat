@@ -64,8 +64,8 @@ function AgentViewer() {
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
+      if (!viewer.isReady) viewer.setup(canvas);
       if (canvas && currentAgent) {
-        viewer.setup(canvas);
         viewer.loadVrm(currentAgent.model);
 
         // Drag and DropでVRMを差し替え
