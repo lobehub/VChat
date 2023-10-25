@@ -94,7 +94,7 @@ function Player(props: PlayerProps) {
         <Flexbox style={{ margin: '0px 12px', flexGrow: 1 }}>
           <div className={styles.top}>
             <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
-              {currentPlay?.name}
+              {currentPlay?.name || '请从舞蹈列表中选取'}
             </Typography.Text>
 
             <div className={styles.control}>

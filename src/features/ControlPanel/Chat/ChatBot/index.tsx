@@ -94,6 +94,9 @@ const ChatBot = (props: ChatBotProps) => {
           value={message}
           style={{ background: theme.colorBgContainer }}
           expand={expand}
+          onInputChange={(value) => {
+            setMessage(value);
+          }}
           /* @ts-ignore */
           footer={<Button icon={<Icon icon={Archive} />} />}
           minHeight={200}
@@ -101,6 +104,7 @@ const ChatBot = (props: ChatBotProps) => {
           onSend={(value) => {
             sendMessage(value);
           }}
+          placeholder="请输入内容开始聊天"
         />
       </DraggablePanel>
     </div>
