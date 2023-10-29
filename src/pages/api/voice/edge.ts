@@ -239,6 +239,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const result = await service.convert(ssml, format);
     res.status(200).send(result);
   } catch (error) {
-    res.status(200).json({ success: false, errorMessage: '转换失败' });
+    res.status(400).json({ errorMessage: error });
   }
 }

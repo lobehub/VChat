@@ -10,6 +10,10 @@ export const speechApi = async (type: TTS_TYPE, ssml: string) => {
     },
     body: JSON.stringify({ ssml }),
   });
+  if (res.status !== 200) {
+    const data = await res.json();
+    throw new Error(data.errorMessage);
+  }
 
   const data = await res.arrayBuffer();
   return data;

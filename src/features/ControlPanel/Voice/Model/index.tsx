@@ -1,10 +1,10 @@
 import { speechApi } from '@/services/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Form, Input, Select, message } from 'antd';
+import { Button, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { voices } from './voices';
 
 const FormItem = Form.Item;
@@ -14,6 +14,8 @@ interface Setting {
   language: string;
   voice: string;
   text: string;
+  speed: number;
+  pitch: number;
 }
 
 const setting: Setting = {
@@ -21,6 +23,8 @@ const setting: Setting = {
   language: 'zh-CN',
   voice: 'zh-CN-XiaoyiNeural',
   text: '正在为你准备我的整个世界',
+  speed: 1,
+  pitch: 1,
 };
 
 interface ConfigProps {
@@ -37,14 +41,14 @@ const useStyles = createStyles(({ css, token }) => ({
     display: flex;
   `,
   text: css`
-    flex: 2;
+    flex: 5;
     margin-right: 12px;
   `,
   config: css`
     padding: 12px;
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadius}px;
-    flex: 1;
+    flex: 3;
   `,
   audio: css`
     margin-top: 20px;
@@ -54,18 +58,22 @@ const useStyles = createStyles(({ css, token }) => ({
 const Config = (props: ConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
+  const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
 
   const { loading, run: speek } = useRequest(speechApi, {
     manual: true,
     onSuccess: (res) => {
-      console.log('res', res);
+      message.success('转换成功');
       const adUrl = URL.createObjectURL(new Blob([res]));
       setAudioUrl(adUrl);
     },
     onError: (err) => {
-      message.info('转换失败');
+      message.error(err.message);
+      ref.current && ref.current.pause();
+      ref.current && (ref.current.currentTime = 0);
+      ref.current && (ref.current.src = '');
       setAudioUrl(undefined);
     },
   });
@@ -74,8 +82,6 @@ const Config = (props: ConfigProps) => {
     const newValue = {
       voiceStyleSelect: '',
       role: '',
-      speed: 1,
-      pitch: 1,
       ...values,
     };
     return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
@@ -98,7 +104,7 @@ const Config = (props: ConfigProps) => {
         const { type } = values;
         speek(type, convertSSML(values));
       }}
-      layout="vertical"
+      layout="horizontal"
       requiredMark={false}
       form={form}
     >
@@ -172,7 +178,31 @@ const Config = (props: ConfigProps) => {
                 );
               }}
             </FormItem>
+            <FormItem label={'语速'} name="speed">
+              <Slider max={3} min={0} step={0.01} />
+            </FormItem>
+            <FormItem label={'音调'} name="pitch">
+              <Slider max={2} min={0} step={0.01} />
+            </FormItem>
             <FormFooter>
+              <Button
+                disabled={!audioUrl}
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = audioUrl!;
+                  link.download = 'audio.mp3';
+
+                  link.dispatchEvent(
+                    new MouseEvent('click', {
+                      bubbles: true,
+                      cancelable: true,
+                      view: window,
+                    }),
+                  );
+                }}
+              >
+                下载
+              </Button>
               <Button htmlType="button" onClick={() => form.resetFields()}>
                 重置
               </Button>
@@ -183,7 +213,13 @@ const Config = (props: ConfigProps) => {
           </div>
         </div>
         <div className={styles.audio}>
-          <audio src={audioUrl} controls controlsList="nodownload" style={{ width: '100%' }} />
+          <audio
+            src={audioUrl}
+            controls
+            controlsList="nodownload"
+            style={{ width: '100%' }}
+            ref={ref}
+          />
         </div>
       </div>
     </Form>
