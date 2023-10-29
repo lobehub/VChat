@@ -236,8 +236,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (ssml == null) {
       throw `转换参数无效`;
     }
-    let result = await service.convert(ssml, format);
-    res.status(200).json({ data: result });
+    const result = await service.convert(ssml, format);
+    res.status(200).send(result);
   } catch (error) {
     res.status(200).json({ success: false, errorMessage: '转换失败' });
   }

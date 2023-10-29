@@ -11,6 +11,6 @@ export const speechApi = async (type: TTS_TYPE, ssml: string) => {
     body: JSON.stringify({ ssml }),
   });
 
-  const buffer = await res.arrayBuffer();
-  return buffer;
+  const data = await res.arrayBuffer();
+  return data;
 };

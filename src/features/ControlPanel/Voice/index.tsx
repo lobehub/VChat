@@ -35,7 +35,7 @@ interface VoiceProps {
 const Voice = (props: VoiceProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
-  const [tab, setTab] = useState('awake');
+  const [tab, setTab] = useState('model');
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
