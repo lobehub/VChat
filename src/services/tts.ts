@@ -1,7 +1,9 @@
 const axios = require('axios');
 
-export const speechApi = async (ssml: string) => {
-  const res = await fetch('/api/voice/microsoft', {
+type TTS_TYPE = 'microsoft' | 'edge' | 'azure';
+
+export const speechApi = async (type: TTS_TYPE, ssml: string) => {
+  const res = await fetch(`/api/voice/${type}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -9,5 +11,6 @@ export const speechApi = async (ssml: string) => {
     body: JSON.stringify({ ssml }),
   });
 
-  return res.json();
+  const buffer = await res.arrayBuffer();
+  return buffer;
 };

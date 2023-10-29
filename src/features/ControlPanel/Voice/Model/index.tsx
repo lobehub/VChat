@@ -16,7 +16,7 @@ interface Setting {
 }
 
 const setting: Setting = {
-  type: 'MicroSoft',
+  type: 'microsoft',
   language: 'zh-CN',
   voice: 'zh-CN-XiaoyiNeural',
   text: '正在为你准备我的整个世界',
@@ -53,7 +53,7 @@ const Config = (props: ConfigProps) => {
 
   const convertSSML = (values: Setting) => {
     const newValue = {
-      voiceStyleSelect: 'angry',
+      voiceStyleSelect: '',
       role: '',
       speed: 1,
       pitch: 1,
@@ -61,16 +61,12 @@ const Config = (props: ConfigProps) => {
     };
     return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
         <voice name="${values.voice}">
-            <mstts:express-as  ${
-              newValue.voiceStyleSelect != '' ? 'style="' + newValue.voiceStyleSelect + '"' : ''
-            } ${newValue.role != '' ? 'role="' + newValue.role + '"' : ''}>
-                <prosody rate="${((newValue.speed - 1) * 100).toFixed()}%" pitch="${(
+          <prosody rate="${((newValue.speed - 1) * 100).toFixed()}%" pitch="${(
       (newValue.pitch - 1) *
       50
     ).toFixed()}%">
                 ${newValue.text}
-                </prosody>
-            </mstts:express-as>
+          </prosody>
         </voice>
     </speak>
     `;
@@ -80,7 +76,8 @@ const Config = (props: ConfigProps) => {
     <Form
       initialValues={setting}
       onFinish={(values) => {
-        speek(convertSSML(values));
+        const { type } = values;
+        speek(type, convertSSML(values));
       }}
       layout="vertical"
       form={form}
@@ -97,14 +94,13 @@ const Config = (props: ConfigProps) => {
               options={[
                 {
                   label: 'MicroSoft 语音接口',
-                  value: 'MicroSoft',
+                  value: 'microsoft',
                 },
                 {
-                  label: 'Azure 语音接口',
-                  value: 'Azure',
+                  label: 'Edge 语音接口',
+                  value: 'edge',
                 },
               ]}
-              defaultValue={'MicroSoft'}
             />
           </FormItem>
           <FormItem label={'语言'} name="language">

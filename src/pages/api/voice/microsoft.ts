@@ -42,6 +42,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.log(response);
     res.status(200).json({ data: response.data });
   } catch (err) {
-    res.status(200).json({ success: false, errorMessage: '获取失败' });
+    res.status(200).json({ success: false, errorMessage: '转换失败' });
   }
 }
