@@ -1,4 +1,4 @@
-import { voicesApi } from '@/services/tts';
+import { speechApi } from '@/services/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select } from 'antd';
@@ -8,7 +8,14 @@ import { voices } from './voices';
 
 const FormItem = Form.Item;
 
-const setting = {
+interface Setting {
+  type: string;
+  language: string;
+  voice: string;
+  text: string;
+}
+
+const setting: Setting = {
   type: 'MicroSoft',
   language: 'zh-CN',
   voice: 'zh-CN-XiaoyiNeural',
@@ -32,6 +39,7 @@ const useStyles = createStyles(({ css, token }) => ({
     padding: 12px;
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadius}px;
+    flex: 1;
   `,
 }));
 
@@ -40,10 +48,43 @@ const Config = (props: ConfigProps) => {
   const { styles } = useStyles();
   const [form] = Form.useForm();
 
-  const { loading, data: list, run: getVoiceList } = useRequest(voicesApi, { manual: true });
+  // const { loading, data: list, run: getVoiceList } = useRequest(voicesApi, { manual: true });
+  const { loading, run: speek } = useRequest(speechApi, { manual: true });
+
+  const convertSSML = (values: Setting) => {
+    const newValue = {
+      voiceStyleSelect: 'angry',
+      role: '',
+      speed: 1,
+      pitch: 1,
+      ...values,
+    };
+    return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
+        <voice name="${values.voice}">
+            <mstts:express-as  ${
+              newValue.voiceStyleSelect != '' ? 'style="' + newValue.voiceStyleSelect + '"' : ''
+            } ${newValue.role != '' ? 'role="' + newValue.role + '"' : ''}>
+                <prosody rate="${((newValue.speed - 1) * 100).toFixed()}%" pitch="${(
+      (newValue.pitch - 1) *
+      50
+    ).toFixed()}%">
+                ${newValue.text}
+                </prosody>
+            </mstts:express-as>
+        </voice>
+    </speak>
+    `;
+  };
 
   return (
-    <Form initialValues={setting} onFinish={console.table} layout="vertical" form={form}>
+    <Form
+      initialValues={setting}
+      onFinish={(values) => {
+        speek(convertSSML(values));
+      }}
+      layout="vertical"
+      form={form}
+    >
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.text}>
           <FormItem name="text" noStyle>
@@ -106,12 +147,12 @@ const Config = (props: ConfigProps) => {
             <Button htmlType="button" onClick={() => form.resetFields()}>
               重置
             </Button>
-            <Button htmlType="submit" type="primary">
+            <Button htmlType="submit" type="primary" loading={loading}>
               转换
             </Button>
-            <Button type="primary" onClick={() => getVoiceList()} loading={loading}>
+            {/* <Button type="primary" onClick={() => getVoiceList()} loading={loading}>
               获取语音列表
-            </Button>
+            </Button> */}
           </FormFooter>
         </div>
       </div>
