@@ -82,6 +82,7 @@ Contributions of all types are more than welcome, if you are interested in contr
 
 - **mmd-parser** - <https://github.com/takahirox/mmd-parser>
 - **three-vrm** - <https://github.com/pixiv/three-vrm>
+- **tts-vue** - <https://github.com/LokerL/tts-vue>
 
 <div align="right">
 

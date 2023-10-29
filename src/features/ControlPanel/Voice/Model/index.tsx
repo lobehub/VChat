@@ -1,45 +1,33 @@
-import { getAgentIndex } from '@/services/agent';
-import { useRequest } from 'ahooks';
-import { List, Typography } from 'antd';
-import { useState } from 'react';
-const { Text } = Typography;
+import { TextArea } from '@lobehub/ui';
+import { createStyles } from 'antd-style';
+import classNames from 'classnames';
+import Config from './Config';
 
-const { Meta } = List.Item;
+const useStyles = createStyles(({ css }) => ({
+  container: css`
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+  `,
+}));
 
-interface AgentIndexItem {
-  name: string;
-  url: string;
-  description: string;
-  created: string;
+interface ModelProps {
+  style?: React.CSSProperties;
+  className?: string;
 }
 
-const AgentIndex = () => {
-  const [agentList, setAgentList] = useState<AgentIndexItem[]>([]);
-
-  const { loading } = useRequest(getAgentIndex, {
-    onSuccess: (data) => {
-      setAgentList(data.agents);
-    },
-  });
+const Model = (props: ModelProps) => {
+  const { style, className } = props;
+  const { styles } = useStyles();
 
   return (
-    <List
-      loading={loading}
-      dataSource={agentList}
-      renderItem={(item) => (
-        <List.Item actions={[]}>
-          <Meta
-            title={item.name}
-            description={
-              <Text style={{ width: 600 }} ellipsis={{ tooltip: item.description }}>
-                {item.description}
-              </Text>
-            }
-          />
-        </List.Item>
-      )}
-    />
+    <div style={style} className={classNames(className, styles.container)}>
+      <TextArea placeholder="请输入要转换的文字" style={{ flex: 2, marginRight: 12 }} />
+      <Config />
+    </div>
   );
 };
 
-export default AgentIndex;
+export default Model;

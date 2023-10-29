@@ -53,16 +53,16 @@ const Voice = (props: VoiceProps) => {
             }}
             items={[
               {
+                key: 'model',
+                label: '语言模型',
+              },
+              {
                 key: 'awake',
                 label: '语音唤醒',
               },
               {
                 key: 'order',
                 label: '语音命令',
-              },
-              {
-                key: 'model',
-                label: '语言模型',
               },
             ]}
           />
