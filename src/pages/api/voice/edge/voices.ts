@@ -1,7 +1,21 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 const axios = require('axios');
 
-const cachedVoiceList = [
+interface Voice {
+  Name: string;
+  ShortName: string;
+  Gender: string;
+  Locale: string;
+  SuggestedCodec: string;
+  FriendlyName: string;
+  Status: string;
+  VoiceTag: {
+    ContentCategories: string[];
+    VoicePersonalities: string[];
+  };
+}
+
+const cachedVoiceList: Voice[] = [
   {
     Name: 'Microsoft Server Speech Text to Speech Voice (af-ZA, AdriNeural)',
     ShortName: 'af-ZA-AdriNeural',
@@ -3918,6 +3932,10 @@ const cachedVoiceList = [
   },
 ];
 
+const convert = (voices: Voice[]) => {
+  return voices.map((voice) => voice.ShortName);
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const config = {
     method: 'get',
@@ -3926,8 +3944,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const response = await axios(config);
-    res.status(200).json({ data: response.data });
+    res.status(200).json({ data: convert(response.data) });
   } catch (err) {
-    res.status(200).json({ data: cachedVoiceList });
+    res.status(200).json({ data: convert(cachedVoiceList) });
   }
 }

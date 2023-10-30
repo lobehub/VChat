@@ -20912,6 +20912,10 @@ const cachedVoiceList = [
   },
 ];
 
+const convert = (voices: any[]) => {
+  return voices.map((voice) => voice.shortName);
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const data = JSON.stringify({
     queryCondition: {
@@ -20950,10 +20954,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     data: data,
     timeout: 1500,
   };
+
   try {
     const response = await axios(config);
-    res.status(200).json({ data: response.data });
+    res.status(200).json({ data: convert(response.data) });
   } catch (err) {
-    res.status(200).json({ data: cachedVoiceList });
+    res.status(200).json({ data: convert(cachedVoiceList) });
   }
 }
