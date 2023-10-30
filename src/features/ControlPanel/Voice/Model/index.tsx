@@ -1,4 +1,4 @@
-import { speechApi } from '@/services/tts';
+import { speechApi, voiceApi } from '@/services/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
@@ -66,7 +66,7 @@ const Config = (props: ConfigProps) => {
     manual: true,
     onSuccess: (res) => {
       message.success('转换成功');
-      const adUrl = URL.createObjectURL(new Blob([res]));
+      const adUrl = URL.createObjectURL(res);
       setAudioUrl(adUrl);
     },
     onError: (err) => {
@@ -76,6 +76,10 @@ const Config = (props: ConfigProps) => {
       ref.current && (ref.current.src = '');
       setAudioUrl(undefined);
     },
+  });
+
+  const { loading: voiceLoading, run: getVoiceList } = useRequest(voiceApi, {
+    manual: true,
   });
 
   const convertSSML = (values: Setting) => {
@@ -125,7 +129,7 @@ const Config = (props: ConfigProps) => {
               <Select
                 options={[
                   {
-                    label: 'MicroSoft 语音接口',
+                    label: 'MicroSoft 语音接口（不稳定）',
                     value: 'microsoft',
                   },
                   {
@@ -208,6 +212,13 @@ const Config = (props: ConfigProps) => {
               </Button>
               <Button htmlType="submit" type="primary" loading={loading}>
                 转换
+              </Button>
+              <Button
+                type="primary"
+                loading={voiceLoading}
+                onClick={() => getVoiceList(form.getFieldValue('type'))}
+              >
+                获取语音列表
               </Button>
             </FormFooter>
           </div>

@@ -15,6 +15,16 @@ export const speechApi = async (type: TTS_TYPE, ssml: string) => {
     throw new Error(data.errorMessage);
   }
 
-  const data = await res.arrayBuffer();
+  const data = await res.blob();
   return data;
+};
+
+export const voiceApi = async (type: TTS_TYPE) => {
+  const res = await fetch(`/api/voice/${type}/voices`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  return res.json();
 };

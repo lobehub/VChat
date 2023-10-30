@@ -39,9 +39,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const response = await axios(config);
-    console.log(response);
-    res.status(200).json({ data: response.data });
+    res.status(200).send(response.data);
   } catch (err) {
-    res.status(200).json({ success: false, errorMessage: '转换失败' });
+    res.status(400).json({ success: false, errorMessage: '转换失败' });
   }
 }

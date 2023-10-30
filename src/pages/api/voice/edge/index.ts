@@ -212,19 +212,8 @@ const service = new Service();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { ssml } = req.body;
-  console.log('ssml', ssml);
-  const back = ` 
-<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-  <voice name="zh-CN-XiaoxiaoNeural">
-      <prosody rate="0%" pitch="0%">
-      你好啊
-今天天气怎么样?
-      </prosody>
-  </voice>
-</speak>
-`;
+
   try {
-    // let format = "webm-24khz-16bit-mono-opus";
     let format = 'audio-24khz-48kbitrate-mono-mp3';
     if (Array.isArray(format)) {
       throw `无效的音频格式：${format}`;
