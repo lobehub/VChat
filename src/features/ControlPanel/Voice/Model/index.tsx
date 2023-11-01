@@ -5,7 +5,6 @@ import { Button, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useRef, useState } from 'react';
-import { voices } from './voices';
 
 const FormItem = Form.Item;
 
@@ -60,6 +59,7 @@ const Config = (props: ConfigProps) => {
   const { styles } = useStyles();
   const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
+  const [voices, setVoices] = useState<any[]>([]);
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
 
   const { loading, run: speek } = useRequest(speechApi, {
@@ -80,6 +80,9 @@ const Config = (props: ConfigProps) => {
 
   const { loading: voiceLoading, run: getVoiceList } = useRequest(voiceApi, {
     manual: true,
+    onSuccess: (res) => {
+      setVoices(res.data);
+    },
   });
 
   const convertSSML = (values: Setting) => {
@@ -137,6 +140,10 @@ const Config = (props: ConfigProps) => {
                     value: 'edge',
                   },
                 ]}
+                onChange={(type) => {
+                  getVoiceList(type);
+                  form.setFieldValue('voice', undefined);
+                }}
               />
             </FormItem>
             <FormItem label={'语言'} name="language">
@@ -171,10 +178,12 @@ const Config = (props: ConfigProps) => {
                     rules={[{ required: true, message: '请选择语音' }]}
                   >
                     <Select
+                      loading={voiceLoading}
                       options={voices
+                        .filter((voice) => !!voice)
                         .filter((voice) => voice.locale === language)
                         .map((item) => ({
-                          label: `${item.properties.DisplayName}-${item.properties.LocalName}`,
+                          label: `${item.DisplayName}-${item.LocalName}`,
                           value: item.shortName,
                         }))}
                     />

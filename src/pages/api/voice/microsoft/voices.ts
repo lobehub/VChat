@@ -20913,6 +20913,15 @@ const cachedVoiceList = [
 ];
 
 const convert = (voices: any[]) => {
+  const voiceMap = {};
+  voices
+    .sort((a: any, b: any) => a.locale.localeCompare(b.locale, 'en'))
+    .forEach((voice) => {
+      voiceMap[voice.locale] = voice.properties.localeZH;
+    });
+
+  console.log(voiceMap);
+
   return voices.map((voice) => voice.shortName);
 };
 
