@@ -1,3 +1,4 @@
+import { voiceMap } from '@/utils/voices';
 import type { NextApiRequest, NextApiResponse } from 'next';
 const axios = require('axios');
 
@@ -3933,7 +3934,7 @@ const cachedVoiceList: Voice[] = [
 ];
 
 const convert = (voices: Voice[]) => {
-  return voices.map((voice) => voice.ShortName);
+  return voices.map((voice) => voiceMap[voice.ShortName]).filter((voice) => !!voice);
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

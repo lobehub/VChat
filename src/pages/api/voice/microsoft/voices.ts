@@ -1,8 +1,79 @@
+import { voiceMap } from '@/utils/voices';
 import type { NextApiRequest, NextApiResponse } from 'next';
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
 
-const cachedVoiceList = [
+interface Voice {
+  name: string;
+  shortName: string;
+  locale: string;
+  description?: string;
+  isHiddenFromAccPortal?: boolean;
+  properties: {
+    Gender: string;
+    VoiceRoleNames: string;
+    VoiceRoleNameDefinitions: string;
+    VoiceStyleNames: string;
+    VoiceStyleNameDefinitions: string;
+    DisplayName: string;
+    LocalName: string;
+    description?: string;
+    ShortName: string;
+    IconFileEndpointWithSas?: string;
+    SampleRateHertz: string;
+    FrontendVoiceType: string;
+    SecondaryLocales: string;
+    OrderInVoiceListApi: string;
+    LocaleDescription: string;
+    PreviewSentence: string;
+    AgeGroups?: string;
+    DisplayVoiceName: string;
+    VoiceModelKind: string;
+    IsTtsBreakEnabled?: string;
+    ReleaseScope: string;
+    locale: string;
+    ExpressAsStyleValues?: string;
+    ExpressAsRoleValues?: string;
+    localeZH: string;
+  };
+  categories: {
+    name: string;
+    audioFileEndpointWithSas?: string;
+    iconFileEndpointWithSas?: string;
+    defaultStyle?: string;
+  }[];
+  masterpieces: {
+    name?: string;
+    audioFileEndpointWithSas?: string;
+    title?: string;
+    iconFileEndpointWithSas?: string;
+    categories?: string[];
+    titleLocalizationId?: string;
+    description?: string;
+    descriptionLocalizationId?: string;
+    ssmlFileEndpointWithSas?: string;
+    videoFileEndpointWithSas?: string;
+  }[];
+  samples: {
+    languageSamples: {
+      languageName?: string;
+      locale?: string;
+      audioFileEndpointWithSas?: string;
+    }[];
+    roleSamples: {
+      roleName: string;
+      audioFileEndpointWithSas?: string;
+    }[];
+    styleSamples: {
+      styleName: string;
+      audioFileEndpointWithSas?: string;
+    }[];
+  };
+  voiceType: string;
+  id: string;
+}
+
+const cachedVoiceList: Voice[] = [
   {
     name: 'Microsoft Server Speech Text to Speech Voice (ko-KR, SoonBokNeural)',
     shortName: 'ko-KR-SoonBokNeural',
@@ -20913,16 +20984,7 @@ const cachedVoiceList = [
 ];
 
 const convert = (voices: any[]) => {
-  const voiceMap = {};
-  voices
-    .sort((a: any, b: any) => a.locale.localeCompare(b.locale, 'en'))
-    .forEach((voice) => {
-      voiceMap[voice.locale] = voice.properties.localeZH;
-    });
-
-  console.log(voiceMap);
-
-  return voices.map((voice) => voice.shortName);
+  return voices.map((voice) => voiceMap[voice.ShortName]).filter((voice) => !!voice);
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

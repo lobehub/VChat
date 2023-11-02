@@ -111,6 +111,12 @@ const Config = (props: ConfigProps) => {
         const { type } = values;
         speek(type, convertSSML(values));
       }}
+      onValuesChange={(changedValues) => {
+        if (changedValues.language) {
+          form.setFieldsValue({ voice: undefined });
+          getVoiceList(changedValues.language);
+        }
+      }}
       layout="horizontal"
       requiredMark={false}
       form={form}
@@ -132,25 +138,21 @@ const Config = (props: ConfigProps) => {
               <Select
                 options={[
                   {
-                    label: 'MicroSoft 语音接口（不稳定）',
-                    value: 'microsoft',
-                  },
-                  {
                     label: 'Edge 语音接口',
                     value: 'edge',
                   },
+                  {
+                    label: 'MicroSoft 语音接口（不稳定）',
+                    value: 'microsoft',
+                  },
                 ]}
-                onChange={(type) => {
-                  getVoiceList(type);
-                  form.setFieldValue('voice', undefined);
-                }}
               />
             </FormItem>
             <FormItem label={'语言'} name="language">
               <Select
                 options={[
                   {
-                    label: '中文',
+                    label: '中文(普通话)',
                     value: 'zh-CN',
                   },
                   {
@@ -161,10 +163,15 @@ const Config = (props: ConfigProps) => {
                     label: '英语(美国)',
                     value: 'en-US',
                   },
+                  {
+                    label: '韩语(韩国)',
+                    value: 'ko-KR',
+                  },
+                  {
+                    label: '中文(粤语)',
+                    value: 'zh-HK',
+                  },
                 ]}
-                onChange={() => {
-                  form.setFieldValue('voice', undefined);
-                }}
               />
             </FormItem>
             <FormItem noStyle dependencies={['language']}>
@@ -221,13 +228,6 @@ const Config = (props: ConfigProps) => {
               </Button>
               <Button htmlType="submit" type="primary" loading={loading}>
                 转换
-              </Button>
-              <Button
-                type="primary"
-                loading={voiceLoading}
-                onClick={() => getVoiceList(form.getFieldValue('type'))}
-              >
-                获取语音列表
               </Button>
             </FormFooter>
           </div>
