@@ -20984,7 +20984,7 @@ const cachedVoiceList: Voice[] = [
 ];
 
 const convert = (voices: any[]) => {
-  return voices.map((voice) => voiceMap[voice.ShortName]).filter((voice) => !!voice);
+  return voices.map((voice) => voiceMap[voice.shortName]).filter((voice) => !!voice);
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {

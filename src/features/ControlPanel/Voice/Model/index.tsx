@@ -1,4 +1,4 @@
-import { speechApi, voiceApi } from '@/services/tts';
+import { Voice, speechApi, voiceApi } from '@/services/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
@@ -11,7 +11,7 @@ const FormItem = Form.Item;
 interface Setting {
   type: string;
   language: string;
-  voice: string;
+  voice?: string;
   text: string;
   speed: number;
   pitch: number;
@@ -20,7 +20,7 @@ interface Setting {
 const setting: Setting = {
   type: 'edge',
   language: 'zh-CN',
-  voice: 'zh-CN-XiaoyiNeural',
+  //   voice: 'zh-CN-XiaoyiNeural',
   text: '正在为你准备我的整个世界',
   speed: 1,
   pitch: 1,
@@ -59,7 +59,7 @@ const Config = (props: ConfigProps) => {
   const { styles } = useStyles();
   const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
-  const [voices, setVoices] = useState<any[]>([]);
+  const [voices, setVoices] = useState<Voice[]>([]);
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
 
   const { loading, run: speek } = useRequest(speechApi, {
@@ -78,12 +78,18 @@ const Config = (props: ConfigProps) => {
     },
   });
 
-  const { loading: voiceLoading, run: getVoiceList } = useRequest(voiceApi, {
-    manual: true,
-    onSuccess: (res) => {
-      setVoices(res.data);
+  const { loading: voiceLoading, run: getVoiceList } = useRequest(
+    () => {
+      const type = form.getFieldValue('type');
+      return voiceApi(type);
     },
-  });
+    {
+      onSuccess: (res) => {
+        setVoices(res.data);
+      },
+      refreshDeps: [form.getFieldValue('type')],
+    },
+  );
 
   const convertSSML = (values: Setting) => {
     const newValue = {
@@ -112,9 +118,12 @@ const Config = (props: ConfigProps) => {
         speek(type, convertSSML(values));
       }}
       onValuesChange={(changedValues) => {
+        // if (changedValues.type) {
+        //   form.setFieldsValue({ voice: undefined });
+        //   getVoiceList(changedValues.type);
+        // }
         if (changedValues.language) {
           form.setFieldsValue({ voice: undefined });
-          getVoiceList(changedValues.language);
         }
       }}
       layout="horizontal"
@@ -174,29 +183,21 @@ const Config = (props: ConfigProps) => {
                 ]}
               />
             </FormItem>
-            <FormItem noStyle dependencies={['language']}>
-              {() => {
-                const language = form.getFieldValue('language');
-
-                return (
-                  <FormItem
-                    label={'语音'}
-                    name="voice"
-                    rules={[{ required: true, message: '请选择语音' }]}
-                  >
-                    <Select
-                      loading={voiceLoading}
-                      options={voices
-                        .filter((voice) => !!voice)
-                        .filter((voice) => voice.locale === language)
-                        .map((item) => ({
-                          label: `${item.DisplayName}-${item.LocalName}`,
-                          value: item.shortName,
-                        }))}
-                    />
-                  </FormItem>
-                );
-              }}
+            <FormItem
+              label={'语音'}
+              name="voice"
+              rules={[{ required: true, message: '请选择语音' }]}
+            >
+              <Select
+                loading={voiceLoading}
+                disabled={voiceLoading}
+                options={voices
+                  .filter((voice) => voice.locale === form.getFieldValue('language'))
+                  .map((item) => ({
+                    label: `${item.DisplayName}-${item.LocalName}`,
+                    value: item.ShortName,
+                  }))}
+              />
             </FormItem>
             <FormItem label={'语速'} name="speed">
               <Slider max={3} min={0} step={0.01} />
