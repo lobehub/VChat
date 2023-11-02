@@ -78,7 +78,7 @@ const Config = (props: ConfigProps) => {
     },
   });
 
-  const { loading: voiceLoading, run: getVoiceList } = useRequest(
+  const { loading: voiceLoading } = useRequest(
     () => {
       const type = form.getFieldValue('type');
       return voiceApi(type);
@@ -87,6 +87,7 @@ const Config = (props: ConfigProps) => {
       onSuccess: (res) => {
         setVoices(res.data);
       },
+      cacheKey: 'vidol-voice-list',
       refreshDeps: [form.getFieldValue('type')],
     },
   );
@@ -118,11 +119,7 @@ const Config = (props: ConfigProps) => {
         speek(type, convertSSML(values));
       }}
       onValuesChange={(changedValues) => {
-        // if (changedValues.type) {
-        //   form.setFieldsValue({ voice: undefined });
-        //   getVoiceList(changedValues.type);
-        // }
-        if (changedValues.language) {
+        if (changedValues.language || changedValues.type) {
           form.setFieldsValue({ voice: undefined });
         }
       }}
@@ -191,6 +188,7 @@ const Config = (props: ConfigProps) => {
               <Select
                 loading={voiceLoading}
                 disabled={voiceLoading}
+                defaultActiveFirstOption
                 options={voices
                   .filter((voice) => voice.locale === form.getFieldValue('language'))
                   .map((item) => ({
