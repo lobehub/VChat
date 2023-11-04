@@ -15,7 +15,7 @@ import { useStyles } from './style';
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
-  const { setControlPanelOpen, controlPanelOpen } = useConfigStore();
+  const { rolePanelOpen, setRolePanelOpen } = useConfigStore();
   const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const { setCurrentAgent } = useSessionStore();
@@ -38,7 +38,7 @@ const Header = memo(() => {
   });
 
   function openPanel() {
-    setControlPanelOpen(true);
+    setRolePanelOpen(true);
   }
 
   return (

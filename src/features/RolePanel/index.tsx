@@ -20,6 +20,8 @@ const RolePanel = (props: RolePanelProps) => {
   const [tab, setTab] = useState('model');
   const { setRolePanelOpen } = useConfigStore();
 
+  console.log('RolePanel', style, className);
+
   return (
     <Panel style={style} className={className} onClose={() => setRolePanelOpen(false)}>
       <div className={styles.content}>
