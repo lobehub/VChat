@@ -10,6 +10,7 @@ import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
 
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
+const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 
 export const items: ActionIconGroupProps['items'] = [
   {
@@ -49,7 +50,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 function AgentViewer() {
   const { viewer } = useViewerStore();
   const { currentAgent } = useSessionStore();
-  const { tab, setTab, controlPanelOpen, setControlPanelOpen } = useConfigStore();
+  const { tab, setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 
   const isHover = useHover(ref);
@@ -124,6 +125,7 @@ function AgentViewer() {
   return (
     <div className={styles.vrm} ref={ref}>
       {<ControlPanel tab={tab} style={{ display: controlPanelOpen ? 'flex' : 'none' }} />}
+      {<RolePanel style={{ display: rolePanelOpen ? 'flex' : 'none' }} />}
       <ActionIconGroup
         style={{
           position: 'absolute',

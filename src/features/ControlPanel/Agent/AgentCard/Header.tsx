@@ -8,12 +8,14 @@ import { Button, Popconfirm, Space, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 
+import { useConfigStore } from '@/store/config';
 import { useStyles } from './style';
 
 // eslint-disable-next-line react/display-name
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
+  const { setControlPanelOpen, controlPanelOpen } = useConfigStore();
   const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const { setCurrentAgent } = useSessionStore();
@@ -35,6 +37,10 @@ const Header = memo(() => {
     },
   });
 
+  function openPanel() {
+    setControlPanelOpen(true);
+  }
+
   return (
     <Center className={styles.container} gap={16}>
       <Avatar
@@ -53,7 +59,10 @@ const Header = memo(() => {
           }}
           type={'primary'}
         >
-          加载角色
+          加载
+        </Button>
+        <Button onClick={openPanel} type={'primary'}>
+          编辑
         </Button>
         {dirname ? (
           <Popconfirm

@@ -1,4 +1,3 @@
-import { useConfigStore } from '@/store/config';
 import { Space, Tooltip } from 'antd';
 import classNames from 'classnames';
 import { PropsWithChildren, useRef, useState } from 'react';
@@ -10,13 +9,12 @@ import { useStyles } from './style';
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
-  tab?: string;
+  onClose: () => void;
 }
 
-const ControlPanel = (props: PropsWithChildren<ControlPanelProps>) => {
-  const { style, className, tab = 'agent', children } = props;
+const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
+  const { style, className, children, onClose } = props;
   const { styles } = useStyles();
-  const { controlPanelOpen, setControlPanelOpen } = useConfigStore();
   const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 });
 
   const draggleRef = useRef<HTMLDivElement>(null);
@@ -57,7 +55,7 @@ const ControlPanel = (props: PropsWithChildren<ControlPanelProps>) => {
               <div
                 className={classNames(styles.button, styles.close)}
                 onClick={() => {
-                  setControlPanelOpen(false);
+                  onClose();
                 }}
               />
             </Tooltip>
@@ -68,7 +66,7 @@ const ControlPanel = (props: PropsWithChildren<ControlPanelProps>) => {
               <div
                 className={classNames(styles.button, styles.min)}
                 onClick={() => {
-                  setControlPanelOpen(false);
+                  onClose();
                 }}
               ></div>
             </Tooltip>
@@ -80,4 +78,4 @@ const ControlPanel = (props: PropsWithChildren<ControlPanelProps>) => {
   );
 };
 
-export default ControlPanel;
+export default Panel;
