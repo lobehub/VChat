@@ -222,7 +222,7 @@ const Config = (props: ConfigProps) => {
                 下载
               </Button>
               <Button htmlType="button" onClick={() => form.resetFields()}>
-                重置
+                保存
               </Button>
               <Button htmlType="submit" type="primary" loading={loading}>
                 转换

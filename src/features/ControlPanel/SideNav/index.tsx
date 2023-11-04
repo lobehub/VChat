@@ -20,7 +20,6 @@ const SideNav = (props: SideNavProps) => {
           onClick={() => {
             setTab('config');
           }}
-          s
           size="large"
           active={tab === 'config'}
         />
