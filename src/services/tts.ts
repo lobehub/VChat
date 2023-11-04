@@ -29,12 +29,23 @@ export const speechApi = async (type: TTS_TYPE, ssml: string) => {
   return data;
 };
 
+const getVoiceKey = (type: string) => {
+  return `vidol_voice_${type}`;
+};
+
 export const voiceApi = async (type: TTS_TYPE): Promise<{ data: Voice[] }> => {
+  const key = getVoiceKey(type);
+  if (sessionStorage.getItem(key)) {
+    return JSON.parse(sessionStorage.getItem(key) || '');
+  }
   const res = await fetch(`/api/voice/${type}/voices`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  return res.json();
+  const result = await res.json();
+  sessionStorage.setItem(key, JSON.stringify(result));
+
+  return result;
 };

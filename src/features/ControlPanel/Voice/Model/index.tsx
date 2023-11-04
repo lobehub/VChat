@@ -20,7 +20,7 @@ interface Setting {
 const setting: Setting = {
   type: 'edge',
   language: 'zh-CN',
-  //   voice: 'zh-CN-XiaoyiNeural',
+  voice: 'zh-CN-XiaoyiNeural',
   text: '正在为你准备我的整个世界',
   speed: 1,
   pitch: 1,
@@ -87,7 +87,6 @@ const Config = (props: ConfigProps) => {
       onSuccess: (res) => {
         setVoices(res.data);
       },
-      cacheKey: 'vidol-voice-list',
       refreshDeps: [form.getFieldValue('type')],
     },
   );

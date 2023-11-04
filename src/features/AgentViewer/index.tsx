@@ -4,7 +4,7 @@ import { useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
-import { Expand, Music2, RotateCw, User } from 'lucide-react';
+import { Expand, Mic, Music2, RotateCw, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
@@ -35,6 +35,12 @@ export const items: ActionIconGroupProps['items'] = [
     icon: Music2,
     key: 'dance',
     label: '舞蹈选择',
+  },
+  {
+    /* @ts-ignore */
+    icon: Mic,
+    key: 'voice',
+    label: '语音设置',
   },
 ];
 
@@ -137,6 +143,8 @@ function AgentViewer() {
             openPanel('agent');
           } else if (key === 'dance') {
             openPanel('dance');
+          } else if (key === 'voice') {
+            openPanel('voice');
           }
         }}
       />
