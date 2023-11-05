@@ -2,7 +2,6 @@ import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import Awake from './Awake';
 import Model from './Model';
 import Order from './Order';
@@ -20,17 +19,18 @@ const RolePanel = (props: RolePanelProps) => {
   const [tab, setTab] = useState('model');
   const { setRolePanelOpen } = useConfigStore();
 
-  console.log('RolePanel', style, className);
-
   return (
     <Panel style={style} className={className} onClose={() => setRolePanelOpen(false)}>
-      <div className={styles.content}>
-        <Flexbox
-          style={{ marginBottom: 12 }}
-          horizontal
-          align="center"
-          distribution="space-between"
-        >
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          width: '100%',
+          paddingLeft: 24,
+          paddingRight: 24,
+        }}
+      >
+        <div style={{ marginBottom: 12 }}>
           <TabsNav
             activeKey={tab}
             onChange={(key) => {
@@ -51,10 +51,12 @@ const RolePanel = (props: RolePanelProps) => {
               },
             ]}
           />
-        </Flexbox>
-        {tab === 'awake' ? <Awake /> : null}
-        {tab === 'order' ? <Order /> : null}
-        {tab === 'model' ? <Model /> : null}
+        </div>
+        <div className={styles.content}>
+          {tab === 'awake' ? <Awake /> : null}
+          {tab === 'order' ? <Order /> : null}
+          {tab === 'model' ? <Model /> : null}
+        </div>
       </div>
     </Panel>
   );
