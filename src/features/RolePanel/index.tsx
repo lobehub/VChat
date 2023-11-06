@@ -2,9 +2,10 @@ import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
-import Awake from './Awake';
-import Model from './Model';
+import Info from './Info';
 import Order from './Order';
+import Touch from './Touch';
+import Voice from './Voice';
 
 import { useStyles } from './style';
 
@@ -38,24 +39,29 @@ const RolePanel = (props: RolePanelProps) => {
             }}
             items={[
               {
-                key: 'model',
-                label: '语言模型',
+                key: 'info',
+                label: '基本信息',
               },
               {
-                key: 'awake',
-                label: '语音唤醒',
+                key: 'role',
+                label: '角色设定',
               },
               {
-                key: 'order',
-                label: '语音命令',
+                key: 'voice',
+                label: '语音',
+              },
+              {
+                key: 'touch',
+                label: '触摸反应',
               },
             ]}
           />
         </div>
         <div className={styles.content}>
-          {tab === 'awake' ? <Awake /> : null}
+          {tab === 'info' ? <Info /> : null}
           {tab === 'order' ? <Order /> : null}
-          {tab === 'model' ? <Model /> : null}
+          {tab === 'voice' ? <Voice /> : null}
+          {tab === 'touch' ? <Touch /> : null}
         </div>
       </div>
     </Panel>
