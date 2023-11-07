@@ -7,7 +7,7 @@ interface AgentStore {
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   currentIdentifier: string;
-  agentList: any[];
+  agentList: Agent[];
   fetchAgentList: () => void;
 }
 
@@ -35,6 +35,7 @@ export const DEFAULT_AGENT_ITEM: Agent = {
   model: '',
   cover: '',
   avatar: '',
+  readme: '',
 };
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;

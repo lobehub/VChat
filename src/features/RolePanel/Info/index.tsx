@@ -1,6 +1,6 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
-import { FormFooter } from '@lobehub/ui';
-import { Button, Form, Input, Upload } from 'antd';
+import { Avatar, FormFooter } from '@lobehub/ui';
+import { Button, Card, Form, Input, Upload } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { UploadIcon } from 'lucide-react';
@@ -8,14 +8,6 @@ import { useEffect } from 'react';
 
 const FormItem = Form.Item;
 
-interface Setting {
-  type: string;
-  language: string;
-  voice?: string;
-  text: string;
-  speed: number;
-  pitch: number;
-}
 interface InfoProps {
   style?: React.CSSProperties;
   className?: string;
@@ -54,6 +46,13 @@ const Info = (props: InfoProps) => {
     form.setFieldsValue(currentAgent);
   }, [currentAgent, form]);
 
+  const uploadButton = (
+    <div>
+      {/* {loading ? <LoadingOutlined /> : <PlusOutlined />} */}
+      <div style={{ marginTop: 8 }}>上传</div>
+    </div>
+  );
+
   return (
     <Form onFinish={(values) => {}} layout="horizontal" requiredMark={false} form={form}>
       <div style={style} className={classNames(className, styles.container)}>
@@ -80,13 +79,31 @@ const Info = (props: InfoProps) => {
             </FormItem>
           </div>
           <div className={styles.text}>
-            <FormItem name="text" noStyle>
-              <Input.TextArea
-                placeholder="请输入要转换的文字"
-                showCount
-                maxLength={800}
-                autoSize={{ maxRows: 21, minRows: 21 }}
-              />
+            <FormItem label={'头像'} name="avatar">
+              <Upload
+                name="avatar"
+                showUploadList={false}
+                // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                // beforeUpload={beforeUpload}
+                // onChange={handleChange}
+              >
+                <Avatar src={currentAgent?.avatar} size={96} shape="circle" />
+              </Upload>
+            </FormItem>
+            <FormItem label={'封面'} name="cover">
+              <Upload
+                name="cover"
+                showUploadList={false}
+                // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+                // beforeUpload={beforeUpload}
+                // onChange={handleChange}
+              >
+                <Card
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  cover={<img alt="example" src={currentAgent?.cover} />}
+                  style={{ width: 160, cursor: 'pointer' }}
+                />
+              </Upload>
             </FormItem>
           </div>
         </div>

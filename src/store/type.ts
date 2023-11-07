@@ -27,6 +27,10 @@ export interface Agent {
    * 头像图片路径
    */
   avatar: string;
+  /**
+   * 说明文件
+   */
+  readme: string;
 }
 
 export interface Dance {
