@@ -17,7 +17,7 @@ interface RolePanelProps {
 const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [tab, setTab] = useState('model');
+  const [tab, setTab] = useState('info');
   const { setRolePanelOpen } = useConfigStore();
 
   return (

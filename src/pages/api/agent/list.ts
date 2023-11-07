@@ -13,12 +13,15 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   for (const agent of agents) {
     if (agent.isDirectory()) {
       const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');
+      const readme = fs.readFileSync(path.join(agentsDir, agent.name, 'readme.txt'), 'utf8');
+
       agentList.push({
         ...JSON.parse(agentMeta),
         dirname: agent.name,
         model: `/agents/${agent.name}/model.vrm`,
         cover: `/agents/${agent.name}/cover.jpg`,
         avatar: `/agents/${agent.name}/avatar.jpg`,
+        readme,
       });
     }
   }

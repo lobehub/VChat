@@ -15,7 +15,7 @@ import { useStyles } from './style';
 const Header = memo(() => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
-  const { rolePanelOpen, setRolePanelOpen } = useConfigStore();
+  const { setRolePanelOpen } = useConfigStore();
   const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const { setCurrentAgent } = useSessionStore();
