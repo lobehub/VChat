@@ -32,6 +32,7 @@ const SessionList = () => {
           className={classNames(styles.listItem, {
             [styles.active]: item.agent.dirname === currentAgent?.dirname,
           })}
+          style={{ padding: 12 }}
         >
           <List.Item.Meta
             avatar={<Avatar src={item.agent.avatar} />}
