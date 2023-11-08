@@ -21,8 +21,11 @@ const useStyles = createStyles(({ css, token }) => ({
   form: css`
     display: flex;
   `,
-  text: css`
+  more: css`
     flex: 2;
+    padding: 12px;
+    border: 1px solid ${token.colorBorderSecondary};
+    border-radius: ${token.borderRadius}px;
   `,
   config: css`
     padding: 12px;
@@ -78,7 +81,7 @@ const Info = (props: InfoProps) => {
               />
             </FormItem>
           </div>
-          <div className={styles.text}>
+          <div className={styles.more}>
             <FormItem label={'头像'} name="avatar">
               <Upload
                 name="avatar"
@@ -101,7 +104,7 @@ const Info = (props: InfoProps) => {
                 <Card
                   /* eslint-disable-next-line @next/next/no-img-element */
                   cover={<img alt="example" src={currentAgent?.cover} />}
-                  style={{ width: 160, cursor: 'pointer' }}
+                  style={{ width: 200, cursor: 'pointer' }}
                 />
               </Upload>
             </FormItem>
