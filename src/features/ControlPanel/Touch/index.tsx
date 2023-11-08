@@ -1,5 +1,6 @@
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import ActionList from './ActionList';
 import SideBar from './SideBar';
 
 const useStyles = createStyles(({ css }) => ({
@@ -24,6 +25,7 @@ const Touch = (props: TouchProps) => {
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <SideBar />
+      <ActionList />
     </div>
   );
 };

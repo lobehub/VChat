@@ -3,8 +3,8 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ css, token }) => ({
   list: css`
-    width: 240px;
-    border-right: 1px solid #eee;
+    width: 100%;
+    padding: 24px;
   `,
   listItem: css`
     &:hover {
@@ -19,16 +19,17 @@ const useStyles = createStyles(({ css, token }) => ({
 const AreaList = () => {
   const { styles } = useStyles();
   const data = [
-    { label: '头部', value: 'head' },
-    { label: '手臂', value: 'arm' },
-    { label: '腿部', value: 'foot' },
-    { label: '胸部', value: 'chest' },
-    { label: '腹部', value: 'belly' },
+    { label: '哇!最喜欢摸摸头!', value: 'head' },
+    { label: '感觉又充满了力量呢!', value: 'arm' },
+    { label: '哇塞，这个摸摸头的感觉好神奇!', value: 'foot' },
+    { label: '摸摸头让我开心一整天!', value: 'chest' },
+    { label: '听说被摸头是会长不高的呢!', value: 'belly' },
+    { label: '干嘛戳我呀？', value: 'belly' },
   ];
 
   return (
     <List
-      header={<div style={{ padding: 12 }}>触摸区域列表</div>}
+      header={<div style={{ padding: 12 }}>触摸反应列表</div>}
       dataSource={data}
       renderItem={(item) => (
         <List.Item className={styles.listItem} style={{ padding: 12 }}>

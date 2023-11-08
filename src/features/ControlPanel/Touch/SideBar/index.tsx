@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 import { ReactNode, memo } from 'react';
-import SessionList from './SessionList';
+import AreaList from './AreaList';
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -14,7 +14,7 @@ const useStyles = createStyles(({ css, token }) => ({
 
 // eslint-disable-next-line react/display-name
 const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
-  return <SessionList />;
+  return <AreaList />;
 });
 
 export default SideBar;
