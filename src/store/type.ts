@@ -63,3 +63,11 @@ export interface Dance {
    */
   readme: string;
 }
+
+export enum TouchAreaEnum {
+  Head = 'head',
+  Arm = 'arm',
+  Leg = 'leg',
+  Chest = 'chest',
+  Belly = 'belly',
+}

@@ -29,11 +29,19 @@ const AreaList = () => {
 
   return (
     <List
-      header={<div style={{ padding: 12 }}>触摸反应列表</div>}
+      header={<div>触摸反应列表</div>}
       dataSource={data}
       renderItem={(item) => (
-        <List.Item className={styles.listItem} style={{ padding: 12 }}>
-          {item.label}
+        <List.Item
+          className={styles.listItem}
+          actions={[
+            <a key="list-loadmore-edit" onClick={}>
+              edit
+            </a>,
+            <a key="list-loadmore-more">more</a>,
+          ]}
+        >
+          <List.Item.Meta title={item.label}></List.Item.Meta>
         </List.Item>
       )}
       className={styles.list}
