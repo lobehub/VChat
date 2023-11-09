@@ -1,5 +1,8 @@
+import { useTouchStore } from '@/store/touch';
+import { ActionIcon } from '@lobehub/ui';
 import { List } from 'antd';
 import { createStyles } from 'antd-style';
+import { PlayIcon } from 'lucide-react';
 
 const useStyles = createStyles(({ css, token }) => ({
   list: css`
@@ -18,15 +21,9 @@ const useStyles = createStyles(({ css, token }) => ({
 
 const AreaList = () => {
   const { styles } = useStyles();
-  const data = [
-    { label: '哇!最喜欢摸摸头!', value: 'head' },
-    { label: '感觉又充满了力量呢!', value: 'arm' },
-    { label: '哇塞，这个摸摸头的感觉好神奇!', value: 'foot' },
-    { label: '摸摸头让我开心一整天!', value: 'chest' },
-    { label: '听说被摸头是会长不高的呢!', value: 'belly' },
-    { label: '干嘛戳我呀？', value: 'belly' },
-  ];
+  const { actionConfig, currentTouchArea } = useTouchStore();
 
+  const data = actionConfig[currentTouchArea];
   return (
     <List
       header={<div>触摸反应列表</div>}
@@ -34,14 +31,10 @@ const AreaList = () => {
       renderItem={(item) => (
         <List.Item
           className={styles.listItem}
-          actions={[
-            <a key="list-loadmore-edit" onClick={}>
-              edit
-            </a>,
-            <a key="list-loadmore-more">more</a>,
-          ]}
+          /* @ts-ignore */
+          actions={[<ActionIcon icon={PlayIcon} key="play" />]}
         >
-          <List.Item.Meta title={item.label}></List.Item.Meta>
+          <List.Item.Meta title={item.text}></List.Item.Meta>
         </List.Item>
       )}
       className={styles.list}

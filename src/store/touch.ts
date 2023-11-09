@@ -118,11 +118,17 @@ interface TouchAction {
 }
 
 interface TouchStore {
+  currentTouchArea: TouchAreaEnum;
+  setCurrentTouchArea: (area: TouchAreaEnum) => void;
   actionConfig: TouchActionConfig;
   createTouchAction: (area: TouchAreaEnum, action: TouchAction) => void;
 }
 
 const createTouchStore: StateCreator<TouchStore, [['zustand/devtools', never]]> = (set, get) => ({
+  currentTouchArea: TouchAreaEnum.Head,
+  setCurrentTouchArea(area) {
+    set({ currentTouchArea: area });
+  },
   actionConfig: DEFAULT_TOUCH_ACTION_CONFIG,
   createTouchAction: (area, action) => {
     const { actionConfig } = get();

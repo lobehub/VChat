@@ -1,4 +1,8 @@
+import { useTouchStore } from '@/store/touch';
+import { TouchAreaEnum } from '@/store/type';
 import { List } from 'antd';
+import classNames from 'classnames';
+
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ css, token }) => ({
@@ -18,12 +22,14 @@ const useStyles = createStyles(({ css, token }) => ({
 
 const AreaList = () => {
   const { styles } = useStyles();
+  const { currentTouchArea, setCurrentTouchArea } = useTouchStore();
+
   const data = [
-    { label: '头部', value: 'head' },
-    { label: '手臂', value: 'arm' },
-    { label: '腿部', value: 'foot' },
-    { label: '胸部', value: 'chest' },
-    { label: '腹部', value: 'belly' },
+    { label: '头部', value: TouchAreaEnum.Head },
+    { label: '手臂', value: TouchAreaEnum.Arm },
+    { label: '腿部', value: TouchAreaEnum.Leg },
+    { label: '胸部', value: TouchAreaEnum.Chest },
+    { label: '腹部', value: TouchAreaEnum.Belly },
   ];
 
   return (
@@ -31,7 +37,13 @@ const AreaList = () => {
       header={<div style={{ padding: 12 }}>触摸区域列表</div>}
       dataSource={data}
       renderItem={(item) => (
-        <List.Item className={styles.listItem} style={{ padding: 12 }}>
+        <List.Item
+          className={classNames(styles.listItem, {
+            [styles.active]: item.value === currentTouchArea,
+          })}
+          onClick={() => setCurrentTouchArea(item.value)}
+          style={{ padding: 12 }}
+        >
           {item.label}
         </List.Item>
       )}
