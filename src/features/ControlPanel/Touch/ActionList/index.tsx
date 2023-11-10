@@ -1,4 +1,8 @@
+import { DEFAULT_PARAM } from '@/features/constants/koeiroParam';
+import { textsToScreenplay } from '@/features/messages/messages';
+import { speakCharacter } from '@/features/messages/speakCharacter';
 import { useTouchStore } from '@/store/touch';
+import { useViewerStore } from '@/store/viewer';
 import { ActionIcon } from '@lobehub/ui';
 import { List } from 'antd';
 import { createStyles } from 'antd-style';
@@ -22,6 +26,7 @@ const useStyles = createStyles(({ css, token }) => ({
 const AreaList = () => {
   const { styles } = useStyles();
   const { actionConfig, currentTouchArea } = useTouchStore();
+  const { viewer } = useViewerStore();
 
   const data = actionConfig[currentTouchArea];
   return (
@@ -31,8 +36,17 @@ const AreaList = () => {
       renderItem={(item) => (
         <List.Item
           className={styles.listItem}
-          /* @ts-ignore */
-          actions={[<ActionIcon icon={PlayIcon} key="play" />]}
+          actions={[
+            <ActionIcon
+              /* @ts-ignore */
+              icon={PlayIcon}
+              key="play"
+              onClick={() => {
+                const aiTalks = textsToScreenplay([item.text], DEFAULT_PARAM);
+                speakCharacter(aiTalks[0], viewer);
+              }}
+            />,
+          ]}
         >
           <List.Item.Meta title={item.text}></List.Item.Meta>
         </List.Item>
