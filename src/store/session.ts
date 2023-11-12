@@ -1,3 +1,4 @@
+import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { buildUrl } from '@/utils/buildUrl';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
@@ -24,6 +25,7 @@ const DEFAULT_AGENT: Agent = {
   Please note that this model is not under the CC0 license and its copyright has not been waived.
   To learn more about this model's conditions of use, consult the following Help article.
   vroid.pixiv.help/hc/en-us/articles/4402394424089`,
+  tts: DEFAULT_TTS,
 };
 
 interface Session {

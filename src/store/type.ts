@@ -31,6 +31,10 @@ export interface Agent {
    * 说明文件
    */
   readme: string;
+  /**
+   * 角色 tts 配置文件
+   */
+  tts: TTS;
 }
 
 export interface Dance {

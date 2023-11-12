@@ -1,3 +1,4 @@
+import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { getLocalAgentList } from '@/services/agent';
 import { create } from 'zustand';
 import { Agent } from './type';
@@ -36,11 +37,12 @@ export const DEFAULT_AGENT_ITEM: Agent = {
   cover: '',
   avatar: '',
   readme: '',
+  tts: DEFAULT_TTS,
 };
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
 
-const currentAgentItem = (s: AgentStore): Agent => {
+const currentAgentItem = (s: AgentStore): Agent | null => {
   const { agentList, currentIdentifier } = s;
   const currentAgent = agentList.find((item) => item.name === currentIdentifier);
   if (!currentAgent) return DEFAULT_AGENT_ITEM;

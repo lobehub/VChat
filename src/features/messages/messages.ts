@@ -38,8 +38,6 @@ export const textsToScreenplay = (texts: string[], ttsParam: TTS): Screenplay[] 
       prevExpression = tag;
     }
 
-    console.log(ttsParam);
-
     screenplays.push({
       expression: expression as EmotionType,
       talk: {

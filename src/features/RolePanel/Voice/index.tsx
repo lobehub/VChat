@@ -1,12 +1,12 @@
-import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { speechApi, voiceListApi } from '@/services/tts';
+import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { Voice } from '@/store/type';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const FormItem = Form.Item;
 
@@ -44,7 +44,12 @@ const Config = (props: ConfigProps) => {
   const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
   const [voices, setVoices] = useState<Voice[]>([]);
+  const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    form.setFieldsValue(currentAgent?.tts);
+  }, [currentAgent, form]);
 
   const { loading, run: speek } = useRequest(speechApi, {
     manual: true,
@@ -64,25 +69,26 @@ const Config = (props: ConfigProps) => {
 
   const { loading: voiceLoading } = useRequest(
     () => {
-      const type = form.getFieldValue('type');
-      return voiceListApi(type);
+      const engine = form.getFieldValue('engine');
+      return voiceListApi(engine);
     },
     {
       onSuccess: (res) => {
         setVoices(res.data);
       },
-      refreshDeps: [form.getFieldValue('type')],
+      refreshDeps: [form.getFieldValue('engine')],
     },
   );
 
   return (
     <Form
-      initialValues={DEFAULT_TTS}
+      initialValues={currentAgent?.tts}
       onFinish={(values) => {
         speek(values);
       }}
+      preserve={false}
       onValuesChange={(changedValues) => {
-        if (changedValues.language || changedValues.type) {
+        if (changedValues.locale || changedValues.engine) {
           form.setFieldsValue({ voice: undefined });
         }
       }}
@@ -153,7 +159,7 @@ const Config = (props: ConfigProps) => {
                 disabled={voiceLoading}
                 defaultActiveFirstOption
                 options={voices
-                  .filter((voice) => voice.locale === form.getFieldValue('language'))
+                  .filter((voice) => voice.locale === form.getFieldValue('locale'))
                   .map((item) => ({
                     label: `${item.DisplayName}-${item.LocalName}`,
                     value: item.ShortName,

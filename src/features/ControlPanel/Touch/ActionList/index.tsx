@@ -42,9 +42,7 @@ const AreaList = () => {
               icon={PlayIcon}
               key="play"
               onClick={() => {
-                console.log('DEFAULT_TTS', DEFAULT_TTS);
                 const aiTalks = textsToScreenplay([item.text], DEFAULT_TTS);
-                console.log('aiTalks', aiTalks);
                 speakCharacter(aiTalks[0], viewer);
               }}
             />,
