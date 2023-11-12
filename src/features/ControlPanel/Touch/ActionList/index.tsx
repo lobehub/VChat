@@ -1,4 +1,4 @@
-import { DEFAULT_PARAM } from '@/features/constants/koeiroParam';
+import { DEFAULT_PARAM } from '@/features/constants/ttsParam';
 import { textsToScreenplay } from '@/features/messages/messages';
 import { speakCharacter } from '@/features/messages/speakCharacter';
 import { useTouchStore } from '@/store/touch';

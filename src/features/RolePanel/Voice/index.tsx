@@ -1,4 +1,5 @@
-import { Voice, speechApi, voiceApi } from '@/services/tts';
+import { speechApi, voiceListApi } from '@/services/tts';
+import { TTS, Voice } from '@/store/type';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
@@ -8,18 +9,9 @@ import { useRef, useState } from 'react';
 
 const FormItem = Form.Item;
 
-interface Setting {
-  type: string;
-  language: string;
-  voice?: string;
-  text: string;
-  speed: number;
-  pitch: number;
-}
-
-const setting: Setting = {
-  type: 'edge',
-  language: 'zh-CN',
+const setting: TTS = {
+  engine: 'edge',
+  locale: 'zh-CN',
   voice: 'zh-CN-XiaoyiNeural',
   text: '正在为你准备我的整个世界',
   speed: 1,
@@ -66,7 +58,7 @@ const Config = (props: ConfigProps) => {
     manual: true,
     onSuccess: (res) => {
       message.success('转换成功');
-      const adUrl = URL.createObjectURL(res);
+      const adUrl = URL.createObjectURL(new Blob([res]));
       setAudioUrl(adUrl);
     },
     onError: (err) => {
@@ -81,7 +73,7 @@ const Config = (props: ConfigProps) => {
   const { loading: voiceLoading } = useRequest(
     () => {
       const type = form.getFieldValue('type');
-      return voiceApi(type);
+      return voiceListApi(type);
     },
     {
       onSuccess: (res) => {
@@ -91,31 +83,11 @@ const Config = (props: ConfigProps) => {
     },
   );
 
-  const convertSSML = (values: Setting) => {
-    const newValue = {
-      voiceStyleSelect: '',
-      role: '',
-      ...values,
-    };
-    return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
-        <voice name="${values.voice}">
-          <prosody rate="${((newValue.speed - 1) * 100).toFixed()}%" pitch="${(
-      (newValue.pitch - 1) *
-      50
-    ).toFixed()}%">
-                ${newValue.text}
-          </prosody>
-        </voice>
-    </speak>
-    `;
-  };
-
   return (
     <Form
       initialValues={setting}
       onFinish={(values) => {
-        const { type } = values;
-        speek(type, convertSSML(values));
+        speek(values);
       }}
       onValuesChange={(changedValues) => {
         if (changedValues.language || changedValues.type) {
@@ -139,21 +111,21 @@ const Config = (props: ConfigProps) => {
             </FormItem>
           </div>
           <div className={styles.config}>
-            <FormItem label={'接口'} name="type">
+            <FormItem label={'语音引擎'} name="engine">
               <Select
                 options={[
                   {
-                    label: 'Edge 语音接口',
+                    label: 'Edge',
                     value: 'edge',
                   },
                   {
-                    label: 'MicroSoft 语音接口（不稳定）',
+                    label: 'MicroSoft（不稳定）',
                     value: 'microsoft',
                   },
                 ]}
               />
             </FormItem>
-            <FormItem label={'语言'} name="language">
+            <FormItem label={'语言'} name="locale">
               <Select
                 options={[
                   {
