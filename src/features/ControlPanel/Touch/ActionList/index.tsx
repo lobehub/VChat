@@ -1,6 +1,5 @@
-import { DEFAULT_TTS } from '@/features/constants/ttsParam';
-import { textsToScreenplay } from '@/features/messages/messages';
 import { speakCharacter } from '@/features/messages/speakCharacter';
+import { useSessionStore } from '@/store/session';
 import { useTouchStore } from '@/store/touch';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIcon } from '@lobehub/ui';
@@ -26,6 +25,7 @@ const useStyles = createStyles(({ css, token }) => ({
 const AreaList = () => {
   const { styles } = useStyles();
   const { actionConfig, currentTouchArea } = useTouchStore();
+  const { currentAgent } = useSessionStore();
   const { viewer } = useViewerStore();
 
   const data = actionConfig[currentTouchArea];
@@ -42,8 +42,16 @@ const AreaList = () => {
               icon={PlayIcon}
               key="play"
               onClick={() => {
-                const aiTalks = textsToScreenplay([item.text], DEFAULT_TTS);
-                speakCharacter(aiTalks[0], viewer);
+                speakCharacter(
+                  {
+                    emotion: item.emotion,
+                    tts: {
+                      ...currentAgent.tts,
+                      message: item.text,
+                    },
+                  },
+                  viewer,
+                );
               }}
             />,
           ]}

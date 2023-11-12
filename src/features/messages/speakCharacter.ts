@@ -20,7 +20,7 @@ const createSpeakCharacter = () => {
         await wait(1000 - (now - lastTime));
       }
 
-      const buffer = await speechApi(screenplay.talk).catch(() => null);
+      const buffer = await speechApi(screenplay.tts).catch(() => null);
       lastTime = Date.now();
       return buffer;
     });

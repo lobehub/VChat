@@ -1,3 +1,5 @@
+import { VRMExpressionPresetName } from '@pixiv/three-vrm';
+
 export interface Agent {
   /**
    * 角色名
@@ -88,6 +90,10 @@ export enum TouchAreaEnum {
 
 export type TTS_ENGINE = 'microsoft' | 'edge';
 
+export const emotions = ['neutral', 'happy', 'angry', 'sad', 'relaxed'] as const;
+export type EmotionType = (typeof emotions)[number] | VRMExpressionPresetName;
+
+// TODO: 需要根据不同 API 进行适配
 export const talkStyles = ['talk', 'happy', 'sad', 'angry', 'fear', 'surprised'] as const;
 
 export type TalkStyle = (typeof talkStyles)[number];

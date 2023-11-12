@@ -1,5 +1,4 @@
-import { TTS, TalkStyle } from '@/store/type';
-import { VRMExpressionPresetName } from '@pixiv/three-vrm';
+import { EmotionType, TTS, TalkStyle, emotions } from '@/store/type';
 
 // ChatGPT API
 export type Message = {
@@ -7,12 +6,9 @@ export type Message = {
   content: string;
 };
 
-const emotions = ['neutral', 'happy', 'angry', 'sad', 'relaxed'] as const;
-type EmotionType = (typeof emotions)[number] & VRMExpressionPresetName;
-
 export type Screenplay = {
-  expression: EmotionType;
-  talk: TTS;
+  emotion: EmotionType;
+  tts: TTS;
 };
 
 export const splitSentence = (text: string): string[] => {
@@ -22,27 +18,27 @@ export const splitSentence = (text: string): string[] => {
 
 export const textsToScreenplay = (texts: string[], ttsParam: TTS): Screenplay[] => {
   const screenplays: Screenplay[] = [];
-  let prevExpression = 'neutral';
+  let prevEmotion = 'neutral';
   for (let i = 0; i < texts.length; i++) {
     const text = texts[i];
 
     const match = text.match(/\[(.*?)\]/);
 
-    const tag = (match && match[1]) || prevExpression;
+    const tag = (match && match[1]) || prevEmotion;
 
     const message = text.replace(/\[(.*?)\]/g, '');
 
-    let expression = prevExpression;
+    let emotion = prevEmotion;
     if (emotions.includes(tag as any)) {
-      expression = tag;
-      prevExpression = tag;
+      emotion = tag;
+      prevEmotion = tag;
     }
 
     screenplays.push({
-      expression: expression as EmotionType,
-      talk: {
+      emotion: emotion as EmotionType,
+      tts: {
         ...ttsParam,
-        style: emotionToTalkStyle(expression as EmotionType),
+        style: emotionToTalkStyle(emotion as EmotionType),
         message: message,
       },
     });

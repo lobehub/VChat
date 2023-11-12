@@ -42,7 +42,7 @@ export const DEFAULT_AGENT_ITEM: Agent = {
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
 
-const currentAgentItem = (s: AgentStore): Agent | null => {
+const currentAgentItem = (s: AgentStore): Agent => {
   const { agentList, currentIdentifier } = s;
   const currentAgent = agentList.find((item) => item.name === currentIdentifier);
   if (!currentAgent) return DEFAULT_AGENT_ITEM;

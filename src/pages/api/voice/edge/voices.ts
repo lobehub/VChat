@@ -746,7 +746,7 @@ const cachedVoiceList: Voice[] = [
     },
   },
   {
-    Name: 'Microsoft Server Speech Text to Speech Voice (zh-CN, XiaoyiNeural)',
+    Name: 'Microsoft Server Speech Text to Speec h Voice (zh-CN, XiaoyiNeural)',
     ShortName: 'zh-CN-XiaoyiNeural',
     Gender: 'Female',
     Locale: 'zh-CN',

@@ -34,7 +34,7 @@ interface Session {
 }
 
 interface SessionStore {
-  currentAgent: Agent | null;
+  currentAgent: Agent;
   sessionList: Session[];
   setCurrentAgent: (agent: Agent) => void;
 }
