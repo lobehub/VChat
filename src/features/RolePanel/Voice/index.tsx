@@ -1,5 +1,6 @@
+import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { speechApi, voiceListApi } from '@/services/tts';
-import { TTS, Voice } from '@/store/type';
+import { Voice } from '@/store/type';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
@@ -8,15 +9,6 @@ import classNames from 'classnames';
 import { useRef, useState } from 'react';
 
 const FormItem = Form.Item;
-
-const setting: TTS = {
-  engine: 'edge',
-  locale: 'zh-CN',
-  voice: 'zh-CN-XiaoyiNeural',
-  text: '正在为你准备我的整个世界',
-  speed: 1,
-  pitch: 1,
-};
 
 interface ConfigProps {
   style?: React.CSSProperties;
@@ -31,7 +23,7 @@ const useStyles = createStyles(({ css, token }) => ({
   form: css`
     display: flex;
   `,
-  text: css`
+  message: css`
     flex: 5;
     margin-right: 12px;
   `,
@@ -85,7 +77,7 @@ const Config = (props: ConfigProps) => {
 
   return (
     <Form
-      initialValues={setting}
+      initialValues={DEFAULT_TTS}
       onFinish={(values) => {
         speek(values);
       }}
@@ -100,8 +92,8 @@ const Config = (props: ConfigProps) => {
     >
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
-          <div className={styles.text}>
-            <FormItem name="text" noStyle>
+          <div className={styles.message}>
+            <FormItem name="message" noStyle>
               <Input.TextArea
                 placeholder="请输入要转换的文字"
                 showCount

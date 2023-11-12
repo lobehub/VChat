@@ -1,4 +1,4 @@
-import { DEFAULT_PARAM } from '@/features/constants/ttsParam';
+import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { textsToScreenplay } from '@/features/messages/messages';
 import { speakCharacter } from '@/features/messages/speakCharacter';
 import { useTouchStore } from '@/store/touch';
@@ -42,7 +42,9 @@ const AreaList = () => {
               icon={PlayIcon}
               key="play"
               onClick={() => {
-                const aiTalks = textsToScreenplay([item.text], DEFAULT_PARAM);
+                console.log('DEFAULT_TTS', DEFAULT_TTS);
+                const aiTalks = textsToScreenplay([item.text], DEFAULT_TTS);
+                console.log('aiTalks', aiTalks);
                 speakCharacter(aiTalks[0], viewer);
               }}
             />,

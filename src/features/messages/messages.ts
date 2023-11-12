@@ -1,4 +1,3 @@
-import { TTSParam } from '@/features/constants/ttsParam';
 import { TTS, TalkStyle } from '@/store/type';
 import { VRMExpressionPresetName } from '@pixiv/three-vrm';
 
@@ -11,9 +10,6 @@ export type Message = {
 const emotions = ['neutral', 'happy', 'angry', 'sad', 'relaxed'] as const;
 type EmotionType = (typeof emotions)[number] & VRMExpressionPresetName;
 
-/**
- * 発話文と音声の感情と、モデルの感情表現がセットになった物
- */
 export type Screenplay = {
   expression: EmotionType;
   talk: TTS;
@@ -24,7 +20,7 @@ export const splitSentence = (text: string): string[] => {
   return splitMessages.filter((msg) => msg !== '');
 };
 
-export const textsToScreenplay = (texts: string[], ttsParam: TTSParam): Screenplay[] => {
+export const textsToScreenplay = (texts: string[], ttsParam: TTS): Screenplay[] => {
   const screenplays: Screenplay[] = [];
   let prevExpression = 'neutral';
   for (let i = 0; i < texts.length; i++) {
@@ -42,9 +38,12 @@ export const textsToScreenplay = (texts: string[], ttsParam: TTSParam): Screenpl
       prevExpression = tag;
     }
 
+    console.log(ttsParam);
+
     screenplays.push({
       expression: expression as EmotionType,
       talk: {
+        ...ttsParam,
         style: emotionToTalkStyle(expression as EmotionType),
         message: message,
       },

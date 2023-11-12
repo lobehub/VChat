@@ -106,9 +106,9 @@ export type TTS = {
    */
   locale?: string;
   /**
-   * 文案
+   * 消息
    */
-  text: string;
+  message: string;
   /**
    * 速度
    */
