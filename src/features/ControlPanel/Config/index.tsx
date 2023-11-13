@@ -1,13 +1,10 @@
+import { useConfigStore } from '@/store/config';
 import { Form, FormFooter, FormGroup, FormItem } from '@lobehub/ui';
-import { Button, Input, InputNumber, Segmented, Select } from 'antd';
+import { Button, Input, Select } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { BotIcon, Monitor } from 'lucide-react';
-
-const setting = {
-  i18n: 'en',
-  model: 'gpt-3.5-turb',
-};
+import { debounce } from 'lodash-es';
+import { BotIcon } from 'lucide-react';
 
 interface ConfigProps {
   style?: React.CSSProperties;
@@ -26,64 +23,19 @@ const useStyles = createStyles(({ css }) => ({
 const Config = (props: ConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
+  const { setSetting, setting } = useConfigStore();
   return (
     <div style={style} className={classNames(styles.config, className)}>
       <Form
         initialValues={setting}
-        onFinish={console.table}
+        onValuesChange={debounce(setSetting, 100)}
         style={{ display: 'flex', flexGrow: 1 }}
       >
         {/* @ts-ignore */}
-        <FormGroup icon={Monitor} title={'Common Settings'}>
-          <FormItem desc={'Editor language'} label={'Language'} name="i18n">
+        <FormGroup icon={BotIcon} title={'OpenAI 模型设置'}>
+          <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
-              options={[
-                {
-                  label: 'English',
-                  value: 'en',
-                },
-                {
-                  label: '简体中文',
-                  value: 'zh_CN',
-                },
-              ]}
-              style={{ width: 180 }}
-            />
-          </FormItem>
-          <FormItem
-            desc={
-              'Fixed as grid mode for constant display, auto-expand when the mouse moves to the side in floating mode'
-            }
-            divider
-            label={'Display Mode'}
-            name="sidebarFixedMode"
-          >
-            <Segmented
-              options={[
-                {
-                  label: 'Fixed',
-                  value: 'fixed',
-                },
-                {
-                  label: 'Float',
-                  value: 'float',
-                },
-              ]}
-            />
-          </FormItem>
-          <FormItem
-            desc={'Default width of the sidebar when starting'}
-            divider
-            label={'Default Width'}
-            name="sidebarWidth"
-          >
-            <InputNumber />
-          </FormItem>
-        </FormGroup>
-        {/* @ts-ignore */}
-        <FormGroup icon={BotIcon} title={'Model Setting'}>
-          <FormItem desc={'which gpt model you are using'} label={'GPT Model'} name="model">
-            <Select
+              style={{ width: 140 }}
               options={[
                 {
                   label: 'gpt-3.5-turb',
@@ -96,8 +48,11 @@ const Config = (props: ConfigProps) => {
               ]}
             />
           </FormItem>
-          <FormItem desc={'Please use your own GPT Key'} divider label={'API Key'} name="apikey">
-            <Input placeholder="sk-" style={{ width: 480 }} />
+          <FormItem desc={'请使用自己的 OpenAI Key'} divider label={'API Key'} name="apikey">
+            <Input placeholder="sk-" style={{ width: 240 }} />
+          </FormItem>
+          <FormItem desc={'http(s)://'} divider label={'接口代理地址'} name="endpoint">
+            <Input placeholder="" style={{ width: 240 }} />
           </FormItem>
         </FormGroup>
         <FormFooter>
