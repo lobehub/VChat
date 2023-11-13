@@ -98,7 +98,7 @@ export class Model {
     const { vrm, mixer } = this;
     if (vrm && mixer) {
       mixer.stopAllAction();
-      this.loadIdleAnimation();
+      await this.loadIdleAnimation();
     }
   }
 
@@ -106,13 +106,13 @@ export class Model {
    * 音声を再生し、リップシンクを行う
    */
   public async speak(buffer: ArrayBuffer, screenplay: Screenplay) {
-    console.log('emotion', screenplay.emotion);
     this.emoteController?.playEmotion(screenplay.emotion);
     await new Promise((resolve) => {
       this._lipSync?.playFromArrayBuffer(buffer, () => {
         resolve(true);
       });
     });
+    this.emoteController?.playEmotion('neutral');
   }
 
   public update(delta: number): void {

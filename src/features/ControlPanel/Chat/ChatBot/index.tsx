@@ -15,7 +15,7 @@ interface ChatBotProps {
 const ChatBot = (props: ChatBotProps) => {
   const { style, className } = props;
   const [expand, setExpand] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('123');
+  const [message, setMessage] = useState<string>('');
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
