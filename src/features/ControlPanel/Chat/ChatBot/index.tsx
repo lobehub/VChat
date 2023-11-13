@@ -20,12 +20,15 @@ const ChatBot = (props: ChatBotProps) => {
   const { styles } = useStyles();
   const theme = useTheme();
 
-  const sendMessage = async (messages: string) => {
-    const res = await fetch('/api/stream', {
+  const sendMessage = async (message: string) => {
+    const res = await fetch('/api/chat/openai', {
       method: 'POST',
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
-        messages: messages,
+        messages: [
+          { role: 'system', content: '你是个有用的助手' },
+          { role: 'user', content: message },
+        ],
       }),
     });
     return res;

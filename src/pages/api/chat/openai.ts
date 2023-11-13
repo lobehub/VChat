@@ -1,13 +1,17 @@
-import { Configuration, OpenAIApi } from 'openai';
-
 import type { NextApiRequest, NextApiResponse } from 'next';
+import OpenAI, { ClientOptions } from 'openai';
 
 type Data = {
   message: string;
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const apiKey = req.body.apiKey || process.env.OPEN_AI_KEY;
+  const apiKey = req.body.apiKey || process.env.OPENAI_API_KEY;
+  const baseURL = req.body.endpoint
+    ? req.body.endpoint
+    : process.env.OPENAI_PROXY_URL
+    ? process.env.OPENAI_PROXY_URL
+    : undefined;
 
   if (!apiKey) {
     res.status(400).json({ message: '"API 密钥错误或未设置。' });
@@ -15,18 +19,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     return;
   }
 
-  const configuration = new Configuration({
+  const config: ClientOptions = {
     apiKey: apiKey,
-  });
+    baseURL,
+  };
+  const openai = new OpenAI(config);
 
-  const openai = new OpenAIApi(configuration);
-
-  const { data } = await openai.createChatCompletion({
+  const completion = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     messages: req.body.messages,
   });
 
-  const [aiRes] = data.choices;
+  const [aiRes] = completion.choices;
   const message = aiRes.message?.content || '发生错误';
 
   res.status(200).json({ message: message });
