@@ -7,7 +7,7 @@ import { StateCreator } from 'zustand/vanilla';
 export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'voice' | 'touch';
 
 interface Setting {
-  OPENAI_API_KEY: string;
+  apikey: string;
   endpoint?: string;
   model?: string;
 }
@@ -31,7 +31,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
   setting: {
-    OPENAI_API_KEY: '',
+    apikey: '',
     endpoint: '',
     model: 'gpt-3.5-turbo',
   },

@@ -23,10 +23,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     apiKey: apiKey,
     baseURL,
   };
+  console.log(config);
   const openai = new OpenAI(config);
 
   const completion = await openai.chat.completions.create({
-    model: 'gpt-3.5-turbo',
+    model: req.body.model,
     messages: req.body.messages,
   });
 

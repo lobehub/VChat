@@ -1,7 +1,9 @@
+import { useConfigStore } from '@/store/config';
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
+import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import ChatList from './ChatList';
@@ -19,12 +21,18 @@ const ChatBot = (props: ChatBotProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
+  const setting = useConfigStore((s) => s.setting, isEqual);
 
   const sendMessage = async (message: string) => {
     const res = await fetch('/api/chat/openai', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: setting.model,
+        endpoint: setting.endpoint,
+        apiKey: setting.apikey,
         messages: [
           { role: 'system', content: '你是个有用的助手' },
           { role: 'user', content: message },
