@@ -1,10 +1,11 @@
 import { useConfigStore } from '@/store/config';
-import { Form, FormFooter, FormGroup, FormItem } from '@lobehub/ui';
-import { Button, Input, Select } from 'antd';
+import { Form, FormGroup, FormItem } from '@lobehub/ui';
+import { Form as AForm, Input, Select } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { debounce } from 'lodash-es';
+import { debounce, isEqual } from 'lodash-es';
 import { BotIcon } from 'lucide-react';
+import { useEffect } from 'react';
 
 interface ConfigProps {
   style?: React.CSSProperties;
@@ -23,16 +24,23 @@ const useStyles = createStyles(({ css }) => ({
 const Config = (props: ConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const { setSetting, setting } = useConfigStore();
+  const [form] = AForm.useForm();
+  const setting = useConfigStore((s) => s.setting, isEqual);
+  const setSetting = useConfigStore((s) => s.setSetting);
+
+  useEffect(() => {
+    form.setFieldsValue(setting);
+  }, [setting]);
+
   return (
     <div style={style} className={classNames(styles.config, className)}>
       <Form
-        initialValues={setting}
+        form={form}
         onValuesChange={debounce(setSetting, 100)}
         style={{ display: 'flex', flexGrow: 1 }}
       >
         {/* @ts-ignore */}
-        <FormGroup icon={BotIcon} title={'OpenAI 模型设置'}>
+        <FormGroup icon={BotIcon} title={'模型设置'}>
           <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
               style={{ width: 140 }}
@@ -55,12 +63,6 @@ const Config = (props: ConfigProps) => {
             <Input placeholder="" style={{ width: 240 }} />
           </FormItem>
         </FormGroup>
-        <FormFooter>
-          <Button htmlType="button">Reset</Button>
-          <Button htmlType="submit" type="primary">
-            Submit
-          </Button>
-        </FormFooter>
       </Form>
     </div>
   );

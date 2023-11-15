@@ -1,5 +1,8 @@
 import { isEqual, merge } from 'lodash-es';
-import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
+import { StateCreator } from 'zustand/vanilla';
 
 export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'voice' | 'touch';
 
@@ -20,7 +23,7 @@ interface ConfigStore {
   setSetting: (setting: Partial<Setting>) => void;
 }
 
-export const useConfigStore = create<ConfigStore>()((set, get) => ({
+const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
   tab: 'agent',
   controlPanelOpen: false,
   rolePanelOpen: false,
@@ -38,4 +41,16 @@ export const useConfigStore = create<ConfigStore>()((set, get) => ({
     if (isEqual(prevSetting, nextSetting)) return;
     set({ setting: nextSetting });
   },
-}));
+});
+
+export const useConfigStore = createWithEqualityFn<ConfigStore>()(
+  persist(
+    devtools(createStore, {
+      name: 'VIDOL_CONFIG_STORE',
+    }),
+    {
+      name: 'vidol-chat-config-storage', // name of the item in the storage (must be unique)
+    },
+  ),
+  shallow,
+);

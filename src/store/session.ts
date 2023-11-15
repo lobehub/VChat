@@ -60,7 +60,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 export const useSessionStore = create<SessionStore>()(
   persist(
     devtools(createSessonStore, {
-      name: 'SESSION_STORE',
+      name: 'VIDOL_SESSION_STORE',
     }),
     {
       name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
