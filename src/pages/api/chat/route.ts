@@ -1,26 +1,16 @@
 import { OpenAIStream, StreamingTextResponse } from 'ai';
-import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI, { ClientOptions } from 'openai';
-
-type Data = {
-  message: string;
-};
-
 export const runtime = 'edge';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const apiKey = req.body.apiKey || process.env.OPENAI_API_KEY;
-  const baseURL = req.body.endpoint
-    ? req.body.endpoint
+export const POST = async (req: Request) => {
+  const payload = await req.json();
+
+  const apiKey = payload.apiKey || process.env.OPENAI_API_KEY;
+  const baseURL = payload.endpoint
+    ? payload.endpoint
     : process.env.OPENAI_PROXY_URL
     ? process.env.OPENAI_PROXY_URL
     : undefined;
-
-  // if (!apiKey) {
-  //   res.status(400).json({ message: '"API 密钥错误或未设置。' });
-
-  //   return;
-  // }
 
   const config: ClientOptions = {
     apiKey: apiKey,
@@ -30,12 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   const openai = new OpenAI(config);
 
   const completion = await openai.chat.completions.create({
-    model: req.body.model,
+    model: payload.model,
     stream: true,
-    messages: req.body.messages,
+    messages: payload.messages,
   });
 
   const stream = OpenAIStream(completion);
 
   return new StreamingTextResponse(stream);
-}
+};

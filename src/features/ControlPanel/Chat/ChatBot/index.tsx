@@ -1,4 +1,5 @@
 import { useConfigStore } from '@/store/config';
+import { fetchSEE } from '@/utils/fetch';
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
@@ -24,21 +25,31 @@ const ChatBot = (props: ChatBotProps) => {
   const setting = useConfigStore((s) => s.setting, isEqual);
 
   const sendMessage = async (message: string) => {
-    const res = await fetch('/api/chat/openai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    let output = '';
+    const res = await fetchSEE(
+      '/api/chat',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: setting.model,
+          endpoint: setting.endpoint,
+          apiKey: setting.apikey,
+          messages: [
+            { role: 'system', content: '你是个有用的助手' },
+            { role: 'user', content: message },
+          ],
+        }),
       },
-      body: JSON.stringify({
-        model: setting.model,
-        endpoint: setting.endpoint,
-        apiKey: setting.apikey,
-        messages: [
-          { role: 'system', content: '你是个有用的助手' },
-          { role: 'user', content: message },
-        ],
-      }),
-    });
+      {
+        onMessageHandle: (txt: string) => {
+          output += txt;
+          console.log(output);
+        },
+      },
+    );
     return res;
   };
 
