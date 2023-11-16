@@ -1,3 +1,4 @@
+import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
@@ -37,7 +38,9 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
   },
   setSetting: (setting) => {
     const prevSetting = get().setting;
-    const nextSetting = merge(prevSetting, setting);
+    const nextSetting = produce(prevSetting, (draftState) => {
+      merge(draftState, setting);
+    });
     if (isEqual(prevSetting, nextSetting)) return;
     set({ setting: nextSetting });
   },
