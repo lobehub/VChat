@@ -1,12 +1,10 @@
-import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { OpenAIStream, streamToResponse } from 'ai';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI, { ClientOptions } from 'openai';
 
 type Data = {
   message: string;
 };
-
-export const runtime = 'edge';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
   const apiKey = req.body.apiKey || process.env.OPENAI_API_KEY;
@@ -16,11 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     ? process.env.OPENAI_PROXY_URL
     : undefined;
 
-  // if (!apiKey) {
-  //   res.status(400).json({ message: '"API 密钥错误或未设置。' });
+  if (!apiKey) {
+    res.status(400).json({ message: '"API 密钥错误或未设置。' });
 
-  //   return;
-  // }
+    return;
+  }
 
   const config: ClientOptions = {
     apiKey: apiKey,
@@ -37,5 +35,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const stream = OpenAIStream(completion);
 
-  return new StreamingTextResponse(stream);
+  return streamToResponse(stream, res);
 }

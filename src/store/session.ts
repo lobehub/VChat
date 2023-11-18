@@ -1,5 +1,6 @@
 import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { buildUrl } from '@/utils/buildUrl';
+import { ChatMessage } from '@lobehub/ui';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { StateCreator } from 'zustand/vanilla';
@@ -30,30 +31,33 @@ const DEFAULT_AGENT: Agent = {
 
 interface Session {
   agent: Agent;
-  history: string[];
+  messages: ChatMessage[];
 }
 
 interface SessionStore {
-  currentAgent: Agent;
+  currentSession: Session | null;
   sessionList: Session[];
-  setCurrentAgent: (agent: Agent) => void;
+  switchSession: (agent: Agent) => void;
 }
 
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
   set,
   get,
 ) => ({
-  currentAgent: DEFAULT_AGENT,
+  currentSession: null,
   sessionList: [],
-  setCurrentAgent: (agent) => {
+  switchSession: (agent) => {
     const { sessionList } = get();
-    if (!sessionList.find((session) => session.agent.dirname === agent.dirname)) {
-      sessionList.push({
+    const targetSession = sessionList.find((session) => session.agent.dirname === agent.dirname);
+    if (!targetSession) {
+      const session = {
         agent,
-        history: [],
-      });
+        messages: [],
+      };
+      set({ sessionList: [...sessionList, session], currentSession: session });
+    } else {
+      set({ currentSession: targetSession });
     }
-    set({ currentAgent: agent });
   },
 });
 

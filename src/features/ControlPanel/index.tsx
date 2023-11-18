@@ -1,3 +1,5 @@
+'use client';
+
 import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
 import Agent from './Agent';

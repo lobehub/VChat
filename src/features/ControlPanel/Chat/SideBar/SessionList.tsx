@@ -18,7 +18,7 @@ const useStyles = createStyles(({ css, token }) => ({
 }));
 
 const SessionList = () => {
-  const { sessionList, setCurrentAgent, currentAgent } = useSessionStore();
+  const { sessionList, switchSession, currentSession } = useSessionStore();
   const { styles } = useStyles();
 
   // TODO: 滚动到当前 agent
@@ -28,9 +28,9 @@ const SessionList = () => {
       dataSource={sessionList}
       renderItem={(item) => (
         <List.Item
-          onClick={() => setCurrentAgent(item.agent)}
+          onClick={() => switchSession(item.agent)}
           className={classNames(styles.listItem, {
-            [styles.active]: item.agent.dirname === currentAgent?.dirname,
+            [styles.active]: item.agent.dirname === currentSession?.agent.dirname,
           })}
           style={{ padding: 12 }}
         >

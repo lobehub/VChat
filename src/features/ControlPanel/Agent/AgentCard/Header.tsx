@@ -18,7 +18,7 @@ const Header = memo(() => {
   const { setRolePanelOpen } = useConfigStore();
   const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
-  const { setCurrentAgent } = useSessionStore();
+  const switchSession = useSessionStore((s) => s.switchSession);
 
   const { avatar, name, description, dirname } = currentAgent;
 
@@ -54,7 +54,7 @@ const Header = memo(() => {
       <Space>
         <Button
           onClick={() => {
-            setCurrentAgent(currentAgent);
+            switchSession(currentAgent);
             setIsPlaying(false);
           }}
           type={'primary'}

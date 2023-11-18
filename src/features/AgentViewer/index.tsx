@@ -49,7 +49,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 function AgentViewer() {
   const { viewer } = useViewerStore();
-  const { currentAgent } = useSessionStore();
+  const currentSession = useSessionStore((s) => s.currentSession);
   const { tab, setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -72,8 +72,8 @@ function AgentViewer() {
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
       if (!viewer.isReady) viewer.setup(canvas);
-      if (canvas && currentAgent) {
-        viewer.loadVrm(currentAgent.model);
+      if (canvas && currentSession) {
+        viewer.loadVrm(currentSession.agent.model);
 
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
@@ -119,7 +119,7 @@ function AgentViewer() {
       }
       return canvas;
     },
-    [viewer, currentAgent],
+    [viewer, currentSession],
   );
 
   return (

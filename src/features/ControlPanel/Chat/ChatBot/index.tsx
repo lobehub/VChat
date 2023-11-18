@@ -1,13 +1,22 @@
+'use client';
 import { useConfigStore } from '@/store/config';
+import { useSessionStore } from '@/store/session';
 import { fetchSEE } from '@/utils/fetch';
-import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
+
+import {
+  ActionIcon,
+  ChatInputArea,
+  DraggablePanel,
+  Icon,
+  ChatList as LobeChatList,
+  TokenTag,
+} from '@lobehub/ui';
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import ChatList from './ChatList';
 import { useStyles } from './style';
 
 interface ChatBotProps {
@@ -23,11 +32,12 @@ const ChatBot = (props: ChatBotProps) => {
   const { styles } = useStyles();
   const theme = useTheme();
   const setting = useConfigStore((s) => s.setting, isEqual);
+  const currentSession = useSessionStore((s) => s.currentSession);
 
   const sendMessage = async (message: string) => {
     let output = '';
     const res = await fetchSEE(
-      '/api/chat',
+      '/api/chat/openai',
       {
         method: 'POST',
         headers: {
@@ -98,7 +108,7 @@ const ChatBot = (props: ChatBotProps) => {
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
       <div style={{ flex: 1, overflow: 'scroll' }}>
-        <ChatList />
+        <LobeChatList data={currentSession?.messages || []} showTitle={true} type="chat" />
       </div>
       <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
         <ChatInputArea
