@@ -2,7 +2,7 @@ import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { chatCompletion } from '@/services/chat';
 import { buildUrl } from '@/utils/buildUrl';
 import { ChatMessage } from '@lobehub/ui';
-import { devtools, persist } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
@@ -37,18 +37,23 @@ interface Session {
 }
 
 interface SessionStore {
-  currentSession: Session | null;
+  currentSession: Session;
   sessionList: Session[];
   sendMessage: (message: string) => void;
   switchSession: (agent: Agent) => void;
 }
 
+const defaultSession: Session = {
+  agent: DEFAULT_AGENT,
+  messages: [],
+};
+
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
   set,
   get,
 ) => ({
-  currentSession: null,
-  sessionList: [],
+  currentSession: defaultSession,
+  sessionList: [defaultSession],
   switchSession: (agent) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agent.dirname === agent.dirname);
@@ -63,13 +68,22 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     }
   },
   sendMessage: async (message: string) => {
+    const { currentSession } = get();
+    const { messages } = currentSession;
     let output = '';
     const res = await chatCompletion(
-      { messages: [{ text: message }] },
+      {
+        messages: [
+          ...messages,
+          {
+            content: message,
+            role: 'user',
+          },
+        ],
+      },
       {
         onMessageHandle: (txt: string) => {
           output += txt;
-          console.log(output);
         },
       },
     );
@@ -78,13 +92,13 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 });
 
 export const useSessionStore = createWithEqualityFn<SessionStore>()(
-  persist(
-    devtools(createSessonStore, {
-      name: 'VIDOL_SESSION_STORE',
-    }),
-    {
-      name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
-    },
-  ),
+  // persist(
+  devtools(createSessonStore, {
+    name: 'VIDOL_SESSION_STORE',
+  }),
+  //   {
+  //     name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
+  //   },
+  // ),
   shallow,
 );
