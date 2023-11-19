@@ -1,6 +1,7 @@
 import { chatCompletion } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
+import { fetchSEE } from '@/utils/fetch';
 import { nanoid } from 'ai';
 import { produce } from 'immer';
 import { devtools } from 'zustand/middleware';
@@ -120,6 +121,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       },
     });
 
+    const currentChats = sessionSelectors.currentChats(get());
+
     const assistantId = nanoid();
 
     // 添加机器人消息占位
@@ -132,7 +135,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       },
     });
 
-    await fetchAIResponse(currentSession.messages, assistantId);
+    await fetchAIResponse(currentChats, assistantId);
   },
   fetchAIResponse: async (messages, assistantId) => {
     const { dispatchMessage } = get();
@@ -145,10 +148,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     set({ chatLoadingId: assistantId });
 
-    let output = '';
-
-    await chatCompletion(
-      {
+    const fetcher = () => {
+      return chatCompletion({
         messages: [
           {
             content: currentAgent.systemRole,
@@ -156,23 +157,26 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
           },
           ...messages,
         ],
+      });
+    };
+
+    let output = '';
+
+    await fetchSEE(fetcher, {
+      onMessageUpdate: (txt: string) => {
+        output += txt;
+        dispatchMessage({
+          payload: {
+            id: assistantId,
+            content: output,
+          },
+          type: 'UPDATE_MESSAGE',
+        });
       },
-      {
-        onMessageHandle: (txt: string) => {
-          output += txt;
-          dispatchMessage({
-            payload: {
-              id: assistantId,
-              content: output,
-            },
-            type: 'UPDATE_MESSAGE',
-          });
-        },
-        onMessageError: () => {
-          // TODO: 错误处理
-        },
+      onMessageError: () => {
+        // TODO: 错误处理
       },
-    );
+    });
     set({ chatLoadingId: undefined });
   },
 });

@@ -1,6 +1,5 @@
 import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
 import { useConfigStore } from '@/store/config';
-import { fetchSEE } from '@/utils/fetch';
 
 const createHeader = (header?: HeadersInit) => {
   const setting = useConfigStore.getState().setting;
@@ -12,20 +11,16 @@ const createHeader = (header?: HeadersInit) => {
   };
 };
 
-export const chatCompletion = async (payload: any, options: any) => {
+export const chatCompletion = async (payload: any) => {
   const setting = useConfigStore.getState().setting;
 
-  const res = fetchSEE(
-    '/api/chat/openai',
-    {
-      method: 'POST',
-      headers: createHeader(),
-      body: JSON.stringify({
-        model: setting.model,
-        ...payload,
-      }),
-    },
-    options,
-  );
+  const res = await fetch('/api/chat/openai', {
+    method: 'POST',
+    headers: createHeader(),
+    body: JSON.stringify({
+      model: setting.model,
+      ...payload,
+    }),
+  });
   return res;
 };

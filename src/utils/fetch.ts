@@ -2,14 +2,13 @@
  * @description: 封装fetch请求，使用流式方法获取数据
  */
 export const fetchSEE = async (
-  url: string,
-  options: RequestInit,
+  fetcher: () => Promise<Response>,
   handler: {
     onMessageError?: (error: Error) => void;
     onMessageUpdate?: (text: string) => void;
   },
 ) => {
-  const res = await fetch(url, options);
+  const res = await fetcher();
 
   if (!res.ok) {
     const error = new Error(res.statusText);
