@@ -98,11 +98,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
   updateSessionMessage: (messages) => {
     const { sessionList, activeId } = get();
-    produce(sessionList, (draft) => {
+    const sessions = produce(sessionList, (draft) => {
       const index = draft.findIndex((session) => session.agent.dirname === activeId);
       if (index === -1) return;
       draft[index].messages = messages;
     });
+    set({ sessionList: sessions });
   },
   dispatchMessage: (payload) => {
     const { updateSessionMessage } = get();
@@ -112,9 +113,10 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       return;
     }
 
-    const new_messages = messageReducer(session.messages, payload);
+    const messages = messageReducer(session.messages, payload);
+    console.log('messages', messages);
 
-    updateSessionMessage(new_messages);
+    updateSessionMessage(messages);
   },
   sendMessage: async (message: string) => {
     const { dispatchMessage, fetchAIResponse } = get();
