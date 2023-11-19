@@ -13,6 +13,12 @@ export const useStyles = createStyles(({ css, token }) => ({
     padding: 16px 16px 24px;
     border-bottom: 1px solid ${token.colorBorderSecondary};
   `,
+  footer: css`
+    overflow-y: auto;
+    white-space: break-spaces;
+    height: 300px;
+    padding: 8px;
+  `,
   date: css`
     font-size: 12px;
     color: ${token.colorTextDescription};
