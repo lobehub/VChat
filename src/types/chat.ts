@@ -23,7 +23,7 @@ export interface MetaData {
 }
 
 /**
- * 消息体定义,与 LobeUI ChatList 组件一致的基础上扩展
+ * 消息体定义,与 LobeUI ChatList 组件一致
  */
 export interface ChatMessage {
   /**

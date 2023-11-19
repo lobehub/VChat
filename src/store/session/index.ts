@@ -4,11 +4,13 @@ import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
 import { buildUrl } from '@/utils/buildUrl';
+import { nanoid } from 'ai';
+import { produce } from 'immer';
 import { devtools } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
-import { messageReducer } from './reducers/message';
+import { MessageActionType, messageReducer } from './reducers/message';
 import { sessionSelectors } from './selectors';
 
 const DEFAULT_AGENT: Agent = {
@@ -40,9 +42,34 @@ const DEFAULT_AGENT: Agent = {
 export interface SessionStore {
   activeId: string;
   sessionList: Session[];
+  /**
+   * 发送消息
+   * @param message 消息内容
+   * @returns
+   */
   sendMessage: (message: string) => void;
+  /**
+   * 分发消息
+   * @param payload - 消息分发参数
+   */
+  dispatchMessage: (payload: MessageActionType) => void;
+  /**
+   * 切换会话
+   * @param agent
+   * @returns
+   */
   switchSession: (agent: Agent) => void;
+  /**
+   * 更新会话消息
+   * @param messages
+   */
   updateSessionMessage: (messages: ChatMessage[]) => void;
+  /**
+   * 请求 AI 回复
+   * @param messages
+   * @returns
+   */
+  fetchAIResponse: (messages: ChatMessage[], assistantId: string) => void;
 }
 
 const defaultSession: Session = {
@@ -68,53 +95,93 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     }
     set({ activeId: agent.dirname });
   },
+
   updateSessionMessage: (messages) => {
-    // const { currentSession, sessionList } = get();
-    // const { agent } = currentSession;
-    // const targetSession = sessionList.find((session) => session.agent.dirname === agent.dirname);
-    // if (targetSession) {
-    //   targetSession.messages = messages;
-    //   set({ sessionList: [...sessionList] });
-    // }
+    const { sessionList, activeId } = get();
+    produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agent.dirname === activeId);
+      if (index === -1) return;
+      draft[index].messages = messages;
+    });
+  },
+  dispatchMessage: (payload) => {
+    const { updateSessionMessage } = get();
+    const session = sessionSelectors.currentSession(get());
+
+    if (!session) {
+      return;
+    }
+
+    const new_messages = messageReducer(session.messages, payload);
+
+    updateSessionMessage(new_messages);
   },
   sendMessage: async (message: string) => {
-    const { updateSessionMessage } = get();
+    const { dispatchMessage, fetchAIResponse } = get();
     const currentSession = sessionSelectors.currentSession(get());
-
     if (!currentSession) {
       return;
     }
 
-    const { messages } = currentSession;
+    const userId = nanoid();
 
-    const new_messages = messageReducer(messages, {
+    // 添加用户消息
+    dispatchMessage({
       type: 'ADD_MESSAGE',
       payload: {
         role: 'user',
-        message,
+        id: userId,
+        content: message,
       },
     });
 
-    updateSessionMessage(new_messages);
+    const assistantId = nanoid();
+
+    // 添加机器人消息占位
+    dispatchMessage({
+      type: 'ADD_MESSAGE',
+      payload: {
+        role: 'assistant',
+        id: assistantId,
+        content: '...', // 占位符
+      },
+    });
+
+    await fetchAIResponse(currentSession.messages, assistantId);
+  },
+  fetchAIResponse: async (messages, assistantId) => {
+    const { dispatchMessage } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+    if (!currentSession) {
+      return;
+    }
+
+    const { agent } = currentSession;
 
     let output = '';
-    const res = await chatCompletion(
+    await chatCompletion(
       {
         messages: [
-          ...messages,
           {
-            content: message,
-            role: 'user',
+            content: agent.systemRole,
+            role: 'system',
           },
+          ...messages,
         ],
       },
       {
         onMessageHandle: (txt: string) => {
           output += txt;
+          dispatchMessage({
+            payload: {
+              id: assistantId,
+              content: output,
+            },
+            type: 'UPDATE_MESSAGE',
+          });
         },
       },
     );
-    return res;
   },
 });
 
