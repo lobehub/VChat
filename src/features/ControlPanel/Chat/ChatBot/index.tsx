@@ -27,8 +27,7 @@ const ChatBot = (props: ChatBotProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
-  const { sendMessage } = useSessionStore();
-  const currentSession = useSessionStore((s) => sessionSelectors.currentSession(s), isEqual);
+  const { sendMessage, chatLoadingId } = useSessionStore();
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
 
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
@@ -76,7 +75,12 @@ const ChatBot = (props: ChatBotProps) => {
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
       <div style={{ flex: 1, overflow: 'scroll' }}>
-        <LobeChatList data={currentChats || []} showTitle={true} type="chat" />
+        <LobeChatList
+          data={currentChats || []}
+          showTitle={true}
+          type="chat"
+          loadingId={chatLoadingId}
+        />
       </div>
       <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
         <ChatInputArea

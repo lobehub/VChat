@@ -9,7 +9,7 @@ const currentSession = (s: SessionStore): Session | undefined => {
   return currentSession;
 };
 
-export const DEFAULT_AGENT_AVATAR = '🤖';
+export const DEFAULT_USER_AVATAR = '😀';
 
 const currentChats = (s: SessionStore): ChatMessage[] => {
   const session = currentSession(s);
@@ -19,8 +19,9 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
     return {
       ...message,
       meta: {
-        avatar: message.role === 'user' ? agent.avatar : DEFAULT_AGENT_AVATAR,
-        title: message.role === 'user' ? agent.name : '机器人',
+        avatar: message.role === 'user' ? DEFAULT_USER_AVATAR : agent.avatar,
+        title: message.role === 'user' ? '你' : agent.name,
+        description: message.role === 'user' ? undefined : agent.description,
       },
     };
   });

@@ -40,8 +40,18 @@ const DEFAULT_AGENT: Agent = {
 };
 
 export interface SessionStore {
+  /**
+   * 当前会话 ID
+   */
   activeId: string;
+  /**
+   * 会话列表
+   */
   sessionList: Session[];
+  /**
+   * 聊天加载中的消息 ID
+   */
+  chatLoadingId: string | undefined;
   /**
    * 发送消息
    * @param message 消息内容
@@ -83,6 +93,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 ) => ({
   activeId: defaultSession.agent.dirname!,
   sessionList: [defaultSession],
+  chatLoadingId: undefined,
   switchSession: (agent) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agent.dirname === agent.dirname);
@@ -114,7 +125,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     }
 
     const messages = messageReducer(session.messages, payload);
-    console.log('messages', messages);
 
     updateSessionMessage(messages);
   },
@@ -158,9 +168,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       return;
     }
 
+    set({ chatLoadingId: assistantId });
+
     const { agent } = currentSession;
 
     let output = '';
+
     await chatCompletion(
       {
         messages: [
@@ -182,8 +195,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
             type: 'UPDATE_MESSAGE',
           });
         },
+        onMessageError: () => {
+          // TODO: 错误处理
+        },
       },
     );
+    set({ chatLoadingId: undefined });
   },
 });
 

@@ -12,10 +12,10 @@ const createHeader = (header?: HeadersInit) => {
   };
 };
 
-export const chatCompletion = async (payload, options) => {
+export const chatCompletion = async (payload: any, options: any) => {
   const setting = useConfigStore.getState().setting;
 
-  return fetchSEE(
+  const res = fetchSEE(
     '/api/chat/openai',
     {
       method: 'POST',
@@ -27,4 +27,5 @@ export const chatCompletion = async (payload, options) => {
     },
     options,
   );
+  return res;
 };

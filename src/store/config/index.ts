@@ -9,7 +9,7 @@ export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'voice' | 'touch';
 
 interface Setting {
   apikey: string;
-  endpoint?: string;
+  endpoint: string;
   model?: string;
 }
 
