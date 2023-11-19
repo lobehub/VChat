@@ -1,7 +1,7 @@
 import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { getLocalAgentList } from '@/services/agent';
+import { Agent } from '@/types/agent';
 import { create } from 'zustand';
-import { Agent } from './type';
 
 interface AgentStore {
   loading: boolean;

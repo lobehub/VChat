@@ -1,6 +1,6 @@
 import { getLocalDanceList } from '@/services/dance';
+import { Dance } from '@/types/dance';
 import { create } from 'zustand';
-import { Dance } from './type';
 
 interface DanceStore {
   loading: boolean;

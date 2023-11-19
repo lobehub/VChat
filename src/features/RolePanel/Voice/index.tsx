@@ -1,6 +1,6 @@
 import { speechApi, voiceListApi } from '@/services/tts';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
-import { Voice } from '@/store/type';
+import { Voice } from '@/types/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
 import { Button, Form, Input, Select, Slider, message } from 'antd';
