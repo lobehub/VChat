@@ -1,3 +1,4 @@
+import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
 import { OpenAIStream, streamToResponse } from 'ai';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI, { ClientOptions } from 'openai';
@@ -7,12 +8,8 @@ type Data = {
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
-  const apiKey = req.body.apiKey || process.env.OPENAI_API_KEY;
-  const baseURL = req.body.endpoint
-    ? req.body.endpoint
-    : process.env.OPENAI_PROXY_URL
-    ? process.env.OPENAI_PROXY_URL
-    : undefined;
+  const apiKey = req.headers[OPENAI_API_KEY] || process.env.OPENAI_API_KEY;
+  const baseURL = req.headers[OPENAI_END_POINT] || process.env.OPENAI_PROXY_URL || undefined;
 
   if (!apiKey) {
     res.status(400).json({ message: '"API 密钥错误或未设置。' });

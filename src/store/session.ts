@@ -1,8 +1,10 @@
 import { DEFAULT_TTS } from '@/features/constants/ttsParam';
+import { chatCompletion } from '@/services/chat';
 import { buildUrl } from '@/utils/buildUrl';
 import { ChatMessage } from '@lobehub/ui';
-import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { Agent } from './type';
 
@@ -37,6 +39,7 @@ interface Session {
 interface SessionStore {
   currentSession: Session | null;
   sessionList: Session[];
+  sendMessage: (message: string) => void;
   switchSession: (agent: Agent) => void;
 }
 
@@ -59,9 +62,22 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       set({ currentSession: targetSession });
     }
   },
+  sendMessage: async (message: string) => {
+    let output = '';
+    const res = await chatCompletion(
+      { messages: [{ text: message }] },
+      {
+        onMessageHandle: (txt: string) => {
+          output += txt;
+          console.log(output);
+        },
+      },
+    );
+    return res;
+  },
 });
 
-export const useSessionStore = create<SessionStore>()(
+export const useSessionStore = createWithEqualityFn<SessionStore>()(
   persist(
     devtools(createSessonStore, {
       name: 'VIDOL_SESSION_STORE',
@@ -70,4 +86,5 @@ export const useSessionStore = create<SessionStore>()(
       name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
     },
   ),
+  shallow,
 );

@@ -1,7 +1,5 @@
 'use client';
-import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
-import { fetchSEE } from '@/utils/fetch';
 
 import {
   ActionIcon,
@@ -14,7 +12,6 @@ import {
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { useStyles } from './style';
@@ -31,37 +28,7 @@ const ChatBot = (props: ChatBotProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
-  const setting = useConfigStore((s) => s.setting, isEqual);
-  const currentSession = useSessionStore((s) => s.currentSession);
-
-  const sendMessage = async (message: string) => {
-    let output = '';
-    const res = await fetchSEE(
-      '/api/chat/openai',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: setting.model,
-          endpoint: setting.endpoint,
-          apiKey: setting.apikey,
-          messages: [
-            { role: 'system', content: '你是个有用的助手' },
-            { role: 'user', content: message },
-          ],
-        }),
-      },
-      {
-        onMessageHandle: (txt: string) => {
-          output += txt;
-          console.log(output);
-        },
-      },
-    );
-    return res;
-  };
+  const [currentSession, sendMessage] = useSessionStore((s) => [s.currentSession, s.sendMessage]);
 
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
 
