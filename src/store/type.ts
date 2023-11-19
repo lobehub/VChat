@@ -34,6 +34,10 @@ export interface Agent {
    */
   readme: string;
   /**
+   * 角色设定
+   */
+  systemRole: string;
+  /**
    * 角色 tts 配置文件
    */
   tts: TTS;

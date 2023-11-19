@@ -38,6 +38,7 @@ export const DEFAULT_AGENT_ITEM: Agent = {
   avatar: '',
   readme: '',
   tts: DEFAULT_TTS,
+  systemRole: '',
 };
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
