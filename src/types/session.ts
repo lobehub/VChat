@@ -1,7 +1,12 @@
-import { Agent } from './agent';
 import { ChatMessage } from './chat';
 
 export interface Session {
-  agent: Agent;
+  /**
+   * 会话对应的 Agent ID
+   */
+  agentId: string;
+  /**
+   * 会话消息列表
+   */
   messages: ChatMessage[];
 }

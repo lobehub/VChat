@@ -1,4 +1,3 @@
-import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
 import { create } from 'zustand';
@@ -10,9 +9,10 @@ interface AgentStore {
   currentIdentifier: string;
   agentList: Agent[];
   fetchAgentList: () => void;
+  getAgentById: (id: string) => Agent | undefined;
 }
 
-export const useAgentStore = create<AgentStore>()((set) => ({
+export const useAgentStore = create<AgentStore>()((set, get) => ({
   currentIdentifier: '',
   loading: false,
   agentList: [],
@@ -27,26 +27,21 @@ export const useAgentStore = create<AgentStore>()((set) => ({
   deactivateAgent: () => {
     set({ currentIdentifier: undefined }, false);
   },
-}));
+  getAgentById: (id: string): Agent | undefined => {
+    const { agentList } = get();
+    const currentAgent = agentList.find((item) => item.dirname === id);
+    if (!currentAgent) return undefined;
 
-export const DEFAULT_AGENT_ITEM: Agent = {
-  name: '',
-  description: '',
-  homepage: '',
-  model: '',
-  cover: '',
-  avatar: '',
-  readme: '',
-  tts: DEFAULT_TTS,
-  systemRole: '',
-};
+    return currentAgent;
+  },
+}));
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
 
-const currentAgentItem = (s: AgentStore): Agent => {
+const currentAgentItem = (s: AgentStore): Agent | undefined => {
   const { agentList, currentIdentifier } = s;
   const currentAgent = agentList.find((item) => item.name === currentIdentifier);
-  if (!currentAgent) return DEFAULT_AGENT_ITEM;
+  if (!currentAgent) return undefined;
 
   return currentAgent;
 };

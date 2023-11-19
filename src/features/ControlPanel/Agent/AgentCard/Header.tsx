@@ -20,7 +20,7 @@ const Header = memo(() => {
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
-  const { avatar, name, description, dirname } = currentAgent;
+  const { avatar, name, description, dirname } = currentAgent || {};
 
   const { loading, run } = useRequest((dirname) => deleteLocalAgent(dirname), {
     manual: true,
@@ -54,7 +54,8 @@ const Header = memo(() => {
       <Space>
         <Button
           onClick={() => {
-            switchSession(currentAgent);
+            if (!currentAgent) return;
+            switchSession(currentAgent.dirname);
             setIsPlaying(false);
           }}
           type={'primary'}

@@ -8,7 +8,7 @@ const Footer = memo(() => {
   const { styles } = useStyles();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
 
-  const { systemRole } = currentAgent;
+  const { systemRole } = currentAgent || {};
 
   return (
     <div className={styles.footer}>
