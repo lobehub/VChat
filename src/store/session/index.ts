@@ -1,12 +1,14 @@
 import { DEFAULT_TTS } from '@/features/constants/ttsParam';
 import { chatCompletion } from '@/services/chat';
+import { Agent } from '@/types/agent';
+import { ChatMessage } from '@/types/chat';
+import { Session } from '@/types/session';
 import { buildUrl } from '@/utils/buildUrl';
-import { ChatMessage } from '@lobehub/ui';
 import { devtools } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
-import { Agent } from './type';
+import { messageReducer } from './reducers/message';
 
 const DEFAULT_AGENT: Agent = {
   name: 'Sample_A',
@@ -33,16 +35,12 @@ const DEFAULT_AGENT: Agent = {
   tts: DEFAULT_TTS,
 };
 
-interface Session {
-  agent: Agent;
-  messages: ChatMessage[];
-}
-
-interface SessionStore {
-  currentSession: Session;
+export interface SessionStore {
+  activeId: string;
   sessionList: Session[];
   sendMessage: (message: string) => void;
   switchSession: (agent: Agent) => void;
+  updateSessionMessage: (messages: ChatMessage[]) => void;
 }
 
 const defaultSession: Session = {
@@ -54,7 +52,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   set,
   get,
 ) => ({
-  currentSession: defaultSession,
+  activeId: defaultSession.agent.dirname!,
   sessionList: [defaultSession],
   switchSession: (agent) => {
     const { sessionList } = get();
@@ -64,14 +62,33 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
         agent,
         messages: [],
       };
-      set({ sessionList: [...sessionList, session], currentSession: session });
-    } else {
-      set({ currentSession: targetSession });
+      set({ sessionList: [...sessionList, session] });
     }
+    set({ activeId: agent.dirname });
+  },
+  updateSessionMessage: (messages) => {
+    // const { currentSession, sessionList } = get();
+    // const { agent } = currentSession;
+    // const targetSession = sessionList.find((session) => session.agent.dirname === agent.dirname);
+    // if (targetSession) {
+    //   targetSession.messages = messages;
+    //   set({ sessionList: [...sessionList] });
+    // }
   },
   sendMessage: async (message: string) => {
-    const { currentSession } = get();
+    const { updateSessionMessage } = get();
     const { messages } = currentSession;
+
+    const new_messages = messageReducer(messages, {
+      type: 'ADD_MESSAGE',
+      payload: {
+        role: 'user',
+        message,
+      },
+    });
+
+    updateSessionMessage(new_messages);
+
     let output = '';
     const res = await chatCompletion(
       {
