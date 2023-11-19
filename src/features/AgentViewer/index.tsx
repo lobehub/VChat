@@ -1,9 +1,10 @@
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { tabType, useConfigStore } from '@/store/config';
-import { useSessionStore } from '@/store/session';
+import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
+import { isEqual } from 'lodash-es';
 import { Expand, Mic, Music2, RotateCw, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { memo, useCallback, useRef } from 'react';
@@ -49,7 +50,7 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 function AgentViewer() {
   const { viewer } = useViewerStore();
-  const currentSession = useSessionStore((s) => s.currentSession);
+  const currentSession = useSessionStore((s) => sessionSelectors.currentSession(s), isEqual);
   const { tab, setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen } = useConfigStore();
   const ref = useRef<HTMLDivElement>(null);
 

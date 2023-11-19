@@ -1,6 +1,4 @@
-'use client';
-import { useSessionStore } from '@/store/session';
-
+import { sessionSelectors, useSessionStore } from '@/store/session';
 import {
   ActionIcon,
   ChatInputArea,
@@ -12,6 +10,7 @@ import {
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
+import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 import { useStyles } from './style';
@@ -28,7 +27,8 @@ const ChatBot = (props: ChatBotProps) => {
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const { styles } = useStyles();
   const theme = useTheme();
-  const [currentSession, sendMessage] = useSessionStore((s) => [s.currentSession, s.sendMessage]);
+  const { sendMessage } = useSessionStore();
+  const currentSession = useSessionStore((s) => sessionSelectors.currentSession(s), isEqual);
 
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
 

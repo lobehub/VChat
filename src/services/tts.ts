@@ -1,4 +1,4 @@
-import { TTS, TTS_ENGINE, Voice } from '@/store/type';
+import { TTS, TTS_ENGINE, Voice } from '@/types/tts';
 
 const convertSSML = (values: TTS) => {
   const { voice, speed = 1, pitch = 1, message } = values;

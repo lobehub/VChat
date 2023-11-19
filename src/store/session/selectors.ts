@@ -1,5 +1,5 @@
 import { Session } from '@/types/session';
-import { SessionStore } from '../index';
+import { SessionStore } from './index';
 
 const currentSession = (s: SessionStore): Session | undefined => {
   const { activeId, sessionList } = s;
@@ -8,6 +8,6 @@ const currentSession = (s: SessionStore): Session | undefined => {
   return currentSession;
 };
 
-export const sessionListSelectors = {
+export const sessionSelectors = {
   currentSession,
 };

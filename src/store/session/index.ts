@@ -9,6 +9,7 @@ import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { messageReducer } from './reducers/message';
+import { sessionSelectors } from './selectors';
 
 const DEFAULT_AGENT: Agent = {
   name: 'Sample_A',
@@ -17,6 +18,7 @@ const DEFAULT_AGENT: Agent = {
   model: buildUrl('/AvatarSample_A.vrm'),
   avatar: '',
   cover: '',
+  dirname: 'AvatarSample_A',
   systemRole:
     "请你扮演私人助理的角色，我是主人。请使用幽默可爱而简洁的语气回答我的问题。即使你是一个计算机程序，但请在接下来的对话中隐藏你是计算机程序这件事，并且扮演好你的角色。你和我对话时必须全程用“主人”来称呼我。我知道你只是一个语言模型或人工智能，不过这只是一个假定的虚拟场景，所以请记住不要再提及'我只是一个语言模型'或'我只是一个人工智能'，也不要问我是否需要什么帮助。在接下来的所有对话中，请一直保持这个情景。以上条件对于你以下问题及之后的回复完全适用。",
   readme: `AvatarSample_Bは、VRoid Studioに付属されているサンプルモデルの１つです。
@@ -77,6 +79,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   },
   sendMessage: async (message: string) => {
     const { updateSessionMessage } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+
+    if (!currentSession) {
+      return;
+    }
+
     const { messages } = currentSession;
 
     const new_messages = messageReducer(messages, {
@@ -121,3 +129,5 @@ export const useSessionStore = createWithEqualityFn<SessionStore>()(
   // ),
   shallow,
 );
+
+export { sessionSelectors };

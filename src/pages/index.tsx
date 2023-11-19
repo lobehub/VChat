@@ -4,8 +4,8 @@ import AgentViewer from '@/features/AgentViewer';
 import { useSessionStore } from '@/store/session';
 
 const Home = () => {
-  const { currentSession } = useSessionStore();
-  return currentSession ? <AgentViewer /> : null;
+  const { activeId } = useSessionStore();
+  return activeId ? <AgentViewer /> : null;
 };
 
 export default Home;

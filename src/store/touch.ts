@@ -1,7 +1,7 @@
+import { EmotionType, TouchAreaEnum } from '@/types/tts';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { StateCreator } from 'zustand/vanilla';
-import { EmotionType, TouchAreaEnum } from './type';
 
 interface TouchActionConfig {
   [TouchAreaEnum.Head]: TouchAction[];

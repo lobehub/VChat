@@ -1,4 +1,4 @@
-import { TTS } from '@/store/type';
+import { TTS } from '@/types/tts';
 
 export const DEFAULT_TTS: TTS = {
   engine: 'edge',

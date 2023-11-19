@@ -1,4 +1,4 @@
-import { EmotionType, TTS, TalkStyle, emotions } from '@/store/type';
+import { EmotionType, TTS, TalkStyle, emotions } from '@/types/tts';
 
 // ChatGPT API
 export type Message = {
