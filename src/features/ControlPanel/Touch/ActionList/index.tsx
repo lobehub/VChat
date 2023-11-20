@@ -26,7 +26,7 @@ const useStyles = createStyles(({ css, token }) => ({
 const AreaList = () => {
   const { styles } = useStyles();
   const { actionConfig, currentTouchArea } = useTouchStore();
-  const currentSession = useSessionStore((s) => sessionSelectors.currentSession(s), isEqual);
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
 
   const { viewer } = useViewerStore();
 
@@ -48,7 +48,7 @@ const AreaList = () => {
                   {
                     emotion: item.emotion,
                     tts: {
-                      ...currentSession?.agent.tts,
+                      ...currentAgent?.tts,
                       message: item.text,
                     },
                   },

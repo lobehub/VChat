@@ -1,6 +1,9 @@
+import { speakCharacter } from '@/features/messages/speakCharacter';
 import { sessionSelectors, useSessionStore } from '@/store/session';
+import { useViewerStore } from '@/store/viewer';
 import {
   ActionIcon,
+  ActionsBar,
   ChatInputArea,
   DraggablePanel,
   Icon,
@@ -29,6 +32,8 @@ const ChatBot = (props: ChatBotProps) => {
   const theme = useTheme();
   const { sendMessage, chatLoadingId } = useSessionStore();
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
+  const { viewer } = useViewerStore();
 
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
 
@@ -72,6 +77,7 @@ const ChatBot = (props: ChatBotProps) => {
     speechRecognition?.start();
     setIsRecording(true);
   };
+
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
       <div style={{ flex: 1, overflow: 'scroll' }}>
@@ -79,6 +85,24 @@ const ChatBot = (props: ChatBotProps) => {
           data={currentChats || []}
           showTitle={true}
           type="chat"
+          renderActions={ActionsBar}
+          renderMessages={{
+            default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
+          }}
+          onActionsClick={({ key }, { content }) => {
+            if (key === 'regenerate') {
+              speakCharacter(
+                {
+                  emotion: 'aa',
+                  tts: {
+                    ...currentAgent?.tts,
+                    message: content,
+                  },
+                },
+                viewer,
+              );
+            }
+          }}
           loadingId={chatLoadingId}
         />
       </div>
