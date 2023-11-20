@@ -20,9 +20,9 @@ const Header = memo(() => {
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
-  const { avatar, name, description, dirname } = currentAgent || {};
+  const { avatar, name, description, agentId } = currentAgent || {};
 
-  const { loading, run } = useRequest((dirname) => deleteLocalAgent(dirname), {
+  const { loading, run } = useRequest((agentId) => deleteLocalAgent(agentId), {
     manual: true,
     onSuccess: (data) => {
       const { success, errorMessage } = data;
@@ -55,7 +55,7 @@ const Header = memo(() => {
         <Button
           onClick={() => {
             if (!currentAgent) return;
-            switchSession(currentAgent.dirname);
+            switchSession(currentAgent.agentId);
             setIsPlaying(false);
           }}
           type={'primary'}
@@ -65,11 +65,11 @@ const Header = memo(() => {
         <Button onClick={openPanel} type={'primary'}>
           编辑
         </Button>
-        {dirname ? (
+        {agentId ? (
           <Popconfirm
             title="确定删除？"
             description="确定删除本地角色文件吗？"
-            onConfirm={() => run(dirname)}
+            onConfirm={() => run(agentId)}
             okText="确定"
             cancelText="取消"
           >

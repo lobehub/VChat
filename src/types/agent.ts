@@ -8,7 +8,7 @@ export interface Agent {
   /**
    * 本地目录
    */
-  dirname: string;
+  agentId: string;
   /**
    * 角色描述
    */

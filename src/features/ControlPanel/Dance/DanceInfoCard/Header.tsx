@@ -16,7 +16,7 @@ const Header = memo(() => {
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
   const { addAndPlayItem, deactivateDance, fetchDanceList } = useDanceStore();
 
-  const { loading, run } = useRequest((dirname) => deleteLocalDance(dirname), {
+  const { loading, run } = useRequest((agentId) => deleteLocalDance(agentId), {
     manual: true,
     onSuccess: (data) => {
       const { success, errorMessage } = data;
@@ -30,7 +30,7 @@ const Header = memo(() => {
     },
   });
 
-  const { cover, name, dirname } = currentDance;
+  const { cover, name, agentId } = currentDance;
 
   return (
     <Center className={styles.container} gap={16}>
@@ -49,7 +49,7 @@ const Header = memo(() => {
         <Popconfirm
           title="确定删除？"
           description="确定删除本地舞蹈文件吗？"
-          onConfirm={() => run(dirname)}
+          onConfirm={() => run(agentId)}
           okText="确定"
           cancelText="取消"
         >

@@ -6,7 +6,7 @@ export interface Dance {
   /**
    * 本地目录
    */
-  dirname?: string;
+  agentId?: string;
   /**
    * 舞蹈文件
    */

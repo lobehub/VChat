@@ -36,7 +36,7 @@ const SessionList = () => {
           <List.Item
             onClick={() => switchSession(item.agentId)}
             className={classNames(styles.listItem, {
-              [styles.active]: item.agentId === currentAgent?.dirname,
+              [styles.active]: item.agentId === currentAgent?.agentId,
             })}
             style={{ padding: 12 }}
           >

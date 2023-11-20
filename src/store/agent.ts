@@ -29,7 +29,7 @@ export const useAgentStore = create<AgentStore>()((set, get) => ({
   },
   getAgentById: (id: string): Agent | undefined => {
     const { agentList } = get();
-    const currentAgent = agentList.find((item) => item.dirname === id);
+    const currentAgent = agentList.find((item) => item.agentId === id);
     if (!currentAgent) return undefined;
 
     return currentAgent;

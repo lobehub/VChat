@@ -37,7 +37,7 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
 
   const { agentList } = useAgentStore.getState();
   const { agentId } = session;
-  const currentAgent = agentList.find((item) => item.dirname === agentId);
+  const currentAgent = agentList.find((item) => item.agentId === agentId);
   return currentAgent;
 };
 

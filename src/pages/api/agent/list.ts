@@ -17,7 +17,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
       agentList.push({
         ...JSON.parse(agentMeta),
-        dirname: agent.name,
+        agentId: agent.name,
         model: `/agents/${agent.name}/model.vrm`,
         cover: `/agents/${agent.name}/cover.jpg`,
         avatar: `/agents/${agent.name}/avatar.jpg`,
