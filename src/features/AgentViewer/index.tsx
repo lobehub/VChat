@@ -137,16 +137,16 @@ function AgentViewer() {
         dropdownMenu={dropdownMenu}
         items={items}
         direction="column"
-        onActionClick={(key) => {
-          if (key === 'resetCamera') {
+        onActionClick={(action) => {
+          if (action.key === 'resetCamera') {
             viewer.resetCamera();
-          } else if (key === 'expand') {
+          } else if (action.key === 'expand') {
             toggleFullScreen();
-          } else if (key === 'agent') {
+          } else if (action.key === 'agent') {
             openPanel('agent');
-          } else if (key === 'dance') {
+          } else if (action.key === 'dance') {
             openPanel('dance');
-          } else if (key === 'voice') {
+          } else if (action.key === 'voice') {
             openPanel('voice');
           }
         }}
