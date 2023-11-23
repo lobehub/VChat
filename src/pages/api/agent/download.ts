@@ -20,9 +20,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await git.clone(url, agentDir);
+    await git.clone(url, agentDir, {
+      '--depth': 1,
+    });
     res.status(200).json({ success: true });
   } catch (err) {
+    console.error(err);
     res.status(200).json({ success: false, errorMessage: '下载失败' });
   }
 }
