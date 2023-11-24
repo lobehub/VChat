@@ -5,7 +5,7 @@ import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { useHover } from 'ahooks';
 import { isEqual } from 'lodash-es';
-import { Expand, Mic, Music2, RotateCw, User } from 'lucide-react';
+import { Expand, MessageSquare, Mic, Music2, Pointer, RotateCw, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { memo, useCallback, useRef } from 'react';
 import { useStyles } from './style';
@@ -37,6 +37,18 @@ export const items: ActionIconGroupProps['items'] = [
     icon: Music2,
     key: 'dance',
     label: '舞蹈选择',
+  },
+  {
+    /* @ts-ignore */
+    icon: MessageSquare,
+    key: 'chat',
+    label: '立即聊天',
+  },
+  {
+    /* @ts-ignore */
+    icon: Pointer,
+    key: 'touch',
+    label: '触摸设置',
   },
   {
     /* @ts-ignore */
@@ -148,6 +160,10 @@ function AgentViewer() {
             openPanel('dance');
           } else if (action.key === 'voice') {
             openPanel('voice');
+          } else if (action.key === 'chat') {
+            openPanel('chat');
+          } else if (action.key === 'touch') {
+            openPanel('touch');
           }
         }}
       />

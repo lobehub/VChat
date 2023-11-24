@@ -51,7 +51,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>Select Your Virtual Idol</h1>
+          <h1 className={styles.title}>选择你的虚拟偶像</h1>
           <GridBackground
             animation
             className={styles.background}
