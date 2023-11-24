@@ -6,7 +6,6 @@ import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
 import Touch from './Touch';
-import Voice from './Voice';
 import { useStyles } from './style';
 
 interface ControlPanelProps {
@@ -27,7 +26,6 @@ const ControlPanel = (props: ControlPanelProps) => {
         <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
         <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
         <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
-        <Voice style={{ display: tab === 'voice' ? 'flex' : 'none' }} />
         <Touch style={{ display: tab === 'touch' ? 'flex' : 'none' }} />
         <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
       </div>

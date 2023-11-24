@@ -5,12 +5,12 @@ import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 
-export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'voice' | 'touch';
+export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'touch';
 
 interface Setting {
   apikey: string;
   endpoint: string;
-  model?: string;
+  model: string;
 }
 
 interface ConfigStore {
