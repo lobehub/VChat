@@ -21,7 +21,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    await git.clone(url, danceDir);
+    await git.clone(url, danceDir, {
+      '--depth': 1,
+    });
     res.status(200).json({ success: true });
   } catch (err) {
     res.status(200).json({ success: false, errorMessage: '下载失败' });
