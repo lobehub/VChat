@@ -1,6 +1,7 @@
+import { OPENAI_MODEL_LIST } from '@/constants/openai';
 import { useConfigStore } from '@/store/config';
 import { Form, FormGroup, FormItem } from '@lobehub/ui';
-import { Form as AForm, Input, Select } from 'antd';
+import { Form as AForm, Input, Select, Tag } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { debounce, isEqual } from 'lodash-es';
@@ -30,7 +31,7 @@ const Config = (props: ConfigProps) => {
 
   useEffect(() => {
     form.setFieldsValue(setting);
-  }, [setting]);
+  }, [setting, form]);
 
   return (
     <div style={style} className={classNames(styles.config, className)}>
@@ -43,24 +44,22 @@ const Config = (props: ConfigProps) => {
         <FormGroup icon={BotIcon} title={'模型设置'}>
           <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
-              style={{ width: 140 }}
-              options={[
-                {
-                  label: 'gpt-3.5-turb',
-                  value: 'gpt-3.5-turb',
-                },
-                {
-                  label: 'gpt-4',
-                  value: 'gpt-4',
-                },
-              ]}
+              style={{ width: 280 }}
+              options={OPENAI_MODEL_LIST.map((model) => ({
+                label: (
+                  <>
+                    {model.name} <Tag color="green">{model.maxToken}</Tag>
+                  </>
+                ),
+                value: model.name,
+              }))}
             />
           </FormItem>
           <FormItem desc={'请使用自己的 OpenAI Key'} divider label={'API Key'} name="apikey">
-            <Input placeholder="sk-" style={{ width: 240 }} />
+            <Input placeholder="sk-" style={{ width: 440 }} />
           </FormItem>
           <FormItem desc={'http(s)://'} divider label={'接口代理地址'} name="endpoint">
-            <Input placeholder="" style={{ width: 240 }} />
+            <Input placeholder="" style={{ width: 320 }} />
           </FormItem>
         </FormGroup>
       </Form>
