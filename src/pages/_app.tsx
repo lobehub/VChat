@@ -1,5 +1,4 @@
 import Header from '@/components/Header';
-
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@lobehub/ui';

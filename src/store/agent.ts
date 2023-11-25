@@ -1,6 +1,7 @@
 import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
-import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 interface AgentStore {
   loading: boolean;
@@ -12,29 +13,32 @@ interface AgentStore {
   getAgentById: (id: string) => Agent | undefined;
 }
 
-export const useAgentStore = create<AgentStore>()((set, get) => ({
-  currentIdentifier: '',
-  loading: false,
-  agentList: [],
-  fetchAgentList: async () => {
-    set({ loading: true });
-    const res = await getLocalAgentList();
-    set({ agentList: res.data, loading: false });
-  },
-  activateAgent: (identifier) => {
-    set({ currentIdentifier: identifier });
-  },
-  deactivateAgent: () => {
-    set({ currentIdentifier: undefined }, false);
-  },
-  getAgentById: (id: string): Agent | undefined => {
-    const { agentList } = get();
-    const currentAgent = agentList.find((item) => item.agentId === id);
-    if (!currentAgent) return undefined;
+export const useAgentStore = createWithEqualityFn<AgentStore>()(
+  (set, get) => ({
+    currentIdentifier: '',
+    loading: false,
+    agentList: [],
+    fetchAgentList: async () => {
+      set({ loading: true });
+      const res = await getLocalAgentList();
+      set({ agentList: res.data, loading: false });
+    },
+    activateAgent: (identifier) => {
+      set({ currentIdentifier: identifier });
+    },
+    deactivateAgent: () => {
+      set({ currentIdentifier: undefined }, false);
+    },
+    getAgentById: (id: string): Agent | undefined => {
+      const { agentList } = get();
+      const currentAgent = agentList.find((item) => item.agentId === id);
+      if (!currentAgent) return undefined;
 
-    return currentAgent;
-  },
-}));
+      return currentAgent;
+    },
+  }),
+  shallow,
+);
 
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
 
