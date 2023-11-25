@@ -10,8 +10,8 @@ const ScrollArchor = () => {
   });
 
   useEffect(() => {
-    if (!inView && trackVisibility) {
-      entry?.target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!inView) {
+      entry?.target.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }
   }, [inView, entry, trackVisibility]);
 
