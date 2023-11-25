@@ -1,12 +1,11 @@
+import { DEFAULT_DANCE } from '@/constants/defaultDance';
+import { deleteLocalDance } from '@/services/dance';
 import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { Avatar } from '@lobehub/ui';
-import { Button, Popconfirm, Space } from 'antd';
+import { useRequest } from 'ahooks';
+import { Button, Popconfirm, Space, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
-
-import { deleteLocalDance } from '@/services/dance';
-import { useRequest } from 'ahooks';
-import { message } from 'antd';
 
 import { useStyles } from './style';
 
@@ -30,7 +29,7 @@ const Header = memo(() => {
     },
   });
 
-  const { cover, name, agentId } = currentDance;
+  const { cover, name, danceId } = currentDance;
 
   return (
     <Center className={styles.container} gap={16}>
@@ -46,15 +45,17 @@ const Header = memo(() => {
         >
           播放并添加到歌单
         </Button>
-        <Popconfirm
-          title="确定删除？"
-          description="确定删除本地舞蹈文件吗？"
-          onConfirm={() => run(agentId)}
-          okText="确定"
-          cancelText="取消"
-        >
-          <Button loading={loading}>删除</Button>
-        </Popconfirm>
+        {DEFAULT_DANCE.danceId !== danceId ? (
+          <Popconfirm
+            title="确定删除？"
+            description="确定删除本地舞蹈文件吗？"
+            onConfirm={() => run(danceId)}
+            okText="确定"
+            cancelText="取消"
+          >
+            <Button loading={loading}>删除</Button>
+          </Popconfirm>
+        ) : null}
       </Space>
     </Center>
   );

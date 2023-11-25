@@ -20,7 +20,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const { src, audio } = meta;
     danceList.push({
       ...meta,
-      agentId: dance.name,
+      danceId: dance.name,
       src: `/dances/${dance.name}/${src}`,
       audio: `/dances/${dance.name}/${audio}`,
       cover: `/dances/${dance.name}/cover.jpg`,

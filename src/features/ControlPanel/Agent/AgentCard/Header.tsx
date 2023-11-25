@@ -1,5 +1,7 @@
+import { DEFAULT_AGENT } from '@/constants/defaultAgent';
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { useConfigStore } from '@/store/config';
 import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
@@ -7,8 +9,6 @@ import { useRequest } from 'ahooks';
 import { Button, Popconfirm, Space, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
-
-import { useConfigStore } from '@/store/config';
 import { useStyles } from './style';
 
 // eslint-disable-next-line react/display-name
@@ -62,10 +62,12 @@ const Header = memo(() => {
         >
           加载
         </Button>
-        <Button onClick={openPanel} type={'primary'}>
-          编辑
-        </Button>
-        {agentId ? (
+        {DEFAULT_AGENT.agentId !== agentId ? (
+          <Button onClick={openPanel} type={'primary'}>
+            编辑
+          </Button>
+        ) : null}
+        {DEFAULT_AGENT.agentId !== agentId ? (
           <Popconfirm
             title="确定删除？"
             description="确定删除本地角色文件吗？"

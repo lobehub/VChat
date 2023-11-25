@@ -4,9 +4,9 @@ export interface Dance {
    */
   name: string;
   /**
-   * 本地目录
+   * 舞蹈 ID
    */
-  agentId?: string;
+  danceId?: string;
   /**
    * 舞蹈文件
    */

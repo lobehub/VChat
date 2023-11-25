@@ -90,7 +90,7 @@ const Dance = (props: DanceProps) => {
                 icon={Loader2Icon}
                 loading={loading}
                 title="重新加载"
-                onClick={fetchDanceList}
+                onClick={() => fetchDanceList()}
               />
             </Space>
           ) : null}

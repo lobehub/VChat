@@ -23,11 +23,11 @@ const ControlPanel = (props: ControlPanelProps) => {
     <Panel style={style} className={className} onClose={() => setControlPanelOpen(false)}>
       <SideNav className="handle" />
       <div className={styles.content}>
-        <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
-        <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
-        <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
-        <Touch style={{ display: tab === 'touch' ? 'flex' : 'none' }} />
-        <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
+        {tab === 'dance' ? <Dance /> : null}
+        {tab === 'agent' ? <Agent /> : null}
+        {tab === 'chat' ? <Chat /> : null}
+        {tab === 'touch' ? <Touch /> : null}
+        {tab === 'config' ? <Config /> : null}
       </div>
     </Panel>
   );

@@ -97,8 +97,8 @@ const Home = () => {
           }
         }}
       />
-      <ControlPanel tab={tab} style={{ display: controlPanelOpen ? 'flex' : 'none' }} />
-      <RolePanel style={{ display: rolePanelOpen ? 'flex' : 'none' }} />
+      {controlPanelOpen ? <ControlPanel tab={tab} /> : null}
+      {rolePanelOpen ? <RolePanel /> : null}
     </div>
   );
 };

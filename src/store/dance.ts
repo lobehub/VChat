@@ -1,3 +1,4 @@
+import { DEFAULT_DANCE } from '@/constants/defaultDance';
 import { getLocalDanceList } from '@/services/dance';
 import { Dance } from '@/types/dance';
 import { create } from 'zustand';
@@ -23,7 +24,7 @@ interface DanceStore {
 
 export const useDanceStore = create<DanceStore>()((set, get) => ({
   loading: false,
-  playlist: [],
+  playlist: [DEFAULT_DANCE],
   isPlaying: false,
   currentIdentifier: '',
   currentPlay: null,
@@ -31,7 +32,7 @@ export const useDanceStore = create<DanceStore>()((set, get) => ({
   fetchDanceList: async () => {
     set({ loading: true });
     const res = await getLocalDanceList();
-    set({ danceList: res.data, loading: false });
+    set({ danceList: [...res.data, DEFAULT_DANCE], loading: false });
   },
   activateDance: (identifier) => {
     set({ currentIdentifier: identifier });
