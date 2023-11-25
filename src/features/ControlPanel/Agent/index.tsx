@@ -73,7 +73,7 @@ const Agent = (props: AgentProps) => {
             items={[
               {
                 key: 'installed',
-                label: '已下载',
+                label: '我的偶像',
               },
               {
                 key: 'index',

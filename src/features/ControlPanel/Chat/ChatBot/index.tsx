@@ -3,7 +3,6 @@ import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import {
   ActionIcon,
-  ActionsBar,
   ChatInputArea,
   DraggablePanel,
   Icon,
@@ -87,7 +86,7 @@ const ChatBot = (props: ChatBotProps) => {
           showTitle={true}
           type="chat"
           // @ts-ignore
-          renderActions={ActionsBar}
+          // renderActions={ActionsBar}
           renderMessages={{
             default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
           }}

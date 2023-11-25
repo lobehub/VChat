@@ -1,6 +1,5 @@
 import AgentViewer from '@/features/AgentViewer';
 import { tabType, useConfigStore } from '@/store/config';
-import { useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { Expand, MessageSquare, Music2, Pointer, RotateCw, User } from 'lucide-react';
@@ -53,7 +52,6 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 const Home = () => {
   const viewer = useViewerStore((s) => s.viewer);
-  const { activeId } = useSessionStore();
   const ref = useRef<HTMLDivElement>(null);
   const { tab, setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen } = useConfigStore();
 
@@ -72,7 +70,7 @@ const Home = () => {
 
   return (
     <div ref={ref}>
-      {activeId ? <AgentViewer /> : null};
+      {<AgentViewer />}
       <ActionIconGroup
         style={{
           position: 'absolute',

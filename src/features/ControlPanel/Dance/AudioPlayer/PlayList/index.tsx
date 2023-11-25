@@ -27,14 +27,16 @@ const PlayList = (props: PlayListProps) => {
       onClose={onClose}
       width={400}
       closeIcon={null}
+      styles={{
+        header: { padding: 12 },
+        body: { padding: 0 },
+      }}
       title="当前播放列表"
-      headerStyle={{ padding: 12 }}
       extra={
         <Button size="small" icon={<DeleteOutlined />} onClick={() => setPlayList([])}>
           清空列表
         </Button>
       }
-      bodyStyle={{ padding: 0 }}
     >
       <List
         size="small"

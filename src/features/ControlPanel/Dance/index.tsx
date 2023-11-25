@@ -74,7 +74,7 @@ const Dance = (props: DanceProps) => {
             items={[
               {
                 key: 'installed',
-                label: '已下载',
+                label: '我的舞蹈',
               },
               {
                 key: 'index',

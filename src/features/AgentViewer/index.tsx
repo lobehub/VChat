@@ -3,25 +3,24 @@ import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { type ActionIconGroupProps } from '@lobehub/ui';
 import { isEqual } from 'lodash-es';
-
-import { memo, useCallback } from 'react';
-import { useStyles } from './style';
+import { memo, useCallback, useEffect } from 'react';
 
 export const items: ActionIconGroupProps['items'] = [];
 
 function AgentViewer() {
   const viewer = useViewerStore((s) => s.viewer);
-  console.log('viewer', viewer);
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
 
-  const { styles } = useStyles();
+  useEffect(() => {
+    if (currentAgent) {
+      viewer.loadVrm(currentAgent.model);
+    }
+  }, [currentAgent, viewer]);
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {
-      if (!viewer.isReady) viewer.setup(canvas);
-      if (canvas && currentAgent) {
-        viewer.loadVrm(currentAgent.model);
-
+      if (canvas) {
+        viewer.setup(canvas);
         // Drag and DropでVRMを差し替え
         canvas.addEventListener('dragover', function (event) {
           event.preventDefault();
@@ -66,11 +65,17 @@ function AgentViewer() {
       }
       return canvas;
     },
-    [viewer, currentAgent],
+    [viewer],
   );
 
   return (
-    <div className={styles.vrm}>
+    <div
+      style={{
+        position: 'relative',
+        width: '100vw',
+        height: 'calc(100vh - 64px)',
+      }}
+    >
       <canvas ref={canvasRef}></canvas>
     </div>
   );
