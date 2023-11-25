@@ -16,6 +16,7 @@ import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Languages, Mic } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
+import ScrollArchor from './ScrollArchor';
 import { useStyles } from './style';
 
 interface ChatBotProps {
@@ -85,6 +86,7 @@ const ChatBot = (props: ChatBotProps) => {
           data={currentChats || []}
           showTitle={true}
           type="chat"
+          // @ts-ignore
           renderActions={ActionsBar}
           renderMessages={{
             default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
@@ -105,6 +107,7 @@ const ChatBot = (props: ChatBotProps) => {
           }}
           loadingId={chatLoadingId}
         />
+        <ScrollArchor />
       </div>
       <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
         <ChatInputArea

@@ -1,6 +1,6 @@
 import { createStyles } from 'antd-style';
 
-const useStyles = createStyles(({ token, cx, css }, { isHover }: { isHover: boolean }) => ({
+const useStyles = createStyles(({ token, cx, css }) => ({
   vrm: cx(
     css`
       position: relative;

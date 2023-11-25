@@ -6,6 +6,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     background-color: ${token.colorBgContainer};
     border: 1px solid #999;
     display: flex;
+    z-index: 10;
     flex-direction: column;
     border-radius: ${token.borderRadius}px;
     position: fixed;

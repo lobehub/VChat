@@ -1,5 +1,6 @@
 import { Viewer } from '@/features/vrmViewer/viewer';
-import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 interface ViewerStore {
   viewer: Viewer;
@@ -7,6 +8,9 @@ interface ViewerStore {
 
 const viewer = new Viewer();
 
-export const useViewerStore = create<ViewerStore>()(() => ({
-  viewer,
-}));
+export const useViewerStore = createWithEqualityFn<ViewerStore>()(
+  () => ({
+    viewer,
+  }),
+  shallow,
+);
