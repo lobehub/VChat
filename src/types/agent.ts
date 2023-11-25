@@ -1,3 +1,4 @@
+import { TouchActionConfig } from './touch';
 import { TTS } from './tts';
 
 export interface Agent {
@@ -6,7 +7,7 @@ export interface Agent {
    */
   name: string;
   /**
-   * 本地目录
+   * 角色 ID，为本地文件目录
    */
   agentId: string;
   /**
@@ -41,4 +42,8 @@ export interface Agent {
    * 角色 tts 配置文件
    */
   tts: TTS;
+  /**
+   * 触摸配置
+   */
+  touch: TouchActionConfig;
 }

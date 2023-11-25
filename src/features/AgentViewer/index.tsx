@@ -2,14 +2,13 @@ import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { type ActionIconGroupProps } from '@lobehub/ui';
-import { isEqual } from 'lodash-es';
 import { memo, useCallback, useEffect } from 'react';
 
 export const items: ActionIconGroupProps['items'] = [];
 
 function AgentViewer() {
   const viewer = useViewerStore((s) => s.viewer);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
 
   useEffect(() => {
     if (currentAgent) {

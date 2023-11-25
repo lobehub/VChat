@@ -1,3 +1,4 @@
+import { DEFAULT_AGENT } from '@/constants/defaultAgent';
 import { chatCompletion } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -10,8 +11,6 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { MessageActionType, messageReducer } from './reducers/message';
 import { sessionSelectors } from './selectors';
-
-const DEFAULT_AGENT_DIRNAME = 'vidol-sample-agent';
 
 export interface SessionStore {
   /**
@@ -57,7 +56,7 @@ export interface SessionStore {
 }
 
 const defaultSession: Session = {
-  agentId: DEFAULT_AGENT_DIRNAME,
+  agentId: DEFAULT_AGENT.agentId,
   messages: [],
 };
 

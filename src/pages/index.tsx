@@ -70,7 +70,7 @@ const Home = () => {
 
   return (
     <div ref={ref}>
-      {<AgentViewer />}
+      <AgentViewer />
       <ActionIconGroup
         style={{
           position: 'absolute',

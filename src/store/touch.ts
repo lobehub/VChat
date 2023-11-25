@@ -1,16 +1,7 @@
-import { EmotionType, TouchAreaEnum } from '@/types/tts';
+import { TouchAction, TouchActionConfig, TouchAreaEnum } from '@/types/touch';
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { StateCreator } from 'zustand/vanilla';
-
-interface TouchActionConfig {
-  [TouchAreaEnum.Head]: TouchAction[];
-  [TouchAreaEnum.Arm]: TouchAction[];
-  [TouchAreaEnum.Leg]: TouchAction[];
-  [TouchAreaEnum.Chest]: TouchAction[];
-  [TouchAreaEnum.Belly]: TouchAction[];
-  enabled: boolean;
-}
 
 const DEFAULT_TOUCH_ACTION_CONFIG: TouchActionConfig = {
   [TouchAreaEnum.Head]: [
@@ -130,13 +121,6 @@ const DEFAULT_TOUCH_ACTION_CONFIG: TouchActionConfig = {
   ],
   enabled: true,
 };
-
-interface TouchAction {
-  text: string;
-  motion?: string;
-  emotion: EmotionType;
-  enabled: boolean;
-}
 
 interface TouchStore {
   currentTouchArea: TouchAreaEnum;

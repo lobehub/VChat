@@ -1,5 +1,5 @@
 import { useTouchStore } from '@/store/touch';
-import { TouchAreaEnum } from '@/types/tts';
+import { TouchAreaEnum } from '@/types/touch';
 import { List } from 'antd';
 import classNames from 'classnames';
 

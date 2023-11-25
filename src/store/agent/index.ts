@@ -1,3 +1,4 @@
+import { DEFAULT_AGENT } from '@/constants/defaultAgent';
 import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
 import { shallow } from 'zustand/shallow';
@@ -17,11 +18,11 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
   (set, get) => ({
     currentIdentifier: '',
     loading: false,
-    agentList: [],
+    agentList: [DEFAULT_AGENT],
     fetchAgentList: async () => {
       set({ loading: true });
       const res = await getLocalAgentList();
-      set({ agentList: res.data, loading: false });
+      set({ agentList: [...res.data, DEFAULT_AGENT], loading: false });
     },
     activateAgent: (identifier) => {
       set({ currentIdentifier: identifier });

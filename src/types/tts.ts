@@ -1,9 +1,4 @@
-import { VRMExpressionPresetName } from '@pixiv/three-vrm';
-
 export type TTS_ENGINE = 'microsoft' | 'edge';
-
-export const emotions = ['neutral', 'happy', 'angry', 'sad', 'relaxed'] as const;
-export type EmotionType = (typeof emotions)[number] | VRMExpressionPresetName;
 
 // TODO: 需要根据不同 API 进行适配
 export const talkStyles = ['talk', 'happy', 'sad', 'angry', 'fear', 'surprised'] as const;
@@ -30,7 +25,7 @@ export type TTS = {
   /**
    * 消息
    */
-  message: string;
+  message?: string;
   /**
    * 速度
    */
@@ -49,12 +44,4 @@ export interface Voice {
   LocalName: string;
   ShortName: string;
   PreviewSentence: string;
-}
-
-export enum TouchAreaEnum {
-  Head = 'head',
-  Arm = 'arm',
-  Leg = 'leg',
-  Chest = 'chest',
-  Belly = 'belly',
 }
