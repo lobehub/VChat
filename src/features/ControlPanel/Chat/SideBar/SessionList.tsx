@@ -19,7 +19,12 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-const SessionList = () => {
+interface SessionListProps {
+  filter?: string;
+}
+
+const SessionList = (props: SessionListProps) => {
+  const { filter } = props;
   const { sessionList, switchSession } = useSessionStore();
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
   const getAgentById = useAgentStore((s) => s.getAgentById);
@@ -29,7 +34,10 @@ const SessionList = () => {
 
   return (
     <List
-      dataSource={sessionList}
+      dataSource={sessionList.filter((item) => {
+        const agent = getAgentById(item.agentId);
+        return !filter || agent?.name?.includes(filter) || agent?.description?.includes(filter);
+      })}
       renderItem={(item) => {
         const agent = getAgentById(item.agentId);
         return (
