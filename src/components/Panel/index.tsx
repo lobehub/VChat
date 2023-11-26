@@ -16,17 +16,27 @@ interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
   onClose: () => void;
+  defaultCoordinates?: Coordinates;
 }
-const defaultCoordinates = {
-  x: 250,
-  y: 250,
-};
 
 const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
-  const { style, className, children, onClose } = props;
+  const {
+    style,
+    className,
+    children,
+    onClose,
+    defaultCoordinates = {
+      x: 200,
+      y: 200,
+    },
+  } = props;
   const [{ x, y }, setCoordinates] = useState<Coordinates>(defaultCoordinates);
 
-  const mouseSensor = useSensor(MouseSensor);
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 8,
+    },
+  });
   const touchSensor = useSensor(TouchSensor);
   const keyboardSensor = useSensor(KeyboardSensor, {});
 

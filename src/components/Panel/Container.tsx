@@ -18,9 +18,15 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   const { style, className, children, onClose, x, y } = props;
   const { styles } = useStyles();
 
-  const { attributes, listeners, transform, setNodeRef } = useDraggable({
+  const { attributes, listeners, transform, setNodeRef, setActivatorNodeRef } = useDraggable({
     id: 'draggable',
   });
+
+  const transformstyle = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
 
   const draggleRef = useRef<HTMLDivElement>(null);
 
@@ -32,54 +38,49 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     }
   }
 
-  const transformstyle = transform
-    ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
-    : undefined;
-
   return (
-    <div
-      className={classNames(styles.box, className)}
-      style={{
-        ...style,
-        left: x,
-        top: y,
-        ...transformstyle,
-      }}
-      ref={draggleRef}
-      {...attributes}
-    >
+    <div ref={setNodeRef}>
       <div
-        className={classNames(styles.header)}
-        {...listeners}
-        onDoubleClick={toggleFullScreen}
-        ref={setNodeRef}
+        className={classNames(styles.box, className)}
+        style={{
+          ...style,
+          left: x,
+          top: y,
+          ...transformstyle,
+        }}
+        ref={draggleRef}
+        {...attributes}
       >
-        <Space>
-          <Tooltip title="关闭">
-            <div
-              className={classNames(styles.button, styles.close)}
-              onClick={() => {
-                console.log('onClose');
-                onClose();
-              }}
-            />
-          </Tooltip>
-          <Tooltip title="最大化">
-            <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-          </Tooltip>
-          <Tooltip title="最小化">
-            <div
-              className={classNames(styles.button, styles.min)}
-              onClick={() => {
-                onClose();
-              }}
-            ></div>
-          </Tooltip>
-        </Space>
+        <div
+          className={classNames(styles.header)}
+          {...listeners}
+          onDoubleClick={toggleFullScreen}
+          ref={setActivatorNodeRef}
+        >
+          <Space data-no-dnd="true">
+            <Tooltip title="关闭">
+              <div
+                className={classNames(styles.button, styles.close)}
+                onClick={() => {
+                  onClose();
+                }}
+              />
+            </Tooltip>
+            <Tooltip title="最大化">
+              <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
+            </Tooltip>
+            <Tooltip title="最小化">
+              <div
+                className={classNames(styles.button, styles.min)}
+                onClick={() => {
+                  onClose();
+                }}
+              ></div>
+            </Tooltip>
+          </Space>
+        </div>
+        <div className={styles.container}>{children}</div>
       </div>
-      <div className={styles.container}>{children}</div>
     </div>
   );
 };

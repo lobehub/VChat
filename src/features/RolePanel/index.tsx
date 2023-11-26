@@ -21,7 +21,15 @@ const RolePanel = (props: RolePanelProps) => {
   const { setRolePanelOpen } = useConfigStore();
 
   return (
-    <Panel style={style} className={className} onClose={() => setRolePanelOpen(false)}>
+    <Panel
+      style={style}
+      className={className}
+      onClose={() => setRolePanelOpen(false)}
+      defaultCoordinates={{
+        x: 320,
+        y: 250,
+      }}
+    >
       <div
         style={{
           display: 'flex',
