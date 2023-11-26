@@ -1,22 +1,12 @@
-import { speakCharacter } from '@/features/messages/speakCharacter';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
-import { sessionSelectors, useSessionStore } from '@/store/session';
-import { useViewerStore } from '@/store/viewer';
-import {
-  ActionIcon,
-  ChatInputArea,
-  DraggablePanel,
-  Icon,
-  ChatList as LobeChatList,
-  TokenTag,
-} from '@lobehub/ui';
+import { useSessionStore } from '@/store/session';
+import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Mic } from 'lucide-react';
 import { useState } from 'react';
-import ScrollArchor from './ScrollArchor';
+import ChatList from './ChatList';
 import { useStyles } from './style';
 
 interface ChatBotProps {
@@ -32,48 +22,19 @@ const ChatBot = (props: ChatBotProps) => {
   const { styles } = useStyles();
   const theme = useTheme();
   const { sendMessage, chatLoadingId } = useSessionStore();
-  const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
-  const { viewer } = useViewerStore();
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
       setMessage(result);
       if (isFinal) {
         sendMessage(result);
+        setMessage('');
       }
     },
   });
 
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
-      <div style={{ flex: 1, overflow: 'scroll' }}>
-        <LobeChatList
-          data={currentChats || []}
-          showTitle={true}
-          type="chat"
-          // @ts-ignore
-          // renderActions={ActionsBar}
-          renderMessages={{
-            default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
-          }}
-          onActionsClick={({ key }, { content }) => {
-            if (key === 'regenerate') {
-              speakCharacter(
-                {
-                  emotion: 'aa',
-                  tts: {
-                    ...currentAgent?.tts,
-                    message: content,
-                  },
-                },
-                viewer,
-              );
-            }
-          }}
-          loadingId={chatLoadingId}
-        />
-        <ScrollArchor />
-      </div>
+      <ChatList style={{ flex: 1, overflow: 'scroll' }} />
       <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
         <ChatInputArea
           actions={
