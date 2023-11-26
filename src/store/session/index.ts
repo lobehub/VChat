@@ -26,6 +26,15 @@ export interface SessionStore {
    */
   chatLoadingId: string | undefined;
   /**
+   * 当前消息输入
+   */
+  messageInput: string;
+  /**
+   * 设置消息输入
+   * @param messageInput
+   */
+  setMessageInput: (messageInput: string) => void;
+  /**
    * 发送消息
    * @param message 消息内容
    * @returns
@@ -71,6 +80,10 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   activeId: defaultSession.agentId,
   sessionList: [defaultSession],
   chatLoadingId: undefined,
+  messageInput: '',
+  setMessageInput: (messageInput) => {
+    set({ messageInput });
+  },
   switchSession: (agentId) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agentId === agentId);

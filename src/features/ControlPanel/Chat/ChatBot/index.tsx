@@ -1,9 +1,13 @@
+import { OPENAI_MODEL_LIST } from '@/constants/openai';
+import { useCalculateToken } from '@/hooks/useCalculateToken';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
+import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
 import { Button, Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
+import { isEqual } from 'lodash-es';
 import { Archive, Eraser, Mic } from 'lucide-react';
 import { useState } from 'react';
 import ChatList from './ChatList';
@@ -17,20 +21,22 @@ interface ChatBotProps {
 const ChatBot = (props: ChatBotProps) => {
   const { style, className } = props;
   const [expand, setExpand] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
-
-  const { styles } = useStyles();
-  const theme = useTheme();
-  const { sendMessage, clearHistory } = useSessionStore();
+  const { sendMessage, clearHistory, setMessageInput, messageInput } = useSessionStore();
+  const setting = useConfigStore((s) => s.setting, isEqual);
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
-      setMessage(result);
+      setMessageInput(result);
       if (isFinal) {
         sendMessage(result);
-        setMessage('');
+        setMessageInput('');
       }
     },
   });
+
+  const { styles } = useStyles();
+  const theme = useTheme();
+
+  const usedTokens = useCalculateToken();
 
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
@@ -51,14 +57,19 @@ const ChatBot = (props: ChatBotProps) => {
               </Popconfirm>
               {/* @ts-ignore */}
               <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} />
-              <TokenTag maxValue={5000} value={1000} />
+              <TokenTag
+                maxValue={
+                  OPENAI_MODEL_LIST.find((item) => item.name === setting.model)?.maxToken || 4096
+                }
+                value={usedTokens}
+              />
             </>
           }
-          value={message}
+          value={messageInput}
           style={{ background: theme.colorBgContainer }}
           expand={expand}
           onInputChange={(value) => {
-            setMessage(value);
+            setMessageInput(value);
           }}
           /* @ts-ignore */
           footer={<Button icon={<Icon icon={Archive} />} />}

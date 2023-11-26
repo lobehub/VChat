@@ -31,6 +31,25 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
   });
 };
 
+const currentChatsString = (s: SessionStore): string => {
+  const session = currentSession(s);
+  const agent = currentAgent(s);
+  if (!session || !agent) return '';
+
+  const { messages } = session;
+  return messages
+    ?.map((message) => {
+      return message.content;
+    })
+    .join(' ');
+};
+
+const currentSystemRole = (s: SessionStore): string => {
+  const agent = currentAgent(s);
+  if (!agent) return '';
+  return agent.systemRole;
+};
+
 const currentAgent = (s: SessionStore): Agent | undefined => {
   const session = currentSession(s);
   if (!session) return undefined;
@@ -45,4 +64,6 @@ export const sessionSelectors = {
   currentSession,
   currentChats,
   currentAgent,
+  currentChatsString,
+  currentSystemRole,
 };

@@ -26,6 +26,7 @@
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "immer": "^10.0.3",
+    "js-tiktoken": "^1.0.8",
     "langchain": "^0.0.105",
     "lodash-es": "^4.17.21",
     "lucide-react": "^0.252.0",
