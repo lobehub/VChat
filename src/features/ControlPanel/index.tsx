@@ -11,23 +11,22 @@ import { useStyles } from './style';
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
-  tab?: string;
 }
 
 const ControlPanel = (props: ControlPanelProps) => {
-  const { style, className, tab = 'agent' } = props;
+  const { style, className } = props;
   const { styles } = useStyles();
-  const { setControlPanelOpen } = useConfigStore();
+  const { setControlPanelOpen, tab } = useConfigStore();
 
   return (
     <Panel style={style} className={className} onClose={() => setControlPanelOpen(false)}>
       <SideNav className="handle" />
       <div className={styles.content}>
-        {tab === 'dance' ? <Dance /> : null}
-        {tab === 'agent' ? <Agent /> : null}
-        {tab === 'chat' ? <Chat /> : null}
-        {tab === 'touch' ? <Touch /> : null}
-        {tab === 'config' ? <Config /> : null}
+        <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
+        <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
+        <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
+        <Touch style={{ display: tab === 'touch' ? 'flex' : 'none' }} />
+        <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
       </div>
     </Panel>
   );
