@@ -7,7 +7,7 @@ const useStyles = createStyles(({ token, css }) => ({
     background-color: ${token.colorBgBase};
     box-sizing: content-box;
     width: 100%;
-    z-index: 2000;
+    z-index: 10;
     height: 96px;
   `,
   player: css`

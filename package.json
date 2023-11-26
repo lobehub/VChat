@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/utilities": "^3.2.2",
     "@gltf-transform/core": "^3.9.0",
     "@lobehub/ui": "^1.119.0",
     "@pixiv/three-vrm": "1.0.2",
@@ -33,7 +35,6 @@
     "openai": "^4.20.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-draggable": "^4.4.6",
     "react-intersection-observer": "^9.5.3",
     "react-layout-kit": "^1.7.4",
     "simple-git": "^3.21.0",

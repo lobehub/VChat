@@ -1,80 +1,53 @@
-import { Space, Tooltip } from 'antd';
-import classNames from 'classnames';
-import { PropsWithChildren, useRef, useState } from 'react';
-import type { DraggableData, DraggableEvent } from 'react-draggable';
-import Draggable from 'react-draggable';
+import {
+  DndContext,
+  KeyboardSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import type { Coordinates } from '@dnd-kit/utilities';
 
-import { useStyles } from './style';
+import Container from './Container';
+
+import React, { PropsWithChildren, useState } from 'react';
 
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
   onClose: () => void;
 }
+const defaultCoordinates = {
+  x: 250,
+  y: 250,
+};
 
 const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
   const { style, className, children, onClose } = props;
-  const { styles } = useStyles();
-  const [bounds, setBounds] = useState({ left: 0, top: 0, bottom: 0, right: 0 });
+  const [{ x, y }, setCoordinates] = useState<Coordinates>(defaultCoordinates);
 
-  const draggleRef = useRef<HTMLDivElement>(null);
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  const keyboardSensor = useSensor(KeyboardSensor, {});
 
-  const onStart = (_event: DraggableEvent, uiData: DraggableData) => {
-    const { clientWidth, clientHeight } = window.document.documentElement;
-    const targetRect = draggleRef.current?.getBoundingClientRect();
-    if (!targetRect) {
-      return;
-    }
-    setBounds({
-      left: -targetRect.left + uiData.x - 800,
-      right: clientWidth - (targetRect.right - uiData.x) + 800,
-      top: -targetRect.top + uiData.y + 64,
-      bottom: clientHeight - (targetRect.bottom - uiData.y) + 600,
-    });
-  };
-
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      draggleRef.current && draggleRef.current.requestFullscreen();
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
+  const sensors = useSensors(mouseSensor, touchSensor, keyboardSensor);
 
   return (
-    <Draggable
-      handle=".handle"
-      bounds={bounds}
-      nodeRef={draggleRef}
-      onStart={(event, uiData) => onStart(event, uiData)}
+    <DndContext
+      sensors={sensors}
+      onDragEnd={({ delta }) => {
+        setCoordinates(({ x, y }) => {
+          return {
+            x: x + delta.x,
+            y: y + delta.y,
+          };
+        });
+      }}
     >
-      <div className={classNames(styles.box, className)} style={style} ref={draggleRef}>
-        <div className={classNames(styles.header, 'handle')} onDoubleClick={toggleFullScreen}>
-          <Space>
-            <Tooltip title="关闭">
-              <div
-                className={classNames(styles.button, styles.close)}
-                onClick={() => {
-                  onClose();
-                }}
-              />
-            </Tooltip>
-            <Tooltip title="最大化">
-              <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-            </Tooltip>
-            <Tooltip title="最小化">
-              <div
-                className={classNames(styles.button, styles.min)}
-                onClick={() => {
-                  onClose();
-                }}
-              ></div>
-            </Tooltip>
-          </Space>
-        </div>
-        <div className={styles.container}>{children}</div>
-      </div>
-    </Draggable>
+      <Container x={x} y={y} onClose={onClose} style={style} className={className}>
+        {children}
+      </Container>
+    </DndContext>
   );
 };
 
