@@ -1,7 +1,7 @@
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 import { useSessionStore } from '@/store/session';
 import { ActionIcon, ChatInputArea, DraggablePanel, Icon, TokenTag } from '@lobehub/ui';
-import { Button } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { Archive, Eraser, Mic } from 'lucide-react';
@@ -21,7 +21,7 @@ const ChatBot = (props: ChatBotProps) => {
 
   const { styles } = useStyles();
   const theme = useTheme();
-  const { sendMessage, chatLoadingId } = useSessionStore();
+  const { sendMessage, clearHistory } = useSessionStore();
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
       setMessage(result);
@@ -39,8 +39,16 @@ const ChatBot = (props: ChatBotProps) => {
         <ChatInputArea
           actions={
             <>
-              {/* @ts-ignore */}
-              <ActionIcon icon={Eraser} />
+              <Popconfirm
+                title="确定删除历史消息？"
+                description="该操作不可逆，请谨慎操作"
+                onConfirm={clearHistory}
+                okText="确定"
+                cancelText="取消"
+              >
+                {/* @ts-ignore */}
+                <ActionIcon icon={Eraser} />
+              </Popconfirm>
               {/* @ts-ignore */}
               <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} />
               <TokenTag maxValue={5000} value={1000} />

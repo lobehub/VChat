@@ -48,6 +48,10 @@ export interface SessionStore {
    */
   updateSessionMessage: (messages: ChatMessage[]) => void;
   /**
+   * 清空历史消息
+   */
+  clearHistory: () => void;
+  /**
    * 请求 AI 回复
    * @param messages
    * @returns
@@ -78,6 +82,10 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       set({ sessionList: [...sessionList, session] });
     }
     set({ activeId: agentId });
+  },
+  clearHistory: () => {
+    const { updateSessionMessage } = get();
+    updateSessionMessage([]);
   },
 
   updateSessionMessage: (messages) => {
