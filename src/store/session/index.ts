@@ -1,5 +1,5 @@
 import { DEFAULT_AGENT } from '@/constants/defaultAgent';
-import { chatCompletion } from '@/services/chat';
+import { chatCompletion, handleSpeakAi } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
 import { fetchSEE } from '@/utils/fetch';
@@ -159,15 +159,39 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       });
     };
 
-    let output = '';
+    let receivedMessage = '';
+    let aiMessage = '';
+    const sentences = [];
 
     await fetchSEE(fetcher, {
       onMessageUpdate: (txt: string) => {
-        output += txt;
+        // 语音合成
+        receivedMessage += txt;
+        // 文本切割
+        const sentenceMatch = receivedMessage.match(/^(.+[。．！？\n]|.{10,}[、,])/);
+        if (sentenceMatch && sentenceMatch[0]) {
+          const sentence = sentenceMatch[0];
+          sentences.push(sentence);
+          receivedMessage = receivedMessage.slice(sentence.length).trimStart();
+
+          if (
+            !sentence.replace(
+              /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
+              '',
+            )
+          ) {
+            return;
+          }
+          handleSpeakAi(sentence);
+        }
+
+        // 对话更新
+        aiMessage += txt;
+
         dispatchMessage({
           payload: {
             id: assistantId,
-            content: output,
+            content: aiMessage,
           },
           type: 'UPDATE_MESSAGE',
         });

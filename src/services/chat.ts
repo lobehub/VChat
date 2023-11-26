@@ -1,5 +1,8 @@
 import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
+import { speakCharacter } from '@/features/messages/speakCharacter';
 import { useConfigStore } from '@/store/config';
+import { sessionSelectors, useSessionStore } from '@/store/session';
+import { useViewerStore } from '@/store/viewer';
 
 const createHeader = (header?: HeadersInit) => {
   const setting = useConfigStore.getState().setting;
@@ -23,4 +26,20 @@ export const chatCompletion = async (payload: any) => {
     }),
   });
   return res;
+};
+
+export const handleSpeakAi = async (message: string) => {
+  const viewer = useViewerStore.getState().viewer;
+  const currentAgent = sessionSelectors.currentAgent(useSessionStore.getState());
+
+  speakCharacter(
+    {
+      emotion: 'aa',
+      tts: {
+        ...currentAgent?.tts,
+        message: message,
+      },
+    },
+    viewer,
+  );
 };
