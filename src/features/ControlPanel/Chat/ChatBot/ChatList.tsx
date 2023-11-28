@@ -1,8 +1,14 @@
-import { speakCharacter } from '@/features/messages/speakCharacter';
+import { handleSpeakAi } from '@/services/chat';
 import { sessionSelectors, useSessionStore } from '@/store/session';
-import { useViewerStore } from '@/store/viewer';
-import { ChatList as LobeChatList } from '@lobehub/ui';
+import {
+  ActionIconGroup,
+  ChatList as LobeChatList,
+  ChatListProps as LobeChatListProps,
+  RenderAction,
+} from '@lobehub/ui';
+import { ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { isEqual } from 'lodash-es';
+import { Play } from 'lucide-react';
 import { memo } from 'react';
 import ScrollArchor from './ScrollArchor';
 
@@ -15,9 +21,20 @@ const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
   const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
-  const { viewer } = useViewerStore();
-  console.log('render chatlist');
+
+  const tts = {
+    icon: Play,
+    key: 'tts',
+    label: '文字转语音',
+  } as ActionIconGroupItems;
+
+  const AssistantActionsBar: RenderAction = ({ onActionClick }) => (
+    <ActionIconGroup dropdownMenu={[]} items={[tts]} onActionClick={onActionClick} type="ghost" />
+  );
+
+  const renderActions: LobeChatListProps['renderActions'] = {
+    assistant: AssistantActionsBar,
+  };
 
   return (
     <div style={style} className={className}>
@@ -26,22 +43,13 @@ const ChatList = (props: ChatListProps) => {
         showTitle={true}
         type="chat"
         // @ts-ignore
-        // renderActions={ActionsBar}
+        renderActions={renderActions}
         renderMessages={{
           default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
         }}
         onActionsClick={({ key }, { content }) => {
-          if (key === 'regenerate') {
-            speakCharacter(
-              {
-                emotion: 'aa',
-                tts: {
-                  ...currentAgent?.tts,
-                  message: content,
-                },
-              },
-              viewer,
-            );
+          if (key === 'tts') {
+            handleSpeakAi(content);
           }
         }}
         loadingId={chatLoadingId}
