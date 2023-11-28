@@ -5,7 +5,7 @@ import { Session } from '@/types/session';
 import { fetchSEE } from '@/utils/fetch';
 import { nanoid } from 'ai';
 import { produce } from 'immer';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
@@ -226,14 +226,14 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 });
 
 export const useSessionStore = createWithEqualityFn<SessionStore>()(
-  // persist(
-  devtools(createSessonStore, {
-    name: 'VIDOL_SESSION_STORE',
-  }),
-  //   {
-  //     name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
-  //   },
-  // ),
+  persist(
+    devtools(createSessonStore, {
+      name: 'VIDOL_SESSION_STORE',
+    }),
+    {
+      name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
+    },
+  ),
   shallow,
 );
 

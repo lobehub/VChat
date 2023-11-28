@@ -1,6 +1,7 @@
 import { DEFAULT_AGENT } from '@/constants/defaultAgent';
 import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
+import { persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 
@@ -15,29 +16,34 @@ interface AgentStore {
 }
 
 export const useAgentStore = createWithEqualityFn<AgentStore>()(
-  (set, get) => ({
-    currentIdentifier: '',
-    loading: false,
-    agentList: [DEFAULT_AGENT],
-    fetchAgentList: async () => {
-      set({ loading: true });
-      const res = await getLocalAgentList();
-      set({ agentList: [...res.data, DEFAULT_AGENT], loading: false });
-    },
-    activateAgent: (identifier) => {
-      set({ currentIdentifier: identifier });
-    },
-    deactivateAgent: () => {
-      set({ currentIdentifier: undefined }, false);
-    },
-    getAgentById: (id: string): Agent | undefined => {
-      const { agentList } = get();
-      const currentAgent = agentList.find((item) => item.agentId === id);
-      if (!currentAgent) return undefined;
+  persist(
+    (set, get) => ({
+      currentIdentifier: '',
+      loading: false,
+      agentList: [DEFAULT_AGENT],
+      fetchAgentList: async () => {
+        set({ loading: true });
+        const res = await getLocalAgentList();
+        set({ agentList: [...res.data, DEFAULT_AGENT], loading: false });
+      },
+      activateAgent: (identifier) => {
+        set({ currentIdentifier: identifier });
+      },
+      deactivateAgent: () => {
+        set({ currentIdentifier: undefined }, false);
+      },
+      getAgentById: (id: string): Agent | undefined => {
+        const { agentList } = get();
+        const currentAgent = agentList.find((item) => item.agentId === id);
+        if (!currentAgent) return undefined;
 
-      return currentAgent;
+        return currentAgent;
+      },
+    }),
+    {
+      name: 'vidol-agent',
     },
-  }),
+  ),
   shallow,
 );
 
