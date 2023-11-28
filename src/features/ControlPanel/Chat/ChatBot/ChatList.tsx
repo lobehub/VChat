@@ -3,6 +3,7 @@ import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { ChatList as LobeChatList } from '@lobehub/ui';
 import { isEqual } from 'lodash-es';
+import { memo } from 'react';
 import ScrollArchor from './ScrollArchor';
 
 interface ChatListProps {
@@ -16,6 +17,7 @@ const ChatList = (props: ChatListProps) => {
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
   const { viewer } = useViewerStore();
+  console.log('render chatlist');
 
   return (
     <div style={style} className={className}>
@@ -49,4 +51,4 @@ const ChatList = (props: ChatListProps) => {
   );
 };
 
-export default ChatList;
+export default memo(ChatList);
