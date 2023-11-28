@@ -13,7 +13,7 @@ interface ChatListProps {
 
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
-  const { chatLoadingId } = useSessionStore();
+  const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
   const { viewer } = useViewerStore();
