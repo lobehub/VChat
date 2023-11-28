@@ -1,6 +1,7 @@
 import { buildUrl } from '@/utils/buildUrl';
-import { Header as LobeHeader } from '@lobehub/ui';
+import { ActionIcon, Header as LobeHeader } from '@lobehub/ui';
 import { Space } from 'antd';
+import { GithubIcon } from 'lucide-react';
 import { memo } from 'react';
 
 const Header = () => {
@@ -13,6 +14,16 @@ const Header = () => {
           <span style={{ fontSize: 22, fontWeight: 'bolder' }}>Vidol.Chat</span>
         </Space>
       }
+      actions={[
+        <ActionIcon
+          key="github"
+          // @ts-ignore
+          icon={GithubIcon}
+          onClick={() => {
+            window.open('https://github.com/v-idol/vidol.chat');
+          }}
+        />,
+      ]}
     />
   );
 };
