@@ -101,9 +101,10 @@ export class Model {
       await this.loadIdleAnimation();
     }
   }
-
   /**
-   * 音声を再生し、リップシンクを行う
+   * 语音播放，配合人物表情动作
+   * @param buffer
+   * @param screenplay
    */
   public async speak(buffer: ArrayBuffer, screenplay: Screenplay) {
     this.emoteController?.playEmotion(screenplay.emotion);
@@ -112,6 +113,14 @@ export class Model {
         resolve(true);
       });
     });
+    this.emoteController?.playEmotion('neutral');
+  }
+
+  /**
+   * 停止语音
+   */
+  public stopSpeak() {
+    this._lipSync?.stopPlay();
     this.emoteController?.playEmotion('neutral');
   }
 

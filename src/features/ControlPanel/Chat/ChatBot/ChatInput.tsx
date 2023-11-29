@@ -1,13 +1,14 @@
 import { OPENAI_MODEL_LIST } from '@/constants/openai';
 import { useCalculateToken } from '@/hooks/useCalculateToken';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
+import { handleStopSpeakAi } from '@/services/chat';
 import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
-import { ActionIcon, ChatInputArea, Icon, TokenTag } from '@lobehub/ui';
-import { Button, Popconfirm } from 'antd';
+import { ActionIcon, ChatInputArea, TokenTag } from '@lobehub/ui';
+import { Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import { isEqual } from 'lodash-es';
-import { Archive, Eraser, Mic } from 'lucide-react';
+import { Eraser, Mic, Mic2 } from 'lucide-react';
 
 interface ChatBotProps {
   style?: React.CSSProperties;
@@ -18,7 +19,13 @@ interface ChatBotProps {
 
 const ChatInput = (props: ChatBotProps) => {
   const { style, className, onExpandChange, expand } = props;
-  const { sendMessage, clearHistory, setMessageInput, messageInput } = useSessionStore();
+  const [sendMessage, clearHistory, setMessageInput] = useSessionStore((s) => [
+    s.sendMessage,
+    s.clearHistory,
+    s.setMessageInput,
+  ]);
+  const messageInput = useSessionStore((s) => s.messageInput);
+  const voiceLoading = useSessionStore((s) => s.voiceLoading);
   const setting = useConfigStore((s) => s.setting, isEqual);
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
@@ -46,10 +53,12 @@ const ChatInput = (props: ChatBotProps) => {
             cancelText="取消"
           >
             {/* @ts-ignore */}
-            <ActionIcon icon={Eraser} />
+            <ActionIcon icon={Eraser} title="删除历史消息" />
           </Popconfirm>
           {/* @ts-ignore */}
-          <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} />
+          <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} title="语音识别" />
+          {/* @ts-ignore */}
+          <ActionIcon icon={Mic2} onClick={handleStopSpeakAi} loading={voiceLoading} />
           <TokenTag
             maxValue={
               OPENAI_MODEL_LIST.find((item) => item.name === setting.model)?.maxToken || 4096
@@ -65,8 +74,10 @@ const ChatInput = (props: ChatBotProps) => {
       onInputChange={(value) => {
         setMessageInput(value);
       }}
+      text={{
+        send: '发送',
+      }}
       /* @ts-ignore */
-      footer={<Button icon={<Icon icon={Archive} />} />}
       minHeight={200}
       onExpandChange={onExpandChange}
       onSend={(value) => {

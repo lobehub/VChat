@@ -20,6 +20,10 @@ interface ChatListProps {
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
   const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
+  const [voiceLoading, setVoiceLoading] = useSessionStore((s) => [
+    s.voiceLoading,
+    s.setVoiceLoading,
+  ]);
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
 
   const tts = {
@@ -49,7 +53,15 @@ const ChatList = (props: ChatListProps) => {
         }}
         onActionsClick={({ key }, { content }) => {
           if (key === 'tts') {
-            handleSpeakAi(content);
+            handleSpeakAi(
+              content,
+              () => {
+                setVoiceLoading(true);
+              },
+              () => {
+                setVoiceLoading(false);
+              },
+            );
           }
         }}
         loadingId={chatLoadingId}

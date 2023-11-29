@@ -26,6 +26,16 @@ export interface SessionStore {
    */
   chatLoadingId: string | undefined;
   /**
+   * 语音加载中的消息 ID
+   */
+  voiceLoading: boolean;
+  /**
+   *  设置语音加载中的消息 ID
+   * @param voiceLoading
+   * @returns
+   */
+  setVoiceLoading: (voiceLoading: boolean) => void;
+  /**
    * 当前消息输入
    */
   messageInput: string;
@@ -80,10 +90,15 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   activeId: defaultSession.agentId,
   sessionList: [defaultSession],
   chatLoadingId: undefined,
+  voiceLoading: false,
   messageInput: '',
   setMessageInput: (messageInput) => {
     set({ messageInput });
   },
+  setVoiceLoading: (voiceLoading) => {
+    set({ voiceLoading });
+  },
+
   switchSession: (agentId) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agentId === agentId);
