@@ -1,4 +1,4 @@
-import { handleSpeakAi, handleStopSpeakAi } from '@/services/chat';
+import { handleSpeakAi } from '@/services/chat';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import {
   ActionIconGroup,
@@ -8,7 +8,7 @@ import {
 } from '@lobehub/ui';
 import { ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { isEqual } from 'lodash-es';
-import { Pause, Play } from 'lucide-react';
+import { Play } from 'lucide-react';
 import { memo } from 'react';
 import ScrollArchor from './ScrollArchor';
 
@@ -27,13 +27,13 @@ const ChatList = (props: ChatListProps) => {
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
 
   const tts = {
-    icon: voiceLoading ? Pause : Play,
+    icon: Play,
     key: 'tts',
-    label: '文字转语音',
+    label: '语音合成',
   } as ActionIconGroupItems;
 
   const AssistantActionsBar: RenderAction = ({ onActionClick, id }) => (
-    <ActionIconGroup dropdownMenu={[]} items={[tts]} onActionClick={onActionClick} type="ghost" />
+    <ActionIconGroup dropdownMenu={[tts]} items={[]} onActionClick={onActionClick} type="ghost" />
   );
 
   const renderActions: LobeChatListProps['renderActions'] = {
@@ -53,19 +53,7 @@ const ChatList = (props: ChatListProps) => {
         }}
         onActionsClick={({ key }, { content }) => {
           if (key === 'tts') {
-            if (voiceLoading) {
-              handleStopSpeakAi();
-              setVoiceLoading(false);
-            } else {
-              setVoiceLoading(true);
-              handleSpeakAi(
-                content,
-                () => {},
-                () => {
-                  setVoiceLoading(false);
-                },
-              );
-            }
+            handleSpeakAi(content);
           }
         }}
         loadingId={chatLoadingId}

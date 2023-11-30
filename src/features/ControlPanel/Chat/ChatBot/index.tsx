@@ -17,8 +17,8 @@ const ChatBot = (props: ChatBotProps) => {
 
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
-      <ChatList style={{ flex: 1, overflow: 'scroll' }} />
-      <DraggablePanel expandable={false} fullscreen={expand} minHeight={200} placement="bottom">
+      <ChatList style={{ flex: 1, overflow: 'auto' }} />
+      <DraggablePanel expandable fullscreen={expand} minHeight={200} placement="bottom">
         <ChatInput expand={expand} onExpandChange={(expand) => setExpand(expand)} />
       </DraggablePanel>
     </div>

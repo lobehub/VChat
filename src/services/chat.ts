@@ -28,8 +28,9 @@ export const chatCompletion = async (payload: any) => {
   return res;
 };
 
-export const handleSpeakAi = async (message: string, onStart?: () => void, onEnd?: () => void) => {
+export const handleSpeakAi = async (message: string) => {
   const viewer = useViewerStore.getState().viewer;
+  const setVoiceLoading = useSessionStore.getState().setVoiceLoading;
   const currentAgent = sessionSelectors.currentAgent(useSessionStore.getState());
 
   speakCharacter(
@@ -41,8 +42,12 @@ export const handleSpeakAi = async (message: string, onStart?: () => void, onEnd
       },
     },
     viewer,
-    onStart,
-    onEnd,
+    () => {
+      setVoiceLoading(true);
+    },
+    () => {
+      setVoiceLoading(false);
+    },
   );
 };
 
