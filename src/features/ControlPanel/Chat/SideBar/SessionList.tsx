@@ -51,11 +51,7 @@ const SessionList = (props: SessionListProps) => {
             <List.Item.Meta
               avatar={<Avatar src={agent?.avatar} />}
               title={agent?.name}
-              description={
-                <Text style={{ width: 200 }} ellipsis>
-                  {agent?.description}
-                </Text>
-              }
+              description={<Text ellipsis>{agent?.description}</Text>}
             />
           </List.Item>
         );

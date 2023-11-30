@@ -23,7 +23,8 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
     <DraggablePanel
       className={styles.content}
       minWidth={240}
-      maxWidth={420}
+      defaultSize={{ width: 240 }}
+      maxWidth={400}
       mode={'fixed'}
       placement={'left'}
     >

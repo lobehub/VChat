@@ -1,14 +1,13 @@
 import { OPENAI_MODEL_LIST } from '@/constants/openai';
 import { useCalculateToken } from '@/hooks/useCalculateToken';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
-import { handleStopSpeakAi } from '@/services/chat';
 import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { ActionIcon, ChatInputArea, TokenTag } from '@lobehub/ui';
 import { Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import { isEqual } from 'lodash-es';
-import { Eraser, Mic, Mic2 } from 'lucide-react';
+import { Eraser, Mic } from 'lucide-react';
 
 interface ChatBotProps {
   style?: React.CSSProperties;
@@ -57,8 +56,6 @@ const ChatInput = (props: ChatBotProps) => {
           </Popconfirm>
           {/* @ts-ignore */}
           <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} title="语音识别" />
-          {/* @ts-ignore */}
-          <ActionIcon icon={Mic2} onClick={handleStopSpeakAi} loading={voiceLoading} />
           <TokenTag
             maxValue={
               OPENAI_MODEL_LIST.find((item) => item.name === setting.model)?.maxToken || 4096
