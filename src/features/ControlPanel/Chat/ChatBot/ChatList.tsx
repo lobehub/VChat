@@ -20,6 +20,7 @@ interface ChatListProps {
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
   const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
+  const updateMessage = useSessionStore((s) => s.updateMessage);
   const [voiceLoading, setVoiceLoading] = useSessionStore((s) => [
     s.voiceLoading,
     s.setVoiceLoading,
@@ -55,6 +56,18 @@ const ChatList = (props: ChatListProps) => {
           if (key === 'tts') {
             handleSpeakAi(content);
           }
+        }}
+        onMessageChange={(id, content) => {
+          updateMessage(id, content);
+        }}
+        text={{
+          cancel: '取消',
+          confirm: '确认',
+          edit: '编辑',
+          delete: '删除',
+          regenerate: '重新生成',
+          copy: '复制',
+          copySuccess: '复制成功',
         }}
         loadingId={chatLoadingId}
       />

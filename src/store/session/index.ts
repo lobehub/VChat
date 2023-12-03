@@ -65,7 +65,12 @@ export interface SessionStore {
    * 更新会话消息
    * @param messages
    */
-  updateSessionMessage: (messages: ChatMessage[]) => void;
+  updateSessionMessages: (messages: ChatMessage[]) => void;
+  /**
+   * 更新消息
+   * @returns
+   */
+  updateMessage: (id: string, content: string) => void;
   /**
    * 清空历史消息
    */
@@ -112,11 +117,11 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     set({ activeId: agentId });
   },
   clearHistory: () => {
-    const { updateSessionMessage } = get();
-    updateSessionMessage([]);
+    const { updateSessionMessages } = get();
+    updateSessionMessages([]);
   },
 
-  updateSessionMessage: (messages) => {
+  updateSessionMessages: (messages) => {
     const { sessionList, activeId } = get();
     const sessions = produce(sessionList, (draft) => {
       const index = draft.findIndex((session) => session.agentId === activeId);
@@ -126,7 +131,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     set({ sessionList: sessions });
   },
   dispatchMessage: (payload) => {
-    const { updateSessionMessage } = get();
+    const { updateSessionMessages } = get();
     const session = sessionSelectors.currentSession(get());
 
     if (!session) {
@@ -135,7 +140,17 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     const messages = messageReducer(session.messages, payload);
 
-    updateSessionMessage(messages);
+    updateSessionMessages(messages);
+  },
+  updateMessage: (id, content) => {
+    const { dispatchMessage } = get();
+    dispatchMessage({
+      payload: {
+        id,
+        content,
+      },
+      type: 'UPDATE_MESSAGE',
+    });
   },
   sendMessage: async (message: string) => {
     const { dispatchMessage, fetchAIResponse } = get();
