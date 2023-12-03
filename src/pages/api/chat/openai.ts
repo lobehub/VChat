@@ -3,11 +3,7 @@ import { OpenAIStream, streamToResponse } from 'ai';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI, { ClientOptions } from 'openai';
 
-type Data = {
-  message: string;
-};
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const apiKey = (req.headers[OPENAI_API_KEY] as string) || process.env.OPENAI_API_KEY;
 
   const baseURL =
