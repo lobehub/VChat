@@ -72,6 +72,11 @@ export interface SessionStore {
    */
   updateMessage: (id: string, content: string) => void;
   /**
+   * 重新生成消息
+   * @returns
+   */
+  regenerateMessage: (id: string) => void;
+  /**
    * 清空历史消息
    */
   clearHistory: () => void;
@@ -129,6 +134,26 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       draft[index].messages = messages;
     });
     set({ sessionList: sessions });
+  },
+  regenerateMessage: (id) => {
+    const { dispatchMessage, fetchAIResponse } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+    if (!currentSession) {
+      return;
+    }
+
+    const previousChats = sessionSelectors.previousChats(get(), id);
+
+    // 添加机器人消息占位
+    dispatchMessage({
+      type: 'UPDATE_MESSAGE',
+      payload: {
+        id: id,
+        content: '...', // 占位符
+      },
+    });
+
+    fetchAIResponse(previousChats, id);
   },
   dispatchMessage: (payload) => {
     const { updateSessionMessages } = get();

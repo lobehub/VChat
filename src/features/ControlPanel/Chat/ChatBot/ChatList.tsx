@@ -5,6 +5,7 @@ import {
   ChatList as LobeChatList,
   ChatListProps as LobeChatListProps,
   RenderAction,
+  useChatListActionsBar,
 } from '@lobehub/ui';
 import { ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { isEqual } from 'lodash-es';
@@ -20,7 +21,16 @@ interface ChatListProps {
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
   const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
-  const updateMessage = useSessionStore((s) => s.updateMessage);
+  const [updateMessage, regenerateMessage] = useSessionStore((s) => [
+    s.updateMessage,
+    s.regenerateMessage,
+  ]);
+  const { copy, regenerate, divider, del, edit } = useChatListActionsBar({
+    edit: '编辑',
+    delete: '删除',
+    regenerate: '重新生成',
+    copy: '复制',
+  });
   const [voiceLoading, setVoiceLoading] = useSessionStore((s) => [
     s.voiceLoading,
     s.setVoiceLoading,
@@ -34,11 +44,26 @@ const ChatList = (props: ChatListProps) => {
   } as ActionIconGroupItems;
 
   const AssistantActionsBar: RenderAction = ({ onActionClick, id }) => (
-    <ActionIconGroup dropdownMenu={[tts]} items={[]} onActionClick={onActionClick} type="ghost" />
+    <ActionIconGroup
+      dropdownMenu={[tts, regenerate, copy, divider, del]}
+      items={[regenerate, edit]}
+      onActionClick={onActionClick}
+      type="ghost"
+    />
+  );
+
+  const userActionsBar: RenderAction = ({ onActionClick, id }) => (
+    <ActionIconGroup
+      dropdownMenu={[copy, divider, del]}
+      items={[edit]}
+      onActionClick={onActionClick}
+      type="ghost"
+    />
   );
 
   const renderActions: LobeChatListProps['renderActions'] = {
     assistant: AssistantActionsBar,
+    user: userActionsBar,
   };
 
   return (
@@ -52,9 +77,12 @@ const ChatList = (props: ChatListProps) => {
         renderMessages={{
           default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
         }}
-        onActionsClick={({ key }, { content }) => {
+        onActionsClick={({ key }, { content, id }) => {
           if (key === 'tts') {
             handleSpeakAi(content);
+          }
+          if (key === 'regenerate') {
+            regenerateMessage(id);
           }
         }}
         onMessageChange={(id, content) => {

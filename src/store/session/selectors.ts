@@ -31,6 +31,13 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
   });
 };
 
+const previousChats = (s: SessionStore, id: string): ChatMessage[] => {
+  const chatList = currentChats(s);
+  const index = chatList.findIndex((item) => item.id === id);
+  if (index === -1) return [];
+  return chatList.slice(0, index);
+};
+
 const currentChatsString = (s: SessionStore): string => {
   const session = currentSession(s);
   const agent = currentAgent(s);
@@ -66,4 +73,5 @@ export const sessionSelectors = {
   currentAgent,
   currentChatsString,
   currentSystemRole,
+  previousChats,
 };
