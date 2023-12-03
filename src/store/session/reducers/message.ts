@@ -19,7 +19,14 @@ export interface UpdateMessageAction {
   };
 }
 
-export type MessageActionType = AddMessageAction | UpdateMessageAction;
+export interface DeleteMessageAction {
+  type: 'DELETE_MESSAGE';
+  payload: {
+    id: string;
+  };
+}
+
+export type MessageActionType = AddMessageAction | UpdateMessageAction | DeleteMessageAction;
 
 export const messageReducer = (state: ChatMessage[], action: MessageActionType): ChatMessage[] => {
   switch (action.type) {
@@ -43,6 +50,13 @@ export const messageReducer = (state: ChatMessage[], action: MessageActionType):
 
         message.content = content;
         message.updateAt = Date.now();
+      });
+    case 'DELETE_MESSAGE':
+      return produce(state, (draft) => {
+        const { id } = action.payload;
+        const index = draft.findIndex((item) => item.id === id);
+        if (index === -1) return;
+        draft.splice(index, 1);
       });
     default: {
       return produce(state, () => []);

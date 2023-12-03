@@ -72,6 +72,10 @@ export interface SessionStore {
    */
   updateMessage: (id: string, content: string) => void;
   /**
+   *  删除消息
+   */
+  deleteMessage: (id: string) => void;
+  /**
    * 重新生成消息
    * @returns
    */
@@ -134,6 +138,15 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       draft[index].messages = messages;
     });
     set({ sessionList: sessions });
+  },
+  deleteMessage: (id) => {
+    const { dispatchMessage } = get();
+    dispatchMessage({
+      payload: {
+        id,
+      },
+      type: 'DELETE_MESSAGE',
+    });
   },
   regenerateMessage: (id) => {
     const { dispatchMessage, fetchAIResponse } = get();

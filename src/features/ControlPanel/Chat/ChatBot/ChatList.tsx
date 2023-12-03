@@ -21,9 +21,10 @@ interface ChatListProps {
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
   const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
-  const [updateMessage, regenerateMessage] = useSessionStore((s) => [
+  const [updateMessage, regenerateMessage, deleteMessage] = useSessionStore((s) => [
     s.updateMessage,
     s.regenerateMessage,
+    s.deleteMessage,
   ]);
   const { copy, regenerate, divider, del, edit } = useChatListActionsBar({
     edit: '编辑',
@@ -80,9 +81,10 @@ const ChatList = (props: ChatListProps) => {
         onActionsClick={({ key }, { content, id }) => {
           if (key === 'tts') {
             handleSpeakAi(content);
-          }
-          if (key === 'regenerate') {
+          } else if (key === 'regenerate') {
             regenerateMessage(id);
+          } else if (key === 'del') {
+            deleteMessage(id);
           }
         }}
         onMessageChange={(id, content) => {

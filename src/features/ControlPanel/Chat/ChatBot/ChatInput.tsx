@@ -58,7 +58,12 @@ const ChatInput = (props: ChatBotProps) => {
           {/* @ts-ignore */}
           <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} title="语音识别" />
           {/* @ts-ignore */}
-          <ActionIcon icon={AudioLines} onClick={handleStopSpeakAi} loading={voiceLoading} />
+          <ActionIcon
+            icon={AudioLines}
+            onClick={handleStopSpeakAi}
+            loading={voiceLoading}
+            title="语音合成"
+          />
           <TokenTag
             maxValue={
               OPENAI_MODEL_LIST.find((item) => item.name === setting.model)?.maxToken || 4096
