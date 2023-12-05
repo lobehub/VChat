@@ -1,7 +1,7 @@
 import { speechApi } from '@/services/tts';
+import { Screenplay } from '@/types/touch';
 import { wait } from '@/utils/wait';
 import { Viewer } from '../vrmViewer/viewer';
-import { Screenplay } from './messages';
 
 const createSpeakCharacter = () => {
   let lastTime = 0;

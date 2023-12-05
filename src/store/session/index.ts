@@ -257,7 +257,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
         // 语音合成
         receivedMessage += txt;
         // 文本切割
-        const sentenceMatch = receivedMessage.match(/^(.+[。．！？\n]|.{10,}[、,])/);
+        const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
         if (sentenceMatch && sentenceMatch[0]) {
           const sentence = sentenceMatch[0];
           sentences.push(sentence);
