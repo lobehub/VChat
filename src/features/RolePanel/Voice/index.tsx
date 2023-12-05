@@ -67,7 +67,7 @@ const Config = (props: ConfigProps) => {
     },
   });
 
-  const { loading: voiceLoading } = useRequest(
+  const { loading: voiceLoading, run: getVoiceList } = useRequest(
     () => {
       const engine = form.getFieldValue('engine');
       return voiceListApi(engine);
@@ -76,7 +76,6 @@ const Config = (props: ConfigProps) => {
       onSuccess: (res) => {
         setVoices(res.data);
       },
-      refreshDeps: [form.getFieldValue('engine')],
     },
   );
 
@@ -88,6 +87,9 @@ const Config = (props: ConfigProps) => {
       }}
       preserve={false}
       onValuesChange={(changedValues) => {
+        if (changedValues.engine) {
+          getVoiceList();
+        }
         if (changedValues.locale || changedValues.engine) {
           form.setFieldsValue({ voice: undefined });
         }
@@ -149,22 +151,26 @@ const Config = (props: ConfigProps) => {
                 ]}
               />
             </FormItem>
-            <FormItem
-              label={'语音'}
-              name="voice"
-              rules={[{ required: true, message: '请选择语音' }]}
-            >
-              <Select
-                loading={voiceLoading}
-                disabled={voiceLoading}
-                defaultActiveFirstOption
-                options={voices
-                  .filter((voice) => voice.locale === form.getFieldValue('locale'))
-                  .map((item) => ({
-                    label: `${item.DisplayName}-${item.LocalName}`,
-                    value: item.ShortName,
-                  }))}
-              />
+            <FormItem dependencies={['locale']} noStyle>
+              {() => (
+                <FormItem
+                  label={'语音'}
+                  name="voice"
+                  rules={[{ required: true, message: '请选择语音' }]}
+                >
+                  <Select
+                    loading={voiceLoading}
+                    disabled={voiceLoading}
+                    defaultActiveFirstOption
+                    options={voices
+                      .filter((voice) => voice.locale === form.getFieldValue('locale'))
+                      .map((item) => ({
+                        label: `${item.DisplayName}-${item.LocalName}`,
+                        value: item.ShortName,
+                      }))}
+                  />
+                </FormItem>
+              )}
             </FormItem>
             <FormItem label={'语速'} name="speed">
               <Slider max={3} min={0} step={0.01} />
