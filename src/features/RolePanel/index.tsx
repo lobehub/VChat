@@ -3,8 +3,7 @@ import { useConfigStore } from '@/store/config';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
 import Info from './Info';
-import Order from './Order';
-import Touch from './Touch';
+import Role from './Role';
 import Voice from './Voice';
 
 import { useStyles } from './style';
@@ -58,18 +57,13 @@ const RolePanel = (props: RolePanelProps) => {
                 key: 'voice',
                 label: '语音',
               },
-              {
-                key: 'touch',
-                label: '触摸反应',
-              },
             ]}
           />
         </div>
         <div className={styles.content}>
           {tab === 'info' ? <Info /> : null}
-          {tab === 'order' ? <Order /> : null}
+          {tab === 'role' ? <Role /> : null}
           {tab === 'voice' ? <Voice /> : null}
-          {tab === 'touch' ? <Touch /> : null}
         </div>
       </div>
     </Panel>

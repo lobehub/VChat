@@ -67,11 +67,11 @@ const Info = (props: InfoProps) => {
             <FormItem label={'描述'} name="description">
               <Input placeholder="请输入角色描述" />
             </FormItem>
-            {/* <FormItem label={'模型'} name="model"> */}
-            <Upload>
-              <Button icon={<UploadIcon size={16} />}>上传模型</Button>
-            </Upload>
-            {/* </FormItem> */}
+            <FormItem label={'模型'} name="model">
+              <Upload>
+                <Button icon={<UploadIcon size={16} />}>上传模型</Button>
+              </Upload>
+            </FormItem>
             <FormItem label={'说明'} name="readme">
               <Input.TextArea
                 placeholder="请输入要转换的文字"
