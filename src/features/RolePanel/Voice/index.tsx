@@ -15,6 +15,42 @@ interface ConfigProps {
   className?: string;
 }
 
+const suportedLocales = [
+  {
+    label: '中文(普通话)',
+    value: 'zh-CN',
+    samples: ['哈喽，早上好', '正在为你准备我的整个世界', '你好，旅行者!'],
+  },
+  {
+    label: '日语(日本)',
+    value: 'ja-JP',
+    samples: [
+      'こんにちは、おはようございます！',
+      'あなたのために私の全世界を準備しています',
+      'こんにちは、旅行者さん！',
+    ],
+  },
+  {
+    label: '英语(美国)',
+    value: 'en-US',
+    samples: ['Hello, traveler!', "I'm preparing my whole world for you.", 'Hello, traveler!'],
+  },
+  {
+    label: '韩语(韩国)',
+    value: 'ko-KR',
+    samples: [
+      '안녕하세요, 여행자!',
+      '당신을 위해 내 전 세계를 준비하고 있습니다.',
+      '안녕, 여행자!',
+    ],
+  },
+  {
+    label: '中文(粤语)',
+    value: 'zh-HK',
+    samples: ['哈喽，早晨好', '正在为您准备我的整个世界', '你好，旅行者！'],
+  },
+];
+
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
     display: flex;
@@ -79,6 +115,24 @@ const Config = (props: ConfigProps) => {
     },
   );
 
+  const getExtraNode = () => {
+    const samples =
+      suportedLocales.find((item) => item.value === form.getFieldValue('locale'))?.samples || [];
+    const nodes: React.ReactNode[] = [];
+
+    samples.forEach((item, index) => {
+      nodes.push(
+        <a href="#" onClick={() => form.setFieldValue('message', item)}>
+          {item}
+        </a>,
+      );
+      if (index !== samples.length - 1) {
+        nodes.push(<Divider type="vertical" />);
+      }
+    });
+    return nodes;
+  };
+
   return (
     <Form
       initialValues={currentAgent?.tts}
@@ -101,25 +155,16 @@ const Config = (props: ConfigProps) => {
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
           <div className={styles.message}>
-            <FormItem
-              name="message"
-              style={{ marginBottom: 0 }}
-              extra={
-                <>
-                  <a href="#">哈喽，早上好</a>
-                  <Divider type="vertical" />
-                  <a href="#">正在为你准备我的整个世界</a>
-                  <Divider type="vertical" />
-                  <a href="#">你好，旅行者!</a>
-                </>
-              }
-            >
-              <Input.TextArea
-                placeholder="请输入要转换的文字"
-                showCount
-                maxLength={800}
-                autoSize={{ maxRows: 19, minRows: 19 }}
-              />
+            <FormItem dependencies={['locale']} noStyle>
+              {() => (
+                <FormItem name="message" style={{ marginBottom: 0 }} extra={getExtraNode()}>
+                  <Input.TextArea
+                    placeholder="请输入要转换的文字"
+                    maxLength={800}
+                    autoSize={{ maxRows: 18, minRows: 18 }}
+                  />
+                </FormItem>
+              )}
             </FormItem>
           </div>
           <div className={styles.config}>
@@ -138,30 +183,7 @@ const Config = (props: ConfigProps) => {
               />
             </FormItem>
             <FormItem label={'语言'} name="locale">
-              <Select
-                options={[
-                  {
-                    label: '中文(普通话)',
-                    value: 'zh-CN',
-                  },
-                  {
-                    label: '日语(日本)',
-                    value: 'ja-JP',
-                  },
-                  {
-                    label: '英语(美国)',
-                    value: 'en-US',
-                  },
-                  {
-                    label: '韩语(韩国)',
-                    value: 'ko-KR',
-                  },
-                  {
-                    label: '中文(粤语)',
-                    value: 'zh-HK',
-                  },
-                ]}
-              />
+              <Select options={suportedLocales} />
             </FormItem>
             <FormItem dependencies={['locale']} noStyle>
               {() => (
