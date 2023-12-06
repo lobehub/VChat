@@ -3,7 +3,7 @@ import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { Voice } from '@/types/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Form, Input, Select, Slider, message } from 'antd';
+import { Button, Divider, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
@@ -101,17 +101,29 @@ const Config = (props: ConfigProps) => {
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
           <div className={styles.message}>
-            <FormItem name="message" noStyle>
+            <FormItem
+              name="message"
+              style={{ marginBottom: 0 }}
+              extra={
+                <>
+                  <a href="#">哈喽，早上好</a>
+                  <Divider type="vertical" />
+                  <a href="#">正在为你准备我的整个世界</a>
+                  <Divider type="vertical" />
+                  <a href="#">你好，旅行者!</a>
+                </>
+              }
+            >
               <Input.TextArea
                 placeholder="请输入要转换的文字"
                 showCount
                 maxLength={800}
-                autoSize={{ maxRows: 21, minRows: 21 }}
+                autoSize={{ maxRows: 19, minRows: 19 }}
               />
             </FormItem>
           </div>
           <div className={styles.config}>
-            <FormItem label={'语音引擎'} name="engine">
+            <FormItem label={'引擎'} name="engine">
               <Select
                 options={[
                   {
