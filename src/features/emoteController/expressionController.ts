@@ -1,11 +1,7 @@
-import * as THREE from "three";
-import {
-  VRM,
-  VRMExpressionManager,
-  VRMExpressionPresetName,
-} from "@pixiv/three-vrm";
-import { AutoLookAt } from "./autoLookAt";
-import { AutoBlink } from "./autoBlink";
+import { VRM, VRMExpressionManager, VRMExpressionPresetName } from '@pixiv/three-vrm';
+import * as THREE from 'three';
+import { AutoBlink } from './autoBlink';
+import { AutoLookAt } from './autoLookAt';
 
 /**
  * Expressionを管理するクラス
@@ -24,7 +20,7 @@ export class ExpressionController {
   } | null;
   constructor(vrm: VRM, camera: THREE.Object3D) {
     this._autoLookAt = new AutoLookAt(vrm, camera);
-    this._currentEmotion = "neutral";
+    this._currentEmotion = 'neutral';
     this._currentLipSync = null;
     if (vrm.expressionManager) {
       this._expressionManager = vrm.expressionManager;
@@ -33,11 +29,11 @@ export class ExpressionController {
   }
 
   public playEmotion(preset: VRMExpressionPresetName) {
-    if (this._currentEmotion != "neutral") {
+    if (this._currentEmotion != 'neutral') {
       this._expressionManager?.setValue(this._currentEmotion, 0);
     }
 
-    if (preset == "neutral") {
+    if (preset == 'neutral') {
       this._autoBlink?.setEnable(true);
       this._currentEmotion = preset;
       return;
@@ -67,7 +63,7 @@ export class ExpressionController {
 
     if (this._currentLipSync) {
       const weight =
-        this._currentEmotion === "neutral"
+        this._currentEmotion === 'neutral'
           ? this._currentLipSync.value * 0.5
           : this._currentLipSync.value * 0.25;
       this._expressionManager?.setValue(this._currentLipSync.preset, weight);

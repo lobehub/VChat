@@ -1,6 +1,7 @@
 import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
 import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
+import { Screenplay } from '@/types/touch';
 import { buildUrl } from '@/utils/buildUrl';
 import { VRM, VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import * as THREE from 'three';
@@ -10,7 +11,6 @@ import { VRMAnimation } from '../../lib/VRMAnimation/VRMAnimation';
 import { VRMLookAtSmootherLoaderPlugin } from '../../lib/VRMLookAtSmootherLoaderPlugin/VRMLookAtSmootherLoaderPlugin';
 import { EmoteController } from '../emoteController/emoteController';
 import { LipSync } from '../lipSync/lipSync';
-import { Screenplay } from '../messages/messages';
 
 /**
  * 3Dキャラクターを管理するクラス
