@@ -30,7 +30,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-# typescript
+#
 *.tsbuildinfo
 next-env.d.ts
 
@@ -39,3 +39,5 @@ package-lock.json
 
 /public/agents/
 /public/dances/
+
+.idea

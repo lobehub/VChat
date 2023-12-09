@@ -53,5 +53,7 @@ export const handleSpeakAi = async (message: string) => {
 
 export const handleStopSpeakAi = async () => {
   const viewer = useViewerStore.getState().viewer;
+  const setVoiceLoading = useSessionStore.getState().setVoiceLoading;
+  setVoiceLoading(false);
   viewer.model?.stopSpeak();
 };
