@@ -13,9 +13,12 @@ import { useStyles } from './style';
 
 const Header = () => {
   const { styles, theme } = useStyles();
-  const { deactivateAgent, fetchLocalAgentList } = useAgentStore();
-  const { setRolePanelOpen } = useConfigStore();
-  const { setIsPlaying } = useDanceStore();
+  const [deactivateAgent, fetchLocalAgentList] = useAgentStore((s) => [
+    s.deactivateAgent,
+    s.fetchLocalAgentList,
+  ]);
+  const [setRolePanelOpen, setTab] = useConfigStore((s) => [s.setRolePanelOpen, s.setTab]);
+  const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
@@ -63,10 +66,11 @@ const Header = () => {
             if (!currentAgent) return;
             switchSession(currentAgent.agentId);
             setIsPlaying(false);
+            setTab('chat');
           }}
           type={'primary'}
         >
-          加载
+          开始聊天
         </Button>
         <Button onClick={openPanel} type={'primary'}>
           编辑

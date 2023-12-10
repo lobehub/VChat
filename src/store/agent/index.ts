@@ -38,15 +38,15 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
         set({ currentIdentifier: undefined });
       },
       getAgentById: (id: string): Agent | undefined => {
-        const { localAgentList } = get();
-        const currentAgent = localAgentList.find((item) => item.agentId === id);
+        const agentList = getAgentList(get());
+        const currentAgent = agentList.find((item) => item.agentId === id);
         if (!currentAgent) return undefined;
 
         return currentAgent;
       },
     }),
     {
-      name: 'vidol-agent',
+      name: 'vidol-chat-agent-storage',
     },
   ),
   shallow,
