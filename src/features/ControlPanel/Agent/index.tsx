@@ -4,7 +4,7 @@ import { Space } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { Loader2Icon } from 'lucide-react';
-import { useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 import AgentCard from './AgentCard';
 import AgentIndex from './AgentIndex';
@@ -45,7 +45,46 @@ const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
   const [tab, setTab] = useState('installed');
-  const { fetchAgentList, agentList, loading } = useAgentStore();
+  const [fetchAgentList, agentList, loading] = useAgentStore((s) => [
+    s.fetchAgentList,
+    s.agentList,
+    s.loading,
+  ]);
+
+  const TabList = useMemo(() => {
+    console.log('tablist', agentList, loading);
+    return (
+      <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
+        <TabsNav
+          activeKey={tab}
+          onChange={(key) => {
+            setTab(key);
+          }}
+          items={[
+            {
+              key: 'installed',
+              label: '我的偶像',
+            },
+            {
+              key: 'index',
+              label: '在线列表',
+            },
+          ]}
+        />
+        {tab === 'installed' ? (
+          <Space>
+            共 {agentList.length} 项{' '}
+            <ActionIcon
+              icon={Loader2Icon}
+              loading={loading}
+              title="重新加载"
+              onClick={fetchAgentList}
+            />
+          </Space>
+        ) : null}
+      </Flexbox>
+    );
+  }, [agentList, fetchAgentList, loading, tab]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
@@ -59,41 +98,7 @@ const Agent = (props: AgentProps) => {
             random
           />
         </Center>
-        <Flexbox
-          style={{ marginBottom: 12 }}
-          horizontal
-          align="center"
-          distribution="space-between"
-        >
-          <TabsNav
-            activeKey={tab}
-            onChange={(key) => {
-              setTab(key);
-            }}
-            items={[
-              {
-                key: 'installed',
-                label: '我的偶像',
-              },
-              {
-                key: 'index',
-                label: '在线列表',
-              },
-            ]}
-          />
-          {tab === 'installed' ? (
-            <Space>
-              共 {agentList.length} 项{' '}
-              <ActionIcon
-                /* @ts-ignore */
-                icon={Loader2Icon}
-                loading={loading}
-                title="重新加载"
-                onClick={fetchAgentList}
-              />
-            </Space>
-          ) : null}
-        </Flexbox>
+        {TabList}
         {tab === 'installed' ? <AgentList /> : null}
         {tab === 'index' ? <AgentIndex /> : null}
       </div>
@@ -102,4 +107,4 @@ const Agent = (props: AgentProps) => {
   );
 };
 
-export default Agent;
+export default memo(Agent);

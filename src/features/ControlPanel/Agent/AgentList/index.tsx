@@ -1,15 +1,26 @@
 import { useAgentStore } from '@/store/agent';
 import { Card, List, Typography } from 'antd';
-import { useEffect } from 'react';
+import { memo, useLayoutEffect } from 'react';
 
 const { Text } = Typography;
 
 const { Meta } = Card;
 
 const AgentList = () => {
-  const { agentList, activateAgent, loading, fetchAgentList } = useAgentStore();
+  const [agentList, activateAgent, loading, fetchAgentList] = useAgentStore((s) => [
+    s.agentList,
+    s.activateAgent,
+    s.loading,
+    s.fetchAgentList,
+  ]);
 
-  useEffect(() => {
+  // const { loading } = useRequest(getLocalAgentList, {
+  //   onSuccess: (data) => {
+  //     setAgentList(data.agents);
+  //   },
+  // });
+
+  useLayoutEffect(() => {
     fetchAgentList();
   }, [fetchAgentList]);
 
@@ -43,4 +54,4 @@ const AgentList = () => {
   );
 };
 
-export default AgentList;
+export default memo(AgentList);

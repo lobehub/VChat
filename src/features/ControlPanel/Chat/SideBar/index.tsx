@@ -1,6 +1,6 @@
 import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
-import { ReactNode, memo, useState } from 'react';
+import { memo, useState } from 'react';
 import Header from './Header';
 import SessionList from './SessionList';
 
@@ -14,8 +14,7 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-// eslint-disable-next-line react/display-name
-const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
+const SideBar = () => {
   const { styles } = useStyles();
   const [searchName, setSearchName] = useState<string>();
 
@@ -37,6 +36,6 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
       <SessionList filter={searchName} />
     </DraggablePanel>
   );
-});
+};
 
-export default SideBar;
+export default memo(SideBar);

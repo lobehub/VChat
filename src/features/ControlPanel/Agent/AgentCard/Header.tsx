@@ -11,8 +11,7 @@ import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 
-// eslint-disable-next-line react/display-name
-const Header = memo(() => {
+const Header = () => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
   const { setRolePanelOpen } = useConfigStore();
@@ -81,6 +80,6 @@ const Header = memo(() => {
       </Space>
     </Center>
   );
-});
+};
 
-export default Header;
+export default memo(Header);

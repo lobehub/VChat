@@ -1,7 +1,7 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
-import { ReactNode, memo, useState } from 'react';
+import { PropsWithChildren, memo, useState } from 'react';
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -13,8 +13,7 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-// eslint-disable-next-line react/display-name
-const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
+const SideBar = ({ children }: PropsWithChildren) => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
   const [showAgentSidebar, activateAgent, deactivateAgent] = useAgentStore((s) => [
@@ -42,6 +41,6 @@ const SideBar = memo<{ children?: ReactNode }>(({ children }) => {
       {children}
     </DraggablePanel>
   );
-});
+};
 
-export default SideBar;
+export default memo(SideBar);
