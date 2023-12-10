@@ -1,4 +1,4 @@
-import { DEFAULT_AGENT } from '@/constants/defaultAgent';
+import { VIDOL_SAMPLE_AGENT_A } from '@/constants/agent';
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
@@ -61,12 +61,12 @@ const Header = () => {
         >
           加载
         </Button>
-        {DEFAULT_AGENT.agentId !== agentId ? (
+        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
           <Button onClick={openPanel} type={'primary'}>
             编辑
           </Button>
         ) : null}
-        {DEFAULT_AGENT.agentId !== agentId ? (
+        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
           <Popconfirm
             title="确定删除？"
             description="确定删除本地角色文件吗？"

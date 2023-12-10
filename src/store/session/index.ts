@@ -1,4 +1,4 @@
-import { DEFAULT_AGENT } from '@/constants/defaultAgent';
+import { VIDOL_SAMPLE_AGENT_A } from '@/constants/agent';
 import { chatCompletion, handleSpeakAi } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -93,7 +93,7 @@ export interface SessionStore {
 }
 
 const defaultSession: Session = {
-  agentId: DEFAULT_AGENT.agentId,
+  agentId: VIDOL_SAMPLE_AGENT_A.agentId,
   messages: [],
 };
 

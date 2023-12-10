@@ -1,6 +1,6 @@
 import { Agent } from '@/types/agent';
 
-export const DEFAULT_AGENT: Agent = {
+export const VIDOL_SAMPLE_AGENT_A: Agent = {
   name: 'A 模型',
   description: 'A 模型是 Vroid 的示例角色，示例角色不可编辑或删除',
   homepage: 'https://hub.vroid.com/characters/2843975675147313744/models/5644550979324015604',
@@ -21,10 +21,12 @@ export const DEFAULT_AGENT: Agent = {
     speed: 1.1,
     pitch: 1.25,
   },
-  agentId: 'vidol-sample-agent',
-  model: '/vidol-sample-agent/model.vrm',
-  cover: '/vidol-sample-agent/cover.jpg',
-  avatar: '/vidol-sample-agent/avatar.jpg',
+  agentId: 'vidol-sample-agent-a',
+  model: '/vidol-sample-agent-a/model.vrm',
+  cover: '/vidol-sample-agent-a/cover.jpg',
+  avatar: '/vidol-sample-agent-a/avatar.jpg',
   readme:
     "AvatarSample_Aは、VRoid Studioに付属されているサンプルモデルの１つです。\r\n良識の範囲内で、本モデルに設定されているVRoid Hubの利用条件に沿って利用することができます。\r\nVRoid Hub連携アプリや、外部サービス等でぜひご活用ください。\r\nなお、本モデルはCC0ライセンスではありません、著作権は放棄はしておりませんので予めご了承ください。\r\n本モデルの利用条件は、以下ヘルプ記事をご覧ください。\r\nvroid.pixiv.help/hc/ja/articles/4402394424089\r\n\r\nAvatarSample_A is one of the sample models included in VRoid Studio.\r\nIt can be used in accordance with its VRoid Hub conditions of use, within reason.\r\nFeel free to use this model in applications linked to VRoid Hub and on external services.\r\nPlease note that this model is not under the CC0 license and its copyright has not been waived.\r\nTo learn more about this model's conditions of use, consult the following Help article.\r\nvroid.pixiv.help/hc/en-us/articles/4402394424089",
 };
+
+export const DEFAULT_AGENTS = [VIDOL_SAMPLE_AGENT_A];

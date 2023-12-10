@@ -1,6 +1,7 @@
-import { DEFAULT_AGENT } from '@/constants/defaultAgent';
+import { DEFAULT_AGENTS } from '@/constants/agent';
 import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
+import { isEqual } from 'lodash-es';
 import { persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
@@ -20,11 +21,16 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
     (set, get) => ({
       currentIdentifier: '',
       loading: false,
-      agentList: [DEFAULT_AGENT],
+      agentList: DEFAULT_AGENTS,
       fetchAgentList: async () => {
         set({ loading: true });
         const res = await getLocalAgentList();
-        set({ agentList: [...res.data, DEFAULT_AGENT], loading: false });
+        set({ loading: false });
+
+        const { agentList } = get();
+        const currentAgents = [...res.data, ...DEFAULT_AGENTS];
+        if (isEqual(agentList, currentAgents)) return;
+        set({ agentList: currentAgents });
       },
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });

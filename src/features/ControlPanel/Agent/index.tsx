@@ -63,11 +63,11 @@ const Agent = (props: AgentProps) => {
           items={[
             {
               key: 'installed',
-              label: '我的偶像',
+              label: '我的角色',
             },
             {
               key: 'index',
-              label: '在线列表',
+              label: '角色卡池',
             },
           ]}
         />
@@ -90,7 +90,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>选择你的虚拟偶像</h1>
+          <h1 className={styles.title}>选择你的虚拟角色</h1>
           <GridBackground
             animation
             className={styles.background}
