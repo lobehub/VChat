@@ -2,7 +2,7 @@ import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { Center } from 'react-layout-kit';
-import DanceList from './DanceList';
+import DanceIndex from './DanceIndex';
 
 const useStyles = createStyles(({ css }) => ({
   container: css`
@@ -51,7 +51,7 @@ const Dance = (props: DanceProps) => {
             random
           />
         </Center>
-        <DanceList />
+        <DanceIndex />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { tabType, useConfigStore } from '@/store/config';
+import { useMarketStore } from '@/store/market';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { Expand, MessageSquare, Music2, Pointer, RotateCw, User } from 'lucide-react';
@@ -8,6 +9,7 @@ import { useRef } from 'react';
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 const AgentViewer = dynamic(() => import('@/features/AgentViewer'), { ssr: false });
+const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
 
 export const items: ActionIconGroupProps['items'] = [
   {
@@ -53,7 +55,14 @@ export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 const Home = () => {
   const viewer = useViewerStore((s) => s.viewer);
   const ref = useRef<HTMLDivElement>(null);
-  const { tab, setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen } = useConfigStore();
+  const [setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen] = useConfigStore((s) => [
+    s.setTab,
+    s.controlPanelOpen,
+    s.setControlPanelOpen,
+    s.rolePanelOpen,
+  ]);
+
+  const [marketPanelOpen] = useMarketStore((s) => [s.marketPanelOpen]);
 
   function openPanel(tab: tabType) {
     setControlPanelOpen(true);
@@ -99,6 +108,7 @@ const Home = () => {
       />
       <ControlPanel style={{ display: controlPanelOpen ? 'flex' : 'none' }} />
       <RolePanel style={{ display: rolePanelOpen ? 'flex' : 'none' }} />
+      <MarketPanel style={{ display: marketPanelOpen ? 'flex' : 'none' }} />
     </div>
   );
 };

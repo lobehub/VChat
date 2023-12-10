@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
-import AgentList from './AgentList';
+import AgentIndex from './AgentIndex';
 
 const useStyles = createStyles(({ css }) => ({
   background: css`
@@ -44,7 +44,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>选择你的虚拟角色</h1>
+          <h1 className={styles.title}>订购你的虚拟偶像</h1>
           <GridBackground
             animation
             className={styles.background}
@@ -52,7 +52,7 @@ const Agent = (props: AgentProps) => {
             random
           />
         </Center>
-        <AgentList />
+        <AgentIndex />
       </div>
     </div>
   );

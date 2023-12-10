@@ -8,7 +8,14 @@ import type { AppProps } from 'next/app';
 export default function App({ Component, pageProps }: AppProps) {
   const themeMode = useThemeStore((s) => s.themeMode);
   return (
-    <AntdThemeProvider themeMode={themeMode}>
+    <AntdThemeProvider
+      themeMode={themeMode}
+      theme={{
+        token: {
+          colorPrimary: '#bdf7e4',
+        },
+      }}
+    >
       <ThemeProvider themeMode={themeMode}>
         <Header />
         <main style={{ display: 'flex', width: '100%' }}>

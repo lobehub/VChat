@@ -16,7 +16,7 @@ interface AgentIndexItem {
 }
 
 const AgentIndex = () => {
-  const [localAgentList, setAgentList] = useState<AgentIndexItem[]>([]);
+  const [agentList, setAgentList] = useState<AgentIndexItem[]>([]);
 
   const { loading } = useRequest(getAgentIndex, {
     onSuccess: (data) => {
@@ -27,7 +27,7 @@ const AgentIndex = () => {
   return (
     <List
       loading={loading}
-      dataSource={localAgentList}
+      dataSource={agentList}
       renderItem={(item) => (
         <List.Item actions={[<DownloadButton url={item.url} key={item.name} />]}>
           <Meta

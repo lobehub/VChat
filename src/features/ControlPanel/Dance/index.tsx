@@ -6,8 +6,8 @@ import classNames from 'classnames';
 import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
+import DanceIndex from '../../MarketPanel/Dance/DanceIndex';
 import AudioPlayer from './AudioPlayer';
-import DanceIndex from './DanceIndex';
 import DanceInfoCard from './DanceInfoCard';
 import DanceList from './DanceList';
 

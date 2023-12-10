@@ -1,6 +1,6 @@
 import { useMarketStore } from '@/store/market';
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
-import { Music2, Settings2, User } from 'lucide-react';
+import { Music2, User } from 'lucide-react';
 
 interface SideNavProps {
   className?: string;
@@ -13,17 +13,7 @@ const SideNav = (props: SideNavProps) => {
   return (
     <LobeSideNav
       className={className}
-      bottomActions={
-        <ActionIcon
-          /* @ts-ignore */
-          icon={Settings2}
-          onClick={() => {
-            setTab('config');
-          }}
-          size="large"
-          active={tab === 'config'}
-        />
-      }
+      bottomActions={null}
       topActions={
         <>
           <ActionIcon

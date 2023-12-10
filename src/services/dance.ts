@@ -1,3 +1,4 @@
+import { DANCE_INDEX_URL } from '@/constants/common';
 /**
  * 请求 Dance 列表
  */
@@ -21,10 +22,8 @@ export const deleteLocalDance = async (agentId: string) => {
 /**
  * 请求线上 Dance index
  */
-export const getDanceIndex = async () => {
-  const res = await fetch(
-    'https://raw.githubusercontent.com/v-idol/vidol-chat-dance/main/index.json',
-  );
+export const getDanceIndex = async (url: string = DANCE_INDEX_URL) => {
+  const res = await fetch(url);
 
   return res.json();
 };

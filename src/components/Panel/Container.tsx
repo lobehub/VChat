@@ -86,7 +86,9 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
           ref={setActivatorNodeRef}
         >
           <div style={{ flex: 1 }}>{switches}</div>
-          <div style={{ flex: 1, textAlign: 'center' }}>{title ? title : null}</div>
+          <div style={{ flex: 1, textAlign: 'center', fontWeight: 'bold' }}>
+            {title ? title : null}
+          </div>
           <div style={{ flex: 1 }}>{extra ? extra : null}</div>
         </div>
         <div className={styles.container}>{children}</div>

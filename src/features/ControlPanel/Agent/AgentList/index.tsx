@@ -1,7 +1,9 @@
 import { useAgentStore } from '@/store/agent';
+import { useMarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
-import { Card, List, Typography } from 'antd';
+import { Button, Card, List, Typography } from 'antd';
 import { memo } from 'react';
+import { Flexbox } from 'react-layout-kit';
 
 const { Text } = Typography;
 
@@ -16,12 +18,22 @@ interface AgentListProps {
 const AgentList = (props: AgentListProps) => {
   const { title, loading, dataSource } = props;
   const [activateAgent] = useAgentStore((s) => [s.activateAgent]);
+  const [setMarketPanelOpen, setTab] = useMarketStore((s) => [s.setMarketPanelOpen, s.setTab]);
 
   return (
     <>
-      <div style={{ marginBottom: 12 }}>
+      <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
         <h2>{title}</h2>
-      </div>
+        <Button
+          onClick={() => {
+            setMarketPanelOpen(true);
+            setTab('agent');
+          }}
+          type={'primary'}
+        >
+          打开商店
+        </Button>
+      </Flexbox>
       <List
         loading={loading}
         grid={{ gutter: 8, column: 4 }}

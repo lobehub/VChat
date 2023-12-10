@@ -16,7 +16,13 @@ const MarketPanel = (props: MarketPanelProps) => {
   const { setMarketPanelOpen, tab } = useMarketStore();
 
   return (
-    <Panel style={style} className={className} onClose={() => setMarketPanelOpen(false)}>
+    <Panel
+      style={style}
+      className={className}
+      onClose={() => setMarketPanelOpen(false)}
+      defaultCoordinates={{ x: 400, y: 400 }}
+      title="虚拟商店"
+    >
       <SideNav className="handle" />
       <div className={styles.content}>
         <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
