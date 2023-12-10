@@ -1,4 +1,4 @@
-import { DEFAULT_AGENT } from '@/constants/defaultAgent';
+import { VIDOL_SAMPLE_AGENT_A } from '@/constants/agent';
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
@@ -11,8 +11,7 @@ import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 
-// eslint-disable-next-line react/display-name
-const Header = memo(() => {
+const Header = () => {
   const { styles, theme } = useStyles();
   const { deactivateAgent, fetchAgentList } = useAgentStore();
   const { setRolePanelOpen } = useConfigStore();
@@ -62,12 +61,12 @@ const Header = memo(() => {
         >
           加载
         </Button>
-        {DEFAULT_AGENT.agentId !== agentId ? (
+        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
           <Button onClick={openPanel} type={'primary'}>
             编辑
           </Button>
         ) : null}
-        {DEFAULT_AGENT.agentId !== agentId ? (
+        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
           <Popconfirm
             title="确定删除？"
             description="确定删除本地角色文件吗？"
@@ -81,6 +80,6 @@ const Header = memo(() => {
       </Space>
     </Center>
   );
-});
+};
 
-export default Header;
+export default memo(Header);

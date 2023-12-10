@@ -1,4 +1,4 @@
-import { DEFAULT_DANCE } from '@/constants/defaultDance';
+import { DEFAULT_DANCE } from '@/constants/dance';
 import { deleteLocalDance } from '@/services/dance';
 import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { Avatar } from '@lobehub/ui';

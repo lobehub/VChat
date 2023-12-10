@@ -1,7 +1,7 @@
 import { getAgentIndex } from '@/services/agent';
 import { useRequest } from 'ahooks';
 import { List, Typography } from 'antd';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import DownloadButton from './DownloadButton';
 
 const { Text } = Typography;
@@ -44,4 +44,4 @@ const AgentIndex = () => {
   );
 };
 
-export default AgentIndex;
+export default memo(AgentIndex);

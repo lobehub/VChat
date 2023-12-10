@@ -1,13 +1,10 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { memo } from 'react';
-
 import { useStyles } from './style';
 
-// eslint-disable-next-line react/display-name
-const Footer = memo(() => {
+const Footer = () => {
   const { styles } = useStyles();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
-
   const { systemRole } = currentAgent || {};
 
   return (
@@ -15,6 +12,6 @@ const Footer = memo(() => {
       <div className={styles.desc}>{systemRole}</div>
     </div>
   );
-});
+};
 
-export default Footer;
+export default memo(Footer);

@@ -5,6 +5,7 @@ import { List, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
+import { memo } from 'react';
 
 const { Text } = Typography;
 
@@ -25,7 +26,7 @@ interface SessionListProps {
 
 const SessionList = (props: SessionListProps) => {
   const { filter } = props;
-  const { sessionList, switchSession } = useSessionStore();
+  const [sessionList, switchSession] = useSessionStore((s) => [s.sessionList, s.switchSession]);
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
   const getAgentById = useAgentStore((s) => s.getAgentById);
   const { styles } = useStyles();
@@ -60,4 +61,4 @@ const SessionList = (props: SessionListProps) => {
   );
 };
 
-export default SessionList;
+export default memo(SessionList);
