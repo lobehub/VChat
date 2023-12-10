@@ -1,3 +1,4 @@
+import { AGENT_INDEX_URL } from '@/constants/common';
 /**
  * 请求本地 Agent 列表
  */
@@ -21,10 +22,8 @@ export const deleteLocalAgent = async (agentId: string) => {
 /**
  * 请求线上 Agent index
  */
-export const getAgentIndex = async () => {
-  const res = await fetch(
-    'https://raw.githubusercontent.com/v-idol/vidol-chat-agents/main/index.json',
-  );
+export const getAgentIndex = async (url: string = AGENT_INDEX_URL) => {
+  const res = await fetch(url);
 
   return res.json();
 };

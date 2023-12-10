@@ -1,4 +1,4 @@
-import { DEFAULT_DANCE } from '@/constants/defaultDance';
+import { DEFAULT_DANCE } from '@/constants/dance';
 import { getLocalDanceList } from '@/services/dance';
 import { Dance } from '@/types/dance';
 import { create } from 'zustand';
