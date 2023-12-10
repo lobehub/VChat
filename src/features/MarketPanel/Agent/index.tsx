@@ -44,7 +44,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>订购你的虚拟偶像</h1>
+          <h1 className={styles.title}>Find & Use Your Lovest Vidol</h1>
           <GridBackground
             animation
             className={styles.background}
