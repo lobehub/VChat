@@ -2,7 +2,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { Space, Tooltip } from 'antd';
 import classNames from 'classnames';
 
-import React, { PropsWithChildren, useRef } from 'react';
+import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
 
 import { useStyles } from './style';
 
@@ -38,6 +38,32 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     }
   }
 
+  const Header = useMemo(() => {
+    return (
+      <Space data-no-dnd="true">
+        <Tooltip title="关闭">
+          <div
+            className={classNames(styles.button, styles.close)}
+            onClick={() => {
+              onClose();
+            }}
+          />
+        </Tooltip>
+        <Tooltip title="最大化">
+          <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
+        </Tooltip>
+        <Tooltip title="最小化">
+          <div
+            className={classNames(styles.button, styles.min)}
+            onClick={() => {
+              onClose();
+            }}
+          ></div>
+        </Tooltip>
+      </Space>
+    );
+  }, [onClose, styles.button, styles.close, styles.max, styles.min]);
+
   return (
     <div ref={setNodeRef}>
       <div
@@ -57,27 +83,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
           onDoubleClick={toggleFullScreen}
           ref={setActivatorNodeRef}
         >
-          <Space data-no-dnd="true">
-            <Tooltip title="关闭">
-              <div
-                className={classNames(styles.button, styles.close)}
-                onClick={() => {
-                  onClose();
-                }}
-              />
-            </Tooltip>
-            <Tooltip title="最大化">
-              <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-            </Tooltip>
-            <Tooltip title="最小化">
-              <div
-                className={classNames(styles.button, styles.min)}
-                onClick={() => {
-                  onClose();
-                }}
-              ></div>
-            </Tooltip>
-          </Space>
+          {Header}
         </div>
         <div className={styles.container}>{children}</div>
       </div>
@@ -85,4 +91,4 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   );
 };
 
-export default Container;
+export default memo(Container);

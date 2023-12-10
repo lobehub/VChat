@@ -9,6 +9,7 @@ import { Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import { isEqual } from 'lodash-es';
 import { AudioLines, Eraser, Mic } from 'lucide-react';
+import { memo } from 'react';
 
 interface ChatBotProps {
   style?: React.CSSProperties;
@@ -93,4 +94,4 @@ const ChatInput = (props: ChatBotProps) => {
   );
 };
 
-export default ChatInput;
+export default memo(ChatInput);

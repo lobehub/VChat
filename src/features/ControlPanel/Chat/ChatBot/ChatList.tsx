@@ -32,10 +32,6 @@ const ChatList = (props: ChatListProps) => {
     regenerate: '重新生成',
     copy: '复制',
   });
-  const [voiceLoading, setVoiceLoading] = useSessionStore((s) => [
-    s.voiceLoading,
-    s.setVoiceLoading,
-  ]);
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
 
   const tts = {

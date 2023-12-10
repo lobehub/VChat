@@ -1,4 +1,3 @@
-import AgentViewer from '@/features/AgentViewer';
 import { tabType, useConfigStore } from '@/store/config';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
@@ -8,6 +7,7 @@ import { useRef } from 'react';
 
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
+const AgentViewer = dynamic(() => import('@/features/AgentViewer'), { ssr: false });
 
 export const items: ActionIconGroupProps['items'] = [
   {
