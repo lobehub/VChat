@@ -1,4 +1,4 @@
-import { VIDOL_SAMPLE_AGENT_A } from '@/constants/agent';
+import { DEFAULT_AGENTS } from '@/constants/agent';
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
@@ -6,20 +6,20 @@ import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Popconfirm, Space, message } from 'antd';
+import { Button, Popconfirm, Space, Tag, message } from 'antd';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 
 const Header = () => {
   const { styles, theme } = useStyles();
-  const { deactivateAgent, fetchAgentList } = useAgentStore();
+  const { deactivateAgent, fetchLocalAgentList } = useAgentStore();
   const { setRolePanelOpen } = useConfigStore();
   const { setIsPlaying } = useDanceStore();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
-  const { avatar, name, description, agentId } = currentAgent || {};
+  const { avatar, name, description, agentId, homepage } = currentAgent || {};
 
   const { loading, run } = useRequest((agentId) => deleteLocalAgent(agentId), {
     manual: true,
@@ -29,7 +29,7 @@ const Header = () => {
         message.success('删除成功');
         deactivateAgent();
         // retrive list
-        fetchAgentList();
+        fetchLocalAgentList();
       } else {
         message.error(errorMessage);
       }
@@ -48,7 +48,14 @@ const Header = () => {
         className={styles.avatar}
         size={100}
       />
-      <div className={styles.title}>{name}</div>
+      <div className={styles.title}>
+        {name}
+        <Tag color="#108ee9" style={{ marginLeft: 8 }}>
+          <a href={homepage} target="_blank">
+            主页
+          </a>
+        </Tag>
+      </div>
       <div className={styles.desc}>{description}</div>
       <Space>
         <Button
@@ -61,12 +68,10 @@ const Header = () => {
         >
           加载
         </Button>
-        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
-          <Button onClick={openPanel} type={'primary'}>
-            编辑
-          </Button>
-        ) : null}
-        {VIDOL_SAMPLE_AGENT_A.agentId !== agentId ? (
+        <Button onClick={openPanel} type={'primary'}>
+          编辑
+        </Button>
+        {DEFAULT_AGENTS.findIndex((item) => item.agentId === agentId) === -1 ? (
           <Popconfirm
             title="确定删除？"
             description="确定删除本地角色文件吗？"

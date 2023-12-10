@@ -4,7 +4,7 @@ import path from 'path';
 //查找个人与商业使用的角色列表 https://hub.vroid.com/models?is_other_users_available=1&personal_commercial_use=profit
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const agentList = [];
+  const localAgentList = [];
   const agentsDir = path.join(process.cwd(), '/public/agents');
   if (!fs.existsSync(agentsDir)) {
     fs.mkdirSync(agentsDir);
@@ -15,7 +15,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       const agentMeta = fs.readFileSync(path.join(agentsDir, agent.name, 'meta.json'), 'utf8');
       const readme = fs.readFileSync(path.join(agentsDir, agent.name, 'readme.txt'), 'utf8');
 
-      agentList.push({
+      localAgentList.push({
         ...JSON.parse(agentMeta),
         agentId: agent.name,
         model: `/agents/${agent.name}/model.vrm`,
@@ -26,5 +26,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
   }
 
-  res.status(200).json({ data: agentList });
+  res.status(200).json({ data: localAgentList });
 }

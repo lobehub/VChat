@@ -1,13 +1,11 @@
+import { DEFAULT_AGENTS } from '@/constants/agent';
 import { useAgentStore } from '@/store/agent';
-import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
-import { Space } from 'antd';
+import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { Loader2Icon } from 'lucide-react';
-import { memo, useMemo, useState } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { memo, useEffect } from 'react';
+import { Center } from 'react-layout-kit';
 import AgentCard from './AgentCard';
-import AgentIndex from './AgentIndex';
 import AgentList from './AgentList';
 
 const useStyles = createStyles(({ css }) => ({
@@ -44,53 +42,22 @@ interface AgentProps {
 const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
-  const [tab, setTab] = useState('installed');
-  const [fetchAgentList, agentList, loading] = useAgentStore((s) => [
-    s.fetchAgentList,
-    s.agentList,
+
+  const [loading, fetchLocalAgentList, localAgentList] = useAgentStore((s) => [
     s.loading,
+    s.fetchLocalAgentList,
+    s.localAgentList,
   ]);
 
-  const TabList = useMemo(() => {
-    console.log('tablist', agentList, loading);
-    return (
-      <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
-        <TabsNav
-          activeKey={tab}
-          onChange={(key) => {
-            setTab(key);
-          }}
-          items={[
-            {
-              key: 'installed',
-              label: '我的角色',
-            },
-            {
-              key: 'index',
-              label: '角色卡池',
-            },
-          ]}
-        />
-        {tab === 'installed' ? (
-          <Space>
-            共 {agentList.length} 项{' '}
-            <ActionIcon
-              icon={Loader2Icon}
-              loading={loading}
-              title="重新加载"
-              onClick={fetchAgentList}
-            />
-          </Space>
-        ) : null}
-      </Flexbox>
-    );
-  }, [agentList, fetchAgentList, loading, tab]);
+  useEffect(() => {
+    fetchLocalAgentList();
+  }, [fetchLocalAgentList]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>选择你的虚拟角色</h1>
+          <h1 className={styles.title}>我的虚拟角色</h1>
           <GridBackground
             animation
             className={styles.background}
@@ -98,9 +65,8 @@ const Agent = (props: AgentProps) => {
             random
           />
         </Center>
-        {TabList}
-        {tab === 'installed' ? <AgentList /> : null}
-        {tab === 'index' ? <AgentIndex /> : null}
+        <AgentList title="示例角色" loading={false} dataSource={DEFAULT_AGENTS} />
+        <AgentList title="本地角色" loading={loading} dataSource={localAgentList} />
       </div>
       <AgentCard />
     </div>

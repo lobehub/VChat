@@ -9,7 +9,7 @@ interface DownloadButtonProps {
 
 const DownloadButton = (props: DownloadButtonProps) => {
   const { url } = props;
-  const { fetchAgentList } = useAgentStore();
+  const { fetchLocalAgentList } = useAgentStore();
 
   const { loading: downloading, run } = useRequest((url) => downloadGithubAgent(url), {
     manual: true,
@@ -17,7 +17,7 @@ const DownloadButton = (props: DownloadButtonProps) => {
       const { success, errorMessage } = data;
       if (success) {
         message.success('下载成功');
-        fetchAgentList();
+        fetchLocalAgentList();
       } else {
         message.error(errorMessage);
       }

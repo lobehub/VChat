@@ -32,5 +32,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     font-size: 20px;
     font-weight: 600;
     text-align: center;
+    display: flex;
+    align-items: center;
   `,
 }));

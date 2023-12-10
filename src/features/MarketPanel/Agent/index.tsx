@@ -1,8 +1,7 @@
-import { useAgentStore } from '@/store/agent';
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import AgentList from './AgentList';
 
@@ -40,12 +39,6 @@ interface AgentProps {
 const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
-  const [tab, setTab] = useState('installed');
-  const [fetchAgentList, agentList, loading] = useAgentStore((s) => [
-    s.fetchAgentList,
-    s.agentList,
-    s.loading,
-  ]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>

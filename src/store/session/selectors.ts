@@ -1,4 +1,4 @@
-import { useAgentStore } from '@/store/agent';
+import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -61,7 +61,7 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
   const session = currentSession(s);
   if (!session) return undefined;
 
-  const { agentList } = useAgentStore.getState();
+  const agentList = agentListSelectors.getAgentList(useAgentStore.getState());
   const { agentId } = session;
   const currentAgent = agentList.find((item) => item.agentId === agentId);
   return currentAgent;

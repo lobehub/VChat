@@ -11,8 +11,8 @@ interface AgentStore {
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   currentIdentifier: string;
-  agentList: Agent[];
-  fetchAgentList: () => void;
+  localAgentList: Agent[];
+  fetchLocalAgentList: () => void;
   getAgentById: (id: string) => Agent | undefined;
 }
 
@@ -21,26 +21,25 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
     (set, get) => ({
       currentIdentifier: '',
       loading: false,
-      agentList: DEFAULT_AGENTS,
-      fetchAgentList: async () => {
+      localAgentList: [],
+      fetchLocalAgentList: async () => {
         set({ loading: true });
-        const res = await getLocalAgentList();
+        const { data = [] } = await getLocalAgentList();
         set({ loading: false });
 
-        const { agentList } = get();
-        const currentAgents = [...res.data, ...DEFAULT_AGENTS];
-        if (isEqual(agentList, currentAgents)) return;
-        set({ agentList: currentAgents });
+        const { localAgentList } = get();
+        if (isEqual(localAgentList, data)) return;
+        set({ localAgentList: data });
       },
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });
       },
       deactivateAgent: () => {
-        set({ currentIdentifier: undefined }, false);
+        set({ currentIdentifier: undefined });
       },
       getAgentById: (id: string): Agent | undefined => {
-        const { agentList } = get();
-        const currentAgent = agentList.find((item) => item.agentId === id);
+        const { localAgentList } = get();
+        const currentAgent = localAgentList.find((item) => item.agentId === id);
         if (!currentAgent) return undefined;
 
         return currentAgent;
@@ -56,14 +55,22 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
 const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
 
 const currentAgentItem = (s: AgentStore): Agent | undefined => {
-  const { agentList, currentIdentifier } = s;
+  const { currentIdentifier } = s;
+  const agentList = getAgentList(s);
   const currentAgent = agentList.find((item) => item.name === currentIdentifier);
   if (!currentAgent) return undefined;
 
   return currentAgent;
 };
 
+const getAgentList = (s: AgentStore): Agent[] => {
+  const { localAgentList = [] } = s;
+  console.log(localAgentList);
+  return [...localAgentList, ...DEFAULT_AGENTS];
+};
+
 export const agentListSelectors = {
   showSideBar,
   currentAgentItem,
+  getAgentList,
 };

@@ -7,11 +7,11 @@ const { Text } = Typography;
 const { Meta } = Card;
 
 const AgentList = () => {
-  const [agentList, activateAgent, loading, fetchAgentList] = useAgentStore((s) => [
-    s.agentList,
+  const [localAgentList, activateAgent, loading, fetchLocalAgentList] = useAgentStore((s) => [
+    s.localAgentList,
     s.activateAgent,
     s.loading,
-    s.fetchAgentList,
+    s.fetchLocalAgentList,
   ]);
 
   // const { loading } = useRequest(getLocalAgentList, {
@@ -21,14 +21,14 @@ const AgentList = () => {
   // });
 
   useLayoutEffect(() => {
-    fetchAgentList();
-  }, [fetchAgentList]);
+    fetchLocalAgentList();
+  }, [fetchLocalAgentList]);
 
   return (
     <List
       loading={loading}
       grid={{ gutter: 8, column: 4 }}
-      dataSource={agentList}
+      dataSource={localAgentList}
       renderItem={(item) => (
         <List.Item>
           <Card
