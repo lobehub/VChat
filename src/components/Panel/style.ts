@@ -19,6 +19,8 @@ export const useStyles = createStyles(({ css, token }) => ({
     cursor: move;
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
   `,
   container: css`
     display: flex;

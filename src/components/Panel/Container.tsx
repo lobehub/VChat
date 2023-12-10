@@ -9,13 +9,15 @@ import { useStyles } from './style';
 interface ContainerProps {
   style?: React.CSSProperties;
   className?: string;
+  title?: React.ReactNode;
+  extra?: React.ReactNode;
   x: number;
   y: number;
   onClose: () => void;
 }
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
-  const { style, className, children, onClose, x, y } = props;
+  const { style, className, children, onClose, x, y, title, extra } = props;
   const { styles } = useStyles();
 
   const { attributes, listeners, transform, setNodeRef, setActivatorNodeRef } = useDraggable({
@@ -38,7 +40,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     }
   }
 
-  const Header = useMemo(() => {
+  const switches = useMemo(() => {
     return (
       <Space data-no-dnd="true">
         <Tooltip title="关闭">
@@ -83,7 +85,9 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
           onDoubleClick={toggleFullScreen}
           ref={setActivatorNodeRef}
         >
-          {Header}
+          <div style={{ flex: 1 }}>{switches}</div>
+          <div style={{ flex: 1, textAlign: 'center' }}>{title ? title : null}</div>
+          <div style={{ flex: 1 }}>{extra ? extra : null}</div>
         </div>
         <div className={styles.container}>{children}</div>
       </div>

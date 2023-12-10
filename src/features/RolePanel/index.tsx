@@ -28,6 +28,7 @@ const RolePanel = (props: RolePanelProps) => {
         x: 320,
         y: 250,
       }}
+      title="编辑角色"
     >
       <div
         style={{

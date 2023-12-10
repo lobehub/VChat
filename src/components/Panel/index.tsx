@@ -15,6 +15,7 @@ import React, { PropsWithChildren, useState } from 'react';
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
+  title?: string;
   onClose: () => void;
   defaultCoordinates?: Coordinates;
 }
@@ -25,6 +26,7 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
     className,
     children,
     onClose,
+    title,
     defaultCoordinates = {
       x: 200,
       y: 200,
@@ -54,7 +56,7 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
         });
       }}
     >
-      <Container x={x} y={y} onClose={onClose} style={style} className={className}>
+      <Container x={x} y={y} onClose={onClose} style={style} className={className} title={title}>
         {children}
       </Container>
     </DndContext>

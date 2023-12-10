@@ -19,7 +19,12 @@ const ControlPanel = (props: ControlPanelProps) => {
   const { setControlPanelOpen, tab } = useConfigStore();
 
   return (
-    <Panel style={style} className={className} onClose={() => setControlPanelOpen(false)}>
+    <Panel
+      style={style}
+      className={className}
+      onClose={() => setControlPanelOpen(false)}
+      title="控制面板"
+    >
       <SideNav className="handle" />
       <div className={styles.content}>
         <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />

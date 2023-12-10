@@ -57,7 +57,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>我的虚拟角色</h1>
+          <h1 className={styles.title}>我的虚拟偶像</h1>
           <GridBackground
             animation
             className={styles.background}
