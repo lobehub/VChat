@@ -1,7 +1,6 @@
-import { downloadGithubAgent } from '@/services/agent';
-import { useAgentStore } from '@/store/agent';
+import { downloadAgentModel } from '@/services/agent';
 import { useRequest } from 'ahooks';
-import { Button, message } from 'antd';
+import { Button } from 'antd';
 
 interface DownloadButtonProps {
   url: string;
@@ -9,18 +8,12 @@ interface DownloadButtonProps {
 
 const DownloadButton = (props: DownloadButtonProps) => {
   const { url } = props;
-  const { fetchLocalAgentList } = useAgentStore();
 
-  const { loading: downloading, run } = useRequest((url) => downloadGithubAgent(url), {
+  const { loading: downloading, run } = useRequest((url) => downloadAgentModel(url), {
     manual: true,
-    onSuccess: (data) => {
-      const { success, errorMessage } = data;
-      if (success) {
-        message.success('下载成功');
-        fetchLocalAgentList();
-      } else {
-        message.error(errorMessage);
-      }
+    onSuccess: (blob) => {
+      const agentModelUrl = window.URL.createObjectURL(blob);
+      console.log('agentModelUrl', agentModelUrl);
     },
   });
 

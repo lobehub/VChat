@@ -61,9 +61,12 @@ const Home = () => {
     s.rolePanelOpen,
   ]);
 
-  const [marketPanelOpen] = useMarketStore((s) => [s.marketPanelOpen]);
+  const [marketPanelOpen, setMarketPanelOpen] = useMarketStore((s) => [
+    s.marketPanelOpen,
+    s.setMarketPanelOpen,
+  ]);
 
-  function openPanel(tab: tabType) {
+  function openControlPanel(tab: tabType) {
     setControlPanelOpen(true);
     setTab(tab);
   }
@@ -95,13 +98,15 @@ const Home = () => {
           } else if (action.key === 'expand') {
             toggleFullScreen();
           } else if (action.key === 'agent') {
-            openPanel('agent');
+            openControlPanel('agent');
           } else if (action.key === 'dance') {
-            openPanel('dance');
+            openControlPanel('dance');
           } else if (action.key === 'chat') {
-            openPanel('chat');
+            openControlPanel('chat');
           } else if (action.key === 'touch') {
-            openPanel('touch');
+            openControlPanel('touch');
+          } else if (action.key === 'market') {
+            setMarketPanelOpen(true);
           }
         }}
       />

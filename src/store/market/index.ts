@@ -2,21 +2,14 @@ import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
+import { AgentStore, createAgentStore } from './slices/agent';
+import { PanelStore, createPanelStore } from './slices/panel';
 
-export type tabType = 'agent' | 'dance' | 'config';
+export type MarketStore = PanelStore & AgentStore;
 
-interface MarketStore {
-  tab: tabType;
-  setTab: (tab: tabType) => void;
-  marketPanelOpen: boolean;
-  setMarketPanelOpen: (open: boolean) => void;
-}
-
-const createStore: StateCreator<MarketStore, [['zustand/devtools', never]]> = (set, get) => ({
-  tab: 'agent',
-  marketPanelOpen: false,
-  setTab: (tab) => set({ tab }),
-  setMarketPanelOpen: (open) => set({ marketPanelOpen: open }),
+const createStore: StateCreator<MarketStore, [['zustand/devtools', never]]> = (...parameters) => ({
+  ...createAgentStore(...parameters),
+  ...createPanelStore(...parameters),
 });
 
 export const useMarketStore = createWithEqualityFn<MarketStore>()(
