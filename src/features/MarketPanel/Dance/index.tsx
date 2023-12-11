@@ -43,7 +43,7 @@ const Dance = (props: DanceProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>找到你心仪的舞蹈</h1>
+          <h1 className={styles.title}>Find Your Favorite Dance</h1>
           <GridBackground
             animation
             className={styles.background}

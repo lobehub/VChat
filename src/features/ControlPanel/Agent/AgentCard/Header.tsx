@@ -72,9 +72,7 @@ const Header = () => {
         >
           开始聊天
         </Button>
-        <Button onClick={openPanel} type={'primary'}>
-          编辑
-        </Button>
+        <Button onClick={openPanel}>编辑</Button>
         {DEFAULT_AGENTS.findIndex((item) => item.agentId === agentId) === -1 ? (
           <Popconfirm
             title="确定删除？"
@@ -83,7 +81,9 @@ const Header = () => {
             okText="确定"
             cancelText="取消"
           >
-            <Button loading={loading}>删除</Button>
+            <Button loading={loading} danger>
+              删除
+            </Button>
           </Popconfirm>
         ) : null}
       </Space>

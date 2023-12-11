@@ -1,7 +1,8 @@
 import { useAgentStore } from '@/store/agent';
 import { useMarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
-import { Button, Card, List, Typography } from 'antd';
+import { GradientButton } from '@lobehub/ui';
+import { Card, List, Typography } from 'antd';
 import { memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
@@ -24,15 +25,16 @@ const AgentList = (props: AgentListProps) => {
     <>
       <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
         <h2>{title}</h2>
-        <Button
+        <GradientButton
           onClick={() => {
             setMarketPanelOpen(true);
             setTab('agent');
           }}
-          type={'primary'}
+          glow
+          size="middle"
         >
           打开商店
-        </Button>
+        </GradientButton>
       </Flexbox>
       <List
         loading={loading}

@@ -51,9 +51,9 @@ export const VIDOL_SAMPLE_AGENT_B: Agent = {
     pitch: 1,
   },
   agentId: 'vidol-sample-agent-b',
-  model: '/vidol-sample-agent-b/model.vrm',
-  cover: '/vidol-sample-agent-b/cover.png',
-  avatar: '/vidol-sample-agent-b/avatar.webp',
+  model: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-b/1.0.0/files/model.vrm',
+  cover: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-b/1.0.0/files/cover.png',
+  avatar: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-b/1.0.0/files/avatar.webp',
   readme: `AvatarSample_B
     AvatarSample_Bは、VRoid Studioに付属されているサンプルモデルの１つです。
     良識の範囲内で、本モデルに設定されているVRoid Hubの利用条件に沿って利用することができます。
@@ -92,9 +92,9 @@ export const VIDOL_SAMPLE_AGENT_C: Agent = {
     pitch: 1,
   },
   agentId: 'vidol-sample-agent-c',
-  model: '/vidol-sample-agent-c/model.vrm',
-  cover: '/vidol-sample-agent-c/cover.png',
-  avatar: '/vidol-sample-agent-c/avatar.webp',
+  model: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-c/1.0.0/files/model.vrm',
+  cover: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-c/1.0.0/files/cover.png',
+  avatar: 'https://registry.npmmirror.com/@v-idol/vidol-agent-sample-c/1.0.0/files/avatar.webp',
   readme: `AvatarSample_Cは、VRoid Studioに付属されているサンプルモデルの１つです。
   良識の範囲内で、本モデルに設定されているVRoid Hubの利用条件に沿って利用することができます。
   VRoid Hub連携アプリや、外部サービス等でぜひご活用ください。

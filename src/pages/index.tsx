@@ -2,7 +2,7 @@ import { tabType, useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
-import { Expand, MessageSquare, Music2, Pointer, RotateCw, User } from 'lucide-react';
+import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
 
@@ -13,40 +13,39 @@ const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false
 
 export const items: ActionIconGroupProps['items'] = [
   {
-    /* @ts-ignore */
     icon: RotateCw,
     key: 'resetCamera',
     label: '重置镜头',
   },
   {
-    /* @ts-ignore */
     icon: Expand,
     key: 'expand',
     label: '全屏',
   },
   {
-    /* @ts-ignore */
     icon: User,
     key: 'agent',
     label: '角色选择',
   },
   {
-    /* @ts-ignore */
     icon: Music2,
     key: 'dance',
     label: '舞蹈选择',
   },
   {
-    /* @ts-ignore */
     icon: MessageSquare,
     key: 'chat',
     label: '立即聊天',
   },
   {
-    /* @ts-ignore */
     icon: Pointer,
     key: 'touch',
     label: '触摸设置',
+  },
+  {
+    icon: ShoppingBag,
+    key: 'market',
+    label: '虚拟商店',
   },
 ];
 

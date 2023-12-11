@@ -53,7 +53,9 @@ const Header = memo(() => {
             okText="确定"
             cancelText="取消"
           >
-            <Button loading={loading}>删除</Button>
+            <Button danger loading={loading}>
+              删除
+            </Button>
           </Popconfirm>
         ) : null}
       </Space>
