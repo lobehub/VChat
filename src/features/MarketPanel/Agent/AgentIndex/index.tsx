@@ -1,4 +1,5 @@
 import { DEFAULT_AGENTS } from '@/constants/agent';
+import { useMarketStore } from '@/store/market';
 import { Card, List, Typography } from 'antd';
 import { memo } from 'react';
 import DownloadButton from './DownloadButton';
@@ -8,6 +9,7 @@ const { Text } = Typography;
 const { Meta } = List.Item;
 
 const AgentIndex = () => {
+  const activateAgent = useMarketStore((s) => s.activateAgent);
   return (
     <List
       grid={{ gutter: 8, column: 4 }}
@@ -19,7 +21,7 @@ const AgentIndex = () => {
             // eslint-disable-next-line @next/next/no-img-element,
             cover={<img src={item.cover} alt="cover" />}
             onClick={() => {
-              activateAgent(item.name);
+              activateAgent(item.agentId);
             }}
           >
             <Meta

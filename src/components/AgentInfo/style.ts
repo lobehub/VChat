@@ -1,23 +1,24 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  author: css`
-    font-size: 12px;
-  `,
-
-  avatar: css`
-    flex: none;
-  `,
   container: css`
+    height: 100%;
+    overflow-y: auto;
+  `,
+  header: css`
     position: relative;
     padding: 16px 16px 24px;
     border-bottom: 1px solid ${token.colorBorderSecondary};
   `,
   footer: css`
-    overflow-y: auto;
     white-space: break-spaces;
-    height: 300px;
-    padding: 8px;
+    padding: 16px 16px 24px;
+  `,
+  author: css`
+    font-size: 12px;
+  `,
+  avatar: css`
+    flex: none;
   `,
   date: css`
     font-size: 12px;
@@ -27,6 +28,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     color: ${token.colorTextDescription};
     text-align: center;
   `,
+  actions: css``,
 
   title: css`
     font-size: 20px;
