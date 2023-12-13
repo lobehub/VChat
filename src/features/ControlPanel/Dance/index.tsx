@@ -1,12 +1,9 @@
 import { useDanceStore } from '@/store/dance';
-import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
-import { Space } from 'antd';
+import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { Loader2Icon } from 'lucide-react';
 import { useState } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
-import DanceIndex from '../../MarketPanel/Dance/DanceIndex';
+import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
 import DanceInfoCard from './DanceInfoCard';
 import DanceList from './DanceList';
@@ -60,43 +57,7 @@ const Dance = (props: DanceProps) => {
             random
           />
         </Center>
-        <Flexbox
-          style={{ marginBottom: 12 }}
-          horizontal
-          align="center"
-          distribution="space-between"
-        >
-          <TabsNav
-            activeKey={tab}
-            onChange={(key) => {
-              setTab(key);
-            }}
-            items={[
-              {
-                key: 'installed',
-                label: '我的舞蹈',
-              },
-              {
-                key: 'index',
-                label: '在线列表',
-              },
-            ]}
-          />
-          {tab === 'installed' ? (
-            <Space>
-              共 {danceList.length} 项{' '}
-              <ActionIcon
-                /* @ts-ignore */
-                icon={Loader2Icon}
-                loading={loading}
-                title="重新加载"
-                onClick={() => fetchDanceList()}
-              />
-            </Space>
-          ) : null}
-        </Flexbox>
-        {tab === 'installed' ? <DanceList /> : null}
-        {tab === 'index' ? <DanceIndex /> : null}
+        <DanceList />
       </div>
       <DanceInfoCard />
       <AudioPlayer
