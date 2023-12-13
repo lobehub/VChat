@@ -43,6 +43,5 @@ export const downloadGithubAgent = async (url: string) => {
 export const downloadAgentModel = async (url: string) => {
   const res = await fetch(url);
 
-  console.log('downloadAgentModel res: ', res);
   return res.blob();
 };

@@ -65,7 +65,6 @@ const currentAgentItem = (s: AgentStore): Agent | undefined => {
 
 const getAgentList = (s: AgentStore): Agent[] => {
   const { localAgentList = [] } = s;
-  console.log(localAgentList);
   return [...localAgentList, ...DEFAULT_AGENTS];
 };
 

@@ -13,7 +13,6 @@ const DownloadButton = (props: DownloadButtonProps) => {
     manual: true,
     onSuccess: (blob) => {
       const agentModelUrl = window.URL.createObjectURL(blob);
-      console.log('agentModelUrl', agentModelUrl);
     },
   });
 

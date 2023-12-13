@@ -1,8 +1,6 @@
-import { useDanceStore } from '@/store/dance';
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useState } from 'react';
 import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
 import DanceInfoCard from './DanceInfoCard';
@@ -42,14 +40,12 @@ interface DanceProps {
 
 const Dance = (props: DanceProps) => {
   const { style, className } = props;
-  const [tab, setTab] = useState('installed');
-  const { danceList, fetchDanceList, loading } = useDanceStore();
   const { theme, styles } = useStyles();
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>找到你心仪的舞蹈</h1>
+          <h1 className={styles.title}>我的舞蹈</h1>
           <GridBackground
             animation
             className={styles.background}

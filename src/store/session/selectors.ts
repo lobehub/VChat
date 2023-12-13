@@ -11,6 +11,11 @@ const currentSession = (s: SessionStore): Session | undefined => {
   return currentSession;
 };
 
+const sessionListIds = (s: SessionStore): string[] => {
+  const { sessionList } = s;
+  return sessionList.map((item) => item.agentId);
+};
+
 export const DEFAULT_USER_AVATAR = '😀';
 
 const currentChats = (s: SessionStore): ChatMessage[] => {
@@ -69,6 +74,7 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
 
 export const sessionSelectors = {
   currentSession,
+  sessionListIds,
   currentChats,
   currentAgent,
   currentChatsString,

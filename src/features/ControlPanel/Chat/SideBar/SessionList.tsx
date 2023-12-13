@@ -26,7 +26,8 @@ interface SessionListProps {
 
 const SessionList = (props: SessionListProps) => {
   const { filter } = props;
-  const [sessionList, switchSession] = useSessionStore((s) => [s.sessionList, s.switchSession]);
+  const [switchSession] = useSessionStore((s) => [s.switchSession]);
+  const sessionListIds = useSessionStore((s) => sessionSelectors.sessionListIds(s), isEqual);
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
   const getAgentById = useAgentStore((s) => s.getAgentById);
   const { styles } = useStyles();
@@ -35,17 +36,17 @@ const SessionList = (props: SessionListProps) => {
 
   return (
     <List
-      dataSource={sessionList.filter((item) => {
-        const agent = getAgentById(item.agentId);
+      dataSource={sessionListIds.filter((agentId) => {
+        const agent = getAgentById(agentId);
         return !filter || agent?.name?.includes(filter) || agent?.description?.includes(filter);
       })}
-      renderItem={(item) => {
-        const agent = getAgentById(item.agentId);
+      renderItem={(agentId) => {
+        const agent = getAgentById(agentId);
         return (
           <List.Item
-            onClick={() => switchSession(item.agentId)}
+            onClick={() => switchSession(agentId)}
             className={classNames(styles.listItem, {
-              [styles.active]: item.agentId === currentAgent?.agentId,
+              [styles.active]: agentId === currentAgent?.agentId,
             })}
             style={{ padding: 12 }}
           >
