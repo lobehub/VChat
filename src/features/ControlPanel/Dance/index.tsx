@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
-import DanceInfoCard from './DanceInfoCard';
+import DanceCard from './DanceCard';
 import DanceList from './DanceList';
 
 const useStyles = createStyles(({ css }) => ({
@@ -55,7 +55,7 @@ const Dance = (props: DanceProps) => {
         </Center>
         <DanceList />
       </div>
-      <DanceInfoCard />
+      <DanceCard />
       <AudioPlayer
         style={{
           position: 'absolute',
