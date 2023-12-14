@@ -13,6 +13,7 @@ import { memo, useState } from 'react';
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
+    height: 100% !important;
     flex-direction: column;
   `,
   header: css`
@@ -59,7 +60,7 @@ const Header = () => {
 
   return (
     <DraggablePanel
-      className={styles.content}
+      classNames={{ content: styles.content }}
       expand={showAgentSidebar}
       minWidth={240}
       mode={'fixed'}

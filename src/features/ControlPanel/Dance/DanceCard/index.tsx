@@ -7,10 +7,11 @@ import { Button, Popconfirm, message } from 'antd';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
 
-const useStyles = createStyles(({ css, token, stylish }) => ({
+const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
     flex-direction: column;
+    height: 100% !important;
   `,
   header: css`
     border-bottom: 1px solid ${token.colorBorder};
@@ -50,7 +51,7 @@ const SideBar = memo(() => {
 
   return (
     <DraggablePanel
-      className={styles.content}
+      classNames={{ content: styles.content }}
       minWidth={240}
       mode={'fixed'}
       expand={showDanceSidebar}
