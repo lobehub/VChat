@@ -3,7 +3,7 @@ import { useRequest } from 'ahooks';
 import { Button } from 'antd';
 
 interface DownloadButtonProps {
-  url: string;
+  url?: string;
 }
 
 const DownloadButton = (props: DownloadButtonProps) => {

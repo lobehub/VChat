@@ -3,6 +3,7 @@ import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { memo } from 'react';
 import { Center } from 'react-layout-kit';
+import AgentCard from './AgentCard';
 import AgentIndex from './AgentIndex';
 
 const useStyles = createStyles(({ css }) => ({
@@ -53,6 +54,7 @@ const Agent = (props: AgentProps) => {
           />
         </Center>
         <AgentIndex />
+        <AgentCard />
       </div>
     </div>
   );

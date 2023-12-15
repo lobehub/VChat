@@ -2,7 +2,7 @@ import { DEFAULT_AGENTS } from '@/constants/agent';
 import { useMarketStore } from '@/store/market';
 import { Card, List, Typography } from 'antd';
 import { memo } from 'react';
-import DownloadButton from './DownloadButton';
+import DownloadButton from '../AgentCard/DownloadButton';
 
 const { Text } = Typography;
 
