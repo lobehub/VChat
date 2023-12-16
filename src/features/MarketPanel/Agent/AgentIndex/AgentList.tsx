@@ -1,4 +1,3 @@
-import { DEFAULT_AGENTS } from '@/constants/agent';
 import { useMarketStore } from '@/store/market';
 import { Card, List, Typography } from 'antd';
 import { memo } from 'react';
@@ -8,11 +7,16 @@ const { Text } = Typography;
 const { Meta } = List.Item;
 
 const AgentList = () => {
-  const activateAgent = useMarketStore((s) => s.activateAgent);
+  const [activateAgent, agentList, agentLoading] = useMarketStore((s) => [
+    s.activateAgent,
+    s.agentList,
+    s.agentLoading,
+  ]);
   return (
     <List
       grid={{ gutter: 8, column: 4 }}
-      dataSource={DEFAULT_AGENTS}
+      dataSource={agentList}
+      loading={agentLoading}
       renderItem={(item) => (
         <List.Item>
           <Card

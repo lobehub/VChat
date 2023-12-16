@@ -20,12 +20,22 @@ interface AgentLoaderProps {
 
 const AgentLoader = (props: AgentLoaderProps) => {
   const { style, className } = props;
-  const agentIndexUrl = useMarketStore((s) => s.agentIndexUrl);
+  const [agentIndexUrl, fetchAgentIndex, agentLoading] = useMarketStore((s) => [
+    s.agentIndexUrl,
+    s.fetchAgentIndex,
+    s.agentLoading,
+  ]);
   const { styles } = useStyles();
   return (
     <div className={classNames(styles.content, className)} style={style}>
       <Input value={agentIndexUrl} width="100%" size="large" />
-      <Button type="primary" size="large" className={styles.button}>
+      <Button
+        type="primary"
+        size="large"
+        className={styles.button}
+        loading={agentLoading}
+        onClick={() => fetchAgentIndex()}
+      >
         加载模型列表
       </Button>
     </div>
