@@ -2,6 +2,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
+import { agentSelectors } from './selectors/agent';
 import { AgentStore, createAgentStore } from './slices/agent';
 import { PanelStore, createPanelStore } from './slices/panel';
 
@@ -23,3 +24,7 @@ export const useMarketStore = createWithEqualityFn<MarketStore>()(
   ),
   shallow,
 );
+
+export const marketStoreSelectors = {
+  ...agentSelectors,
+};
