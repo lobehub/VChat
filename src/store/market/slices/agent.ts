@@ -13,6 +13,7 @@ export interface AgentStore {
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   fetchAgentIndex: () => void;
+  setAgentIndexUrl: (url: string) => void;
 }
 
 export const createAgentStore: StateCreator<
@@ -31,6 +32,9 @@ export const createAgentStore: StateCreator<
     },
     deactivateAgent: () => {
       set({ currentAgentId: undefined });
+    },
+    setAgentIndexUrl: (url) => {
+      set({ agentIndexUrl: url });
     },
     fetchAgentIndex: async () => {
       const { agentIndexUrl } = get();
