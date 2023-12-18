@@ -42,7 +42,7 @@ const AgentLoader = (props: AgentLoaderProps) => {
   return (
     <div className={classNames(styles.content, className)} style={style}>
       <div className={styles.address}>
-        <div className={styles.label}>列表地址：</div>
+        <div className={styles.label}>模型列表地址：</div>
         <Input
           value={agentIndexUrl}
           size="large"
