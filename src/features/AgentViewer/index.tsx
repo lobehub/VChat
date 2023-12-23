@@ -20,7 +20,7 @@ function AgentViewer() {
     (canvas: HTMLCanvasElement) => {
       if (canvas) {
         viewer.setup(canvas);
-        // Drag and DropでVRMを差し替え
+
         canvas.addEventListener('dragover', function (event) {
           event.preventDefault();
         });

@@ -41,7 +41,7 @@ const Config = (props: ConfigProps) => {
         style={{ display: 'flex', flexGrow: 1 }}
       >
         {/* @ts-ignore */}
-        <FormGroup icon={BotIcon} title={'模型设置'}>
+        <FormGroup icon={BotIcon} title={'语言模型'}>
           <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
               style={{ width: 280 }}

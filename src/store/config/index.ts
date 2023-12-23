@@ -1,41 +1,27 @@
+import { Setting, tabType } from '@/types/setting';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
+import { ConfigState, initialState } from './initialState';
 
-export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'touch';
-
-interface Setting {
-  apikey: string;
-  endpoint: string;
-  model: string;
-}
-
-interface ConfigStore {
-  setting: Setting;
-  tab: tabType;
+interface ConfigAction {
   setTab: (tab: tabType) => void;
-  controlPanelOpen: boolean;
-  rolePanelOpen: boolean;
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
   setSetting: (setting: Partial<Setting>) => void;
 }
 
+interface ConfigStore extends ConfigState, ConfigAction {}
+
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
-  tab: 'agent',
-  controlPanelOpen: false,
-  rolePanelOpen: false,
+  ...initialState,
   setTab: (tab) => set({ tab }),
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
-  setting: {
-    apikey: '',
-    endpoint: '',
-    model: 'gpt-3.5-turbo',
-  },
+
   setSetting: (setting) => {
     const prevSetting = get().setting;
     const nextSetting = produce(prevSetting, (draftState) => {
