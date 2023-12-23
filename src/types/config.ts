@@ -1,15 +1,15 @@
 export interface OpenAIConfig {
-  apikey: string;
+  apikey?: string;
   endpoint?: string;
+  model?: string;
 }
 
 export interface LanguageModelConfig {
-  openai: OpenAIConfig;
+  openAI: OpenAIConfig;
 }
 
 export interface Setting {
   languageModel: LanguageModelConfig;
-  model: string;
 }
 
 export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'touch';

@@ -1,4 +1,4 @@
-import { Setting, tabType } from '@/types/setting';
+import { Setting, tabType } from '@/types/config';
 
 export interface ConfigState {
   setting: Setting;
@@ -13,13 +13,12 @@ const initialState: ConfigState = {
   rolePanelOpen: false,
   setting: {
     languageModel: {
-      openai: {
+      openAI: {
         apikey: '',
         endpoint: '',
+        model: 'gpt-3.5-turbo',
       },
     },
-
-    model: 'gpt-3.5-turbo',
   },
 };
 

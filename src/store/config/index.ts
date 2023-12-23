@@ -1,4 +1,4 @@
-import { Setting, tabType } from '@/types/setting';
+import { Setting, tabType } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
@@ -6,15 +6,17 @@ import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { ConfigState, initialState } from './initialState';
+import { configSelectors } from './selectors/config';
 
-interface ConfigAction {
+export interface ConfigAction {
   setTab: (tab: tabType) => void;
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
   setSetting: (setting: Partial<Setting>) => void;
+  setOpenAISetting: (setting: Partial<Setting['languageModel']['openAI']>) => void;
 }
 
-interface ConfigStore extends ConfigState, ConfigAction {}
+export interface ConfigStore extends ConfigState, ConfigAction {}
 
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
   ...initialState,
@@ -30,6 +32,9 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     if (isEqual(prevSetting, nextSetting)) return;
     set({ setting: nextSetting });
   },
+  setOpenAISetting: (setting) => {
+    get().setSetting({ languageModel: { openAI: setting } });
+  },
 });
 
 export const useConfigStore = createWithEqualityFn<ConfigStore>()(
@@ -43,3 +48,5 @@ export const useConfigStore = createWithEqualityFn<ConfigStore>()(
   ),
   shallow,
 );
+
+export { configSelectors };
