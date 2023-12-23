@@ -48,7 +48,7 @@ const AgentList = (props: AgentListProps) => {
                 // eslint-disable-next-line @next/next/no-img-element,
                 cover={<img src={cover} alt="cover" />}
                 onClick={() => {
-                  activateAgent(name);
+                  activateAgent(item.agentId);
                 }}
               >
                 <Meta
