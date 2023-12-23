@@ -1,8 +1,8 @@
-import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { useAgentStore } from '@/store/agent';
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import AgentCard from './AgentCard';
 import AgentList from './AgentList';
@@ -42,13 +42,7 @@ const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
 
-  const [loading, fetchLocalAgentList] = useAgentStore((s) => [s.loading, s.fetchLocalAgentList]);
-
-  const agentList = useAgentStore((s) => agentListSelectors.getAgentList(s));
-
-  useEffect(() => {
-    fetchLocalAgentList();
-  }, [fetchLocalAgentList]);
+  const [loading, localAgentList] = useAgentStore((s) => [s.loading, s.localAgentList]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
@@ -62,7 +56,7 @@ const Agent = (props: AgentProps) => {
             random
           />
         </Center>
-        <AgentList title="角色列表" loading={loading} dataSource={agentList} />
+        <AgentList title="角色列表" loading={loading} dataSource={localAgentList} />
       </div>
       <AgentCard />
     </div>

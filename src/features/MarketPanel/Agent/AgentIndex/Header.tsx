@@ -2,7 +2,7 @@ import { useMarketStore } from '@/store/market';
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -37,6 +37,11 @@ const Header = (props: AgentLoaderProps) => {
     s.agentLoading,
   ]);
   const { styles } = useStyles();
+
+  useEffect(() => {
+    fetchAgentIndex();
+  }, [fetchAgentIndex]);
+
   return (
     <div className={classNames(styles.content, className)} style={style}>
       <h2>模型列表</h2>

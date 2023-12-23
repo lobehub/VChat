@@ -1,4 +1,4 @@
-import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { useAgentStore } from '@/store/agent';
 import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -23,14 +23,16 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
   const agent = currentAgent(s);
   if (!session || !agent) return [];
 
+  const { avatar, name, description } = agent.meta;
+
   const { messages } = session;
   return messages?.map((message) => {
     return {
       ...message,
       meta: {
-        avatar: message.role === 'user' ? DEFAULT_USER_AVATAR : agent.avatar,
-        title: message.role === 'user' ? '你' : agent.name,
-        description: message.role === 'user' ? undefined : agent.description,
+        avatar: message.role === 'user' ? DEFAULT_USER_AVATAR : avatar,
+        title: message.role === 'user' ? '你' : name,
+        description: message.role === 'user' ? undefined : description,
       },
     };
   });
@@ -66,9 +68,9 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
   const session = currentSession(s);
   if (!session) return undefined;
 
-  const agentList = agentListSelectors.getAgentList(useAgentStore.getState());
+  const { localAgentList } = useAgentStore.getState();
   const { agentId } = session;
-  const currentAgent = agentList.find((item) => item.agentId === agentId);
+  const currentAgent = localAgentList.find((item) => item.agentId === agentId);
   return currentAgent;
 };
 

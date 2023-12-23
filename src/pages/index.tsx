@@ -1,6 +1,7 @@
-import { tabType, useConfigStore } from '@/store/config';
+import { useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
 import { useViewerStore } from '@/store/viewer';
+import { tabType } from '@/types/config';
 import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
 import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } from 'lucide-react';
 import dynamic from 'next/dynamic';

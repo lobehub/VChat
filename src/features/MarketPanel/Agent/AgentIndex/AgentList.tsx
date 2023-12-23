@@ -1,8 +1,8 @@
+import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useMarketStore } from '@/store/market';
-import { Card, List, Typography } from 'antd';
+import { CheckCircleTwoTone } from '@ant-design/icons';
+import { Card, List } from 'antd';
 import { memo } from 'react';
-
-const { Text } = Typography;
 
 const { Meta } = List.Item;
 
@@ -12,32 +12,33 @@ const AgentList = () => {
     s.agentList,
     s.agentLoading,
   ]);
+  const [subscribed] = useAgentStore((s) => [agentListSelectors.subscribed(s)]);
   return (
     <List
       grid={{ gutter: 8, column: 4 }}
       dataSource={agentList}
       loading={agentLoading}
       renderItem={(item) => {
-        const { cover, name, description } = item?.meta;
+        const { avatar, name } = item?.meta;
+        const isSubscribed = subscribed(item.agentId);
         return (
-          <List.Item>
+          <List.Item style={{ position: 'relative' }}>
             <Card
               hoverable
               // eslint-disable-next-line @next/next/no-img-element,
-              cover={<img src={cover} alt="cover" />}
+              cover={<img src={avatar} alt="cover" />}
               onClick={() => {
                 activateAgent(item.agentId);
               }}
             >
-              <Meta
-                title={name}
-                description={
-                  <Text style={{ width: 200 }} ellipsis={{ tooltip: description }}>
-                    {description}
-                  </Text>
-                }
-              />
+              <Meta title={name} />
             </Card>
+            {isSubscribed ? (
+              <CheckCircleTwoTone
+                twoToneColor="#52c41a"
+                style={{ position: 'absolute', right: 8, top: 8, fontSize: 24 }}
+              />
+            ) : null}
           </List.Item>
         );
       }}

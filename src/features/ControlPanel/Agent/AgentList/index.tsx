@@ -39,27 +39,30 @@ const AgentList = (props: AgentListProps) => {
         loading={loading}
         grid={{ gutter: 8, column: 4 }}
         dataSource={dataSource}
-        renderItem={(item) => (
-          <List.Item>
-            <Card
-              hoverable
-              // eslint-disable-next-line @next/next/no-img-element,
-              cover={<img src={item.cover} alt="cover" />}
-              onClick={() => {
-                activateAgent(item.name);
-              }}
-            >
-              <Meta
-                title={item.name}
-                description={
-                  <Text style={{ width: 200 }} ellipsis={{ tooltip: item.description }}>
-                    {item.description}
-                  </Text>
-                }
-              />
-            </Card>
-          </List.Item>
-        )}
+        renderItem={(item) => {
+          const { cover, name, description } = item.meta;
+          return (
+            <List.Item>
+              <Card
+                hoverable
+                // eslint-disable-next-line @next/next/no-img-element,
+                cover={<img src={cover} alt="cover" />}
+                onClick={() => {
+                  activateAgent(name);
+                }}
+              >
+                <Meta
+                  title={name}
+                  description={
+                    <Text style={{ width: 200 }} ellipsis={{ tooltip: description }}>
+                      {description}
+                    </Text>
+                  }
+                />
+              </Card>
+            </List.Item>
+          );
+        }}
       />
     </>
   );

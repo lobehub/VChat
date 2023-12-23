@@ -1,9 +1,10 @@
 import AgentInfo from '@/components/AgentInfo';
 import { marketStoreSelectors, useMarketStore } from '@/store/market';
+
 import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
-import DownloadButton from './DownloadButton';
+import DownloadButton from './SubscribeButton';
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -28,6 +29,11 @@ const Header = () => {
     ],
   );
 
+  const actions = [];
+  if (currentAgentItem) {
+    actions.push(<DownloadButton agent={currentAgentItem} key="download" />);
+  }
+
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
@@ -44,10 +50,7 @@ const Header = () => {
       }}
       placement={'right'}
     >
-      <AgentInfo
-        agent={currentAgentItem}
-        actions={[<DownloadButton url={currentAgentItem?.meta?.model} key="download" />]}
-      />
+      <AgentInfo agent={currentAgentItem} actions={actions} />
     </DraggablePanel>
   );
 };

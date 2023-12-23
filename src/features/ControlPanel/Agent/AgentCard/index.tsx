@@ -24,14 +24,11 @@ const useStyles = createStyles(({ css, token }) => ({
 const Header = () => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showAgentSidebar, activateAgent, deactivateAgent, fetchLocalAgentList] = useAgentStore(
-    (s) => [
-      agentListSelectors.showSideBar(s),
-      s.activateAgent,
-      s.deactivateAgent,
-      s.fetchLocalAgentList,
-    ],
-  );
+  const [showAgentSidebar, activateAgent, deactivateAgent] = useAgentStore((s) => [
+    agentListSelectors.showSideBar(s),
+    s.activateAgent,
+    s.deactivateAgent,
+  ]);
   const [setRolePanelOpen, setTab] = useConfigStore((s) => [s.setRolePanelOpen, s.setTab]);
   const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
@@ -46,8 +43,6 @@ const Header = () => {
       if (success) {
         message.success('删除成功');
         deactivateAgent();
-        // retrive list
-        fetchLocalAgentList();
       } else {
         message.error(errorMessage);
       }
