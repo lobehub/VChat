@@ -1,5 +1,12 @@
 import { useConfigStore } from '@/store/config';
-import { Form, FormGroup, FormItem, Swatches } from '@lobehub/ui';
+import {
+  Form,
+  FormGroup,
+  FormItem,
+  PrimaryColors,
+  Swatches,
+  findCustomThemeName,
+} from '@lobehub/ui';
 import { createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { Settings2 } from 'lucide-react';
@@ -46,7 +53,8 @@ const CommonConfig = (props: CommonConfigProps) => {
                 theme.volcano,
               ]}
               onSelect={(color: any) => {
-                setConfig({ primaryColor: color });
+                const name = findCustomThemeName('primary', color) as PrimaryColors;
+                setConfig({ primaryColor: name || '' });
               }}
             />
           </FormItem>
