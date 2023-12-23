@@ -5,7 +5,7 @@ const showSideBar = (s: MarketStore) => !!s.currentAgentId;
 
 const currentAgentItem = (s: MarketStore): Agent | undefined => {
   const { currentAgentId, agentList } = s;
-  const currentAgent = agentList.find((item) => item.name === currentAgentId);
+  const currentAgent = agentList.find((item) => item.agentId === currentAgentId);
   if (!currentAgent) return undefined;
 
   return currentAgent;

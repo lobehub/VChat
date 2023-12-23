@@ -38,10 +38,12 @@ const SessionList = (props: SessionListProps) => {
     <List
       dataSource={sessionListIds.filter((agentId) => {
         const agent = getAgentById(agentId);
-        return !filter || agent?.name?.includes(filter) || agent?.description?.includes(filter);
+        const { name, description } = agent?.meta || {};
+        return !filter || name?.includes(filter) || description?.includes(filter);
       })}
       renderItem={(agentId) => {
         const agent = getAgentById(agentId);
+        const { name, description, avatar } = agent?.meta || {};
         return (
           <List.Item
             onClick={() => switchSession(agentId)}
@@ -51,9 +53,9 @@ const SessionList = (props: SessionListProps) => {
             style={{ padding: 12 }}
           >
             <List.Item.Meta
-              avatar={<Avatar src={agent?.avatar} />}
-              title={agent?.name}
-              description={<Text ellipsis>{agent?.description}</Text>}
+              avatar={<Avatar src={avatar} />}
+              title={name}
+              description={<Text ellipsis>{description}</Text>}
             />
           </List.Item>
         );

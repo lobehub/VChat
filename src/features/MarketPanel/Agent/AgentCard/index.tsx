@@ -46,7 +46,7 @@ const Header = () => {
     >
       <AgentInfo
         agent={currentAgentItem}
-        actions={[<DownloadButton url={currentAgentItem?.model} key="download" />]}
+        actions={[<DownloadButton url={currentAgentItem?.meta?.model} key="download" />]}
       />
     </DraggablePanel>
   );

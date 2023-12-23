@@ -12,7 +12,7 @@ function AgentViewer() {
 
   useEffect(() => {
     if (currentAgent) {
-      viewer.loadVrm(currentAgent.model);
+      viewer.loadVrm(currentAgent.meta.model);
     }
   }, [currentAgent, viewer]);
 
