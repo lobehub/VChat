@@ -26,7 +26,7 @@ const Config = (props: ConfigProps) => {
   const { styles } = useStyles();
   const [form] = AForm.useForm();
   const openAIConfig = useConfigStore((s) => configSelectors.currentOpenAIConfig(s), isEqual);
-  const setOpenAISetting = useConfigStore((s) => s.setOpenAISetting);
+  const setOpenAIConfig = useConfigStore((s) => s.setOpenAIConfig);
 
   useEffect(() => {
     form.setFieldsValue(openAIConfig);
@@ -36,7 +36,7 @@ const Config = (props: ConfigProps) => {
     <div style={style} className={classNames(styles.config, className)}>
       <Form
         form={form}
-        onValuesChange={debounce(setOpenAISetting, 100)}
+        onValuesChange={debounce(setOpenAIConfig, 100)}
         style={{ display: 'flex', flexGrow: 1 }}
       >
         {/* @ts-ignore */}

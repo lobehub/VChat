@@ -1,7 +1,7 @@
-import { Setting, tabType } from '@/types/config';
+import { Config, tabType } from '@/types/config';
 
 export interface ConfigState {
-  setting: Setting;
+  config: Config;
   tab: tabType;
   controlPanelOpen: boolean;
   rolePanelOpen: boolean;
@@ -11,7 +11,8 @@ const initialState: ConfigState = {
   tab: 'agent',
   controlPanelOpen: false,
   rolePanelOpen: false,
-  setting: {
+  config: {
+    primaryColor: 'blue',
     languageModel: {
       openAI: {
         apikey: '',

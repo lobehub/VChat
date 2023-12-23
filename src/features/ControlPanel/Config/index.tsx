@@ -1,6 +1,7 @@
 import { TabsNav } from '@lobehub/ui';
 import classNames from 'classnames';
 import { useState } from 'react';
+import CommonConfig from './common';
 import OpenAIConfig from './model/openai';
 import { useStyles } from './style';
 
@@ -12,7 +13,7 @@ interface ConfigProps {
 const Config = (props: ConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [tab, setTab] = useState('languageModel');
+  const [tab, setTab] = useState('common');
 
   return (
     <div style={style} className={classNames(styles.container, className)}>
@@ -24,17 +25,20 @@ const Config = (props: ConfigProps) => {
           }}
           items={[
             {
-              key: 'languageModel',
-              label: '语言模型',
+              key: 'common',
+              label: '通用设置',
             },
             {
-              key: 'market',
-              label: '商店设置',
+              key: 'languageModel',
+              label: '语言模型',
             },
           ]}
         />
       </div>
-      <div className={styles.content}>{tab === 'languageModel' ? <OpenAIConfig /> : null}</div>
+      <div className={styles.content}>
+        {tab === 'languageModel' ? <OpenAIConfig /> : null}
+        {tab === 'common' ? <CommonConfig /> : null}
+      </div>
     </div>
   );
 };

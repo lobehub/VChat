@@ -1,4 +1,4 @@
-import { Setting, tabType } from '@/types/config';
+import { Config, tabType } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
@@ -12,8 +12,8 @@ export interface ConfigAction {
   setTab: (tab: tabType) => void;
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
-  setSetting: (setting: Partial<Setting>) => void;
-  setOpenAISetting: (setting: Partial<Setting['languageModel']['openAI']>) => void;
+  setConfig: (config: Partial<Config>) => void;
+  setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
 }
 
 export interface ConfigStore extends ConfigState, ConfigAction {}
@@ -24,16 +24,16 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
 
-  setSetting: (setting) => {
-    const prevSetting = get().setting;
+  setConfig: (config) => {
+    const prevSetting = get().config;
     const nextSetting = produce(prevSetting, (draftState) => {
-      merge(draftState, setting);
+      merge(draftState, config);
     });
     if (isEqual(prevSetting, nextSetting)) return;
-    set({ setting: nextSetting });
+    set({ config: nextSetting });
   },
-  setOpenAISetting: (setting) => {
-    get().setSetting({ languageModel: { openAI: setting } });
+  setOpenAIConfig: (config) => {
+    get().setConfig({ languageModel: { openAI: config } });
   },
 });
 

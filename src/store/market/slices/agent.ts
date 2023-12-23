@@ -1,4 +1,3 @@
-import { AGENT_INDEX_URL } from '@/constants/common';
 import { getAgentIndex } from '@/services/agent';
 import { MarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
@@ -8,12 +7,10 @@ import { StateCreator } from 'zustand/vanilla';
 export interface AgentStore {
   currentAgentId: string;
   agentList: Agent[];
-  agentIndexUrl: string;
   agentLoading: boolean;
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   fetchAgentIndex: () => void;
-  setAgentIndexUrl: (url: string) => void;
 }
 
 export const createAgentStore: StateCreator<
@@ -25,7 +22,6 @@ export const createAgentStore: StateCreator<
   return {
     currentAgentId: '',
     agentList: [],
-    agentIndexUrl: AGENT_INDEX_URL,
     agentLoading: false,
     activateAgent: (identifier) => {
       set({ currentAgentId: identifier });
@@ -33,14 +29,10 @@ export const createAgentStore: StateCreator<
     deactivateAgent: () => {
       set({ currentAgentId: undefined });
     },
-    setAgentIndexUrl: (url) => {
-      set({ agentIndexUrl: url });
-    },
     fetchAgentIndex: async () => {
-      const { agentIndexUrl } = get();
       set({ agentLoading: true });
       try {
-        const { agents = [] } = await getAgentIndex(agentIndexUrl);
+        const { agents = [] } = await getAgentIndex();
         const { agentList } = get();
         if (!isEqual(agentList, agents)) set({ agentList: agents });
       } catch (error) {

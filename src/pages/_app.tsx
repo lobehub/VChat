@@ -1,27 +1,24 @@
 import Header from '@/components/Header';
+import { useConfigStore } from '@/store/config';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@lobehub/ui';
-import { ThemeProvider as AntdThemeProvider } from 'antd-style';
 import type { AppProps } from 'next/app';
 
 export default function App({ Component, pageProps }: AppProps) {
   const themeMode = useThemeStore((s) => s.themeMode);
+  const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
   return (
-    <AntdThemeProvider
+    <ThemeProvider
       themeMode={themeMode}
-      theme={{
-        token: {
-          colorPrimary: '#bdf7e4',
-        },
+      customTheme={{
+        primaryColor: primaryColor,
       }}
     >
-      <ThemeProvider themeMode={themeMode}>
-        <Header />
-        <main style={{ display: 'flex', width: '100%' }}>
-          <Component {...pageProps} />
-        </main>
-      </ThemeProvider>
-    </AntdThemeProvider>
+      <Header />
+      <main style={{ display: 'flex', width: '100%' }}>
+        <Component {...pageProps} />
+      </main>
+    </ThemeProvider>
   );
 }
