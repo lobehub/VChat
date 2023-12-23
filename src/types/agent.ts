@@ -11,6 +11,10 @@ export interface AgentMeta {
    */
   description: string;
   /**
+   * 主页地址，一般为 Vroid Hub 的地址
+   */
+  homepage: string;
+  /**
    * 模型文件路径
    */
   model: string;
@@ -37,10 +41,7 @@ export interface Agent {
    * 角色元数据
    */
   meta: AgentMeta;
-  /**
-   * 主页地址，一般为 Vroid Hub 的地址
-   */
-  homepage: string;
+
   /**
    * 角色设定
    */

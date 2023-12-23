@@ -54,8 +54,8 @@ const Agent = (props: AgentProps) => {
           />
         </Center>
         <AgentIndex />
-        <AgentCard />
       </div>
+      <AgentCard />
     </div>
   );
 };

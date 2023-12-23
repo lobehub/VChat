@@ -20,12 +20,13 @@ const DownloadButton = (props: DownloadButtonProps) => {
     <Button
       key="list-download"
       disabled={downloading}
+      type="primary"
       loading={downloading}
       onClick={() => {
         run(url);
       }}
     >
-      下载
+      订阅
     </Button>
   );
 };

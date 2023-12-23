@@ -13,7 +13,8 @@ interface AgentInfoProps {
 const AgentInfo = (props: AgentInfoProps) => {
   const { styles, theme } = useStyles();
   const { agent, actions = [] } = props;
-  const { avatar, name, description, homepage, systemRole } = agent || {};
+  const { meta, systemRole } = agent || {};
+  const { avatar, name, description, homepage } = meta || {};
 
   return (
     <div className={styles.container}>
