@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import AgentList from './AgentList';
-import AgentLoader from './AgentLoader';
+import Header from './Header';
 
 const AgentIndex = () => {
   return (
     <>
-      <AgentLoader style={{ marginBottom: 12 }} />
+      <Header style={{ marginBottom: 12 }} />
       <AgentList />
     </>
   );
