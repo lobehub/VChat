@@ -11,7 +11,7 @@ const AgentList = () => {
     s.activateAgent,
     s.agentList,
     s.agentLoading,
-    marketStoreSelectors.showSideBar(s),
+    marketStoreSelectors.showAgentSideBar(s),
   ]);
   const [subscribed] = useAgentStore((s) => [agentListSelectors.subscribed(s)]);
   return (

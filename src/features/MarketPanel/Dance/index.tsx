@@ -2,13 +2,13 @@ import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { Center } from 'react-layout-kit';
+import DanceCard from './DanceCard';
 import DanceIndex from './DanceIndex';
 
 const useStyles = createStyles(({ css }) => ({
   container: css`
     position: relative;
     display: flex;
-    padding-bottom: 96px;
     width: 100%;
     height: 100%;
     min-height: 500px;
@@ -53,6 +53,7 @@ const Dance = (props: DanceProps) => {
         </Center>
         <DanceIndex />
       </div>
+      <DanceCard />
     </div>
   );
 };

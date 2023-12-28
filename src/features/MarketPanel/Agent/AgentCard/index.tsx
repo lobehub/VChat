@@ -22,7 +22,7 @@ const Header = () => {
   const [tempId, setTempId] = useState<string>('');
   const [showAgentSidebar, activateAgent, deactivateAgent, currentAgentItem] = useMarketStore(
     (s) => [
-      marketStoreSelectors.showSideBar(s),
+      marketStoreSelectors.showAgentSideBar(s),
       s.activateAgent,
       s.deactivateAgent,
       marketStoreSelectors.currentAgentItem(s),

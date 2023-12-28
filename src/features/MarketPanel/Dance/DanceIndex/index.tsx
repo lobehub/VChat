@@ -2,7 +2,7 @@ import { memo } from 'react';
 import DanceList from './DanceList';
 import Header from './Header';
 
-const AgentIndex = () => {
+const DanceIndex = () => {
   return (
     <>
       <Header style={{ marginBottom: 12 }} />
@@ -11,4 +11,4 @@ const AgentIndex = () => {
   );
 };
 
-export default memo(AgentIndex);
+export default memo(DanceIndex);

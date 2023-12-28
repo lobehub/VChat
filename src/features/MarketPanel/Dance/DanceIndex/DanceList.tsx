@@ -1,4 +1,4 @@
-import { danceListSelectors, useDanceStore } from '@/store/dance'; // 更改这里
+import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { marketStoreSelectors, useMarketStore } from '@/store/market';
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Card, List } from 'antd';
@@ -7,34 +7,33 @@ import { memo } from 'react';
 const { Meta } = List.Item;
 
 const DanceList = () => {
-  // 更改这里
   const [activateDance, danceList, danceLoading, showDanceSidebar] = useMarketStore((s) => [
-    // 更改这里
-    s.activateDance, // 更改这里
-    s.danceList, // 更改这里
-    s.danceLoading, // 更改这里
-    marketStoreSelectors.showSideBar(s),
+    s.activateDance,
+    s.danceList,
+    s.danceLoading,
+    marketStoreSelectors.showDanceSideBar(s),
   ]);
-  const [subscribed] = useDanceStore((s) => [danceListSelectors.subscribed(s)]); // 更改这里
+  const [subscribed] = useDanceStore((s) => [danceListSelectors.subscribed(s)]);
   return (
     <List
-      grid={{ gutter: 8, column: showDanceSidebar ? 3 : 4 }} // 更改这里
-      dataSource={danceList} // 更改这里
-      loading={danceLoading} // 更改这里
+      grid={{ gutter: 8, column: showDanceSidebar ? 3 : 4 }}
+      dataSource={danceList}
+      loading={danceLoading}
       renderItem={(item) => {
-        const { avatar, name } = item?.meta;
-        const isSubscribed = subscribed(item.danceId); // 更改这里
+        const isSubscribed = subscribed(item.danceId);
         return (
           <List.Item style={{ position: 'relative' }}>
             <Card
               hoverable
-              // eslint-disable-next-line @next/next/no-img-element,
-              cover={<img src={avatar} alt="cover" />}
+              cover={
+                // eslint-disable-next-line @next/next/no-img-element,
+                <img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />
+              }
               onClick={() => {
-                activateDance(item.danceId); // 更改这里
+                activateDance(item.danceId);
               }}
             >
-              <Meta title={name} />
+              <Meta title={item.name} />
             </Card>
             {isSubscribed ? (
               <CheckCircleTwoTone
@@ -49,4 +48,4 @@ const DanceList = () => {
   );
 };
 
-export default memo(DanceList); // 更改这里
+export default memo(DanceList);

@@ -2,18 +2,13 @@ import { useDanceStore } from '@/store/dance';
 import { useMarketStore } from '@/store/market';
 import { GradientButton } from '@lobehub/ui';
 import { Card, List } from 'antd';
-import { useEffect } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 const { Meta } = Card;
 
 const DanceList = () => {
-  const { danceList, fetchDanceList, activateDance, loading } = useDanceStore();
+  const [danceList, activateDance] = useDanceStore((s) => [s.danceList, s.activateDance]);
   const [setMarketPanelOpen, setTab] = useMarketStore((s) => [s.setMarketPanelOpen, s.setTab]);
-
-  useEffect(() => {
-    fetchDanceList();
-  }, [fetchDanceList]);
 
   return (
     <>
@@ -31,15 +26,14 @@ const DanceList = () => {
         </GradientButton>
       </Flexbox>
       <List
-        loading={loading}
         grid={{ gutter: 8, column: 4 }}
         dataSource={danceList}
         renderItem={(item) => (
           <List.Item>
             <Card
               hoverable
-              // eslint-disable-next-line @next/next/no-img-element,
               cover={
+                // eslint-disable-next-line @next/next/no-img-element,
                 <img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />
               }
               onClick={() => {

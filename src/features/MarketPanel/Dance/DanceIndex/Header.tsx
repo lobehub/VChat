@@ -25,27 +25,27 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-interface AgentLoaderProps {
+interface HeaderProps {
   style?: React.CSSProperties;
   className?: string;
 }
 
-const Header = (props: AgentLoaderProps) => {
+const Header = (props: HeaderProps) => {
   const { style, className } = props;
-  const [fetchAgentIndex, agentLoading] = useMarketStore((s) => [
-    s.fetchAgentIndex,
-    s.agentLoading,
+  const [fetchDanceIndex, danceLoading] = useMarketStore((s) => [
+    s.fetchDanceIndex,
+    s.danceLoading,
   ]);
   const { styles } = useStyles();
 
   useEffect(() => {
-    fetchAgentIndex();
-  }, [fetchAgentIndex]);
+    fetchDanceIndex();
+  }, [fetchDanceIndex]);
 
   return (
     <div className={classNames(styles.content, className)} style={style}>
       <h2>舞蹈列表</h2>
-      <Button type="primary" loading={agentLoading} onClick={() => fetchAgentIndex()}>
+      <Button type="primary" loading={danceLoading} onClick={() => fetchDanceIndex()}>
         重新加载
       </Button>
     </div>

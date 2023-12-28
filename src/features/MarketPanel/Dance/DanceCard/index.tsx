@@ -1,10 +1,10 @@
-import AgentInfo from '@/components/AgentInfo';
+import DanceInfo from '@/components/DanceInfo';
 import { marketStoreSelectors, useMarketStore } from '@/store/market';
 
 import { DraggablePanel } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
-import DownloadButton from './SubscribeButton';
+import SubscribeButton from './SubscribeButton';
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -20,39 +20,39 @@ const useStyles = createStyles(({ css, token }) => ({
 const Header = () => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showAgentSidebar, activateAgent, deactivateAgent, currentAgentItem] = useMarketStore(
+  const [showDanceSidebar, activateDance, deactivateDance, currentDanceItem] = useMarketStore(
     (s) => [
-      marketStoreSelectors.showSideBar(s),
-      s.activateAgent,
-      s.deactivateAgent,
-      marketStoreSelectors.currentAgentItem(s),
+      marketStoreSelectors.showDanceSideBar(s),
+      s.activateDance,
+      s.deactivateDance,
+      marketStoreSelectors.currentDanceItem(s),
     ],
   );
 
   const actions = [];
-  if (currentAgentItem) {
-    actions.push(<DownloadButton agent={currentAgentItem} key="download" />);
+  if (currentDanceItem) {
+    actions.push(<SubscribeButton dance={currentDanceItem} key="download" />);
   }
 
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      expand={showAgentSidebar}
+      expand={showDanceSidebar}
       minWidth={280}
       defaultSize={{ width: 280 }}
       maxWidth={400}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
-          setTempId(useMarketStore.getState().currentAgentId);
-          deactivateAgent();
+          setTempId(useMarketStore.getState().currentDanceId);
+          deactivateDance();
         } else if (tempId) {
-          activateAgent(tempId);
+          activateDance(tempId);
         }
       }}
       placement={'right'}
     >
-      <AgentInfo agent={currentAgentItem} actions={actions} />
+      <DanceInfo dance={currentDanceItem} actions={actions} />
     </DraggablePanel>
   );
 };

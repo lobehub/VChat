@@ -1,7 +1,7 @@
 import { MarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
 
-const showSideBar = (s: MarketStore) => !!s.currentAgentId;
+const showAgentSideBar = (s: MarketStore) => !!s.currentAgentId;
 
 const currentAgentItem = (s: MarketStore): Agent | undefined => {
   const { currentAgentId, agentList } = s;
@@ -12,6 +12,6 @@ const currentAgentItem = (s: MarketStore): Agent | undefined => {
 };
 
 export const agentSelectors = {
-  showSideBar,
+  showAgentSideBar,
   currentAgentItem,
 };

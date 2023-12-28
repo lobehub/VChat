@@ -22,12 +22,12 @@ const useStyles = createStyles(({ css, token }) => ({
 const SideBar = memo(() => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showDanceSidebar, activateDance, deactivateDance, fetchDanceList, addAndPlayItem] =
+  const [showDanceSidebar, activateDance, deactivateDance, danceList, addAndPlayItem] =
     useDanceStore((s) => [
       danceListSelectors.showSideBar(s),
       s.activateDance,
       s.deactivateDance,
-      s.fetchDanceList,
+      s.danceList,
       s.addAndPlayItem,
     ]);
 
@@ -40,14 +40,13 @@ const SideBar = memo(() => {
       if (success) {
         message.success('删除成功');
         deactivateDance();
-        fetchDanceList();
       } else {
         message.error(errorMessage);
       }
     },
   });
 
-  const { danceId } = currentDance;
+  const { danceId } = currentDance || {};
 
   return (
     <DraggablePanel
@@ -73,7 +72,7 @@ const SideBar = memo(() => {
           <Button
             key="play"
             onClick={() => {
-              addAndPlayItem(currentDance);
+              if (currentDance) addAndPlayItem(currentDance);
             }}
             type={'primary'}
           >

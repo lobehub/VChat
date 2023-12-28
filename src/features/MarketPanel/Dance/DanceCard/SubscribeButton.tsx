@@ -1,30 +1,30 @@
-import { agentListSelectors, useAgentStore } from '@/store/agent';
-import { Agent } from '@/types/agent';
+import { danceListSelectors, useDanceStore } from '@/store/dance';
+import { Dance } from '@/types/dance';
 import { Button } from 'antd';
 
 interface SubscribeButtonProps {
-  agent: Agent;
+  dance: Dance;
 }
 
 const SubscribeButton = (props: SubscribeButtonProps) => {
-  const [subscribe, unsubscribe, subscribed] = useAgentStore((s) => [
+  const [subscribe, unsubscribe, subscribed] = useDanceStore((s) => [
     s.subscribe,
     s.unsubscribe,
-    agentListSelectors.subscribed(s),
+    danceListSelectors.subscribed(s),
   ]);
 
-  const { agent } = props;
+  const { dance } = props;
 
-  const isSubscribed = subscribed(agent.agentId);
+  const isSubscribed = subscribed(dance.danceId);
 
   return (
     <Button
       type={isSubscribed ? 'default' : 'primary'}
       onClick={() => {
         if (isSubscribed) {
-          unsubscribe(agent.agentId);
+          unsubscribe(dance.danceId);
         } else {
-          subscribe(agent);
+          subscribe(dance);
         }
       }}
     >

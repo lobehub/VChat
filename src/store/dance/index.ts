@@ -1,101 +1,13 @@
-import { DEFAULT_DANCE } from '@/constants/dance';
-import { getLocalDanceList } from '@/services/dance';
-import { Dance } from '@/types/dance';
 import { create } from 'zustand';
 import { danceListSelectors } from './selectors/dance';
+import { DanceListStore, createDanceStore } from './slices/dancelist';
+import { PlayListStore, createPlayListStore } from './slices/playlist';
 
-export interface DanceStore {
-  loading: boolean;
-  currentIdentifier: string;
-  currentPlay: Dance | null;
-  danceList: Dance[];
-  playlist: Dance[];
-  isPlaying: boolean;
-  fetchDanceList: () => void;
-  activateDance: (identifier: string) => void;
-  deactivateDance: () => void;
-  setPlayList: (playlist: Dance[]) => void;
-  playItem: (dance: Dance) => void;
-  addAndPlayItem: (dance: Dance) => void;
-  removePlayItem: (dance: Dance) => void;
-  setIsPlaying: (play: boolean) => void;
-  prevDance: () => void;
-  nextDance: () => void;
-}
+export type DanceStore = DanceListStore & PlayListStore;
 
-export const useDanceStore = create<DanceStore>()((set, get) => ({
-  loading: false,
-  playlist: [DEFAULT_DANCE],
-  isPlaying: false,
-  currentIdentifier: '',
-  currentPlay: null,
-  danceList: [],
-  fetchDanceList: async () => {
-    set({ loading: true });
-    const res = await getLocalDanceList();
-    set({ danceList: [...res.data, DEFAULT_DANCE], loading: false });
-  },
-  activateDance: (identifier) => {
-    set({ currentIdentifier: identifier });
-  },
-  deactivateDance: () => {
-    set({ currentIdentifier: undefined }, false);
-  },
-  setPlayList: (playlist) => {
-    set({ playlist: playlist });
-  },
-  playItem: (dance) => {
-    set({ currentPlay: dance, isPlaying: true });
-  },
-  addAndPlayItem: (dance) => {
-    const { playlist, playItem } = get();
-    const index = playlist.findIndex((item) => item.name === dance.name);
-
-    if (index === -1) {
-      playlist.unshift(dance);
-    }
-    playItem(dance);
-  },
-  setIsPlaying: (play) => {
-    set({ isPlaying: play });
-  },
-  removePlayItem: (dance) => {
-    const { playlist } = get();
-    const currentPlayIndex = playlist.findIndex((item) => item.name === dance.name);
-
-    playlist.splice(currentPlayIndex, 1);
-  },
-  prevDance: () => {
-    const { currentPlay, playlist, playItem } = get();
-    if (currentPlay && playlist.length > 0) {
-      const currentPlayIndex = playlist.findIndex((item) => item.name === currentPlay.name);
-      if (currentPlayIndex > 0) {
-        playItem(playlist[currentPlayIndex - 1]);
-      } else {
-        playItem(playlist[playlist.length - 1]);
-      }
-    }
-  },
-  nextDance: () => {
-    const { currentPlay, playlist, playItem } = get();
-    if (currentPlay && playlist.length > 0) {
-      const currentPlayIndex = playlist.findIndex((item) => item.name === currentPlay.name);
-      if (currentPlayIndex < playlist.length - 1) {
-        playItem(playlist[currentPlayIndex + 1]);
-      } else {
-        playItem(playlist[0]);
-      }
-    }
-  },
+export const useDanceStore = create<DanceStore>()((...parameters) => ({
+  ...createDanceStore(...parameters),
+  ...createPlayListStore(...parameters),
 }));
-
-export const DEFAULT_DANCE_ITEM: Dance = {
-  name: '',
-  cover: '',
-  src: '',
-  audio: '',
-  thumb: '',
-  readme: '',
-};
 
 export { danceListSelectors };
