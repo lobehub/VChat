@@ -10,7 +10,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     flex-direction: column;
     border-radius: ${token.borderRadius}px;
     position: fixed;
-    width: 800px;
+    width: 900px;
   `,
   header: css`
     border-bottom: 1px solid #999;

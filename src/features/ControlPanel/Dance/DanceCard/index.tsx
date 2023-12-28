@@ -52,7 +52,9 @@ const SideBar = memo(() => {
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      minWidth={240}
+      minWidth={280}
+      defaultSize={{ width: 280 }}
+      maxWidth={400}
       mode={'fixed'}
       expand={showDanceSidebar}
       onExpandChange={(show) => {

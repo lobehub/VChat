@@ -19,8 +19,7 @@ const SubscribeButton = (props: SubscribeButtonProps) => {
 
   return (
     <Button
-      type="primary"
-      danger={isSubscribed}
+      type={isSubscribed ? 'default' : 'primary'}
       onClick={() => {
         if (isSubscribed) {
           unsubscribe(agent.agentId);

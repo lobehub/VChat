@@ -1,4 +1,4 @@
-import { useAgentStore } from '@/store/agent';
+import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useMarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
 import { GradientButton } from '@lobehub/ui';
@@ -17,7 +17,10 @@ interface AgentListProps {
 
 const AgentList = (props: AgentListProps) => {
   const { title, loading, dataSource } = props;
-  const [activateAgent] = useAgentStore((s) => [s.activateAgent]);
+  const [activateAgent, showAgentSidebar] = useAgentStore((s) => [
+    s.activateAgent,
+    agentListSelectors.showSideBar(s),
+  ]);
   const [setMarketPanelOpen, setTab] = useMarketStore((s) => [s.setMarketPanelOpen, s.setTab]);
 
   return (
@@ -37,7 +40,7 @@ const AgentList = (props: AgentListProps) => {
       </Flexbox>
       <List
         loading={loading}
-        grid={{ gutter: 8, column: 4 }}
+        grid={{ gutter: 8, column: showAgentSidebar ? 3 : 4 }}
         dataSource={dataSource}
         renderItem={(item) => {
           const { cover, name, description } = item.meta;

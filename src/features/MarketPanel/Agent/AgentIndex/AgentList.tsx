@@ -1,5 +1,5 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
-import { useMarketStore } from '@/store/market';
+import { marketStoreSelectors, useMarketStore } from '@/store/market';
 import { CheckCircleTwoTone } from '@ant-design/icons';
 import { Card, List } from 'antd';
 import { memo } from 'react';
@@ -7,15 +7,16 @@ import { memo } from 'react';
 const { Meta } = List.Item;
 
 const AgentList = () => {
-  const [activateAgent, agentList, agentLoading] = useMarketStore((s) => [
+  const [activateAgent, agentList, agentLoading, showAgentSidebar] = useMarketStore((s) => [
     s.activateAgent,
     s.agentList,
     s.agentLoading,
+    marketStoreSelectors.showSideBar(s),
   ]);
   const [subscribed] = useAgentStore((s) => [agentListSelectors.subscribed(s)]);
   return (
     <List
-      grid={{ gutter: 8, column: 4 }}
+      grid={{ gutter: 8, column: showAgentSidebar ? 3 : 4 }}
       dataSource={agentList}
       loading={agentLoading}
       renderItem={(item) => {

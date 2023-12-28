@@ -57,7 +57,9 @@ const Header = () => {
     <DraggablePanel
       classNames={{ content: styles.content }}
       expand={showAgentSidebar}
-      minWidth={240}
+      minWidth={280}
+      defaultSize={{ width: 280 }}
+      maxWidth={400}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
