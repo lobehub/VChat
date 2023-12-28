@@ -37,7 +37,7 @@ const DanceList = () => {
                 <img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />
               }
               onClick={() => {
-                activateDance(item.name);
+                activateDance(item.danceId);
               }}
             >
               <Meta title={item.name} />
