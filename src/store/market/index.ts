@@ -4,12 +4,14 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { agentSelectors } from './selectors/agent';
 import { AgentStore, createAgentStore } from './slices/agent';
+import { DanceStore, createDanceStore } from './slices/dance';
 import { PanelStore, createPanelStore } from './slices/panel';
 
-export type MarketStore = PanelStore & AgentStore;
+export type MarketStore = PanelStore & AgentStore & DanceStore;
 
 const createStore: StateCreator<MarketStore, [['zustand/devtools', never]]> = (...parameters) => ({
   ...createAgentStore(...parameters),
+  ...createDanceStore(...parameters),
   ...createPanelStore(...parameters),
 });
 

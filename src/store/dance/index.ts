@@ -2,8 +2,9 @@ import { DEFAULT_DANCE } from '@/constants/dance';
 import { getLocalDanceList } from '@/services/dance';
 import { Dance } from '@/types/dance';
 import { create } from 'zustand';
+import { danceListSelectors } from './selectors/dance';
 
-interface DanceStore {
+export interface DanceStore {
   loading: boolean;
   currentIdentifier: string;
   currentPlay: Dance | null;
@@ -97,17 +98,4 @@ export const DEFAULT_DANCE_ITEM: Dance = {
   readme: '',
 };
 
-const showSideBar = (s: DanceStore) => !!s.currentIdentifier;
-
-const currentDanceItem = (s: DanceStore): Dance => {
-  const { danceList, currentIdentifier } = s;
-  const currentDance = danceList.find((item) => item.name === currentIdentifier);
-  if (!currentDance) return DEFAULT_DANCE_ITEM;
-
-  return currentDance;
-};
-
-export const danceListSelectors = {
-  showSideBar,
-  currentDanceItem,
-};
+export { danceListSelectors };
