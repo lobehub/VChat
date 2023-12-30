@@ -25,10 +25,13 @@ export const useSpeechRecognition = (props: useSpeechRecognitionProps) => {
     setIsRecording(true);
   };
 
-  const handleRecognitionResult = useCallback((event: SpeechRecognitionEvent) => {
-    const text = event.results[0][0].transcript;
-    if (onMessage) onMessage(text, event.results[0].isFinal);
-  }, []);
+  const handleRecognitionResult = useCallback(
+    (event: SpeechRecognitionEvent) => {
+      const text = event.results[0][0].transcript;
+      if (onMessage) onMessage(text, event.results[0].isFinal);
+    },
+    [onMessage],
+  );
 
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;

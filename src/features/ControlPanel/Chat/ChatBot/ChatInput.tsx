@@ -2,7 +2,7 @@ import { OPENAI_MODEL_LIST } from '@/constants/openai';
 import { useCalculateToken } from '@/hooks/useCalculateToken';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
 import { handleStopSpeakAi } from '@/services/chat';
-import { useConfigStore } from '@/store/config';
+import { configSelectors, useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { ActionIcon, ChatInputArea, TokenTag } from '@lobehub/ui';
 import { Popconfirm } from 'antd';
@@ -27,7 +27,7 @@ const ChatInput = (props: ChatBotProps) => {
   ]);
   const messageInput = useSessionStore((s) => s.messageInput);
   const voiceLoading = useSessionStore((s) => s.voiceLoading);
-  const config = useConfigStore((s) => s.config, isEqual);
+  const config = useConfigStore((s) => configSelectors.currentOpenAIConfig(s), isEqual);
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
       setMessageInput(result);
@@ -67,7 +67,7 @@ const ChatInput = (props: ChatBotProps) => {
           />
           <TokenTag
             maxValue={
-              OPENAI_MODEL_LIST.find((item) => item.name === config.model)?.maxToken || 4096
+              OPENAI_MODEL_LIST.find((item) => item.name === config?.model)?.maxToken || 4096
             }
             value={usedTokens}
           />
