@@ -1,14 +1,9 @@
-import { useDanceStore } from '@/store/dance';
-import { ActionIcon, GridBackground, TabsNav } from '@lobehub/ui';
-import { Space } from 'antd';
+import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { Loader2Icon } from 'lucide-react';
-import { useState } from 'react';
-import { Center, Flexbox } from 'react-layout-kit';
+import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
-import DanceIndex from './DanceIndex';
-import DanceInfoCard from './DanceInfoCard';
+import DanceCard from './DanceCard';
 import DanceList from './DanceList';
 
 const useStyles = createStyles(({ css }) => ({
@@ -45,14 +40,12 @@ interface DanceProps {
 
 const Dance = (props: DanceProps) => {
   const { style, className } = props;
-  const [tab, setTab] = useState('installed');
-  const { danceList, fetchDanceList, loading } = useDanceStore();
   const { theme, styles } = useStyles();
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>找到你心仪的舞蹈</h1>
+          <h1 className={styles.title}>我的舞蹈</h1>
           <GridBackground
             animation
             className={styles.background}
@@ -60,45 +53,9 @@ const Dance = (props: DanceProps) => {
             random
           />
         </Center>
-        <Flexbox
-          style={{ marginBottom: 12 }}
-          horizontal
-          align="center"
-          distribution="space-between"
-        >
-          <TabsNav
-            activeKey={tab}
-            onChange={(key) => {
-              setTab(key);
-            }}
-            items={[
-              {
-                key: 'installed',
-                label: '我的舞蹈',
-              },
-              {
-                key: 'index',
-                label: '在线列表',
-              },
-            ]}
-          />
-          {tab === 'installed' ? (
-            <Space>
-              共 {danceList.length} 项{' '}
-              <ActionIcon
-                /* @ts-ignore */
-                icon={Loader2Icon}
-                loading={loading}
-                title="重新加载"
-                onClick={() => fetchDanceList()}
-              />
-            </Space>
-          ) : null}
-        </Flexbox>
-        {tab === 'installed' ? <DanceList /> : null}
-        {tab === 'index' ? <DanceIndex /> : null}
+        <DanceList />
       </div>
-      <DanceInfoCard />
+      <DanceCard />
       <AudioPlayer
         style={{
           position: 'absolute',

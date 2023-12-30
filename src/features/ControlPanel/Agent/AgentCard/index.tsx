@@ -1,14 +1,111 @@
-import Footer from './Footer';
-import Header from './Header';
-import SideBar from './SideBar';
+import AgentInfo from '@/components/AgentInfo';
+import { deleteLocalAgent } from '@/services/agent';
+import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { useConfigStore } from '@/store/config';
+import { useDanceStore } from '@/store/dance';
+import { useSessionStore } from '@/store/session';
+import { DraggablePanel } from '@lobehub/ui';
+import { useRequest } from 'ahooks';
+import { Button, Popconfirm, Tooltip, message } from 'antd';
+import { createStyles } from 'antd-style';
+import { memo, useState } from 'react';
 
-const AgentCard = () => {
+const useStyles = createStyles(({ css, token }) => ({
+  content: css`
+    display: flex;
+    height: 100% !important;
+    flex-direction: column;
+  `,
+  header: css`
+    border-bottom: 1px solid ${token.colorBorder};
+  `,
+}));
+
+const Header = () => {
+  const { styles } = useStyles();
+  const [tempId, setTempId] = useState<string>('');
+  const [showAgentSidebar, activateAgent, deactivateAgent] = useAgentStore((s) => [
+    agentListSelectors.showSideBar(s),
+    s.activateAgent,
+    s.deactivateAgent,
+  ]);
+  const [setRolePanelOpen, setTab] = useConfigStore((s) => [s.setRolePanelOpen, s.setTab]);
+  const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
+  const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
+  const switchSession = useSessionStore((s) => s.switchSession);
+
+  const { agentId } = currentAgent || {};
+
+  const { loading, run } = useRequest((agentId) => deleteLocalAgent(agentId), {
+    manual: true,
+    onSuccess: (data) => {
+      const { success, errorMessage } = data;
+      if (success) {
+        message.success('删除成功');
+        deactivateAgent();
+      } else {
+        message.error(errorMessage);
+      }
+    },
+  });
+
+  function openPanel() {
+    setRolePanelOpen(true);
+  }
+
   return (
-    <SideBar>
-      <Header />
-      <Footer />
-    </SideBar>
+    <DraggablePanel
+      classNames={{ content: styles.content }}
+      expand={showAgentSidebar}
+      minWidth={280}
+      defaultSize={{ width: 280 }}
+      maxWidth={400}
+      mode={'fixed'}
+      onExpandChange={(show) => {
+        if (!show) {
+          setTempId(useAgentStore.getState().currentIdentifier);
+          deactivateAgent();
+        } else if (tempId) {
+          activateAgent(tempId);
+        }
+      }}
+      placement={'right'}
+    >
+      <AgentInfo
+        agent={currentAgent}
+        actions={[
+          <Tooltip title="首次加载时间较长，请耐心等待" key="chat">
+            <Button
+              onClick={() => {
+                if (!currentAgent) return;
+                switchSession(currentAgent.agentId);
+                setIsPlaying(false);
+                setTab('chat');
+              }}
+              type={'primary'}
+            >
+              开始聊天
+            </Button>
+          </Tooltip>,
+          <Button onClick={openPanel} key="edit">
+            编辑
+          </Button>,
+          <Popconfirm
+            title="确定删除？"
+            description="确定删除本地角色文件吗？"
+            onConfirm={() => run(agentId)}
+            okText="确定"
+            key="delete"
+            cancelText="取消"
+          >
+            <Button loading={loading} danger>
+              删除
+            </Button>
+          </Popconfirm>,
+        ]}
+      />
+    </DraggablePanel>
   );
 };
 
-export default AgentCard;
+export default memo(Header);

@@ -27,7 +27,7 @@ const ChatInput = (props: ChatBotProps) => {
   ]);
   const messageInput = useSessionStore((s) => s.messageInput);
   const voiceLoading = useSessionStore((s) => s.voiceLoading);
-  const setting = useConfigStore((s) => s.setting, isEqual);
+  const config = useConfigStore((s) => s.config, isEqual);
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: (result, isFinal) => {
       setMessageInput(result);
@@ -67,7 +67,7 @@ const ChatInput = (props: ChatBotProps) => {
           />
           <TokenTag
             maxValue={
-              OPENAI_MODEL_LIST.find((item) => item.name === setting.model)?.maxToken || 4096
+              OPENAI_MODEL_LIST.find((item) => item.name === config.model)?.maxToken || 4096
             }
             value={usedTokens}
           />

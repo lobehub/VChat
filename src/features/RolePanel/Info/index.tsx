@@ -74,9 +74,8 @@ const Info = (props: InfoProps) => {
             </FormItem>
             <FormItem label={'说明'} name="readme">
               <Input.TextArea
-                placeholder="请输入要转换的文字"
+                placeholder="请输入角色说明"
                 showCount
-                maxLength={800}
                 autoSize={{ maxRows: 11, minRows: 11 }}
               />
             </FormItem>

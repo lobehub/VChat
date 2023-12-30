@@ -1,19 +1,20 @@
 import { DEFAULT_AGENTS } from '@/constants/agent';
-import { getLocalAgentList } from '@/services/agent';
 import { Agent } from '@/types/agent';
-import { isEqual } from 'lodash-es';
+import { produce } from 'immer';
 import { persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
+import { agentListSelectors } from './selectors/agent';
 
-interface AgentStore {
+export interface AgentStore {
   loading: boolean;
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   currentIdentifier: string;
-  agentList: Agent[];
-  fetchAgentList: () => void;
-  getAgentById: (id: string) => Agent | undefined;
+  localAgentList: Agent[];
+  getAgentById: (agentId: string) => Agent | undefined;
+  subscribe: (agent: Agent) => void;
+  unsubscribe: (agentId: string) => void;
 }
 
 export const useAgentStore = createWithEqualityFn<AgentStore>()(
@@ -21,49 +22,50 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
     (set, get) => ({
       currentIdentifier: '',
       loading: false,
-      agentList: DEFAULT_AGENTS,
-      fetchAgentList: async () => {
-        set({ loading: true });
-        const res = await getLocalAgentList();
-        set({ loading: false });
-
-        const { agentList } = get();
-        const currentAgents = [...res.data, ...DEFAULT_AGENTS];
-        if (isEqual(agentList, currentAgents)) return;
-        set({ agentList: currentAgents });
-      },
+      localAgentList: [...DEFAULT_AGENTS],
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });
       },
       deactivateAgent: () => {
-        set({ currentIdentifier: undefined }, false);
+        set({ currentIdentifier: undefined });
       },
-      getAgentById: (id: string): Agent | undefined => {
-        const { agentList } = get();
-        const currentAgent = agentList.find((item) => item.agentId === id);
+      subscribe: (agent) => {
+        const { localAgentList } = get();
+
+        const newList = produce(localAgentList, (draft) => {
+          const index = draft.findIndex((item) => item.agentId === agent.agentId);
+
+          if (index === -1) {
+            draft.unshift(agent);
+          }
+        });
+        set({ localAgentList: newList });
+      },
+      unsubscribe: (agentId) => {
+        const { localAgentList } = get();
+        const newList = produce(localAgentList, (draft) => {
+          const index = draft.findIndex((item) => item.agentId === agentId);
+
+          if (index !== -1) {
+            draft.splice(index, 1);
+          }
+        });
+        set({ localAgentList: newList });
+      },
+      getAgentById: (agentId: string): Agent | undefined => {
+        const { localAgentList } = get();
+
+        const currentAgent = localAgentList.find((item) => item.agentId === agentId);
         if (!currentAgent) return undefined;
 
         return currentAgent;
       },
     }),
     {
-      name: 'vidol-agent',
+      name: 'vidol-chat-agent-storage',
     },
   ),
   shallow,
 );
 
-const showSideBar = (s: AgentStore) => !!s.currentIdentifier;
-
-const currentAgentItem = (s: AgentStore): Agent | undefined => {
-  const { agentList, currentIdentifier } = s;
-  const currentAgent = agentList.find((item) => item.name === currentIdentifier);
-  if (!currentAgent) return undefined;
-
-  return currentAgent;
-};
-
-export const agentListSelectors = {
-  showSideBar,
-  currentAgentItem,
-};
+export { agentListSelectors };

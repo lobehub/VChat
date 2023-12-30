@@ -12,7 +12,7 @@ function AgentViewer() {
 
   useEffect(() => {
     if (currentAgent) {
-      viewer.loadVrm(currentAgent.model);
+      viewer.loadVrm(currentAgent.meta.model);
     }
   }, [currentAgent, viewer]);
 
@@ -20,7 +20,7 @@ function AgentViewer() {
     (canvas: HTMLCanvasElement) => {
       if (canvas) {
         viewer.setup(canvas);
-        // Drag and DropでVRMを差し替え
+
         canvas.addEventListener('dragover', function (event) {
           event.preventDefault();
         });

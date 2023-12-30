@@ -1,48 +1,39 @@
+import { Config, tabType } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
+import { ConfigState, initialState } from './initialState';
+import { configSelectors } from './selectors/config';
 
-export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'touch';
-
-interface Setting {
-  apikey: string;
-  endpoint: string;
-  model: string;
-}
-
-interface ConfigStore {
-  setting: Setting;
-  tab: tabType;
+export interface ConfigAction {
   setTab: (tab: tabType) => void;
-  controlPanelOpen: boolean;
-  rolePanelOpen: boolean;
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
-  setSetting: (setting: Partial<Setting>) => void;
+  setConfig: (config: Partial<Config>) => void;
+  setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
 }
 
+export interface ConfigStore extends ConfigState, ConfigAction {}
+
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
-  tab: 'agent',
-  controlPanelOpen: false,
-  rolePanelOpen: false,
+  ...initialState,
   setTab: (tab) => set({ tab }),
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
-  setting: {
-    apikey: '',
-    endpoint: '',
-    model: 'gpt-3.5-turbo',
-  },
-  setSetting: (setting) => {
-    const prevSetting = get().setting;
+
+  setConfig: (config) => {
+    const prevSetting = get().config;
     const nextSetting = produce(prevSetting, (draftState) => {
-      merge(draftState, setting);
+      merge(draftState, config);
     });
     if (isEqual(prevSetting, nextSetting)) return;
-    set({ setting: nextSetting });
+    set({ config: nextSetting });
+  },
+  setOpenAIConfig: (config) => {
+    get().setConfig({ languageModel: { openAI: config } });
   },
 });
 
@@ -57,3 +48,5 @@ export const useConfigStore = createWithEqualityFn<ConfigStore>()(
   ),
   shallow,
 );
+
+export { configSelectors };

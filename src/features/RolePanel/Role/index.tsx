@@ -57,7 +57,6 @@ const Info = (props: InfoProps) => {
               <Input.TextArea
                 placeholder="请输入要转换的文字"
                 showCount
-                maxLength={800}
                 autoSize={{ maxRows: 18, minRows: 18 }}
               />
             </FormItem>

@@ -6,7 +6,7 @@ export interface Dance {
   /**
    * 舞蹈 ID
    */
-  danceId?: string;
+  danceId: string;
   /**
    * 舞蹈文件
    */

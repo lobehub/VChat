@@ -1,27 +1,27 @@
 import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
 import { speakCharacter } from '@/features/messages/speakCharacter';
-import { useConfigStore } from '@/store/config';
+import { configSelectors, useConfigStore } from '@/store/config';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 
 const createHeader = (header?: HeadersInit) => {
-  const setting = useConfigStore.getState().setting;
+  const config = configSelectors.currentOpenAIConfig(useConfigStore.getState());
   return {
     'Content-Type': 'application/json',
-    [OPENAI_API_KEY]: setting.apikey,
-    [OPENAI_END_POINT]: setting.endpoint,
+    [OPENAI_API_KEY]: config?.apikey || '',
+    [OPENAI_END_POINT]: config?.endpoint || '',
     ...header,
   };
 };
 
 export const chatCompletion = async (payload: any) => {
-  const setting = useConfigStore.getState().setting;
+  const config = configSelectors.currentOpenAIConfig(useConfigStore.getState());
 
   const res = await fetch('/api/chat/openai', {
     method: 'POST',
     headers: createHeader(),
     body: JSON.stringify({
-      model: setting.model,
+      model: config?.model,
       ...payload,
     }),
   });
