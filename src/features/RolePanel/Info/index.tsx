@@ -45,6 +45,8 @@ const Info = (props: InfoProps) => {
   const [form] = Form.useForm();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
 
+  const { name, description, cover, avatar } = currentAgent?.meta || {};
+
   useEffect(() => {
     form.setFieldsValue(currentAgent);
   }, [currentAgent, form]);
@@ -61,18 +63,18 @@ const Info = (props: InfoProps) => {
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
           <div className={styles.config}>
-            <FormItem label={'名称'} name="name">
+            <FormItem label={'名称'} name={['meta', 'name']}>
               <Input placeholder="请输入角色名称" />
             </FormItem>
-            <FormItem label={'描述'} name="description">
+            <FormItem label={'描述'} name={['meta', 'description']}>
               <Input placeholder="请输入角色描述" />
             </FormItem>
-            <FormItem label={'模型'} name="model">
+            <FormItem label={'模型'} name={['meta', 'model']}>
               <Upload>
                 <Button icon={<UploadIcon size={16} />}>上传模型</Button>
               </Upload>
             </FormItem>
-            <FormItem label={'说明'} name="readme">
+            <FormItem label={'说明'} name={['meta', 'readme']}>
               <Input.TextArea
                 placeholder="请输入角色说明"
                 showCount
@@ -89,7 +91,7 @@ const Info = (props: InfoProps) => {
                 // beforeUpload={beforeUpload}
                 // onChange={handleChange}
               >
-                <Avatar src={currentAgent?.avatar} size={96} shape="circle" />
+                <Avatar src={avatar} size={96} shape="circle" />
               </Upload>
             </FormItem>
             <FormItem label={'封面'} name="cover">
@@ -102,7 +104,7 @@ const Info = (props: InfoProps) => {
               >
                 <Card
                   /* eslint-disable-next-line @next/next/no-img-element */
-                  cover={<img alt="example" src={currentAgent?.cover} />}
+                  cover={<img alt="example" src={cover} />}
                   style={{ width: 200, cursor: 'pointer' }}
                 />
               </Upload>
