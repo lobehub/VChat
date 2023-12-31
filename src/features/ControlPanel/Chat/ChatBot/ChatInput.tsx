@@ -77,7 +77,7 @@ const ChatInput = (props: ChatBotProps) => {
       className={className}
       style={{ background: theme.colorBgContainer, ...style }}
       expand={expand}
-      onInputChange={(value) => {
+      onInputChange={(value: string) => {
         setMessageInput(value);
       }}
       text={{
