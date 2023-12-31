@@ -62,7 +62,7 @@ class Service {
       ws.on('open', () => {
         resolve(ws);
       });
-      ws.on('close', (code, reason) => {
+      ws.on('close', (code: string, reason: string) => {
         // 服务器会自动断开空闲超过30秒的连接
         this.ws = null;
         if (this.timer) {
@@ -77,23 +77,23 @@ class Service {
         console.info(`连接已关闭： ${reason} ${code}`);
       });
 
-      ws.on('message', (message, isBinary) => {
+      ws.on('message', (message: string, isBinary: boolean) => {
         let pattern = /X-RequestId:(?<id>[a-z|0-9]*)/;
         if (!isBinary) {
           let data = message.toString();
           if (data.includes('Path:turn.start')) {
             // 开始传输
             let matches = data.match(pattern);
-            let requestId = matches.groups.id;
+            let requestId = matches?.groups?.id;
             this.bufferMap.set(requestId, Buffer.from([]));
           } else if (data.includes('Path:turn.end')) {
             // 结束传输
             let matches = data.match(pattern);
-            let requestId = matches.groups.id;
+            let requestId = matches?.groups?.id;
 
             let executor = this.executorMap.get(requestId);
             if (executor) {
-              this.executorMap.delete(matches.groups.id);
+              this.executorMap.delete(matches?.groups?.id);
               let result = this.bufferMap.get(requestId);
               executor.resolve(result);
               console.info(`传输完成：${requestId}……`);
@@ -108,7 +108,7 @@ class Service {
 
           let headers = data.slice(2, contentIndex).toString();
           let matches = headers.match(pattern);
-          let requestId = matches.groups.id;
+          let requestId = matches?.groups?.id;
 
           let content = data.slice(contentIndex);
           let buffer = this.bufferMap.get(requestId);
@@ -120,17 +120,19 @@ class Service {
           }
         }
       });
-      ws.on('error', (error) => {
+      ws.on('error', (error: string) => {
         console.error(`连接失败： ${error}`);
         reject(`连接失败： ${error}`);
       });
     });
   }
 
-  async convert(ssml, format) {
+  async convert(ssml: string, format: string) {
+    // @ts-ignore
     if (this.ws == null || this.ws.readyState != WebSocket.OPEN) {
       console.info('准备连接服务器……');
       let connection = await this.connect();
+      // @ts-ignore
       this.ws = connection;
       console.info('连接成功！');
     }
@@ -160,7 +162,8 @@ class Service {
         'Content-Type:application/json; charset=utf-8\r\n' +
         'Path:speech.config\r\n\r\n' +
         JSON.stringify(configData);
-      this.ws.send(configMessage, (configError) => {
+      // @ts-ignore
+      this.ws.send(configMessage, (configError: any) => {
         if (configError) {
           console.error(`配置请求发送失败：${requestId}\n`);
         }
@@ -172,7 +175,8 @@ class Service {
           `Content-Type:application/ssml+xml\r\n` +
           `Path:ssml\r\n\r\n` +
           ssml;
-        this.ws.send(ssmlMessage, (ssmlError) => {
+        // @ts-ignore
+        this.ws.send(ssmlMessage, (ssmlError: any) => {
           if (ssmlError) {
             console.error(`SSML消息发送失败：${requestId}\n`);
           }
@@ -186,8 +190,11 @@ class Service {
       clearTimeout(this.timer);
     }
     // 设置定时器，超过10秒没有收到请求，主动断开连接
+    // @ts-ignore
     this.timer = setTimeout(() => {
+      // @ts-ignore
       if (this.ws && this.ws.readyState == WebSocket.OPEN) {
+        // @ts-ignore
         this.ws.close(1000);
         this.timer = null;
       }

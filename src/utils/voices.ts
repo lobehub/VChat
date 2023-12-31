@@ -1,4 +1,4 @@
-export const voiceMap = {
+export const voiceMap: Record<string, any> = {
   'ko-KR-SoonBokNeural': {
     locale: 'ko-KR',
     localeZH: '韩语(韩国)',
