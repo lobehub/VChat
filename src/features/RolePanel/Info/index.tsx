@@ -3,7 +3,6 @@ import { Avatar, FormFooter } from '@lobehub/ui';
 import { Button, Card, Form, Input, Upload } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { UploadIcon } from 'lucide-react';
 import { useEffect } from 'react';
 
 const FormItem = Form.Item;
@@ -45,7 +44,7 @@ const Info = (props: InfoProps) => {
   const [form] = Form.useForm();
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
 
-  const { name, description, cover, avatar } = currentAgent?.meta || {};
+  const { cover, avatar } = currentAgent?.meta || {};
 
   useEffect(() => {
     form.setFieldsValue(currentAgent);
@@ -69,11 +68,6 @@ const Info = (props: InfoProps) => {
             <FormItem label={'描述'} name={['meta', 'description']}>
               <Input placeholder="请输入角色描述" />
             </FormItem>
-            <FormItem label={'模型'} name={['meta', 'model']}>
-              <Upload>
-                <Button icon={<UploadIcon size={16} />}>上传模型</Button>
-              </Upload>
-            </FormItem>
             <FormItem label={'说明'} name={['meta', 'readme']}>
               <Input.TextArea
                 placeholder="请输入角色说明"
@@ -83,9 +77,8 @@ const Info = (props: InfoProps) => {
             </FormItem>
           </div>
           <div className={styles.more}>
-            <FormItem label={'头像'} name="avatar">
+            <FormItem label={'头像'} name={['meta', 'name']}>
               <Upload
-                name="avatar"
                 showUploadList={false}
                 // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                 // beforeUpload={beforeUpload}
@@ -94,9 +87,8 @@ const Info = (props: InfoProps) => {
                 <Avatar src={avatar} size={96} shape="circle" />
               </Upload>
             </FormItem>
-            <FormItem label={'封面'} name="cover">
+            <FormItem label={'封面'} name={['meta', 'cover']}>
               <Upload
-                name="cover"
                 showUploadList={false}
                 // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
                 // beforeUpload={beforeUpload}

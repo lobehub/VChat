@@ -86,8 +86,8 @@ const ChatInput = (props: ChatBotProps) => {
       /* @ts-ignore */
       minHeight={200}
       onExpandChange={onExpandChange}
-      onSend={(value) => {
-        sendMessage(value);
+      onSend={() => {
+        sendMessage(messageInput);
       }}
       placeholder="请输入内容开始聊天"
     />
