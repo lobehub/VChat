@@ -12,8 +12,6 @@ const Header = () => {
     <LobeHeader
       logo={
         <Space align="center" size={16}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={'/logo.png'} width={48} height={48} alt="logo" />
           <span style={{ fontSize: 22, fontWeight: 'bolder' }}>Vidol.Chat</span>
         </Space>
       }
