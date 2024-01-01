@@ -1,35 +1,39 @@
-import Header from '@/components/Header';
+'use client';
+
+import Header from '@/layout/Header';
 import { useConfigStore } from '@/store/config';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@lobehub/ui';
 import { ThemeAppearance } from 'antd-style';
-import type { AppProps } from 'next/app';
-import { cookies } from 'next/headers';
 
 import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
+import { setCookie } from '@/utils/cookie';
+import { ReactNode } from 'react';
 
-export default function App({ Component, pageProps }: AppProps) {
+export interface LayoutProps {
+  children?: ReactNode;
+  defaultAppearance?: ThemeAppearance;
+}
+
+export default function App(props: LayoutProps) {
+  const { children, defaultAppearance } = props;
   const themeMode = useThemeStore((s) => s.themeMode);
   const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
 
-  const cookieStore = cookies();
-  const appearance = cookieStore.get(VIDOL_THEME_APPEARANCE);
   return (
     <ThemeProvider
       themeMode={themeMode}
       customTheme={{
         primaryColor: primaryColor,
       }}
-      defaultAppearance={appearance?.value as ThemeAppearance}
+      defaultAppearance={defaultAppearance as ThemeAppearance}
       onAppearanceChange={(appearance) => {
-        cookieStore.set(VIDOL_THEME_APPEARANCE, appearance);
+        setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
     >
       <Header />
-      <main style={{ display: 'flex', width: '100%' }}>
-        <Component {...pageProps} />
-      </main>
+      <main style={{ display: 'flex', width: '100%' }}>{children}</main>
     </ThemeProvider>
   );
 }

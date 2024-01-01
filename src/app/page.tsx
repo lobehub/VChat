@@ -1,3 +1,5 @@
+'use client';
+
 import { useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
 import { useViewerStore } from '@/store/viewer';
