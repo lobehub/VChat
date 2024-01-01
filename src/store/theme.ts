@@ -1,12 +1,16 @@
 import type { ThemeMode } from 'antd-style';
-import { create } from 'zustand';
+import { shallow } from 'zustand/shallow';
+import { createWithEqualityFn } from 'zustand/traditional';
 
 interface ThemeStore {
   themeMode: ThemeMode;
   setThemeMode: (themeMode: ThemeMode) => void;
 }
 
-export const useThemeStore = create<ThemeStore>()((set) => ({
-  themeMode: 'dark' as ThemeMode,
-  setThemeMode: (themeMode: ThemeMode) => set({ themeMode }),
-}));
+export const useThemeStore = createWithEqualityFn<ThemeStore>()(
+  (set) => ({
+    themeMode: 'auto' as ThemeMode,
+    setThemeMode: (themeMode: ThemeMode) => set({ themeMode }),
+  }),
+  shallow,
+);

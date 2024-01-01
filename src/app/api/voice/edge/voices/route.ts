@@ -1,5 +1,5 @@
 import { voiceMap } from '@/utils/voices';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 const axios = require('axios');
 
 interface Voice {
@@ -3937,7 +3937,7 @@ const convert = (voices: Voice[]) => {
   return voices.map((voice) => voiceMap[voice.ShortName]).filter((voice) => !!voice);
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export const GET = async (req: Request) => {
   const config = {
     method: 'get',
     url: 'https://speech.platform.bing.com/consumer/speech/synthesize/readaloud/voices/list?trustedclienttoken=6A5AA1D4EAFF4E9FB37E23D68491D6F4',
@@ -3945,8 +3945,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const response = await axios(config);
-    res.status(200).json({ data: convert(response.data) });
+    return NextResponse.json({ data: convert(response.data) });
   } catch (err) {
-    res.status(200).json({ data: convert(cachedVoiceList) });
+    return NextResponse.json({ data: convert(cachedVoiceList) });
   }
-}
+};

@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
+import { NextResponse } from 'next/server';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { ssml } = req.body;
+export const POST = async (req: Request) => {
+  const { ssml } = await req.json();
   const data = JSON.stringify({
     ssml,
     ttsAudioFormat: 'audio-24khz-160kbitrate-mono-mp3',
@@ -39,8 +39,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const response = await axios(config);
-    res.status(200).send(response.data);
+    return response;
   } catch (err) {
-    res.status(400).json({ success: false, errorMessage: '转换失败' });
+    return NextResponse.json({ success: false, errorMessage: '转换失败' }, { status: 400 });
   }
-}
+};

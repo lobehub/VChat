@@ -1,8 +1,10 @@
+'use client';
+
 import { useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
 import { useViewerStore } from '@/store/viewer';
 import { tabType } from '@/types/config';
-import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
+import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useRef } from 'react';
@@ -11,46 +13,6 @@ const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: fal
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 const AgentViewer = dynamic(() => import('@/features/AgentViewer'), { ssr: false });
 const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
-
-export const items: ActionIconGroupProps['items'] = [
-  {
-    icon: RotateCw,
-    key: 'resetCamera',
-    label: '重置镜头',
-  },
-  {
-    icon: Expand,
-    key: 'expand',
-    label: '全屏',
-  },
-  {
-    icon: User,
-    key: 'agent',
-    label: '角色选择',
-  },
-  {
-    icon: Music2,
-    key: 'dance',
-    label: '舞蹈选择',
-  },
-  {
-    icon: MessageSquare,
-    key: 'chat',
-    label: '立即聊天',
-  },
-  {
-    icon: Pointer,
-    key: 'touch',
-    label: '触摸设置',
-  },
-  {
-    icon: ShoppingBag,
-    key: 'market',
-    label: '虚拟商店',
-  },
-];
-
-export const dropdownMenu: ActionIconGroupProps['dropdownMenu'] = [];
 
 const Home = () => {
   const viewer = useViewerStore((s) => s.viewer);
@@ -90,8 +52,43 @@ const Home = () => {
           left: 24,
           bottom: '50%',
         }}
-        dropdownMenu={dropdownMenu}
-        items={items}
+        items={[
+          {
+            icon: RotateCw,
+            key: 'resetCamera',
+            label: '重置镜头',
+          },
+          {
+            icon: Expand,
+            key: 'expand',
+            label: '全屏',
+          },
+          {
+            icon: User,
+            key: 'agent',
+            label: '角色选择',
+          },
+          {
+            icon: Music2,
+            key: 'dance',
+            label: '舞蹈选择',
+          },
+          {
+            icon: MessageSquare,
+            key: 'chat',
+            label: '立即聊天',
+          },
+          {
+            icon: Pointer,
+            key: 'touch',
+            label: '触摸设置',
+          },
+          {
+            icon: ShoppingBag,
+            key: 'market',
+            label: '虚拟商店',
+          },
+        ]}
         direction="column"
         onActionClick={(action) => {
           if (action.key === 'resetCamera') {

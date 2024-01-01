@@ -1,5 +1,5 @@
 import { voiceMap } from '@/utils/voices';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import {NextResponse } from 'next/server';
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
 
@@ -20987,7 +20987,7 @@ const convert = (voices: any[]) => {
   return voices.map((voice) => voiceMap[voice.shortName]).filter((voice) => !!voice);
 };
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export const GET = async (req: Request) => {
   const data = JSON.stringify({
     queryCondition: {
       items: [
@@ -21028,8 +21028,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     const response = await axios(config);
-    res.status(200).json({ data: convert(response.data) });
+    return NextResponse.json({ data: convert(response.data) });
   } catch (err) {
-    res.status(200).json({ data: convert(cachedVoiceList) });
+    return NextResponse.json({ data: convert(cachedVoiceList) });
   }
-}
+};

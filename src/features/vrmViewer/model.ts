@@ -2,7 +2,6 @@ import { convert } from '@/lib/VMDAnimation/vmd2vrmanim';
 import { bindToVRM, toOffset } from '@/lib/VMDAnimation/vmd2vrmanim.binding';
 import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { Screenplay } from '@/types/touch';
-import { buildUrl } from '@/utils/buildUrl';
 import { VRM, VRMLoaderPlugin, VRMUtils } from '@pixiv/three-vrm';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
@@ -75,7 +74,7 @@ export class Model {
   }
 
   public async loadIdleAnimation() {
-    const vrma = await loadVRMAnimation(buildUrl('/idle_loop.vrma'));
+    const vrma = await loadVRMAnimation('/idle_loop.vrma');
     if (vrma) this.loadAnimation(vrma);
   }
 

@@ -1,3 +1,4 @@
+import { DEFAULT_DANCE } from '@/constants/dance';
 import { getDanceIndex } from '@/services/dance';
 import { DanceStore } from '@/store/dance';
 import { Dance } from '@/types/dance';
@@ -24,7 +25,7 @@ export const createDanceStore: StateCreator<
 > = (set, get) => {
   return {
     currentIdentifier: '',
-    danceList: [],
+    danceList: [DEFAULT_DANCE],
     danceLoading: false,
     activateDance: (identifier) => {
       set({ currentIdentifier: identifier });
