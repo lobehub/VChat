@@ -1,4 +1,3 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 const { randomBytes } = require('crypto');
 const { WebSocket } = require('ws');
 
@@ -203,7 +202,6 @@ class Service {
     let data = await Promise.race([
       result,
       new Promise((resolve, reject) => {
-        // 如果超过 20 秒没有返回结果，则清除请求并返回超时
         setTimeout(() => {
           this.executorMap.delete(requestId);
           this.bufferMap.delete(requestId);
@@ -217,9 +215,8 @@ class Service {
 
 const service = new Service();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { ssml } = req.body;
-
+export const POST = async (req: Request) => {
+  const { ssml } = await req.json();
   try {
     let format = 'audio-24khz-48kbitrate-mono-mp3';
     if (Array.isArray(format)) {
@@ -233,8 +230,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw `转换参数无效`;
     }
     const result = await service.convert(ssml, format);
-    res.status(200).send(result);
+    return new Response(result as ArrayBuffer);
   } catch (error) {
-    res.status(400).json({ errorMessage: error });
+    return Response.json({ errorMessage: error });
   }
-}
+};
