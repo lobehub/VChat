@@ -1,4 +1,5 @@
 import { voiceMap } from '@/utils/voices';
+import { NextResponse } from 'next/server';
 const axios = require('axios');
 
 interface Voice {
@@ -3944,8 +3945,8 @@ export const GET = async (req: Request) => {
 
   try {
     const response = await axios(config);
-    return Response.json({ data: convert(response.data) });
+    return NextResponse.json({ data: convert(response.data) });
   } catch (err) {
-    return Response.json({ data: convert(cachedVoiceList) });
+    return NextResponse.json({ data: convert(cachedVoiceList) });
   }
 };

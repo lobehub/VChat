@@ -1,5 +1,8 @@
 const { randomBytes } = require('crypto');
+
 const { WebSocket } = require('ws');
+
+import { NextResponse } from 'next/server';
 
 const FORMAT_CONTENT_TYPE = new Map([
   ['raw-16khz-16bit-mono-pcm', 'audio/basic'],
@@ -232,6 +235,6 @@ export const POST = async (req: Request) => {
     const result = await service.convert(ssml, format);
     return new Response(result as ArrayBuffer);
   } catch (error) {
-    return Response.json({ errorMessage: error });
+    return NextResponse.json({ errorMessage: error });
   }
 };

@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
+import { NextResponse } from 'next/server';
 
 export const POST = async (req: Request) => {
   const { ssml } = await req.json();
@@ -40,6 +41,6 @@ export const POST = async (req: Request) => {
     const response = await axios(config);
     return response;
   } catch (err) {
-    return Response.json({ success: false, errorMessage: '转换失败' }, { status: 400 });
+    return NextResponse.json({ success: false, errorMessage: '转换失败' }, { status: 400 });
   }
 };

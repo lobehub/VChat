@@ -1,5 +1,6 @@
 import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
+import { NextResponse } from 'next/server';
 import OpenAI, { ClientOptions } from 'openai';
 
 export const POST = async (req: Request) => {
@@ -9,7 +10,7 @@ export const POST = async (req: Request) => {
     (req.headers.get(OPENAI_END_POINT) as string) || process.env.OPENAI_PROXY_URL || undefined;
 
   if (!apiKey) {
-    return Response.json({ message: '"API 密钥错误或未设置。' }, { status: 400 });
+    return NextResponse.json({ message: '"API 密钥错误或未设置。' }, { status: 400 });
   }
   const config: ClientOptions = {
     apiKey: apiKey,
