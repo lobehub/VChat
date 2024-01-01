@@ -9,7 +9,7 @@ import { Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import { isEqual } from 'lodash-es';
 import { AudioLines, Eraser, Mic } from 'lucide-react';
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 
 interface ChatBotProps {
   style?: React.CSSProperties;
@@ -28,14 +28,20 @@ const ChatInput = (props: ChatBotProps) => {
   const messageInput = useSessionStore((s) => s.messageInput);
   const voiceLoading = useSessionStore((s) => s.voiceLoading);
   const config = useConfigStore((s) => configSelectors.currentOpenAIConfig(s), isEqual);
-  const { isRecording, toggleRecord } = useSpeechRecognition({
-    onMessage: (result, isFinal) => {
+
+  const handleMessageInput = useCallback(
+    (result: string, isFinal: boolean) => {
       setMessageInput(result);
       if (isFinal) {
         sendMessage(result);
         setMessageInput('');
       }
     },
+    [sendMessage, setMessageInput],
+  );
+
+  const { isRecording, toggleRecord } = useSpeechRecognition({
+    onMessage: handleMessageInput,
   });
 
   const theme = useTheme();
