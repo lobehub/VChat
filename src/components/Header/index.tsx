@@ -1,10 +1,12 @@
+import { useThemeStore } from '@/store/theme';
 import { buildUrl } from '@/utils/buildUrl';
-import { ActionIcon, Header as LobeHeader } from '@lobehub/ui';
+import { ActionIcon, Header as LobeHeader, ThemeSwitch } from '@lobehub/ui';
 import { Space } from 'antd';
 import { GithubIcon } from 'lucide-react';
 import { memo } from 'react';
 
 const Header = () => {
+  const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
   return (
     <LobeHeader
       logo={
@@ -15,6 +17,11 @@ const Header = () => {
         </Space>
       }
       actions={[
+        <ThemeSwitch
+          onThemeSwitch={(mode) => setThemeMode(mode)}
+          themeMode={themeMode}
+          key="theme"
+        />,
         <ActionIcon
           key="github"
           // @ts-ignore
