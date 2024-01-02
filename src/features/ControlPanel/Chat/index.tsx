@@ -1,5 +1,6 @@
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import { memo } from 'react';
 import ChatBot from './ChatBot';
 import SideBar from './SideBar';
 
@@ -30,4 +31,4 @@ const Chat = (props: ChatProps) => {
   );
 };
 
-export default Chat;
+export default memo(Chat);

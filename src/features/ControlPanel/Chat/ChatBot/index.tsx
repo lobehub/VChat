@@ -1,6 +1,6 @@
 import { DraggablePanel } from '@lobehub/ui';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatList from './ChatList';
 import { useStyles } from './style';
@@ -25,4 +25,4 @@ const ChatBot = (props: ChatBotProps) => {
   );
 };
 
-export default ChatBot;
+export default memo(ChatBot);

@@ -1,6 +1,7 @@
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
 import DanceCard from './DanceCard';
@@ -67,4 +68,4 @@ const Dance = (props: DanceProps) => {
   );
 };
 
-export default Dance;
+export default memo(Dance);

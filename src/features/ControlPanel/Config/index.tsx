@@ -1,6 +1,6 @@
 import { TabsNav } from '@lobehub/ui';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import CommonConfig from './common';
 import OpenAIConfig from './model/openai';
 import { useStyles } from './style';
@@ -43,4 +43,4 @@ const Config = (props: ConfigProps) => {
   );
 };
 
-export default Config;
+export default memo(Config);

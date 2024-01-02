@@ -1,5 +1,6 @@
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import { memo } from 'react';
 import ActionList from './ActionList';
 import SideBar from './SideBar';
 
@@ -30,4 +31,4 @@ const Touch = (props: TouchProps) => {
   );
 };
 
-export default Touch;
+export default memo(Touch);

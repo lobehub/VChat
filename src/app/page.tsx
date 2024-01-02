@@ -7,7 +7,7 @@ import { tabType } from '@/types/config';
 import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import { memo, useMemo, useRef } from 'react';
 
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
@@ -41,6 +41,18 @@ const Home = () => {
       document.exitFullscreen();
     }
   }
+
+  const controlPanel = useMemo(() => {
+    return <ControlPanel style={{ display: controlPanelOpen ? 'flex' : 'none' }} />;
+  }, [controlPanelOpen]);
+
+  const rolePanel = useMemo(() => {
+    return <RolePanel style={{ display: rolePanelOpen ? 'flex' : 'none' }} />;
+  }, [rolePanelOpen]);
+
+  const marketPanel = useMemo(() => {
+    return <MarketPanel style={{ display: marketPanelOpen ? 'flex' : 'none' }} />;
+  }, [marketPanelOpen]);
 
   return (
     <div ref={ref}>
@@ -108,11 +120,11 @@ const Home = () => {
           }
         }}
       />
-      <ControlPanel style={{ display: controlPanelOpen ? 'flex' : 'none' }} />
-      <RolePanel style={{ display: rolePanelOpen ? 'flex' : 'none' }} />
-      <MarketPanel style={{ display: marketPanelOpen ? 'flex' : 'none' }} />
+      {controlPanel}
+      {rolePanel}
+      {marketPanel}
     </div>
   );
 };
 
-export default Home;
+export default memo(Home);

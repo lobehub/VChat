@@ -1,5 +1,6 @@
 import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
+import { memo } from 'react';
 import Agent from './Agent';
 import Chat from './Chat';
 import Config from './Config';
@@ -16,7 +17,7 @@ interface ControlPanelProps {
 const ControlPanel = (props: ControlPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const { setControlPanelOpen, tab } = useConfigStore();
+  const [setControlPanelOpen, tab] = useConfigStore((s) => [s.setControlPanelOpen, s.tab]);
 
   return (
     <Panel
@@ -27,14 +28,14 @@ const ControlPanel = (props: ControlPanelProps) => {
     >
       <SideNav className="handle" />
       <div className={styles.content}>
-        <Dance style={{ display: tab === 'dance' ? 'flex' : 'none' }} />
-        <Agent style={{ display: tab === 'agent' ? 'flex' : 'none' }} />
-        <Chat style={{ display: tab === 'chat' ? 'flex' : 'none' }} />
-        <Touch style={{ display: tab === 'touch' ? 'flex' : 'none' }} />
-        <Config style={{ display: tab === 'config' ? 'flex' : 'none' }} />
+        {tab === 'dance' ? <Dance /> : null}
+        {tab === 'agent' ? <Agent /> : null}
+        {tab === 'chat' ? <Chat /> : null}
+        {tab === 'touch' ? <Touch /> : null}
+        {tab === 'config' ? <Config /> : null}
       </div>
     </Panel>
   );
 };
 
-export default ControlPanel;
+export default memo(ControlPanel);

@@ -1,13 +1,14 @@
 import { useConfigStore } from '@/store/config';
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
 import { MessageSquare, Music2, Pointer, Settings2, User } from 'lucide-react';
+import { memo } from 'react';
 
 interface SideNavProps {
   className?: string;
 }
 
 const SideNav = (props: SideNavProps) => {
-  const { tab, setTab } = useConfigStore();
+  const [tab, setTab] = useConfigStore((s) => [s.tab, s.setTab]);
   const { className } = props;
 
   return (
@@ -28,7 +29,6 @@ const SideNav = (props: SideNavProps) => {
         <>
           <ActionIcon
             active={tab === 'agent'}
-            /* @ts-ignore */
             icon={User}
             onClick={() => {
               setTab('agent');
@@ -37,7 +37,6 @@ const SideNav = (props: SideNavProps) => {
           />
           <ActionIcon
             active={tab === 'dance'}
-            /* @ts-ignore */
             icon={Music2}
             onClick={() => {
               setTab('dance');
@@ -46,7 +45,6 @@ const SideNav = (props: SideNavProps) => {
           />
           <ActionIcon
             active={tab === 'chat'}
-            /* @ts-ignore */
             icon={MessageSquare}
             onClick={() => {
               setTab('chat');
@@ -55,7 +53,6 @@ const SideNav = (props: SideNavProps) => {
           />
           <ActionIcon
             active={tab === 'touch'}
-            /* @ts-ignore */
             icon={Pointer}
             onClick={() => {
               setTab('touch');
@@ -68,4 +65,4 @@ const SideNav = (props: SideNavProps) => {
   );
 };
 
-export default SideNav;
+export default memo(SideNav);
