@@ -69,7 +69,7 @@ export class Viewer {
       });
 
       this._scene.add(this.model.vrm.scene);
-      this.model.loadIdleAnimation();
+      await this.model.loadIdleAnimation();
 
       // HACK: アニメーションの原点がずれているので再生後にカメラ位置を調整する
       requestAnimationFrame(() => {
