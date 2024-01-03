@@ -56,7 +56,7 @@ const Config = (props: ConfigProps) => {
         <FormGroup icon={BotIcon} title={'OpenAI 语言模型'}>
           <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
-              style={{ width: 280 }}
+              style={{ width: 300 }}
               options={OPENAI_MODEL_LIST.map((model) => ({
                 label: (
                   <>
@@ -68,10 +68,10 @@ const Config = (props: ConfigProps) => {
             />
           </FormItem>
           <FormItem desc={'请使用自己的 OpenAI Key'} divider label={'API Key'} name="apikey">
-            <Input placeholder="sk-" style={{ width: 440 }} />
+            <Input.Password placeholder="sk-" style={{ width: 480 }} />
           </FormItem>
           <FormItem desc={'http(s)://'} divider label={'接口代理地址'} name="endpoint">
-            <Input placeholder="" style={{ width: 320 }} />
+            <Input placeholder="" style={{ width: 360 }} />
           </FormItem>
           <FormItem desc={'检查 APIKey 和接口代理地址是否设置正确'} divider label={'连通性检查'}>
             <Button
@@ -84,6 +84,7 @@ const Config = (props: ConfigProps) => {
                       role: 'user',
                     },
                   ],
+                  model: 'gpt-3.5-turbo',
                 })
               }
             >

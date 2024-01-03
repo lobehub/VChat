@@ -43,10 +43,6 @@ export const OPENAI_MODEL_LIST: OPENAI_MODEL[] = [
     maxToken: 128000,
   },
   {
-    name: 'gpt-4-turbo-1106-preview',
-    maxToken: 128000,
-  },
-  {
     name: 'gpt-4',
     maxToken: 8192,
   },
