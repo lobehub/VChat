@@ -1,7 +1,9 @@
 import { OPENAI_MODEL_LIST } from '@/constants/openai';
+import { chatCompletion } from '@/services/chat';
 import { configSelectors, useConfigStore } from '@/store/config';
 import { Form, FormGroup, FormItem } from '@lobehub/ui';
-import { Form as AForm, Input, Select, Tag } from 'antd';
+import { useRequest } from 'ahooks';
+import { Form as AForm, Button, Input, Select, Tag, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { debounce, isEqual } from 'lodash-es';
@@ -32,6 +34,17 @@ const Config = (props: ConfigProps) => {
     form.setFieldsValue(openAIConfig);
   }, [openAIConfig, form]);
 
+  const { loading, run: checkConnect } = useRequest(chatCompletion, {
+    manual: true,
+    onSuccess: (res) => {
+      if (!res.ok) {
+        message.error('调用接口失败，请检查 APIKey 和接口代理地址是否设置正确');
+        return;
+      }
+      message.success('检查通过');
+    },
+  });
+
   return (
     <div style={style} className={classNames(styles.config, className)}>
       <Form
@@ -59,6 +72,23 @@ const Config = (props: ConfigProps) => {
           </FormItem>
           <FormItem desc={'http(s)://'} divider label={'接口代理地址'} name="endpoint">
             <Input placeholder="" style={{ width: 320 }} />
+          </FormItem>
+          <FormItem desc={'检查 APIKey 和接口代理地址是否设置正确'} divider label={'连通性检查'}>
+            <Button
+              loading={loading}
+              onClick={() =>
+                checkConnect({
+                  messages: [
+                    {
+                      content: 'Hi',
+                      role: 'user',
+                    },
+                  ],
+                })
+              }
+            >
+              检查
+            </Button>
           </FormItem>
         </FormGroup>
       </Form>

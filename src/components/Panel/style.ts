@@ -30,8 +30,8 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   button: css`
     border-radius: 8px;
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
   `,
   close: css`
