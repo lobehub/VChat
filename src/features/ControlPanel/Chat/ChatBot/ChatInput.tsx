@@ -1,14 +1,14 @@
 import { OPENAI_MODEL_LIST } from '@/constants/openai';
 import { useCalculateToken } from '@/hooks/useCalculateToken';
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition';
-import { handleStopSpeakAi } from '@/services/chat';
+import { toogleVoice } from '@/services/chat';
 import { configSelectors, useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { ActionIcon, ChatInputArea, TokenTag } from '@lobehub/ui';
 import { Popconfirm } from 'antd';
 import { useTheme } from 'antd-style';
 import { isEqual } from 'lodash-es';
-import { AudioLines, Eraser, Mic } from 'lucide-react';
+import { EarIcon, EarOffIcon, Eraser, Mic } from 'lucide-react';
 import { memo, useCallback } from 'react';
 
 interface ChatBotProps {
@@ -26,7 +26,7 @@ const ChatInput = (props: ChatBotProps) => {
     s.setMessageInput,
   ]);
   const messageInput = useSessionStore((s) => s.messageInput);
-  const voiceLoading = useSessionStore((s) => s.voiceLoading);
+  const voiceOn = useSessionStore((s) => s.voiceOn);
   const config = useConfigStore((s) => configSelectors.currentOpenAIConfig(s), isEqual);
 
   const handleMessageInput = useCallback(
@@ -66,10 +66,9 @@ const ChatInput = (props: ChatBotProps) => {
           <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} title="语音识别" />
           {/* @ts-ignore */}
           <ActionIcon
-            icon={AudioLines}
-            onClick={handleStopSpeakAi}
-            loading={voiceLoading}
-            title="语音合成"
+            icon={voiceOn ? EarIcon : EarOffIcon}
+            onClick={toogleVoice}
+            title={voiceOn ? '关闭语音合成' : '开启语音合成'}
           />
           <TokenTag
             maxValue={

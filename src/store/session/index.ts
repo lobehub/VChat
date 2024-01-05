@@ -26,15 +26,13 @@ export interface SessionStore {
    */
   chatLoadingId: string | undefined;
   /**
-   * 语音加载中的消息 ID
+   * 语音开关
    */
-  voiceLoading: boolean;
+  voiceOn: boolean;
   /**
-   *  设置语音加载中的消息 ID
-   * @param voiceLoading
-   * @returns
+   * 触发语音开关
    */
-  setVoiceLoading: (voiceLoading: boolean) => void;
+  toogleVoice: () => void;
   /**
    * 当前消息输入
    */
@@ -104,13 +102,14 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   activeId: defaultSession.agentId,
   sessionList: [defaultSession],
   chatLoadingId: undefined,
-  voiceLoading: false,
+  voiceOn: true,
   messageInput: '',
   setMessageInput: (messageInput) => {
     set({ messageInput });
   },
-  setVoiceLoading: (voiceLoading) => {
-    set({ voiceLoading });
+  toogleVoice: () => {
+    const { voiceOn } = get();
+    set({ voiceOn: !voiceOn });
   },
 
   switchSession: (agentId) => {
@@ -254,24 +253,28 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     await fetchSEE(fetcher, {
       onMessageUpdate: (txt: string) => {
-        // 语音合成
-        receivedMessage += txt;
-        // 文本切割
-        const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
-        if (sentenceMatch && sentenceMatch[0]) {
-          const sentence = sentenceMatch[0];
-          sentences.push(sentence);
-          receivedMessage = receivedMessage.slice(sentence.length).trimStart();
+        const { voiceOn } = get();
 
-          if (
-            !sentence.replace(
-              /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
-              '',
-            )
-          ) {
-            return;
+        if (voiceOn) {
+          // 语音合成
+          receivedMessage += txt;
+          // 文本切割
+          const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
+          if (sentenceMatch && sentenceMatch[0]) {
+            const sentence = sentenceMatch[0];
+            sentences.push(sentence);
+            receivedMessage = receivedMessage.slice(sentence.length).trimStart();
+
+            if (
+              !sentence.replace(
+                /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
+                '',
+              )
+            ) {
+              return;
+            }
+            handleSpeakAi(sentence);
           }
-          handleSpeakAi(sentence);
         }
 
         // 对话更新
