@@ -1,4 +1,4 @@
-import { useDanceStore } from '@/store/dance';
+import { DanceStore, useDanceStore } from '@/store/dance';
 import { useViewerStore } from '@/store/viewer';
 import { Avatar, Icon } from '@lobehub/ui';
 import { Slider, Typography } from 'antd';
@@ -22,19 +22,27 @@ interface PlayerProps {
   className?: string;
 }
 
+const danceSelectors = (s: DanceStore) => {
+  return {
+    isPlaying: s.isPlaying,
+    setIsPlaying: s.setIsPlaying,
+    prevDance: s.prevDance,
+    nextDance: s.nextDance,
+    currentPlay: s.currentPlay,
+  };
+};
+
 function Player(props: PlayerProps) {
   const { style, className } = props;
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
   const [open, setOpen] = useState(false);
-
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currrentProgress, setCurrrentProgress] = useState(0);
-  const { currentPlay } = useDanceStore();
-
-  const { isPlaying, setIsPlaying, prevDance, nextDance } = useDanceStore();
-  const { viewer } = useViewerStore();
+  const { isPlaying, setIsPlaying, prevDance, nextDance, currentPlay } =
+    useDanceStore(danceSelectors);
+  const viewer = useViewerStore((s) => s.viewer);
 
   const { styles } = useStyles();
 
@@ -51,12 +59,12 @@ function Player(props: PlayerProps) {
     } else {
       ref.current && ref.current.pause();
       ref.current && (ref.current.currentTime = 0);
-      viewer.model?.stopDance();
     }
   }, [isPlaying, currentPlay, viewer]);
 
   const togglePlayPause = () => {
     if (isPlaying) {
+      viewer.model?.stopDance();
       setIsPlaying(false);
     } else {
       setIsPlaying(true);

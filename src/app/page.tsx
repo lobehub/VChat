@@ -54,6 +54,8 @@ const Home = () => {
     return <MarketPanel style={{ display: marketPanelOpen ? 'flex' : 'none' }} />;
   }, [marketPanelOpen]);
 
+  console.log('render');
+
   return (
     <div ref={ref}>
       <AgentViewer />
