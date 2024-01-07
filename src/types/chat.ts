@@ -1,4 +1,13 @@
+import { ErrorTypeEnum } from '@/types/api';
 import { LLMRoleType } from './llm';
+
+/**
+ * 聊天消息错误对象
+ */
+export interface ChatMessageError {
+  message: string;
+  type: ErrorTypeEnum;
+}
 
 /**
  * 消息元数据,包括头像,背景色,描述,名称等
@@ -33,7 +42,7 @@ export interface ChatMessage {
   /**
    * 错误
    */
-  error?: any;
+  error?: ChatMessageError;
   /**
    * 角色
    */

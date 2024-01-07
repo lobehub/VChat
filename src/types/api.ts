@@ -3,3 +3,9 @@ export enum ErrorTypeEnum {
   OPENAI_API_ERROR = 'OPENAI_API_ERROR',
   INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
 }
+
+export interface APIErrorResponse {
+  success: boolean;
+  message: string;
+  errorType: ErrorTypeEnum;
+}

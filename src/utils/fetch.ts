@@ -1,18 +1,24 @@
+import { APIErrorResponse } from '@/types/api';
+import { ChatMessageError } from '@/types/chat';
 /**
  * @description: 封装fetch请求，使用流式方法获取数据
  */
 export const fetchSEE = async (
   fetcher: () => Promise<Response>,
   handler: {
-    onMessageError?: (error: Error) => void;
+    onMessageError?: (error: ChatMessageError) => void;
     onMessageUpdate?: (text: string) => void;
   },
 ) => {
   const res = await fetcher();
 
   if (!res.ok) {
-    const error = new Error(res.statusText);
-    handler.onMessageError?.(error);
+    const data = (await res.json()) as APIErrorResponse;
+
+    handler.onMessageError?.({
+      type: data.errorType,
+      message: data.message,
+    });
     return;
   }
 

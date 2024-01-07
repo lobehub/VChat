@@ -67,10 +67,13 @@ const ChatList = (props: ChatListProps) => {
 
   const renderErrorMessages: LobeChatListProps['renderErrorMessages'] = {
     [ErrorTypeEnum.API_KEY_MISSING]: {
-      Render: ({ error }) => <div>{error}</div>,
-      config: {
-        type: 'error',
-      },
+      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
+    },
+    [ErrorTypeEnum.OPENAI_API_ERROR]: {
+      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
+    },
+    [ErrorTypeEnum.INTERNAL_SERVER_ERROR]: {
+      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
     },
   };
 

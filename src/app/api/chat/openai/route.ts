@@ -1,8 +1,8 @@
 import { OPENAI_API_KEY, OPENAI_END_POINT } from '@/constants/openai';
 import { ErrorTypeEnum } from '@/types/api';
 import { OpenAIStream, StreamingTextResponse } from 'ai';
-import { NextResponse } from 'next/server';
 import OpenAI, { ClientOptions } from 'openai';
+import { createErrorResponse } from './createErrorResponse';
 
 export const POST = async (req: Request) => {
   const payload = await req.json();
@@ -10,14 +10,7 @@ export const POST = async (req: Request) => {
   const baseURL = (req.headers.get(OPENAI_END_POINT) as string) || process.env.OPENAI_PROXY_URL;
 
   if (!apiKey) {
-    return NextResponse.json(
-      {
-        success: false,
-        message: 'openai api key missing',
-        errorType: ErrorTypeEnum.API_KEY_MISSING,
-      },
-      { status: 401 },
-    );
+    return createErrorResponse(ErrorTypeEnum.API_KEY_MISSING, 'openai api key missing');
   }
   const config: ClientOptions = {
     apiKey: apiKey,
@@ -41,23 +34,9 @@ export const POST = async (req: Request) => {
   } catch (error) {
     // https://platform.openai.com/docs/guides/error-codes/api-errors
     if (error instanceof OpenAI.APIError) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: error.message,
-          errorType: ErrorTypeEnum.OPENAI_API_ERROR,
-        },
-        { status: error.status || 577 },
-      );
+      return createErrorResponse(ErrorTypeEnum.OPENAI_API_ERROR, error.message);
     } else {
-      return NextResponse.json(
-        {
-          success: false,
-          message: JSON.stringify(error),
-          errorType: ErrorTypeEnum.INTERNAL_SERVER_ERROR,
-        },
-        { status: 500 },
-      );
+      return createErrorResponse(ErrorTypeEnum.INTERNAL_SERVER_ERROR, JSON.stringify(error));
     }
   }
 };
