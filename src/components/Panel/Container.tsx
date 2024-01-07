@@ -1,5 +1,5 @@
 import { useDraggable } from '@dnd-kit/core';
-import { Space, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import classNames from 'classnames';
 
 import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
@@ -41,29 +41,20 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   }
 
   const switches = useMemo(() => {
-    return (
-      <Space data-no-dnd="true">
-        <Tooltip title="关闭">
-          <div
-            className={classNames(styles.button, styles.close)}
-            onClick={() => {
-              onClose();
-            }}
-          />
-        </Tooltip>
-        <Tooltip title="最大化">
-          <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-        </Tooltip>
-        <Tooltip title="最小化">
-          <div
-            className={classNames(styles.button, styles.min)}
-            onClick={() => {
-              onClose();
-            }}
-          ></div>
-        </Tooltip>
-      </Space>
-    );
+    const handleClose = () => {
+      if (onClose) onClose();
+    };
+    return [
+      <Tooltip title="关闭" key="close">
+        <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
+      </Tooltip>,
+      <Tooltip title="最大化" key="max">
+        <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
+      </Tooltip>,
+      <Tooltip title="最小化" key="min">
+        <div className={classNames(styles.button, styles.min)} onClick={handleClose} />
+      </Tooltip>,
+    ];
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);
 
   return (
@@ -81,15 +72,13 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
       >
         <div
           className={classNames(styles.header)}
-          {...listeners}
           onDoubleClick={toggleFullScreen}
           ref={setActivatorNodeRef}
+          {...listeners}
         >
-          <div style={{ flex: 1 }}>{switches}</div>
-          <div style={{ flex: 1, textAlign: 'center', fontWeight: 'bold' }}>
-            {title ? title : null}
-          </div>
-          <div style={{ flex: 1 }}>{extra ? extra : null}</div>
+          <div className={styles.swtich}>{switches}</div>
+          <div className={styles.title}>{title ? title : null}</div>
+          <div className={styles.extra}>{extra ? extra : null}</div>
         </div>
         <div className={styles.container}>{children}</div>
       </div>
