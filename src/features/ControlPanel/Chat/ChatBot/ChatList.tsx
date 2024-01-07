@@ -1,13 +1,15 @@
 import { handleSpeakAi } from '@/services/chat';
 import { sessionSelectors, useSessionStore } from '@/store/session';
+import { ErrorTypeEnum } from '@/types/api';
 import {
   ActionIconGroup,
+  ChatMessage,
   ChatList as LobeChatList,
   ChatListProps as LobeChatListProps,
   RenderAction,
   useChatListActionsBar,
 } from '@lobehub/ui';
-import { ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
+import { ActionEvent, ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { isEqual } from 'lodash-es';
 import { Play } from 'lucide-react';
 import { memo } from 'react';
@@ -63,26 +65,41 @@ const ChatList = (props: ChatListProps) => {
     user: userActionsBar,
   };
 
+  const renderErrorMessages: LobeChatListProps['renderErrorMessages'] = {
+    [ErrorTypeEnum.API_KEY_MISSING]: {
+      Render: ({ error }) => <div>{error}</div>,
+      config: {
+        type: 'error',
+      },
+    },
+  };
+
+  const onActionsClick = (action: ActionEvent, message: ChatMessage) => {
+    const { key } = action;
+    const { content, id } = message;
+    if (key === 'tts') {
+      handleSpeakAi(content);
+    } else if (key === 'regenerate') {
+      regenerateMessage(id);
+    } else if (key === 'del') {
+      deleteMessage(id);
+    }
+  };
+
+  const renderMessages: LobeChatListProps['renderMessages'] = {
+    default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
+  };
+
   return (
     <div style={style} className={className}>
       <LobeChatList
         data={currentChats || []}
         showTitle={true}
         type="chat"
-        // @ts-ignore
         renderActions={renderActions}
-        renderMessages={{
-          default: ({ id, editableContent }) => <div id={id}>{editableContent}</div>,
-        }}
-        onActionsClick={({ key }, { content, id }) => {
-          if (key === 'tts') {
-            handleSpeakAi(content);
-          } else if (key === 'regenerate') {
-            regenerateMessage(id);
-          } else if (key === 'del') {
-            deleteMessage(id);
-          }
-        }}
+        renderMessages={renderMessages}
+        renderErrorMessages={renderErrorMessages}
+        onActionsClick={onActionsClick}
         onMessageChange={(id, content) => {
           updateMessage(id, content);
         }}

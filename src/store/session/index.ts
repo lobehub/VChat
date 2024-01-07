@@ -161,7 +161,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       type: 'UPDATE_MESSAGE',
       payload: {
         id: id,
-        content: '...', // 占位符
+        key: 'content',
+        value: '...', // 占位符
       },
     });
 
@@ -184,7 +185,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     dispatchMessage({
       payload: {
         id,
-        content,
+        key: 'content',
+        value: content,
       },
       type: 'UPDATE_MESSAGE',
     });
@@ -283,13 +285,21 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
         dispatchMessage({
           payload: {
             id: assistantId,
-            content: aiMessage,
+            key: 'content',
+            value: aiMessage,
           },
           type: 'UPDATE_MESSAGE',
         });
       },
-      onMessageError: () => {
-        // TODO: 错误处理
+      onMessageError: (error) => {
+        dispatchMessage({
+          payload: {
+            id: assistantId,
+            key: 'error',
+            value: error,
+          },
+          type: 'UPDATE_MESSAGE',
+        });
       },
     });
     set({ chatLoadingId: undefined });

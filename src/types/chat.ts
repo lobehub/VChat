@@ -31,6 +31,10 @@ export interface ChatMessage {
    */
   content: string;
   /**
+   * 错误
+   */
+  error?: any;
+  /**
    * 角色
    */
   role: LLMRoleType;
