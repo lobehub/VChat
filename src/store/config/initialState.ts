@@ -6,6 +6,7 @@ export interface ConfigState {
   controlPanelOpen: boolean;
   rolePanelOpen: boolean;
   livePanelOpen: boolean;
+  chatPanelOpen: boolean;
 }
 
 const initialState: ConfigState = {
@@ -13,6 +14,7 @@ const initialState: ConfigState = {
   controlPanelOpen: false,
   rolePanelOpen: false,
   livePanelOpen: false,
+  chatPanelOpen: false,
   config: {
     primaryColor: 'blue',
     languageModel: {

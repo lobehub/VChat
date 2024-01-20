@@ -13,6 +13,7 @@ export interface ConfigAction {
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
   setLivePanelOpen: (open: boolean) => void;
+  setChatPanelOpen: (open: boolean) => void;
   setConfig: (config: Partial<Config>) => void;
   setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
 }
@@ -25,6 +26,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
   setLivePanelOpen: (open) => set({ livePanelOpen: open }),
+  setChatPanelOpen: (open) => set({ chatPanelOpen: open }),
 
   setConfig: (config) => {
     const prevSetting = get().config;

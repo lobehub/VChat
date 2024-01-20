@@ -2,7 +2,6 @@ import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
 import { memo } from 'react';
 import Agent from './Agent';
-import Chat from './Chat';
 import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
@@ -30,7 +29,6 @@ const ControlPanel = (props: ControlPanelProps) => {
       <div className={styles.content}>
         {tab === 'dance' ? <Dance /> : null}
         {tab === 'agent' ? <Agent /> : null}
-        {tab === 'chat' ? <Chat /> : null}
         {tab === 'touch' ? <Touch /> : null}
         {tab === 'config' ? <Config /> : null}
       </div>
