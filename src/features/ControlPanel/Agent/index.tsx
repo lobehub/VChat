@@ -48,7 +48,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>我的虚拟偶像</h1>
+          <h1 className={styles.title}>Hello, Let&apos;s Chat!</h1>
           <GridBackground
             animation
             className={styles.background}
@@ -56,7 +56,7 @@ const Agent = (props: AgentProps) => {
             random
           />
         </Center>
-        <AgentList title="角色列表" loading={loading} dataSource={localAgentList} />
+        <AgentList title="好友列表" loading={loading} dataSource={localAgentList} />
       </div>
       <AgentCard />
     </div>

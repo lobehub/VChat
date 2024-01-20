@@ -35,7 +35,7 @@ const AgentList = (props: AgentListProps) => {
           glow
           size="middle"
         >
-          打开商店
+          + 加好友
         </GradientButton>
       </Flexbox>
       <List

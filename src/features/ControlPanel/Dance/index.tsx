@@ -46,7 +46,7 @@ const Dance = (props: DanceProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <Center>
-          <h1 className={styles.title}>我的舞蹈</h1>
+          <h1 className={styles.title}> Just Dance </h1>
           <GridBackground
             animation
             className={styles.background}

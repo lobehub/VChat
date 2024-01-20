@@ -9,6 +9,8 @@ import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } f
 import dynamic from 'next/dynamic';
 import { memo, useMemo, useRef } from 'react';
 
+const ChatPanel = dynamic(() => import('@/features/ChatPanel'), { ssr: false });
+const livePanel = dynamic(() => import('@/features/LivePanel'), { ssr: false });
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
@@ -16,11 +18,20 @@ const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false
 const Home = () => {
   const viewer = useViewerStore((s) => s.viewer);
   const ref = useRef<HTMLDivElement>(null);
-  const [setTab, controlPanelOpen, setControlPanelOpen, rolePanelOpen] = useConfigStore((s) => [
+  const [
+    setTab,
+    controlPanelOpen,
+    chatPanelOpen,
+    livePanelOpen,
+    rolePanelOpen,
+    setControlPanelOpen,
+  ] = useConfigStore((s) => [
     s.setTab,
     s.controlPanelOpen,
-    s.setControlPanelOpen,
+    s.chatPanelOpen,
+    s.livePanelOpen,
     s.rolePanelOpen,
+    s.setControlPanelOpen,
   ]);
 
   const [marketPanelOpen, setMarketPanelOpen] = useMarketStore((s) => [
@@ -53,7 +64,13 @@ const Home = () => {
     return <MarketPanel style={{ display: marketPanelOpen ? 'flex' : 'none' }} />;
   }, [marketPanelOpen]);
 
-  console.log('render');
+  const chatPanel = useMemo(() => {
+    return <ChatPanel style={{ display: chatPanelOpen ? 'flex' : 'none' }} />;
+  }, [chatPanelOpen]);
+
+  const livePanel = useMemo(() => {
+    return <ChatPanel style={{ display: livePanelOpen ? 'flex' : 'none' }} />;
+  }, [livePanelOpen]);
 
   return (
     <div ref={ref}>
@@ -123,6 +140,8 @@ const Home = () => {
       {controlPanel}
       {rolePanel}
       {marketPanel}
+      {chatPanel}
+      {livePanel}
     </div>
   );
 };
