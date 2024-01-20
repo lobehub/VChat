@@ -5,12 +5,14 @@ export interface ConfigState {
   tab: tabType;
   controlPanelOpen: boolean;
   rolePanelOpen: boolean;
+  livePanelOpen: boolean;
 }
 
 const initialState: ConfigState = {
   tab: 'agent',
   controlPanelOpen: false,
   rolePanelOpen: false,
+  livePanelOpen: false,
   config: {
     primaryColor: 'blue',
     languageModel: {

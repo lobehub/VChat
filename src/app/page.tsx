@@ -11,7 +11,6 @@ import { memo, useMemo, useRef } from 'react';
 
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
-const AgentViewer = dynamic(() => import('@/features/AgentViewer'), { ssr: false });
 const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
 
 const Home = () => {
@@ -58,7 +57,6 @@ const Home = () => {
 
   return (
     <div ref={ref}>
-      <AgentViewer />
       <ActionIconGroup
         style={{
           position: 'absolute',
