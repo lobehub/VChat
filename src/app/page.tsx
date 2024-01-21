@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import { memo, useMemo, useRef } from 'react';
 
 const ChatPanel = dynamic(() => import('@/features/ChatPanel'), { ssr: false });
-const livePanel = dynamic(() => import('@/features/LivePanel'), { ssr: false });
+const LivePanel = dynamic(() => import('@/features/LivePanel'), { ssr: false });
 const ControlPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
 const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
@@ -71,7 +71,7 @@ const Home = () => {
   }, [chatPanelOpen]);
 
   const livePanel = useMemo(() => {
-    return <ChatPanel style={{ display: livePanelOpen ? 'flex' : 'none' }} />;
+    return <LivePanel style={{ display: livePanelOpen ? 'flex' : 'none' }} />;
   }, [livePanelOpen]);
 
   return (

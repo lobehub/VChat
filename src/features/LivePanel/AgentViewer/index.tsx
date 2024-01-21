@@ -1,4 +1,3 @@
-import { loadVRMAnimation } from '@/lib/VRMAnimation/loadVRMAnimation';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { type ActionIconGroupProps } from '@lobehub/ui';
@@ -20,47 +19,6 @@ function AgentViewer() {
     (canvas: HTMLCanvasElement) => {
       if (canvas) {
         viewer.setup(canvas);
-
-        canvas.addEventListener('dragover', function (event) {
-          event.preventDefault();
-        });
-
-        canvas.addEventListener('drop', function (event) {
-          event.preventDefault();
-
-          const files = event.dataTransfer?.files;
-          if (!files) {
-            return;
-          }
-
-          const file = files[0];
-          if (!file) {
-            return;
-          }
-
-          const file_type = file.name.split('.').pop();
-          if (file_type === 'vrm') {
-            const blob = new Blob([file], { type: 'application/octet-stream' });
-            const url = window.URL.createObjectURL(blob);
-            viewer.loadVrm(url);
-          } else if (file_type === 'vrma') {
-            const blob = new Blob([file], { type: 'application/octet-stream' });
-            const url = window.URL.createObjectURL(blob);
-            loadVRMAnimation(url).then((vrma) => {
-              if (vrma) viewer.model?.loadAnimation(vrma);
-            });
-          } else if (file_type === 'vmd') {
-            const blob = new Blob([file]);
-            blob.arrayBuffer().then((vmd) => {
-              viewer.model?.dance(vmd);
-            });
-          } else if (file_type === 'pmx') {
-            const blob = new Blob([file]);
-            blob.arrayBuffer().then((pmx) => {
-              viewer.loadStage(pmx);
-            });
-          }
-        });
       }
       return canvas;
     },
@@ -70,9 +28,7 @@ function AgentViewer() {
   return (
     <div
       style={{
-        position: 'relative',
-        width: '100vw',
-        height: 'calc(100vh - 64px)',
+        width: '100%',
       }}
     >
       <canvas ref={canvasRef}></canvas>

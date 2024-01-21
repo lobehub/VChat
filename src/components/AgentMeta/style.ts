@@ -10,9 +10,11 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   desc: css`
     width: 480px;
+    line-height: 18px;
     color: ${token.colorTextDescription};
   `,
   title: css`
+    line-height: 18px;
     font-size: ${token.fontSize}px;
     font-weight: bold;
   `,

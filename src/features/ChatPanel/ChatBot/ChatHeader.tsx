@@ -8,14 +8,14 @@ import { useStyles } from './style';
 
 const Header = () => {
   const { styles } = useStyles();
-  const { setTab } = useConfigStore();
+  const { setLivePanelOpen } = useConfigStore();
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
 
   return (
     <div className={styles.header}>
       <AgentMeta meta={currentAgent?.meta} />
       {/* @ts-ignore */}
-      <ActionIcon icon={Video} onClick={() => setTab('agent')} />
+      <ActionIcon icon={Video} onClick={() => setLivePanelOpen(true)} />
     </div>
   );
 };
