@@ -8,5 +8,6 @@ export const useStyles = createStyles(({ css, token }) => ({
     height: 100%;
     width: 100%;
     flex-grow: 1;
+    position: relative;
   `,
 }));

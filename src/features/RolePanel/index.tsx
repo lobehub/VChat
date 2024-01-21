@@ -4,8 +4,8 @@ import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
 import Info from './Info';
 import Role from './Role';
+import Touch from './Touch';
 import Voice from './Voice';
-
 import { useStyles } from './style';
 
 interface RolePanelProps {
@@ -17,7 +17,7 @@ const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [tab, setTab] = useState('info');
-  const { setRolePanelOpen } = useConfigStore();
+  const setRolePanelOpen = useConfigStore((s) => s.setRolePanelOpen);
 
   return (
     <Panel
@@ -58,6 +58,10 @@ const RolePanel = (props: RolePanelProps) => {
                 key: 'voice',
                 label: '语音',
               },
+              {
+                key: 'touch',
+                label: '触摸设置',
+              },
             ]}
           />
         </div>
@@ -65,6 +69,7 @@ const RolePanel = (props: RolePanelProps) => {
           {tab === 'info' ? <Info /> : null}
           {tab === 'role' ? <Role /> : null}
           {tab === 'voice' ? <Voice /> : null}
+          {tab === 'touch' ? <Touch /> : null}
         </div>
       </div>
     </Panel>

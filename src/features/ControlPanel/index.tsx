@@ -5,7 +5,7 @@ import Agent from './Agent';
 import Config from './Config';
 import Dance from './Dance';
 import SideNav from './SideNav';
-import Touch from './Touch';
+
 import { useStyles } from './style';
 
 interface ControlPanelProps {
@@ -29,7 +29,6 @@ const ControlPanel = (props: ControlPanelProps) => {
       <div className={styles.content}>
         {tab === 'dance' ? <Dance /> : null}
         {tab === 'agent' ? <Agent /> : null}
-        {tab === 'touch' ? <Touch /> : null}
         {tab === 'config' ? <Config /> : null}
       </div>
     </Panel>

@@ -1,6 +1,6 @@
 import { useConfigStore } from '@/store/config';
 import { ActionIcon, SideNav as LobeSideNav } from '@lobehub/ui';
-import { Music2, Pointer, Settings2, User } from 'lucide-react';
+import { Music2, Settings2, User } from 'lucide-react';
 import { memo } from 'react';
 
 interface SideNavProps {
@@ -40,14 +40,6 @@ const SideNav = (props: SideNavProps) => {
             icon={Music2}
             onClick={() => {
               setTab('dance');
-            }}
-            size="large"
-          />
-          <ActionIcon
-            active={tab === 'touch'}
-            icon={Pointer}
-            onClick={() => {
-              setTab('touch');
             }}
             size="large"
           />

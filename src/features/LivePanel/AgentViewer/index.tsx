@@ -37,10 +37,11 @@ function AgentViewer() {
 
   return (
     <div
+      ref={ref}
       style={{
         width: '100%',
+        height: '100%',
       }}
-      ref={ref}
     >
       <ActionIconGroup
         style={{
