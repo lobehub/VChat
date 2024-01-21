@@ -2,12 +2,11 @@
 
 import { useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
-import { useViewerStore } from '@/store/viewer';
 import { tabType } from '@/types/config';
 import { ActionIconGroup } from '@lobehub/ui';
-import { Expand, MessageSquare, Music2, Pointer, RotateCw, ShoppingBag, User } from 'lucide-react';
+import { MessageSquare, Music2, ShoppingBag, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { memo, useMemo, useRef } from 'react';
+import { memo, useMemo } from 'react';
 
 const ChatPanel = dynamic(() => import('@/features/ChatPanel'), { ssr: false });
 const LivePanel = dynamic(() => import('@/features/LivePanel'), { ssr: false });
@@ -16,8 +15,6 @@ const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
 const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
 
 const Home = () => {
-  const viewer = useViewerStore((s) => s.viewer);
-  const ref = useRef<HTMLDivElement>(null);
   const [
     setTab,
     controlPanelOpen,
@@ -46,14 +43,6 @@ const Home = () => {
     setTab(tab);
   }
 
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      ref.current && ref.current.requestFullscreen();
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
-
   const controlPanel = useMemo(() => {
     return <ControlPanel style={{ display: controlPanelOpen ? 'flex' : 'none' }} />;
   }, [controlPanelOpen]);
@@ -75,7 +64,7 @@ const Home = () => {
   }, [livePanelOpen]);
 
   return (
-    <div ref={ref}>
+    <div>
       <ActionIconGroup
         style={{
           position: 'absolute',
@@ -84,16 +73,6 @@ const Home = () => {
           bottom: '50%',
         }}
         items={[
-          {
-            icon: RotateCw,
-            key: 'resetCamera',
-            label: '重置镜头',
-          },
-          {
-            icon: Expand,
-            key: 'expand',
-            label: '全屏',
-          },
           {
             icon: User,
             key: 'agent',
@@ -110,11 +89,6 @@ const Home = () => {
             label: '立即聊天',
           },
           {
-            icon: Pointer,
-            key: 'touch',
-            label: '触摸设置',
-          },
-          {
             icon: ShoppingBag,
             key: 'market',
             label: '虚拟商店',
@@ -122,11 +96,7 @@ const Home = () => {
         ]}
         direction="column"
         onActionClick={(action) => {
-          if (action.key === 'resetCamera') {
-            viewer.resetCamera();
-          } else if (action.key === 'expand') {
-            toggleFullScreen();
-          } else if (action.key === 'agent') {
+          if (action.key === 'agent') {
             openControlPanel('agent');
           } else if (action.key === 'dance') {
             openControlPanel('dance');

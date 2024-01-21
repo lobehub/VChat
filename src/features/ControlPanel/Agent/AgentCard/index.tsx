@@ -6,7 +6,7 @@ import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { DraggablePanel } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
-import { Button, Popconfirm, Tooltip, message } from 'antd';
+import { Button, Popconfirm, message } from 'antd';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
 
@@ -77,19 +77,18 @@ const Header = () => {
       <AgentInfo
         agent={currentAgent}
         actions={[
-          <Tooltip title="首次加载时间较长，请耐心等待" key="chat">
-            <Button
-              onClick={() => {
-                if (!currentAgent) return;
-                switchSession(currentAgent.agentId);
-                setIsPlaying(false);
-                setChatPanelOpen(true);
-              }}
-              type={'primary'}
-            >
-              开始聊天
-            </Button>
-          </Tooltip>,
+          <Button
+            key="chat"
+            onClick={() => {
+              if (!currentAgent) return;
+              switchSession(currentAgent.agentId);
+              setIsPlaying(false);
+              setChatPanelOpen(true);
+            }}
+            type={'primary'}
+          >
+            开始聊天
+          </Button>,
           <Button onClick={openPanel} key="edit">
             编辑
           </Button>,
