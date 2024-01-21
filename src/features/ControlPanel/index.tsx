@@ -23,7 +23,7 @@ const ControlPanel = (props: ControlPanelProps) => {
       style={style}
       className={className}
       onClose={() => setControlPanelOpen(false)}
-      title="控制面板"
+      title="Vidol.Chat"
     >
       <SideNav className="handle" />
       <div className={styles.content}>

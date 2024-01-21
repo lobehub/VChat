@@ -2,7 +2,7 @@ import { useDraggable } from '@dnd-kit/core';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 
-import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
+import React, { PropsWithChildren, memo, useMemo, useRef, useState } from 'react';
 
 import { useStyles } from './style';
 
@@ -18,7 +18,8 @@ interface ContainerProps {
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
   const { style, className, children, onClose, x, y, title, extra } = props;
-  const { styles } = useStyles();
+  const [focus, setFocus] = useState(false);
+  const { styles } = useStyles(focus);
 
   const { attributes, listeners, transform, setNodeRef, setActivatorNodeRef } = useDraggable({
     id: 'draggable',
@@ -58,7 +59,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);
 
   return (
-    <div ref={setNodeRef}>
+    <div ref={setNodeRef} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
       <div
         className={classNames(styles.box, className)}
         style={{
