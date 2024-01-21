@@ -25,6 +25,7 @@ const Home = () => {
     livePanelOpen,
     rolePanelOpen,
     setControlPanelOpen,
+    setChatPanelOpen,
   ] = useConfigStore((s) => [
     s.setTab,
     s.controlPanelOpen,
@@ -32,6 +33,7 @@ const Home = () => {
     s.livePanelOpen,
     s.rolePanelOpen,
     s.setControlPanelOpen,
+    s.setChatPanelOpen,
   ]);
 
   const [marketPanelOpen, setMarketPanelOpen] = useMarketStore((s) => [
@@ -129,7 +131,7 @@ const Home = () => {
           } else if (action.key === 'dance') {
             openControlPanel('dance');
           } else if (action.key === 'chat') {
-            openControlPanel('chat');
+            setChatPanelOpen(true);
           } else if (action.key === 'touch') {
             openControlPanel('touch');
           } else if (action.key === 'market') {
