@@ -7,12 +7,14 @@ export interface ConfigState {
   rolePanelOpen: boolean;
   livePanelOpen: boolean;
   chatPanelOpen: boolean;
+  dancePanelOpen: boolean;
 }
 
 const initialState: ConfigState = {
   tab: 'agent',
   controlPanelOpen: false,
   rolePanelOpen: false,
+  dancePanelOpen: false,
   livePanelOpen: false,
   chatPanelOpen: false,
   config: {

@@ -1,14 +1,13 @@
 'use client';
 
+import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
 import Header from '@/layout/Header';
 import { useConfigStore } from '@/store/config';
 import { useThemeStore } from '@/store/theme';
 import '@/styles/globals.css';
+import { setCookie } from '@/utils/cookie';
 import { ThemeProvider } from '@lobehub/ui';
 import { ThemeAppearance } from 'antd-style';
-
-import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
-import { setCookie } from '@/utils/cookie';
 import { ReactNode } from 'react';
 
 export interface LayoutProps {
