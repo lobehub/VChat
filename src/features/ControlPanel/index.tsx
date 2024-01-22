@@ -2,10 +2,6 @@ import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
 import { memo } from 'react';
 import Agent from './Agent';
-import Config from './Config';
-import Dance from './Dance';
-import SideNav from './SideNav';
-
 import { useStyles } from './style';
 
 interface ControlPanelProps {
@@ -25,12 +21,7 @@ const ControlPanel = (props: ControlPanelProps) => {
       onClose={() => setControlPanelOpen(false)}
       title="Vidol.Chat"
     >
-      <SideNav className="handle" />
-      <div className={styles.content}>
-        {tab === 'dance' ? <Dance /> : null}
-        {tab === 'agent' ? <Agent /> : null}
-        {tab === 'config' ? <Config /> : null}
-      </div>
+      <div className={styles.content}>{tab === 'agent' ? <Agent /> : null}</div>
     </Panel>
   );
 };
