@@ -36,7 +36,13 @@ function AgentViewer() {
   }
 
   return (
-    <div ref={ref}>
+    <div
+      ref={ref}
+      style={{
+        width: '100%',
+        height: '100%',
+      }}
+    >
       <ActionIconGroup
         style={{
           position: 'absolute',
