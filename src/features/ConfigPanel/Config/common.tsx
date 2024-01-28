@@ -1,4 +1,5 @@
 import { useConfigStore } from '@/store/config';
+import { BackgroundEffect } from '@/types/config';
 import { CheckCard } from '@ant-design/pro-card';
 import {
   Form,
@@ -76,7 +77,7 @@ const CommonConfig = (props: CommonConfigProps) => {
               size="small"
               value={backgroundEffect}
               onChange={(value) => {
-                setConfig({ backgroundEffect: value || 'none' });
+                setConfig({ backgroundEffect: (value as BackgroundEffect) || 'none' });
               }}
             >
               <CheckCard title="🌸 落樱缤纷" value="sakura" className={styles.effect} />
