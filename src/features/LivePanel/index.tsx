@@ -18,7 +18,7 @@ const LivePanel = (props: LivePanelProps) => {
       style={style}
       className={className}
       onClose={() => setLivePanelOpen(false)}
-      title="视频通话"
+      title="WebCam"
     >
       <div className={styles.content}>
         <AgentViewer />

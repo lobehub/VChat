@@ -36,13 +36,7 @@ function AgentViewer() {
   }
 
   return (
-    <div
-      ref={ref}
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
-    >
+    <div ref={ref}>
       <ActionIconGroup
         style={{
           position: 'absolute',
@@ -71,7 +65,7 @@ function AgentViewer() {
           }
         }}
       />
-      <canvas ref={canvasRef}></canvas>
+      <canvas ref={canvasRef} width={900} height={640}></canvas>
     </div>
   );
 }

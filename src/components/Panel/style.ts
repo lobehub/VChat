@@ -3,7 +3,7 @@ import { createStyles } from 'antd-style';
 export const useStyles = createStyles(({ css, token }, focus: boolean) => ({
   box: css`
     backdrop-filter: saturate(180%) blur(10px);
-    background-color: ${token.colorBgContainer};
+    /* background-color: ${token.colorBgContainer}; */
     border: 1px solid #999;
     display: flex;
     z-index: ${focus ? 1000 : 10};
