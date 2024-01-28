@@ -1,9 +1,14 @@
 import { PrimaryColors } from '@lobehub/ui';
+
 export interface CommonConfig {
   /**
    * 主题色
    */
   primaryColor: PrimaryColors;
+  /**
+   * 背景类型
+   */
+  backgroundEffect: 'sakura' | 'snow' | 'star' | 'none';
 }
 
 export interface OpenAIConfig {

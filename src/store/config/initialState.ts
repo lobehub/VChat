@@ -21,6 +21,7 @@ const initialState: ConfigState = {
   configPanelOpen: false,
   config: {
     primaryColor: 'blue',
+    backgroundEffect: 'sakura',
     languageModel: {
       openAI: {
         apikey: '',

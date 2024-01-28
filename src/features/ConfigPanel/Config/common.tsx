@@ -1,4 +1,5 @@
 import { useConfigStore } from '@/store/config';
+import { CheckCard } from '@ant-design/pro-card';
 import {
   Form,
   FormGroup,
@@ -22,12 +23,19 @@ const useStyles = createStyles(({ css }) => ({
     display: flex;
     flex-grow: 1;
   `,
+  effect: css`
+    margin-bottom: 0;
+    width: 120px;
+  `,
 }));
 
 const CommonConfig = (props: CommonConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
+  const [primaryColor, backgroundEffect] = useConfigStore((s) => [
+    s.config.primaryColor,
+    s.config.backgroundEffect,
+  ]);
   const setConfig = useConfigStore((s) => s.setConfig);
   const theme = useTheme();
 
@@ -57,6 +65,25 @@ const CommonConfig = (props: CommonConfigProps) => {
                 setConfig({ primaryColor: name || '' });
               }}
             />
+          </FormItem>
+          <FormItem
+            desc={'自定义桌面粒子效果'}
+            divider
+            label={'粒子特效'}
+            name={'backgroundEffect'}
+          >
+            <CheckCard.Group
+              size="small"
+              value={backgroundEffect}
+              onChange={(value) => {
+                setConfig({ backgroundEffect: value || 'none' });
+              }}
+            >
+              <CheckCard title="🌸 落樱缤纷" value="sakura" className={styles.effect} />
+              <CheckCard title="❄️ 冰雪王国" value="snow" className={styles.effect} />
+              <CheckCard title="✨ 仰望星空" value="star" className={styles.effect} />
+              <CheckCard title="🙌 无效果" value="none" className={styles.effect} />
+            </CheckCard.Group>
           </FormItem>
         </FormGroup>
       </Form>
