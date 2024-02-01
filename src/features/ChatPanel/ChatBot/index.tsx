@@ -1,4 +1,3 @@
-import { DraggablePanel } from '@lobehub/ui';
 import classNames from 'classnames';
 import { memo, useState } from 'react';
 import ChatHeader from './ChatHeader';
@@ -20,9 +19,7 @@ const ChatBot = (props: ChatBotProps) => {
     <div className={classNames(styles.chatbot, className)} style={style}>
       <ChatHeader />
       <ChatList style={{ flex: 1, overflow: 'auto' }} />
-      <DraggablePanel expandable fullscreen={expand} minHeight={200} placement="bottom">
-        <ChatInput expand={expand} onExpandChange={(expand) => setExpand(expand)} />
-      </DraggablePanel>
+      <ChatInput expand={expand} setExpand={(expand) => setExpand(expand)} />
     </div>
   );
 };
