@@ -10,10 +10,8 @@ import {
   useChatListActionsBar,
 } from '@lobehub/ui';
 import { ActionEvent, ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
-import { isEqual } from 'lodash-es';
 import { Play } from 'lucide-react';
 import { memo } from 'react';
-import ScrollArchor from './ScrollArchor';
 
 interface ChatListProps {
   style?: React.CSSProperties;
@@ -34,7 +32,7 @@ const ChatList = (props: ChatListProps) => {
     regenerate: '重新生成',
     copy: '复制',
   });
-  const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
+  const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s));
 
   const tts = {
     icon: Play,
@@ -117,7 +115,7 @@ const ChatList = (props: ChatListProps) => {
         }}
         loadingId={chatLoadingId}
       />
-      <ScrollArchor />
+      {/* <ScrollArchor /> */}
     </div>
   );
 };

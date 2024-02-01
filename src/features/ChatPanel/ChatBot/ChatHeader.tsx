@@ -2,7 +2,6 @@ import AgentMeta from '@/components/AgentMeta';
 import { useConfigStore } from '@/store/config';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { ActionIcon } from '@lobehub/ui';
-import { isEqual } from 'lodash-es';
 import { Video, VideoOff } from 'lucide-react';
 import { useStyles } from './style';
 
@@ -12,7 +11,10 @@ const Header = () => {
     s.livePanelOpen,
     s.setLivePanelOpen,
   ]);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
+  const [currentAgent, setLiveId] = useSessionStore((s) => [
+    sessionSelectors.currentAgent(s),
+    s.setLiveId,
+  ]);
 
   return (
     <div className={styles.header}>
@@ -20,7 +22,15 @@ const Header = () => {
       {/* @ts-ignore */}
       <ActionIcon
         icon={livePanelOpen ? VideoOff : Video}
-        onClick={() => setLivePanelOpen(!livePanelOpen)}
+        onClick={() => {
+          if (livePanelOpen) {
+            setLiveId(undefined);
+            setLivePanelOpen(false);
+          } else {
+            setLiveId(currentAgent?.agentId);
+            setLivePanelOpen(true);
+          }
+        }}
         title={livePanelOpen ? '关闭视频通话' : '发起视频通话'}
       />
     </div>

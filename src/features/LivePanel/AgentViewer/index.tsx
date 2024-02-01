@@ -8,14 +8,14 @@ export const items: ActionIconGroupProps['items'] = [];
 
 function AgentViewer() {
   const viewer = useViewerStore((s) => s.viewer);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
+  const currentLiveAgent = useSessionStore((s) => sessionSelectors.currentLiveAgent(s));
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (currentAgent) {
-      viewer.loadVrm(currentAgent.meta.model);
+    if (currentLiveAgent) {
+      viewer.loadVrm(currentLiveAgent.meta.model);
     }
-  }, [currentAgent, viewer]);
+  }, [currentLiveAgent, viewer]);
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {

@@ -22,7 +22,7 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
     (set, get) => ({
       currentIdentifier: '',
       loading: false,
-      localAgentList: [...DEFAULT_AGENTS],
+      localAgentList: DEFAULT_AGENTS,
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });
       },
