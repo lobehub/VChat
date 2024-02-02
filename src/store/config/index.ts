@@ -1,4 +1,4 @@
-import { Config, tabType } from '@/types/config';
+import { Config } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools } from 'zustand/middleware';
@@ -9,7 +9,6 @@ import { ConfigState, initialState } from './initialState';
 import { configSelectors } from './selectors/config';
 
 export interface ConfigAction {
-  setTab: (tab: tabType) => void;
   setControlPanelOpen: (open: boolean) => void;
   setRolePanelOpen: (open: boolean) => void;
   setLivePanelOpen: (open: boolean) => void;
@@ -24,7 +23,6 @@ export interface ConfigStore extends ConfigState, ConfigAction {}
 
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
   ...initialState,
-  setTab: (tab) => set({ tab }),
   setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
   setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
   setLivePanelOpen: (open) => set({ livePanelOpen: open }),

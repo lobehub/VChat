@@ -19,7 +19,6 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <AgentMeta meta={currentAgent?.meta} />
-      {/* @ts-ignore */}
       <ActionIcon
         icon={livePanelOpen ? VideoOff : Video}
         onClick={() => {

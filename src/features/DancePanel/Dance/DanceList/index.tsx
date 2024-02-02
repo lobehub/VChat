@@ -8,7 +8,7 @@ const { Meta } = Card;
 
 const DanceList = () => {
   const [danceList, activateDance] = useDanceStore((s) => [s.danceList, s.activateDance]);
-  const [setMarketPanelOpen, setTab] = useMarketStore((s) => [s.setMarketPanelOpen, s.setTab]);
+  const [setMarketPanelOpen] = useMarketStore((s) => [s.setMarketPanelOpen]);
 
   return (
     <>
@@ -17,7 +17,6 @@ const DanceList = () => {
         <GradientButton
           onClick={() => {
             setMarketPanelOpen(true);
-            setTab('dance');
           }}
           glow
           size="middle"

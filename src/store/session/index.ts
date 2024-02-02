@@ -120,10 +120,9 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     const { voiceOn } = get();
     set({ voiceOn: !voiceOn });
   },
-  setLiveId: (liveId: string) => {
+  setLiveId: (liveId?: string) => {
     set({ liveId });
   },
-
   switchSession: (agentId) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agentId === agentId);

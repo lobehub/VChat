@@ -21,7 +21,7 @@ const AgentList = (props: AgentListProps) => {
     s.activateAgent,
     agentListSelectors.showSideBar(s),
   ]);
-  const [setMarketPanelOpen, setTab] = useMarketStore((s) => [s.setMarketPanelOpen, s.setTab]);
+  const [setMarketPanelOpen] = useMarketStore((s) => [s.setMarketPanelOpen]);
 
   return (
     <>
@@ -30,7 +30,6 @@ const AgentList = (props: AgentListProps) => {
         <GradientButton
           onClick={() => {
             setMarketPanelOpen(true);
-            setTab('agent');
           }}
           glow
           size="middle"

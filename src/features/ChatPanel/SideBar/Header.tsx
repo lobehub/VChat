@@ -1,4 +1,3 @@
-import { useConfigStore } from '@/store/config';
 import { ActionIcon, SearchBar } from '@lobehub/ui';
 import { Plus } from 'lucide-react';
 import { memo } from 'react';
@@ -14,7 +13,6 @@ interface HeaderProps {
 const Header = memo((props: HeaderProps) => {
   const { value, onChange } = props;
   const { styles } = useStyles();
-  const { setTab } = useConfigStore();
 
   return (
     <div className={styles.header}>

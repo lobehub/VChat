@@ -26,5 +26,3 @@ export interface LanguageModelConfig {
 export interface Config extends CommonConfig {
   languageModel: LanguageModelConfig;
 }
-
-export type tabType = 'agent' | 'config' | 'dance' | 'chat' | 'touch';

@@ -81,7 +81,7 @@ const Home = () => {
   ]);
 
   const controlPanel = useMemo(() => {
-    return <ControlPanel style={{ display: controlPanelOpen ? 'flex' : 'none' }} />;
+    return controlPanelOpen ? <ControlPanel /> : null;
   }, [controlPanelOpen]);
 
   const rolePanel = useMemo(() => {
