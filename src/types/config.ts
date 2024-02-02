@@ -2,6 +2,22 @@ import { PrimaryColors } from '@lobehub/ui';
 
 export type BackgroundEffect = 'sakura' | 'snow' | 'star' | 'none';
 
+export interface Panel {
+  open: boolean;
+}
+
+export interface PanelConfig {
+  agent: Panel;
+  role: Panel;
+  market: Panel;
+  dance: Panel;
+  live: Panel;
+  chat: Panel;
+  config: Panel;
+}
+
+export type PanelKey = keyof PanelConfig;
+
 export interface CommonConfig {
   /**
    * 主题色

@@ -11,13 +11,13 @@ interface LivePanelProps {
 const LivePanel = (props: LivePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setLivePanelOpen] = useConfigStore((s) => [s.setLivePanelOpen]);
+  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setLivePanelOpen(false)}
+      onClose={() => setPanel('live', { open: false })}
       title="WebCam"
     >
       <div className={styles.content}>

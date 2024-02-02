@@ -12,16 +12,18 @@ interface ControlPanelProps {
 const ControlPanel = (props: ControlPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setControlPanelOpen, tab] = useConfigStore((s) => [s.setControlPanelOpen, s.tab]);
+  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setControlPanelOpen(false)}
+      onClose={() => setPanel('agent' as any, { open: false })}
       title="Vidol.Chat"
     >
-      <div className={styles.content}>{tab === 'agent' ? <Agent /> : null}</div>
+      <div className={styles.content}>
+        <Agent />
+      </div>
     </Panel>
   );
 };

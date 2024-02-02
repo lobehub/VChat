@@ -14,13 +14,13 @@ interface ChatPanelProps {
 const ChatPanel = (props: ChatPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setChatPanelOpen] = useConfigStore((s) => [s.setChatPanelOpen]);
+  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setChatPanelOpen(false)}
+      onClose={() => setPanel('chat', { open: false })}
       title="对话列表"
     >
       <div style={style} className={classNames(className, styles.content)}>

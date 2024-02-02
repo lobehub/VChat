@@ -17,13 +17,13 @@ const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [tab, setTab] = useState('info');
-  const setRolePanelOpen = useConfigStore((s) => s.setRolePanelOpen);
+  const setPanel = useConfigStore((s) => s.setPanel);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setRolePanelOpen(false)}
+      onClose={() => setPanel('role', { open: false })}
       defaultCoordinates={{
         x: 320,
         y: 250,

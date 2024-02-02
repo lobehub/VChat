@@ -11,13 +11,13 @@ interface DancePanelProps {
 const DancePanel = (props: DancePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setDancePanelOpen] = useConfigStore((s) => [s.setDancePanelOpen]);
+  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setDancePanelOpen(false)}
+      onClose={() => setPanel('dance', { open: false })}
       title="舞蹈"
     >
       <div className={styles.content}>

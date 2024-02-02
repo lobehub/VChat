@@ -11,13 +11,13 @@ interface ConfigPanelProps {
 const ConfigPanel = (props: ConfigPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setConfigPanelOpen] = useConfigStore((s) => [s.setConfigPanelOpen]);
+  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setConfigPanelOpen(false)}
+      onClose={() => setPanel('config', { open: false })}
       title="系统设置"
     >
       <div className={styles.content}>
