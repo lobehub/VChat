@@ -1,14 +1,16 @@
+'use client';
+
 import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
-import Config from './Config';
+import AgentViewer from './AgentViewer';
 import { useStyles } from './style';
 
-interface ConfigPanelProps {
+interface LivePanelProps {
   style?: React.CSSProperties;
   className?: string;
 }
 
-const ConfigPanel = (props: ConfigPanelProps) => {
+const LivePanel = (props: LivePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [setPanel] = useConfigStore((s) => [s.setPanel]);
@@ -17,14 +19,14 @@ const ConfigPanel = (props: ConfigPanelProps) => {
     <Panel
       style={style}
       className={className}
-      onClose={() => setPanel('config', { open: false })}
-      title="系统设置"
+      onClose={() => setPanel('live', { open: false })}
+      title="WebCam"
     >
       <div className={styles.content}>
-        <Config />
+        <AgentViewer />
       </div>
     </Panel>
   );
 };
 
-export default ConfigPanel;
+export default LivePanel;

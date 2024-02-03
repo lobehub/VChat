@@ -4,16 +4,16 @@ import { useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
 import { ActionIconGroup } from '@lobehub/ui';
 import { MessageSquare, Music2, Settings2, ShoppingBag, User, Video } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import { memo } from 'react';
 
-const ChatPanel = dynamic(() => import('@/features/ChatPanel'), { ssr: false });
-const LivePanel = dynamic(() => import('@/features/LivePanel'), { ssr: false });
-const ConfigPanel = dynamic(() => import('@/features/ConfigPanel'), { ssr: false });
-const DancePanel = dynamic(() => import('@/features/DancePanel'), { ssr: false });
-const AgentPanel = dynamic(() => import('@/features/ControlPanel'), { ssr: false });
-const RolePanel = dynamic(() => import('@/features/RolePanel'), { ssr: false });
-const MarketPanel = dynamic(() => import('@/features/MarketPanel'), { ssr: false });
+import {
+  AgentPanel,
+  ChatPanel,
+  ConfigPanel,
+  DancePanel,
+  LivePanel,
+  MarketPanel,
+  RolePanel,
+} from '@/panels';
 
 const apps = [
   {
@@ -84,4 +84,4 @@ const Home = () => {
   );
 };
 
-export default memo(Home);
+export default Home;

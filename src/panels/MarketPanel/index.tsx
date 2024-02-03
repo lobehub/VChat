@@ -1,3 +1,5 @@
+'use client';
+
 import Panel from '@/components/Panel';
 import { useMarketStore } from '@/store/market';
 import Agent from './Agent';

@@ -1,14 +1,16 @@
+'use client';
+
 import Panel from '@/components/Panel';
 import { useConfigStore } from '@/store/config';
-import AgentViewer from './AgentViewer';
+import Agent from './Agent';
 import { useStyles } from './style';
 
-interface LivePanelProps {
+interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
 }
 
-const LivePanel = (props: LivePanelProps) => {
+const ControlPanel = (props: ControlPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [setPanel] = useConfigStore((s) => [s.setPanel]);
@@ -17,14 +19,14 @@ const LivePanel = (props: LivePanelProps) => {
     <Panel
       style={style}
       className={className}
-      onClose={() => setPanel('live', { open: false })}
-      title="WebCam"
+      onClose={() => setPanel('agent' as any, { open: false })}
+      title="Vidol.Chat"
     >
       <div className={styles.content}>
-        <AgentViewer />
+        <Agent />
       </div>
     </Panel>
   );
 };
 
-export default LivePanel;
+export default ControlPanel;
