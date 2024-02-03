@@ -120,6 +120,7 @@ const ChatInput = (props: ChatBotProps) => {
       heights={{ minHeight: INITIAL_INPUT_HEIGHT, inputHeight }}
       onSend={() => {
         sendMessage(messageInput);
+        setMessageInput('');
       }}
       placeholder="请输入内容开始聊天"
     />

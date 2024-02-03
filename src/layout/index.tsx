@@ -8,8 +8,6 @@ import { setCookie } from '@/utils/cookie';
 import { ThemeProvider } from '@lobehub/ui';
 import { ThemeAppearance } from 'antd-style';
 import { ReactNode } from 'react';
-import Background from './Background';
-import Header from './Header';
 
 export interface LayoutProps {
   children?: ReactNode;
@@ -32,9 +30,7 @@ export default function App(props: LayoutProps) {
         setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
     >
-      <Header />
-      <main style={{ display: 'flex', width: '100%' }}>{children}</main>
-      <Background />
+      {children}
     </ThemeProvider>
   );
 }

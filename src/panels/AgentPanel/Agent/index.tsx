@@ -1,23 +1,14 @@
 import { useAgentStore } from '@/store/agent';
-import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import { memo } from 'react';
-import { Center } from 'react-layout-kit';
 import AgentCard from './AgentCard';
 import AgentList from './AgentList';
 
+const TopBanner = dynamic(() => import('./TopBanner'), { ssr: false });
+
 const useStyles = createStyles(({ css }) => ({
-  background: css`
-    width: 90%;
-    margin: -24px 0 -12px;
-  `,
-  title: css`
-    z-index: 2;
-    margin-top: 24px;
-    font-size: 36px;
-    font-weight: 800;
-  `,
   container: css`
     position: relative;
     display: flex;
@@ -41,21 +32,12 @@ interface AgentProps {
 const Agent = (props: AgentProps) => {
   const { theme, styles } = useStyles();
   const { style, className } = props;
-
   const [loading, localAgentList] = useAgentStore((s) => [s.loading, s.localAgentList]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
-        <Center>
-          <h1 className={styles.title}>Hello, Let&apos;s Chat!</h1>
-          <GridBackground
-            animation
-            className={styles.background}
-            colorFront={theme.colorText}
-            random
-          />
-        </Center>
+        <TopBanner />
         <AgentList title="好友列表" loading={loading} dataSource={localAgentList} />
       </div>
       <AgentCard />
