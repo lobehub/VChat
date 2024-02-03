@@ -4,7 +4,7 @@ import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { memo, useEffect } from 'react';
 
-const useStyles = createStyles(({ css, token }) => ({
+const useStyles = createStyles(({ css }) => ({
   content: css`
     display: flex;
     align-items: center;

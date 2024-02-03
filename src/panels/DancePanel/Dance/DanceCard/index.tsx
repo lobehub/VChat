@@ -22,14 +22,12 @@ const useStyles = createStyles(({ css, token }) => ({
 const SideBar = memo(() => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showDanceSidebar, activateDance, deactivateDance, danceList, addAndPlayItem] =
-    useDanceStore((s) => [
-      danceListSelectors.showSideBar(s),
-      s.activateDance,
-      s.deactivateDance,
-      s.danceList,
-      s.addAndPlayItem,
-    ]);
+  const [showDanceSidebar, activateDance, deactivateDance, addAndPlayItem] = useDanceStore((s) => [
+    danceListSelectors.showSideBar(s),
+    s.activateDance,
+    s.deactivateDance,
+    s.addAndPlayItem,
+  ]);
 
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
 
