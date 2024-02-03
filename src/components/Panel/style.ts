@@ -44,8 +44,8 @@ export const useStyles = createStyles(({ css, token }, focus: boolean) => ({
   `,
   button: css`
     border-radius: 8px;
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     margin-left: ${token.marginXS}px;
     cursor: pointer;
   `,
