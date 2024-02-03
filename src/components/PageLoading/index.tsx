@@ -1,22 +1,20 @@
-import { Icon } from '@lobehub/ui';
+import { Icon, Logo } from '@lobehub/ui';
 import { Loader2 } from 'lucide-react';
 import { memo } from 'react';
 import { Center, Flexbox } from 'react-layout-kit';
 
-// eslint-disable-next-line react/display-name
-const Loading = memo(() => {
+const PageLoading = ({ title }: { title: string }) => {
   return (
-    <Flexbox height={'100vh'} width={'100%'}>
+    <Flexbox height={'100%'} width={'100%'}>
       <Center flex={1} gap={12} width={'100%'}>
-        <h1>Vidol.Chat</h1>
+        <Logo extra={'V-Idol'} size={48} type={'combine'} />
         <Center gap={16} horizontal>
-          {/* @ts-ignore */}
           <Icon icon={Loader2} spin />
-          应用初始化中
+          {title}
         </Center>
       </Center>
     </Flexbox>
   );
-});
+};
 
-export default Loading;
+export default memo(PageLoading);

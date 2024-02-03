@@ -1,9 +1,9 @@
-import Page from './home';
+import PageLoading from './home/loading';
 import Redirect from './home/Redirect';
 
 const Index = () => (
   <>
-    <Page />
+    <PageLoading />
     <Redirect />
   </>
 );

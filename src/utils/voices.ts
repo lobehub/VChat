@@ -16,7 +16,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'AIGenerate1',
     LocalName: 'AIGenerate1',
     ShortName: 'en-US-AIGenerate1Neural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-LouisaNeural': {
     locale: 'de-DE',
@@ -85,7 +85,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Luke',
     LocalName: 'Luke',
     ShortName: 'en-ZA-LukeNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'lo-LA-ChanthavongNeural': {
     locale: 'lo-LA',
@@ -94,7 +94,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Chanthavong',
     LocalName: 'ຈັນທະວົງ',
     ShortName: 'lo-LA-ChanthavongNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-CecilioNeural': {
     locale: 'es-MX',
@@ -123,7 +123,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Kumar',
     LocalName: 'குமார்',
     ShortName: 'ta-LK-KumarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-CH-JanNeural': {
     locale: 'de-CH',
@@ -142,7 +142,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sabela',
     LocalName: 'Sabela',
     ShortName: 'gl-ES-SabelaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-YE-MaryamNeural': {
     locale: 'ar-YE',
@@ -151,7 +151,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Maryam',
     LocalName: 'مريم',
     ShortName: 'ar-YE-MaryamNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ja-JP-DaichiNeural': {
     locale: 'ja-JP',
@@ -170,7 +170,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Venba',
     LocalName: 'வெண்பா',
     ShortName: 'ta-SG-VenbaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'kk-KZ-AigulNeural': {
     locale: 'kk-KZ',
@@ -179,7 +179,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Aigul',
     LocalName: 'Айгүл',
     ShortName: 'kk-KZ-AigulNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-NG-AbeoNeural': {
     locale: 'en-NG',
@@ -188,7 +188,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Abeo',
     LocalName: 'Abeo',
     ShortName: 'en-NG-AbeoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-HK-SamNeural': {
     locale: 'en-HK',
@@ -197,7 +197,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sam',
     LocalName: 'Sam',
     ShortName: 'en-HK-SamNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-PT-FernandaNeural': {
     locale: 'pt-PT',
@@ -216,7 +216,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Kani',
     LocalName: 'கனி',
     ShortName: 'ta-MY-KaniNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-SV-RodrigoNeural': {
     locale: 'es-SV',
@@ -225,7 +225,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Rodrigo',
     LocalName: 'Rodrigo',
     ShortName: 'es-SV-RodrigoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-ElizabethNeural': {
     locale: 'en-US',
@@ -234,7 +234,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Elizabeth',
     LocalName: 'Elizabeth',
     ShortName: 'en-US-ElizabethNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-AU-WilliamNeural': {
     locale: 'en-AU',
@@ -243,7 +243,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'William',
     LocalName: 'William',
     ShortName: 'en-AU-WilliamNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-LibbyNeural': {
     locale: 'en-GB',
@@ -252,7 +252,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Libby',
     LocalName: 'Libby',
     ShortName: 'en-GB-LibbyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-AU-AnnetteNeural': {
     locale: 'en-AU',
@@ -261,7 +261,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Annette',
     LocalName: 'Annette',
     ShortName: 'en-AU-AnnetteNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'cy-GB-AledNeural': {
     locale: 'cy-GB',
@@ -289,7 +289,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Elena',
     LocalName: 'Elena',
     ShortName: 'es-AR-ElenaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-MiaNeural': {
     locale: 'en-GB',
@@ -298,7 +298,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mia',
     LocalName: 'Mia',
     ShortName: 'en-GB-MiaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-CO-SalomeNeural': {
     locale: 'es-CO',
@@ -307,7 +307,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Salome',
     LocalName: 'Salome',
     ShortName: 'es-CO-SalomeNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fi-FI-SelmaNeural': {
     locale: 'fi-FI',
@@ -336,7 +336,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ryan',
     LocalName: 'Ryan',
     ShortName: 'en-GB-RyanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ja-JP-ShioriNeural': {
     locale: 'ja-JP',
@@ -374,7 +374,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ezinne',
     LocalName: 'Ezinne',
     ShortName: 'en-NG-EzinneNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaochenNeural': {
     locale: 'zh-CN',
@@ -450,7 +450,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sameera',
     LocalName: 'සමීර',
     ShortName: 'si-LK-SameeraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaohanNeural': {
     locale: 'zh-CN',
@@ -477,7 +477,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tania',
     LocalName: 'Tania',
     ShortName: 'es-PY-TaniaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-MajaNeural': {
     locale: 'de-DE',
@@ -496,7 +496,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Rehema',
     LocalName: 'Rehema',
     ShortName: 'sw-TZ-RehemaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mn-MN-YesuiNeural': {
     locale: 'mn-MN',
@@ -505,7 +505,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yesui',
     LocalName: 'Есүй',
     ShortName: 'mn-MN-YesuiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-AmalaNeural': {
     locale: 'de-DE',
@@ -524,7 +524,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tina',
     LocalName: 'Tina',
     ShortName: 'en-AU-TinaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-NicolauNeural': {
     locale: 'pt-BR',
@@ -543,7 +543,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Kim',
     LocalName: 'Kim',
     ShortName: 'en-AU-KimNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-CH-ArianeNeural': {
     locale: 'fr-CH',
@@ -572,7 +572,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jajang',
     LocalName: 'Jajang',
     ShortName: 'su-ID-JajangNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaozhenNeural': {
     locale: 'zh-CN',
@@ -610,7 +610,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mario',
     LocalName: 'Mario',
     ShortName: 'es-PY-MarioNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ka-GE-EkaNeural': {
     locale: 'ka-GE',
@@ -619,7 +619,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Eka',
     LocalName: 'ეკა',
     ShortName: 'ka-GE-EkaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-YaraNeural': {
     locale: 'pt-BR',
@@ -638,7 +638,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Molly',
     LocalName: 'Molly',
     ShortName: 'en-NZ-MollyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PA-MargaritaNeural': {
     locale: 'es-PA',
@@ -647,7 +647,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Margarita',
     LocalName: 'Margarita',
     ShortName: 'es-PA-MargaritaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-MA-JamalNeural': {
     locale: 'ar-MA',
@@ -656,7 +656,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jamal',
     LocalName: 'جمال',
     ShortName: 'ar-MA-JamalNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-VeraNeural': {
     locale: 'es-ES',
@@ -675,7 +675,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jenny Multilingual',
     LocalName: 'Jenny Multilingual',
     ShortName: 'en-US-JennyMultilingualNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-OM-AbdullahNeural': {
     locale: 'ar-OM',
@@ -684,7 +684,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Abdullah',
     LocalName: 'عبدالله',
     ShortName: 'ar-OM-AbdullahNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'cy-GB-NiaNeural': {
     locale: 'cy-GB',
@@ -732,7 +732,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Lorena',
     LocalName: 'Lorena',
     ShortName: 'es-SV-LorenaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-KillianNeural': {
     locale: 'de-DE',
@@ -751,7 +751,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tim',
     LocalName: 'Tim',
     ShortName: 'en-AU-TimNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'bg-BG-KalinaNeural': {
     locale: 'bg-BG',
@@ -799,7 +799,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Asilia',
     LocalName: 'Asilia',
     ShortName: 'en-KE-AsiliaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'nl-NL-ColetteNeural': {
     locale: 'nl-NL',
@@ -837,7 +837,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Roi',
     LocalName: 'Roi',
     ShortName: 'gl-ES-RoiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-SY-LaithNeural': {
     locale: 'ar-SY',
@@ -846,7 +846,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Laith',
     LocalName: 'ليث',
     ShortName: 'ar-SY-LaithNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-AmberNeural': {
     locale: 'en-US',
@@ -855,7 +855,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Amber',
     LocalName: 'Amber',
     ShortName: 'en-US-AmberNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-AntonioNeural': {
     locale: 'pt-BR',
@@ -874,7 +874,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ameha',
     LocalName: 'አምሀ',
     ShortName: 'am-ET-AmehaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ta-SG-AnbuNeural': {
     locale: 'ta-SG',
@@ -883,7 +883,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Anbu',
     LocalName: 'அன்பு',
     ShortName: 'ta-SG-AnbuNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-CelesteNeural': {
     locale: 'fr-FR',
@@ -912,7 +912,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Juan',
     LocalName: 'Juan',
     ShortName: 'es-CR-JuanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ka-GE-GiorgiNeural': {
     locale: 'ka-GE',
@@ -921,7 +921,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Giorgi',
     LocalName: 'გიორგი',
     ShortName: 'ka-GE-GiorgiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-JorgeNeural': {
     locale: 'es-MX',
@@ -949,7 +949,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Brandon',
     LocalName: 'Brandon',
     ShortName: 'en-US-BrandonNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sv-SE-MattiasNeural': {
     locale: 'sv-SE',
@@ -968,7 +968,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Babek',
     LocalName: 'Babək',
     ShortName: 'az-AZ-BabekNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mk-MK-AleksandarNeural': {
     locale: 'mk-MK',
@@ -977,7 +977,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Aleksandar',
     LocalName: 'Александар',
     ShortName: 'mk-MK-AleksandarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-CA-AntoineNeural': {
     locale: 'fr-CA',
@@ -996,7 +996,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ramona',
     LocalName: 'Ramona',
     ShortName: 'es-DO-RamonaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-TrianaNeural': {
     locale: 'es-ES',
@@ -1044,7 +1044,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Wayne',
     LocalName: 'Wayne',
     ShortName: 'en-SG-WayneNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-HN-CarlosNeural': {
     locale: 'es-HN',
@@ -1053,7 +1053,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Carlos',
     LocalName: 'Carlos',
     ShortName: 'es-HN-CarlosNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-MaisieNeural': {
     locale: 'en-GB',
@@ -1062,7 +1062,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Maisie',
     LocalName: 'Maisie',
     ShortName: 'en-GB-MaisieNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'so-SO-UbaxNeural': {
     locale: 'so-SO',
@@ -1071,7 +1071,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ubax',
     LocalName: 'Ubax',
     ShortName: 'so-SO-UbaxNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'bn-BD-NabanitaNeural': {
     locale: 'bn-BD',
@@ -1080,7 +1080,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Nabanita',
     LocalName: 'নবনীতা',
     ShortName: 'bn-BD-NabanitaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-QA-MoazNeural': {
     locale: 'ar-QA',
@@ -1089,7 +1089,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Moaz',
     LocalName: 'معاذ',
     ShortName: 'ar-QA-MoazNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-TZ-ElimuNeural': {
     locale: 'en-TZ',
@@ -1098,7 +1098,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Elimu',
     LocalName: 'Elimu',
     ShortName: 'en-TZ-ElimuNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-TZ-ImaniNeural': {
     locale: 'en-TZ',
@@ -1107,7 +1107,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Imani',
     LocalName: 'Imani',
     ShortName: 'en-TZ-ImaniNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-DavisNeural': {
     locale: 'en-US',
@@ -1116,7 +1116,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Davis',
     LocalName: 'Davis',
     ShortName: 'en-US-DavisNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-ConradNeural': {
     locale: 'de-DE',
@@ -1135,7 +1135,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sophie',
     LocalName: 'Софија',
     ShortName: 'sr-RS-SophieNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'kn-IN-SapnaNeural': {
     locale: 'kn-IN',
@@ -1144,7 +1144,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sapna',
     LocalName: 'ಸಪ್ನಾ',
     ShortName: 'kn-IN-SapnaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-UY-MateoNeural': {
     locale: 'es-UY',
@@ -1153,7 +1153,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mateo',
     LocalName: 'Mateo',
     ShortName: 'es-UY-MateoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-MarinaNeural': {
     locale: 'es-MX',
@@ -1172,7 +1172,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jason',
     LocalName: 'Jason',
     ShortName: 'en-US-JasonNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-HK-HiuGaaiNeural': {
     locale: 'zh-HK',
@@ -1210,7 +1210,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sara',
     LocalName: 'Sara',
     ShortName: 'en-US-SaraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-HK-YanNeural': {
     locale: 'en-HK',
@@ -1219,7 +1219,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yan',
     LocalName: 'Yan',
     ShortName: 'en-HK-YanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-IsabellaNeural': {
     locale: 'it-IT',
@@ -1247,7 +1247,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Natasha',
     LocalName: 'Natasha',
     ShortName: 'en-AU-NatashaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ca-ES-AlbaNeural': {
     locale: 'ca-ES',
@@ -1266,7 +1266,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Nilar',
     LocalName: 'နီလာ',
     ShortName: 'my-MM-NilarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-BrigitteNeural': {
     locale: 'fr-FR',
@@ -1315,7 +1315,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gonzalo',
     LocalName: 'Gonzalo',
     ShortName: 'es-CO-GonzaloNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sk-SK-LukasNeural': {
     locale: 'sk-SK',
@@ -1334,7 +1334,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Cora',
     LocalName: 'Cora',
     ShortName: 'en-US-CoraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'vi-VN-NamMinhNeural': {
     locale: 'vi-VN',
@@ -1353,7 +1353,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Xiaoni',
     LocalName: '晓妮',
     ShortName: 'zh-CN-shaanxi-XiaoniNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'hr-HR-GabrijelaNeural': {
     locale: 'hr-HR',
@@ -1372,7 +1372,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Teresa',
     LocalName: 'Teresa',
     ShortName: 'es-GQ-TeresaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-MichelleNeural': {
     locale: 'en-US',
@@ -1381,7 +1381,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Michelle',
     LocalName: 'Michelle',
     ShortName: 'en-US-MichelleNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-HenriNeural': {
     locale: 'fr-FR',
@@ -1400,7 +1400,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sobhana',
     LocalName: 'ശോഭന',
     ShortName: 'ml-IN-SobhanaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-EliasNeural': {
     locale: 'es-ES',
@@ -1439,7 +1439,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Javier',
     LocalName: 'Javier',
     ShortName: 'es-GQ-JavierNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'is-IS-GudrunNeural': {
     locale: 'is-IS',
@@ -1448,7 +1448,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gudrun',
     LocalName: 'Guðrún',
     ShortName: 'is-IS-GudrunNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaoshuangNeural': {
     locale: 'zh-CN',
@@ -1466,7 +1466,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gagan',
     LocalName: 'ಗಗನ್',
     ShortName: 'kn-IN-GaganNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-AlainNeural': {
     locale: 'fr-FR',
@@ -1505,7 +1505,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jenny',
     LocalName: 'Jenny',
     ShortName: 'en-US-JennyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-UY-ValentinaNeural': {
     locale: 'es-UY',
@@ -1514,7 +1514,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Valentina',
     LocalName: 'Valentina',
     ShortName: 'es-UY-ValentinaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-KlarissaNeural': {
     locale: 'de-DE',
@@ -1543,7 +1543,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ismael',
     LocalName: 'إسماعيل',
     ShortName: 'ar-DZ-IsmaelNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'nb-NO-FinnNeural': {
     locale: 'nb-NO',
@@ -1591,7 +1591,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Carly',
     LocalName: 'Carly',
     ShortName: 'en-AU-CarlyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-OM-AyshaNeural': {
     locale: 'ar-OM',
@@ -1600,7 +1600,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Aysha',
     LocalName: 'عائشة',
     ShortName: 'ar-OM-AyshaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-RalfNeural': {
     locale: 'de-DE',
@@ -1628,7 +1628,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Thilini',
     LocalName: 'තිළිණි',
     ShortName: 'si-LK-ThiliniNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-ClaudeNeural': {
     locale: 'fr-FR',
@@ -1647,7 +1647,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sagar',
     LocalName: 'सागर',
     ShortName: 'ne-NP-SagarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-ValerioNeural': {
     locale: 'pt-BR',
@@ -1676,7 +1676,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tony',
     LocalName: 'Tony',
     ShortName: 'en-US-TonyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-MauriceNeural': {
     locale: 'fr-FR',
@@ -1705,7 +1705,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Saleh',
     LocalName: 'صالح',
     ShortName: 'ar-YE-SalehNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-LibertoNeural': {
     locale: 'es-MX',
@@ -1724,7 +1724,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gunnar',
     LocalName: 'Gunnar',
     ShortName: 'is-IS-GunnarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'cs-CZ-AntoninNeural': {
     locale: 'cs-CZ',
@@ -1743,7 +1743,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Bassel',
     LocalName: 'باسل',
     ShortName: 'ar-IQ-BasselNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mt-MT-JosephNeural': {
     locale: 'mt-MT',
@@ -1772,7 +1772,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Piseth',
     LocalName: 'ពិសិដ្ឋ',
     ShortName: 'km-KH-PisethNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'th-TH-NiwatNeural': {
     locale: 'th-TH',
@@ -1791,7 +1791,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ainhoa',
     LocalName: 'Ainhoa',
     ShortName: 'eu-ES-AinhoaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-KlausNeural': {
     locale: 'de-DE',
@@ -1810,7 +1810,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Manohar',
     LocalName: 'मनोहर',
     ShortName: 'mr-IN-ManoharNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'hr-HR-SreckoNeural': {
     locale: 'hr-HR',
@@ -1859,7 +1859,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mouna',
     LocalName: 'منى',
     ShortName: 'ar-MA-MounaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-YunzeNeural': {
     locale: 'zh-CN',
@@ -1897,7 +1897,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Hollie',
     LocalName: 'Hollie',
     ShortName: 'en-GB-HollieNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-GianniNeural': {
     locale: 'it-IT',
@@ -1973,7 +1973,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Thiha',
     LocalName: 'သီဟ',
     ShortName: 'my-MM-ThihaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'lv-LV-NilsNeural': {
     locale: 'lv-LV',
@@ -2001,7 +2001,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Xiaobei',
     LocalName: '晓北',
     ShortName: 'zh-CN-liaoning-XiaobeiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-ChristophNeural': {
     locale: 'de-DE',
@@ -2030,7 +2030,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Oliver',
     LocalName: 'Oliver',
     ShortName: 'en-GB-OliverNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'bn-BD-PradeepNeural': {
     locale: 'bn-BD',
@@ -2039,7 +2039,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Pradeep',
     LocalName: 'প্রদ্বীপ',
     ShortName: 'bn-BD-PradeepNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaoqiuNeural': {
     locale: 'zh-CN',
@@ -2086,7 +2086,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Bashkar',
     LocalName: 'ভাস্কর',
     ShortName: 'bn-IN-BashkarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'wuu-CN-XiaotongNeural': {
     locale: 'wuu-CN',
@@ -2095,7 +2095,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Xiaotong',
     LocalName: '晓彤',
     ShortName: 'wuu-CN-XiaotongNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-AU-DarrenNeural': {
     locale: 'en-AU',
@@ -2104,7 +2104,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Darren',
     LocalName: 'Darren',
     ShortName: 'en-AU-DarrenNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-PT-DuarteNeural': {
     locale: 'pt-PT',
@@ -2123,7 +2123,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Freya',
     LocalName: 'Freya',
     ShortName: 'en-AU-FreyaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-CA-LiamNeural': {
     locale: 'en-CA',
@@ -2132,7 +2132,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Liam',
     LocalName: 'Liam',
     ShortName: 'en-CA-LiamNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-AU-DuncanNeural': {
     locale: 'en-AU',
@@ -2141,7 +2141,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Duncan',
     LocalName: 'Duncan',
     ShortName: 'en-AU-DuncanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'hy-AM-AnahitNeural': {
     locale: 'hy-AM',
@@ -2150,7 +2150,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Anahit',
     LocalName: 'Անահիտ',
     ShortName: 'hy-AM-AnahitNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-NI-YolandaNeural': {
     locale: 'es-NI',
@@ -2159,7 +2159,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yolanda',
     LocalName: 'Yolanda',
     ShortName: 'es-NI-YolandaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ja-JP-KeitaNeural': {
     locale: 'ja-JP',
@@ -2197,7 +2197,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Vesna',
     LocalName: 'Vesna',
     ShortName: 'bs-BA-VesnaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'uz-UZ-SardorNeural': {
     locale: 'uz-UZ',
@@ -2206,7 +2206,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sardor',
     LocalName: 'Sardor',
     ShortName: 'uz-UZ-SardorNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'th-TH-PremwadeeNeural': {
     locale: 'th-TH',
@@ -2235,7 +2235,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yunxi',
     LocalName: '云希',
     ShortName: 'zh-CN-sichuan-YunxiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'yue-CN-YunSongNeural': {
     locale: 'yue-CN',
@@ -2244,7 +2244,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'YunSong',
     LocalName: '云松',
     ShortName: 'yue-CN-YunSongNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'gu-IN-NiranjanNeural': {
     locale: 'gu-IN',
@@ -2253,7 +2253,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Niranjan',
     LocalName: 'નિરંજન',
     ShortName: 'gu-IN-NiranjanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'lt-LT-OnaNeural': {
     locale: 'lt-LT',
@@ -2272,7 +2272,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Anila',
     LocalName: 'Anila',
     ShortName: 'sq-AL-AnilaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-DO-EmilioNeural': {
     locale: 'es-DO',
@@ -2281,7 +2281,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Emilio',
     LocalName: 'Emilio',
     ShortName: 'es-DO-EmilioNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-SoniaNeural': {
     locale: 'en-GB',
@@ -2290,7 +2290,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sonia',
     LocalName: 'Sonia',
     ShortName: 'en-GB-SoniaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-AshleyNeural': {
     locale: 'en-US',
@@ -2299,7 +2299,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ashley',
     LocalName: 'Ashley',
     ShortName: 'en-US-AshleyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaoruiNeural': {
     locale: 'zh-CN',
@@ -2317,7 +2317,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Fahed',
     LocalName: 'فهد',
     ShortName: 'ar-KW-FahedNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-LY-OmarNeural': {
     locale: 'ar-LY',
@@ -2326,7 +2326,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Omar',
     LocalName: 'أحمد',
     ShortName: 'ar-LY-OmarNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zu-ZA-ThandoNeural': {
     locale: 'zu-ZA',
@@ -2335,7 +2335,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Thando',
     LocalName: 'Thando',
     ShortName: 'zu-ZA-ThandoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-SaulNeural': {
     locale: 'es-ES',
@@ -2364,7 +2364,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Fatima',
     LocalName: 'فاطمة',
     ShortName: 'ar-AE-FatimaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'lo-LA-KeomanyNeural': {
     locale: 'lo-LA',
@@ -2373,7 +2373,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Keomany',
     LocalName: 'ແກ້ວມະນີ',
     ShortName: 'lo-LA-KeomanyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mn-MN-BataaNeural': {
     locale: 'mn-MN',
@@ -2382,7 +2382,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Bataa',
     LocalName: 'Батаа',
     ShortName: 'mn-MN-BataaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-AT-IngridNeural': {
     locale: 'de-AT',
@@ -2401,7 +2401,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Belkys',
     LocalName: 'Belkys',
     ShortName: 'es-CU-BelkysNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'af-ZA-AdriNeural': {
     locale: 'af-ZA',
@@ -2410,7 +2410,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Adri',
     LocalName: 'Adri',
     ShortName: 'af-ZA-AdriNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-ElkeNeural': {
     locale: 'de-DE',
@@ -2429,7 +2429,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Iman',
     LocalName: 'إيمان',
     ShortName: 'ar-LY-ImanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fil-PH-AngeloNeural': {
     locale: 'fil-PH',
@@ -2438,7 +2438,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Angelo',
     LocalName: 'Angelo',
     ShortName: 'fil-PH-AngeloNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-PH-RosaNeural': {
     locale: 'en-PH',
@@ -2467,7 +2467,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ana',
     LocalName: 'Ana',
     ShortName: 'en-US-AnaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-IE-ConnorNeural': {
     locale: 'en-IE',
@@ -2476,7 +2476,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Connor',
     LocalName: 'Connor',
     ShortName: 'en-IE-ConnorNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sk-SK-ViktoriaNeural': {
     locale: 'sk-SK',
@@ -2525,7 +2525,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Marta',
     LocalName: 'Marta',
     ShortName: 'es-GT-MartaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'am-ET-MekdesNeural': {
     locale: 'am-ET',
@@ -2534,7 +2534,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mekdes',
     LocalName: 'መቅደስ',
     ShortName: 'am-ET-MekdesNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-SteffanNeural': {
     locale: 'en-US',
@@ -2543,7 +2543,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Steffan',
     LocalName: 'Steffan',
     ShortName: 'en-US-SteffanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-BellaNeural': {
     locale: 'en-GB',
@@ -2552,7 +2552,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Bella',
     LocalName: 'Bella',
     ShortName: 'en-GB-BellaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-BeatrizNeural': {
     locale: 'es-MX',
@@ -2571,7 +2571,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'AIGenerate2',
     LocalName: 'AIGenerate2',
     ShortName: 'en-US-AIGenerate2Neural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ml-IN-MidhunNeural': {
     locale: 'ml-IN',
@@ -2580,7 +2580,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Midhun',
     LocalName: 'മിഥുൻ',
     ShortName: 'ml-IN-MidhunNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ta-IN-PallaviNeural': {
     locale: 'ta-IN',
@@ -2619,7 +2619,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Noura',
     LocalName: 'نورا',
     ShortName: 'ar-KW-NouraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sw-TZ-DaudiNeural': {
     locale: 'sw-TZ',
@@ -2628,7 +2628,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Daudi',
     LocalName: 'Daudi',
     ShortName: 'sw-TZ-DaudiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-CA-ClaraNeural': {
     locale: 'en-CA',
@@ -2637,7 +2637,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Clara',
     LocalName: 'Clara',
     ShortName: 'en-CA-ClaraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-ThomasNeural': {
     locale: 'en-GB',
@@ -2646,7 +2646,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Thomas',
     LocalName: 'Thomas',
     ShortName: 'en-GB-ThomasNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'lv-LV-EveritaNeural': {
     locale: 'lv-LV',
@@ -2665,7 +2665,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Laila',
     LocalName: 'ليلى',
     ShortName: 'ar-BH-LailaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-EloiseNeural': {
     locale: 'fr-FR',
@@ -2684,7 +2684,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tomas',
     LocalName: 'Tomas',
     ShortName: 'es-AR-TomasNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-TN-HediNeural': {
     locale: 'ar-TN',
@@ -2693,7 +2693,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Hedi',
     LocalName: 'هادي',
     ShortName: 'ar-TN-HediNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'da-DK-ChristelNeural': {
     locale: 'da-DK',
@@ -2722,7 +2722,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Manuel',
     LocalName: 'Manuel',
     ShortName: 'es-CU-ManuelNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ne-NP-HemkalaNeural': {
     locale: 'ne-NP',
@@ -2731,7 +2731,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Hemkala',
     LocalName: 'हेमकला',
     ShortName: 'ne-NP-HemkalaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-YunxiNeural': {
     locale: 'zh-CN',
@@ -2749,7 +2749,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Luna',
     LocalName: 'Luna',
     ShortName: 'en-SG-LunaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'nl-BE-ArnaudNeural': {
     locale: 'nl-BE',
@@ -2768,7 +2768,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Farid',
     LocalName: 'فرید',
     ShortName: 'fa-IR-FaridNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'tr-TR-EmelNeural': {
     locale: 'tr-TR',
@@ -2787,7 +2787,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Roger',
     LocalName: 'Roger',
     ShortName: 'en-US-RogerNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pl-PL-MarekNeural': {
     locale: 'pl-PL',
@@ -2806,7 +2806,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Leah',
     LocalName: 'Leah',
     ShortName: 'en-ZA-LeahNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-ArnauNeural': {
     locale: 'es-ES',
@@ -2825,7 +2825,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ander',
     LocalName: 'Ander',
     ShortName: 'eu-ES-AnderNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-NI-FedericoNeural': {
     locale: 'es-NI',
@@ -2834,7 +2834,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Federico',
     LocalName: 'Federico',
     ShortName: 'es-NI-FedericoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'wuu-CN-YunzheNeural': {
     locale: 'wuu-CN',
@@ -2843,7 +2843,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yunzhe',
     LocalName: '云哲',
     ShortName: 'wuu-CN-YunzheNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fa-IR-DilaraNeural': {
     locale: 'fa-IR',
@@ -2852,7 +2852,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Dilara',
     LocalName: 'دلارا',
     ShortName: 'fa-IR-DilaraNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-GerardoNeural': {
     locale: 'es-MX',
@@ -2871,7 +2871,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Dhwani',
     LocalName: 'ધ્વની',
     ShortName: 'gu-IN-DhwaniNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sr-RS-NicholasNeural': {
     locale: 'sr-RS',
@@ -2880,7 +2880,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Nicholas',
     LocalName: 'Никола',
     ShortName: 'sr-RS-NicholasNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-CalimeroNeural': {
     locale: 'it-IT',
@@ -2926,7 +2926,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tuti',
     LocalName: 'Tuti',
     ShortName: 'su-ID-TutiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-AbbiNeural': {
     locale: 'en-GB',
@@ -2935,7 +2935,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Abbi',
     LocalName: 'Abbi',
     ShortName: 'en-GB-AbbiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-EC-AndreaNeural': {
     locale: 'es-EC',
@@ -2944,7 +2944,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Andrea',
     LocalName: 'Andrea',
     ShortName: 'es-EC-AndreaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'th-TH-AcharaNeural': {
     locale: 'th-TH',
@@ -2973,7 +2973,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Eric',
     LocalName: 'Eric',
     ShortName: 'en-US-EricNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-AlfieNeural': {
     locale: 'en-GB',
@@ -2982,7 +2982,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Alfie',
     LocalName: 'Alfie',
     ShortName: 'en-GB-AlfieNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ur-IN-GulNeural': {
     locale: 'ur-IN',
@@ -2991,7 +2991,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gul',
     LocalName: 'گل',
     ShortName: 'ur-IN-GulNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-CandelaNeural': {
     locale: 'es-MX',
@@ -3010,7 +3010,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Monica',
     LocalName: 'Monica',
     ShortName: 'en-US-MonicaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-TW-YunJheNeural': {
     locale: 'zh-TW',
@@ -3028,7 +3028,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Amina',
     LocalName: 'أمينة',
     ShortName: 'ar-DZ-AminaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-JO-TaimNeural': {
     locale: 'ar-JO',
@@ -3037,7 +3037,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Taim',
     LocalName: 'تيم',
     ShortName: 'ar-JO-TaimNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-RenataNeural': {
     locale: 'es-MX',
@@ -3096,7 +3096,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Saranya',
     LocalName: 'சரண்யா',
     ShortName: 'ta-LK-SaranyaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-DarioNeural': {
     locale: 'es-ES',
@@ -3125,7 +3125,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jane',
     LocalName: 'Jane',
     ShortName: 'en-US-JaneNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaoyouNeural': {
     locale: 'zh-CN',
@@ -3143,7 +3143,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Paola',
     LocalName: 'Paola',
     ShortName: 'es-VE-PaolaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-MX-PelayoNeural': {
     locale: 'es-MX',
@@ -3162,7 +3162,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sebastian',
     LocalName: 'Sebastián',
     ShortName: 'es-VE-SebastianNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'et-EE-AnuNeural': {
     locale: 'et-EE',
@@ -3181,7 +3181,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Rafiki',
     LocalName: 'Rafiki',
     ShortName: 'sw-KE-RafikiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ur-IN-SalmanNeural': {
     locale: 'ur-IN',
@@ -3190,7 +3190,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Salman',
     LocalName: 'سلمان',
     ShortName: 'ur-IN-SalmanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mr-IN-AarohiNeural': {
     locale: 'mr-IN',
@@ -3199,7 +3199,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Aarohi',
     LocalName: 'आरोही',
     ShortName: 'mr-IN-AarohiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mt-MT-GraceNeural': {
     locale: 'mt-MT',
@@ -3218,7 +3218,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sreymom',
     LocalName: 'ស្រីមុំ',
     ShortName: 'km-KH-SreymomNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-PH-JamesNeural': {
     locale: 'en-PH',
@@ -3237,7 +3237,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Karla',
     LocalName: 'Karla',
     ShortName: 'es-HN-KarlaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-CL-LorenzoNeural': {
     locale: 'es-CL',
@@ -3246,7 +3246,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Lorenzo',
     LocalName: 'Lorenzo',
     ShortName: 'es-CL-LorenzoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-FiammaNeural': {
     locale: 'it-IT',
@@ -3264,7 +3264,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Goran',
     LocalName: 'Goran',
     ShortName: 'bs-BA-GoranNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-GT-AndresNeural': {
     locale: 'es-GT',
@@ -3273,7 +3273,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Andres',
     LocalName: 'Andrés',
     ShortName: 'es-GT-AndresNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-EstrellaNeural': {
     locale: 'es-ES',
@@ -3312,7 +3312,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Tanishaa',
     LocalName: 'তানিশা',
     ShortName: 'bn-IN-TanishaaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-SY-AmanyNeural': {
     locale: 'ar-SY',
@@ -3321,7 +3321,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Amany',
     LocalName: 'أماني',
     ShortName: 'ar-SY-AmanyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-ElliotNeural': {
     locale: 'en-GB',
@@ -3330,7 +3330,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Elliot',
     LocalName: 'Elliot',
     ShortName: 'en-GB-ElliotNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PR-VictorNeural': {
     locale: 'es-PR',
@@ -3339,7 +3339,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Victor',
     LocalName: 'Víctor',
     ShortName: 'es-PR-VictorNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-ElzaNeural': {
     locale: 'pt-BR',
@@ -3358,7 +3358,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Rana',
     LocalName: 'رنا',
     ShortName: 'ar-IQ-RanaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-AU-JoanneNeural': {
     locale: 'en-AU',
@@ -3367,7 +3367,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Joanne',
     LocalName: 'Joanne',
     ShortName: 'en-AU-JoanneNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-NoahNeural': {
     locale: 'en-GB',
@@ -3376,7 +3376,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Noah',
     LocalName: 'Noah',
     ShortName: 'en-GB-NoahNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ms-MY-YasminNeural': {
     locale: 'ms-MY',
@@ -3404,7 +3404,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ilir',
     LocalName: 'Ilir',
     ShortName: 'sq-AL-IlirNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ps-AF-LatifaNeural': {
     locale: 'ps-AF',
@@ -3413,7 +3413,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Latifa',
     LocalName: 'لطيفه',
     ShortName: 'ps-AF-LatifaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-KasperNeural': {
     locale: 'de-DE',
@@ -3442,7 +3442,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Rami',
     LocalName: 'رامي',
     ShortName: 'ar-LB-RamiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-AriaNeural': {
     locale: 'en-US',
@@ -3451,7 +3451,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Aria',
     LocalName: 'Aria',
     ShortName: 'en-US-AriaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-LaiaNeural': {
     locale: 'es-ES',
@@ -3490,7 +3490,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Neil',
     LocalName: 'Neil',
     ShortName: 'en-AU-NeilNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-IE-EmilyNeural': {
     locale: 'en-IE',
@@ -3499,7 +3499,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Emily',
     LocalName: 'Emily',
     ShortName: 'en-IE-EmilyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'fr-FR-CoralieNeural': {
     locale: 'fr-FR',
@@ -3518,7 +3518,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yundeng',
     LocalName: '云登',
     ShortName: 'zh-CN-henan-YundengNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-YunyangNeural': {
     locale: 'zh-CN',
@@ -3546,7 +3546,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Surya',
     LocalName: 'சூர்யா',
     ShortName: 'ta-MY-SuryaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'af-ZA-WillemNeural': {
     locale: 'af-ZA',
@@ -3555,7 +3555,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Willem',
     LocalName: 'Willem',
     ShortName: 'af-ZA-WillemNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'de-DE-GiselaNeural': {
     locale: 'de-DE',
@@ -3604,7 +3604,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Gul Nawaz',
     LocalName: ' ګل نواز',
     ShortName: 'ps-AF-GulNawazNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-TW-HsiaoYuNeural': {
     locale: 'zh-TW',
@@ -3632,7 +3632,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Jacob',
     LocalName: 'Jacob',
     ShortName: 'en-US-JacobNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'pt-BR-DonatoNeural': {
     locale: 'pt-BR',
@@ -3651,7 +3651,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Blessica',
     LocalName: 'Blessica',
     ShortName: 'fil-PH-BlessicaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-BH-AliNeural': {
     locale: 'ar-BH',
@@ -3660,7 +3660,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ali',
     LocalName: 'علي',
     ShortName: 'ar-BH-AliNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'nl-NL-FennaNeural': {
     locale: 'nl-NL',
@@ -3679,7 +3679,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Neerja',
     LocalName: 'Neerja',
     ShortName: 'en-IN-NeerjaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-US-PalomaNeural': {
     locale: 'es-US',
@@ -3688,7 +3688,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Paloma',
     LocalName: 'Paloma',
     ShortName: 'es-US-PalomaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-NancyNeural': {
     locale: 'en-US',
@@ -3697,7 +3697,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Nancy',
     LocalName: 'Nancy',
     ShortName: 'en-US-NancyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-HK-WanLungNeural': {
     locale: 'zh-HK',
@@ -3715,7 +3715,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Banu',
     LocalName: 'Banu',
     ShortName: 'az-AZ-BanuNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-AbrilNeural': {
     locale: 'es-ES',
@@ -3734,7 +3734,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Zuri',
     LocalName: 'Zuri',
     ShortName: 'sw-KE-ZuriNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'so-SO-MuuseNeural': {
     locale: 'so-SO',
@@ -3743,7 +3743,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Muuse',
     LocalName: 'Muuse',
     ShortName: 'so-SO-MuuseNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'sl-SI-RokNeural': {
     locale: 'sl-SI',
@@ -3762,7 +3762,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Hamdan',
     LocalName: 'حمدان',
     ShortName: 'ar-AE-HamdanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-XiaomoNeural': {
     locale: 'zh-CN',
@@ -3790,7 +3790,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ethan',
     LocalName: 'Ethan',
     ShortName: 'en-GB-EthanNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-NZ-MitchellNeural': {
     locale: 'en-NZ',
@@ -3799,7 +3799,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Mitchell',
     LocalName: 'Mitchell',
     ShortName: 'en-NZ-MitchellNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zu-ZA-ThembaNeural': {
     locale: 'zu-ZA',
@@ -3808,7 +3808,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Themba',
     LocalName: 'Themba',
     ShortName: 'zu-ZA-ThembaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PA-RobertoNeural': {
     locale: 'es-PA',
@@ -3817,7 +3817,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Roberto',
     LocalName: 'Roberto',
     ShortName: 'es-PA-RobertoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ms-MY-OsmanNeural': {
     locale: 'ms-MY',
@@ -3836,7 +3836,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Guy',
     LocalName: 'Guy',
     ShortName: 'en-US-GuyNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-QA-AmalNeural': {
     locale: 'ar-QA',
@@ -3845,7 +3845,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Amal',
     LocalName: 'أمل',
     ShortName: 'ar-QA-AmalNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PE-CamilaNeural': {
     locale: 'es-PE',
@@ -3854,7 +3854,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Camila',
     LocalName: 'Camila',
     ShortName: 'es-PE-CamilaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-HK-HiuMaanNeural': {
     locale: 'zh-HK',
@@ -3882,7 +3882,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Marcelo',
     LocalName: 'Marcelo',
     ShortName: 'es-BO-MarceloNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-TeoNeural': {
     locale: 'es-ES',
@@ -3901,7 +3901,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'XiaoMin',
     LocalName: '晓敏',
     ShortName: 'yue-CN-XiaoMinNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-BO-SofiaNeural': {
     locale: 'es-BO',
@@ -3910,7 +3910,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sofia',
     LocalName: 'Sofia',
     ShortName: 'es-BO-SofiaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'tr-TR-AhmetNeural': {
     locale: 'tr-TR',
@@ -3929,7 +3929,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Dimas',
     LocalName: 'Dimas',
     ShortName: 'jv-ID-DimasNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-GB-OliviaNeural': {
     locale: 'en-GB',
@@ -3938,7 +3938,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Olivia',
     LocalName: 'Olivia',
     ShortName: 'en-GB-OliviaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'uz-UZ-MadinaNeural': {
     locale: 'uz-UZ',
@@ -3947,7 +3947,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Madina',
     LocalName: 'Madina',
     ShortName: 'uz-UZ-MadinaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-ES-LiaNeural': {
     locale: 'es-ES',
@@ -3986,7 +3986,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Daulet',
     LocalName: 'Дәулет',
     ShortName: 'kk-KZ-DauletNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PR-KarinaNeural': {
     locale: 'es-PR',
@@ -3995,7 +3995,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Karina',
     LocalName: 'Karina',
     ShortName: 'es-PR-KarinaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'cs-CZ-VlastaNeural': {
     locale: 'cs-CZ',
@@ -4014,7 +4014,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Alonso',
     LocalName: 'Alonso',
     ShortName: 'es-US-AlonsoNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ca-ES-EnricNeural': {
     locale: 'ca-ES',
@@ -4053,7 +4053,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Reem',
     LocalName: 'ريم',
     ShortName: 'ar-TN-ReemNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-EG-SalmaNeural': {
     locale: 'ar-EG',
@@ -4072,7 +4072,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Hayk',
     LocalName: 'Հայկ',
     ShortName: 'hy-AM-HaykNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-US-ChristopherNeural': {
     locale: 'en-US',
@@ -4081,7 +4081,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Christopher',
     LocalName: 'Christopher',
     ShortName: 'en-US-ChristopherNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-EG-ShakirNeural': {
     locale: 'ar-EG',
@@ -4100,7 +4100,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Siti',
     LocalName: 'Siti',
     ShortName: 'jv-ID-SitiNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-KE-ChilembaNeural': {
     locale: 'en-KE',
@@ -4109,7 +4109,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Chilemba',
     LocalName: 'Chilemba',
     ShortName: 'en-KE-ChilembaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'zh-CN-shandong-YunxiangNeural': {
     locale: 'zh-CN-shandong',
@@ -4118,7 +4118,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Yunxiang',
     LocalName: '云翔',
     ShortName: 'zh-CN-shandong-YunxiangNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ar-LB-LaylaNeural': {
     locale: 'ar-LB',
@@ -4127,7 +4127,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Layla',
     LocalName: 'ليلى',
     ShortName: 'ar-LB-LaylaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-ElsaNeural': {
     locale: 'it-IT',
@@ -4175,7 +4175,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Elsie',
     LocalName: 'Elsie',
     ShortName: 'en-AU-ElsieNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'it-IT-RinaldoNeural': {
     locale: 'it-IT',
@@ -4203,7 +4203,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Catalina',
     LocalName: 'Catalina',
     ShortName: 'es-CL-CatalinaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-CR-MariaNeural': {
     locale: 'es-CR',
@@ -4212,7 +4212,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Maria',
     LocalName: 'María',
     ShortName: 'es-CR-MariaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'en-IN-PrabhatNeural': {
     locale: 'en-IN',
@@ -4221,7 +4221,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Prabhat',
     LocalName: 'Prabhat',
     ShortName: 'en-IN-PrabhatNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-EC-LuisNeural': {
     locale: 'es-EC',
@@ -4230,7 +4230,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Luis',
     LocalName: 'Luis',
     ShortName: 'es-EC-LuisNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'mk-MK-MarijaNeural': {
     locale: 'mk-MK',
@@ -4239,7 +4239,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Marija',
     LocalName: 'Марија',
     ShortName: 'mk-MK-MarijaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'ru-RU-DmitryNeural': {
     locale: 'ru-RU',
@@ -4258,7 +4258,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Ken',
     LocalName: 'Ken',
     ShortName: 'en-AU-KenNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'hi-IN-MadhurNeural': {
     locale: 'hi-IN',
@@ -4277,7 +4277,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Sana',
     LocalName: 'سناء',
     ShortName: 'ar-JO-SanaNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
   'es-PE-AlexNeural': {
     locale: 'es-PE',
@@ -4286,7 +4286,7 @@ export const voiceMap: Record<string, any> = {
     DisplayName: 'Alex',
     LocalName: 'Alex',
     ShortName: 'es-PE-AlexNeural',
-    PreviewSentence: 'Welcome to the Microsoft Voice Tuning. ',
+    PreviewSentence: 'PageLoading to the Microsoft Voice Tuning. ',
   },
 };
 
