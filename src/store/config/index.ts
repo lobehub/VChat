@@ -1,7 +1,7 @@
 import { Config, Panel, PanelKey } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
@@ -46,9 +46,12 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
 });
 
 export const useConfigStore = createWithEqualityFn<ConfigStore>()(
-  devtools(createStore, {
-    name: 'VIDOL_CONFIG_STORE',
-  }),
+  persist(
+    devtools(createStore, {
+      name: 'VIDOL_CONFIG_STORE',
+    }),
+    { name: 'vidol-chat-config-storage' },
+  ),
   shallow,
 );
 

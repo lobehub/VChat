@@ -3,11 +3,12 @@
 import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import { useThemeStore } from '@/store/theme';
-import { GlobalStyle } from '@/styles/index';
+import { GlobalStyle } from '@/styles';
 import { setCookie } from '@/utils/cookie';
 import { ThemeProvider } from '@lobehub/ui';
 import { ThemeAppearance, createStyles } from 'antd-style';
 import { ReactNode } from 'react';
+import StoreHydration from './StoreHydration';
 
 const useStyles = createStyles(({ css, token }) => ({
   bg: css`
@@ -41,6 +42,7 @@ const Layout = (props: LayoutProps) => {
         setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
     >
+      <StoreHydration />
       <GlobalStyle />
       <main className={styles.bg}>{children}</main>
     </ThemeProvider>

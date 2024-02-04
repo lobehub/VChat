@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { useConfigStore } from '@/store/config';
 import { useMarketStore } from '@/store/market';
 import Agent from './Agent';
 import Dance from './Dance';
@@ -15,13 +16,14 @@ interface MarketPanelProps {
 const MarketPanel = (props: MarketPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const { setMarketPanelOpen, tab } = useMarketStore();
+  const { tab } = useMarketStore();
+  const { setPanel } = useConfigStore();
 
   return (
     <Panel
       style={style}
       className={className}
-      onClose={() => setMarketPanelOpen(false)}
+      onClose={() => setPanel('market', { open: false })}
       defaultCoordinates={{ x: 400, y: 400 }}
       title="虚拟商店"
     >
