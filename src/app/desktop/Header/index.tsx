@@ -9,7 +9,6 @@ const Header = () => {
   return (
     <LobeHeader
       logo={<Logo extra={'V-idol'} size={36} type={'combine'} />}
-      nav={'NAV'}
       actions={[
         <ThemeSwitch
           onThemeSwitch={(mode) => setThemeMode(mode)}

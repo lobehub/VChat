@@ -17,45 +17,52 @@ import {
 
 const apps = [
   {
-    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/card-index.webp',
     key: 'agent',
     label: '联系人',
+    show: true,
     component: <AgentPanel />,
   },
   {
     icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
     key: 'dance',
     label: '舞蹈',
+    show: true,
     component: <DancePanel />,
   },
   {
-    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/speech-balloon.webp',
     key: 'chat',
     label: '聊天',
+    show: true,
     component: <ChatPanel />,
   },
   {
-    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/play-button.webp',
     key: 'live',
-    label: '视频',
+    label: '视频聊天',
+    show: false,
     component: <LivePanel />,
   },
   {
-    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/convenience-store.webp',
     key: 'market',
     label: '商店',
+    show: true,
     component: <MarketPanel />,
   },
   {
-    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+    icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/gear.webp',
     key: 'config',
     label: '设置',
+    show: true,
     component: <ConfigPanel />,
   },
   {
     icon: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
     key: 'role',
     label: '角色',
+    show: false,
     component: <RolePanel />,
   },
 ];
@@ -66,18 +73,20 @@ const Apps = () => {
 
   return (
     <div className={styles.apps}>
-      {apps.map((app) => {
-        return (
-          <Application
-            key={app.key}
-            icon={app.icon}
-            name={app.label}
-            onClick={() => {
-              setPanel(app.key as any, { open: true });
-            }}
-          />
-        );
-      })}
+      {apps
+        .filter((app) => app.show)
+        .map((app) => {
+          return (
+            <Application
+              key={app.key}
+              icon={app.icon}
+              name={app.label}
+              onClick={() => {
+                setPanel(app.key as any, { open: true });
+              }}
+            />
+          );
+        })}
       {apps.map((app) => {
         const open = panel[app.key as PanelKey].open;
         const component = app.component;
