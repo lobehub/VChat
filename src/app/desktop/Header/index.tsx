@@ -1,20 +1,15 @@
 'use client';
 
 import { useThemeStore } from '@/store/theme';
-import { ActionIcon, Header as LobeHeader, ThemeSwitch } from '@lobehub/ui';
-import { Space } from 'antd';
+import { ActionIcon, Header as LobeHeader, Logo, ThemeSwitch } from '@lobehub/ui';
 import { GithubIcon } from 'lucide-react';
-import { memo } from 'react';
 
 const Header = () => {
   const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
   return (
     <LobeHeader
-      logo={
-        <Space align="center" size={16}>
-          <span style={{ fontSize: 22, fontWeight: 'bolder' }}>Vidol.Chat</span>
-        </Space>
-      }
+      logo={<Logo extra={'V-idol'} size={36} type={'combine'} />}
+      nav={'NAV'}
       actions={[
         <ThemeSwitch
           onThemeSwitch={(mode) => setThemeMode(mode)}
@@ -34,4 +29,4 @@ const Header = () => {
   );
 };
 
-export default memo(Header);
+export default Header;
