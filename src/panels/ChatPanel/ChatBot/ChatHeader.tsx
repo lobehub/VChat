@@ -7,10 +7,7 @@ import { useStyles } from './style';
 
 const Header = () => {
   const { styles } = useStyles();
-  const [livePanelOpen, setLivePanelOpen] = useConfigStore((s) => [
-    s.livePanelOpen,
-    s.setLivePanelOpen,
-  ]);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
   const [currentAgent, setLiveId] = useSessionStore((s) => [
     sessionSelectors.currentAgent(s),
     s.setLiveId,
@@ -20,17 +17,17 @@ const Header = () => {
     <div className={styles.header}>
       <AgentMeta meta={currentAgent?.meta} />
       <ActionIcon
-        icon={livePanelOpen ? VideoOff : Video}
+        icon={panel.live.open ? VideoOff : Video}
         onClick={() => {
-          if (livePanelOpen) {
+          if (panel.live.open) {
             setLiveId(undefined);
-            setLivePanelOpen(false);
+            setPanel('live', { open: false });
           } else {
             setLiveId(currentAgent?.agentId);
-            setLivePanelOpen(true);
+            setPanel('live', { open: true });
           }
         }}
-        title={livePanelOpen ? '关闭视频通话' : '发起视频通话'}
+        title={panel.live.open ? '关闭视频通话' : '发起视频通话'}
       />
     </div>
   );

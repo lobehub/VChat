@@ -29,10 +29,7 @@ const Header = () => {
     s.activateAgent,
     s.deactivateAgent,
   ]);
-  const [setRolePanelOpen, setChatPanelOpen] = useConfigStore((s) => [
-    s.setRolePanelOpen,
-    s.setChatPanelOpen,
-  ]);
+  const setPanel = useConfigStore((s) => s.setPanel);
   const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
@@ -51,10 +48,6 @@ const Header = () => {
       }
     },
   });
-
-  function openPanel() {
-    setRolePanelOpen(true);
-  }
 
   return (
     <DraggablePanel
@@ -83,13 +76,18 @@ const Header = () => {
               if (!currentAgent) return;
               switchSession(currentAgent.agentId);
               setIsPlaying(false);
-              setChatPanelOpen(true);
+              setPanel('chat', { open: true });
             }}
             type={'primary'}
           >
             开始聊天
           </Button>,
-          <Button onClick={openPanel} key="edit">
+          <Button
+            onClick={() => {
+              setPanel('role', { open: true });
+            }}
+            key="edit"
+          >
             编辑
           </Button>,
           <Popconfirm
