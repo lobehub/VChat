@@ -1,18 +1,38 @@
-import { Config, tabType } from '@/types/config';
+import { Config, PanelConfig } from '@/types/config';
 
 export interface ConfigState {
   config: Config;
-  tab: tabType;
-  controlPanelOpen: boolean;
-  rolePanelOpen: boolean;
+  panel: PanelConfig;
 }
 
 const initialState: ConfigState = {
-  tab: 'agent',
-  controlPanelOpen: false,
-  rolePanelOpen: false,
+  panel: {
+    agent: {
+      open: false,
+    },
+    role: {
+      open: false,
+    },
+    dance: {
+      open: false,
+    },
+    live: {
+      open: false,
+    },
+    chat: {
+      open: false,
+    },
+    market: {
+      open: false,
+    },
+    config: {
+      open: false,
+    },
+  },
+
   config: {
     primaryColor: 'blue',
+    backgroundEffect: 'sakura',
     languageModel: {
       openAI: {
         apikey: '',

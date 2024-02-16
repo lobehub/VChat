@@ -1,8 +1,8 @@
 import { useDraggable } from '@dnd-kit/core';
-import { Space, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import classNames from 'classnames';
 
-import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
+import React, { PropsWithChildren, memo, useMemo, useRef, useState } from 'react';
 
 import { useStyles } from './style';
 
@@ -18,7 +18,8 @@ interface ContainerProps {
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
   const { style, className, children, onClose, x, y, title, extra } = props;
-  const { styles } = useStyles();
+  const [focus, setFocus] = useState(false);
+  const { styles } = useStyles(focus);
 
   const { attributes, listeners, transform, setNodeRef, setActivatorNodeRef } = useDraggable({
     id: 'draggable',
@@ -41,33 +42,24 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   }
 
   const switches = useMemo(() => {
-    return (
-      <Space data-no-dnd="true">
-        <Tooltip title="关闭">
-          <div
-            className={classNames(styles.button, styles.close)}
-            onClick={() => {
-              onClose();
-            }}
-          />
-        </Tooltip>
-        <Tooltip title="最大化">
-          <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-        </Tooltip>
-        <Tooltip title="最小化">
-          <div
-            className={classNames(styles.button, styles.min)}
-            onClick={() => {
-              onClose();
-            }}
-          ></div>
-        </Tooltip>
-      </Space>
-    );
+    const handleClose = () => {
+      if (onClose) onClose();
+    };
+    return [
+      <Tooltip title="关闭" key="close">
+        <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
+      </Tooltip>,
+      <Tooltip title="最大化" key="max">
+        <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
+      </Tooltip>,
+      <Tooltip title="最小化" key="min">
+        <div className={classNames(styles.button, styles.min)} onClick={handleClose} />
+      </Tooltip>,
+    ];
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);
 
   return (
-    <div ref={setNodeRef}>
+    <div ref={setNodeRef} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
       <div
         className={classNames(styles.box, className)}
         style={{
@@ -81,15 +73,13 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
       >
         <div
           className={classNames(styles.header)}
-          {...listeners}
           onDoubleClick={toggleFullScreen}
           ref={setActivatorNodeRef}
+          {...listeners}
         >
-          <div style={{ flex: 1 }}>{switches}</div>
-          <div style={{ flex: 1, textAlign: 'center', fontWeight: 'bold' }}>
-            {title ? title : null}
-          </div>
-          <div style={{ flex: 1 }}>{extra ? extra : null}</div>
+          <div className={styles.swtich}>{switches}</div>
+          <div className={styles.title}>{title ? title : null}</div>
+          <div className={styles.extra}>{extra ? extra : null}</div>
         </div>
         <div className={styles.container}>{children}</div>
       </div>

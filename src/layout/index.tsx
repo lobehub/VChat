@@ -1,25 +1,35 @@
 'use client';
 
-import Header from '@/layout/Header';
+import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import { useThemeStore } from '@/store/theme';
-import '@/styles/globals.css';
-import { ThemeProvider } from '@lobehub/ui';
-import { ThemeAppearance } from 'antd-style';
-
-import { VIDOL_THEME_APPEARANCE } from '@/constants/common';
+import { GlobalStyle } from '@/styles';
 import { setCookie } from '@/utils/cookie';
+import { ThemeProvider } from '@lobehub/ui';
+import { ThemeAppearance, createStyles } from 'antd-style';
 import { ReactNode } from 'react';
+import StoreHydration from './StoreHydration';
+
+const useStyles = createStyles(({ css, token }) => ({
+  bg: css`
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+  `,
+}));
 
 export interface LayoutProps {
   children?: ReactNode;
   defaultAppearance?: ThemeAppearance;
 }
 
-export default function App(props: LayoutProps) {
+const Layout = (props: LayoutProps) => {
   const { children, defaultAppearance } = props;
   const themeMode = useThemeStore((s) => s.themeMode);
   const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
+  const { styles } = useStyles();
 
   return (
     <ThemeProvider
@@ -32,8 +42,11 @@ export default function App(props: LayoutProps) {
         setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
     >
-      <Header />
-      <main style={{ display: 'flex', width: '100%' }}>{children}</main>
+      <StoreHydration />
+      <GlobalStyle />
+      <main className={styles.bg}>{children}</main>
     </ThemeProvider>
   );
-}
+};
+
+export default Layout;

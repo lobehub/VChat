@@ -30,7 +30,6 @@ export const chatCompletion = async (payload: any) => {
 
 export const handleSpeakAi = async (message: string) => {
   const viewer = useViewerStore.getState().viewer;
-  const setVoiceLoading = useSessionStore.getState().setVoiceLoading;
   const currentAgent = sessionSelectors.currentAgent(useSessionStore.getState());
 
   speakCharacter(
@@ -42,18 +41,14 @@ export const handleSpeakAi = async (message: string) => {
       },
     },
     viewer,
-    () => {
-      setVoiceLoading(true);
-    },
-    () => {
-      setVoiceLoading(false);
-    },
   );
 };
 
-export const handleStopSpeakAi = async () => {
-  const viewer = useViewerStore.getState().viewer;
-  const setVoiceLoading = useSessionStore.getState().setVoiceLoading;
-  setVoiceLoading(false);
-  viewer.model?.stopSpeak();
+export const toogleVoice = async () => {
+  const { toogleVoice, voiceOn } = useSessionStore.getState();
+  if (voiceOn) {
+    const viewer = useViewerStore.getState().viewer;
+    viewer.model?.stopSpeak();
+  }
+  toogleVoice();
 };

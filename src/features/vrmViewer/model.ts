@@ -65,7 +65,8 @@ export class Model {
   public async loadAnimation(vrmAnimation: VRMAnimation): Promise<void> {
     const { vrm, mixer } = this;
     if (vrm == null || mixer == null) {
-      throw new Error('You have to load VRM first');
+      console.error('You have to load VRM first');
+      return;
     }
 
     const clip = vrmAnimation.createAnimationClip(vrm);

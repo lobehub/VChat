@@ -1,4 +1,4 @@
-import { Config, tabType } from '@/types/config';
+import { Config, Panel, PanelKey } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
 import { devtools, persist } from 'zustand/middleware';
@@ -9,9 +9,7 @@ import { ConfigState, initialState } from './initialState';
 import { configSelectors } from './selectors/config';
 
 export interface ConfigAction {
-  setTab: (tab: tabType) => void;
-  setControlPanelOpen: (open: boolean) => void;
-  setRolePanelOpen: (open: boolean) => void;
+  setPanel: (panel: PanelKey, config: Partial<Panel>) => void;
   setConfig: (config: Partial<Config>) => void;
   setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
 }
@@ -20,9 +18,19 @@ export interface ConfigStore extends ConfigState, ConfigAction {}
 
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
   ...initialState,
-  setTab: (tab) => set({ tab }),
-  setControlPanelOpen: (open) => set({ controlPanelOpen: open }),
-  setRolePanelOpen: (open) => set({ rolePanelOpen: open }),
+  setPanel: (panel, config) => {
+    const prevSetting = get().panel[panel];
+    const nextSetting = produce(prevSetting, (draftState) => {
+      merge(draftState, config);
+    });
+    if (isEqual(prevSetting, nextSetting)) return;
+    set((state) => ({
+      panel: {
+        ...state.panel,
+        [panel]: nextSetting,
+      },
+    }));
+  },
 
   setConfig: (config) => {
     const prevSetting = get().config;
@@ -42,9 +50,7 @@ export const useConfigStore = createWithEqualityFn<ConfigStore>()(
     devtools(createStore, {
       name: 'VIDOL_CONFIG_STORE',
     }),
-    {
-      name: 'vidol-chat-config-storage', // name of the item in the storage (must be unique)
-    },
+    { name: 'vidol-chat-config-storage' },
   ),
   shallow,
 );

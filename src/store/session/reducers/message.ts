@@ -15,7 +15,8 @@ export interface UpdateMessageAction {
   type: 'UPDATE_MESSAGE';
   payload: {
     id: string;
-    content: string;
+    key: keyof ChatMessage;
+    value: ChatMessage[keyof ChatMessage];
   };
 }
 
@@ -44,11 +45,12 @@ export const messageReducer = (state: ChatMessage[], action: MessageActionType):
       });
     case 'UPDATE_MESSAGE':
       return produce(state, (draft) => {
-        const { content, id } = action.payload;
+        const { key, id, value } = action.payload;
         const message = draft.find((item) => item.id === id);
         if (!message) return;
 
-        message.content = content;
+        // @ts-ignore
+        message[key] = value;
         message.updateAt = Date.now();
       });
     case 'DELETE_MESSAGE':

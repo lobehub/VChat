@@ -18,6 +18,10 @@ export interface SessionStore {
    */
   activeId: string;
   /**
+   * 当前视频 ID
+   */
+  liveId?: string;
+  /**
    * 会话列表
    */
   sessionList: Session[];
@@ -26,15 +30,17 @@ export interface SessionStore {
    */
   chatLoadingId: string | undefined;
   /**
-   * 语音加载中的消息 ID
+   * 语音开关
    */
-  voiceLoading: boolean;
+  voiceOn: boolean;
   /**
-   *  设置语音加载中的消息 ID
-   * @param voiceLoading
-   * @returns
+   * 触发语音开关
    */
-  setVoiceLoading: (voiceLoading: boolean) => void;
+  toogleVoice: () => void;
+  /**
+   * 设置视频 ID
+   */
+  setLiveId: (liveId?: string) => void;
   /**
    * 当前消息输入
    */
@@ -102,17 +108,21 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   get,
 ) => ({
   activeId: defaultSession.agentId,
+  liveId: undefined,
   sessionList: [defaultSession],
   chatLoadingId: undefined,
-  voiceLoading: false,
+  voiceOn: true,
   messageInput: '',
   setMessageInput: (messageInput) => {
     set({ messageInput });
   },
-  setVoiceLoading: (voiceLoading) => {
-    set({ voiceLoading });
+  toogleVoice: () => {
+    const { voiceOn } = get();
+    set({ voiceOn: !voiceOn });
   },
-
+  setLiveId: (liveId?: string) => {
+    set({ liveId });
+  },
   switchSession: (agentId) => {
     const { sessionList } = get();
     const targetSession = sessionList.find((session) => session.agentId === agentId);
@@ -162,7 +172,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       type: 'UPDATE_MESSAGE',
       payload: {
         id: id,
-        content: '...', // 占位符
+        key: 'content',
+        value: '...', // 占位符
       },
     });
 
@@ -185,7 +196,8 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     dispatchMessage({
       payload: {
         id,
-        content,
+        key: 'content',
+        value: content,
       },
       type: 'UPDATE_MESSAGE',
     });
@@ -254,24 +266,28 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     await fetchSEE(fetcher, {
       onMessageUpdate: (txt: string) => {
-        // 语音合成
-        receivedMessage += txt;
-        // 文本切割
-        const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
-        if (sentenceMatch && sentenceMatch[0]) {
-          const sentence = sentenceMatch[0];
-          sentences.push(sentence);
-          receivedMessage = receivedMessage.slice(sentence.length).trimStart();
+        const { voiceOn } = get();
 
-          if (
-            !sentence.replace(
-              /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
-              '',
-            )
-          ) {
-            return;
+        if (voiceOn) {
+          // 语音合成
+          receivedMessage += txt;
+          // 文本切割
+          const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
+          if (sentenceMatch && sentenceMatch[0]) {
+            const sentence = sentenceMatch[0];
+            sentences.push(sentence);
+            receivedMessage = receivedMessage.slice(sentence.length).trimStart();
+
+            if (
+              !sentence.replace(
+                /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
+                '',
+              )
+            ) {
+              return;
+            }
+            handleSpeakAi(sentence);
           }
-          handleSpeakAi(sentence);
         }
 
         // 对话更新
@@ -280,13 +296,21 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
         dispatchMessage({
           payload: {
             id: assistantId,
-            content: aiMessage,
+            key: 'content',
+            value: aiMessage,
           },
           type: 'UPDATE_MESSAGE',
         });
       },
-      onMessageError: () => {
-        // TODO: 错误处理
+      onMessageError: (error) => {
+        dispatchMessage({
+          payload: {
+            id: assistantId,
+            key: 'error',
+            value: error,
+          },
+          type: 'UPDATE_MESSAGE',
+        });
       },
     });
     set({ chatLoadingId: undefined });

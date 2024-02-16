@@ -1,12 +1,12 @@
 import { createStyles } from 'antd-style';
 
-export const useStyles = createStyles(({ css, token }) => ({
+export const useStyles = createStyles(({ css, token }, focus: boolean) => ({
   box: css`
     backdrop-filter: saturate(180%) blur(10px);
     background-color: ${token.colorBgContainer};
     border: 1px solid #999;
     display: flex;
-    z-index: 10;
+    z-index: ${focus ? 1000 : 10};
     flex-direction: column;
     border-radius: ${token.borderRadius}px;
     position: fixed;
@@ -15,13 +15,27 @@ export const useStyles = createStyles(({ css, token }) => ({
   header: css`
     border-bottom: 1px solid #999;
     height: 32px;
-    padding: 10px;
     cursor: move;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
   `,
+  swtich: css`
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  `,
+  title: css`
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+  `,
+  extra: css`
+    flex: 1;
+  `,
+
   container: css`
     display: flex;
     height: 640px;
@@ -30,8 +44,9 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   button: css`
     border-radius: 8px;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
+    margin-left: ${token.marginXS}px;
     cursor: pointer;
   `,
   close: css`
