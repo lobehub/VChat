@@ -15,7 +15,7 @@
     "@dnd-kit/core": "^6.1.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@gltf-transform/core": "^3.10.0",
-    "@lobehub/ui": "~1.119.4",
+    "@lobehub/ui": "~1.121.0",
     "@pixiv/three-vrm": "1.0.2",
     "@pixiv/three-vrm-core": "1.0.1",
     "ahooks": "^3.7.8",
