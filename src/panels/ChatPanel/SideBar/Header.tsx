@@ -1,7 +1,7 @@
+import { useConfigStore } from '@/store/config';
 import { ActionIcon, SearchBar } from '@lobehub/ui';
 import { Plus } from 'lucide-react';
 import { memo } from 'react';
-
 import { useStyles } from './style';
 
 interface HeaderProps {
@@ -13,6 +13,7 @@ interface HeaderProps {
 const Header = memo((props: HeaderProps) => {
   const { value, onChange } = props;
   const { styles } = useStyles();
+  const setPanel = useConfigStore((s) => s.setPanel);
 
   return (
     <div className={styles.header}>
@@ -26,7 +27,11 @@ const Header = memo((props: HeaderProps) => {
         }}
       />
       {/* @ts-ignore */}
-      <ActionIcon icon={Plus} onClick={() => setTab('agent')} />
+      <ActionIcon
+        icon={Plus}
+        onClick={() => setPanel('agent', { open: true })}
+        title={'找人聊天'}
+      />
     </div>
   );
 });

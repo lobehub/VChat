@@ -6,12 +6,14 @@ import { agentSelectors } from './selectors/agent';
 import { danceSelectors } from './selectors/dance';
 import { AgentStore, createAgentStore } from './slices/agent';
 import { DanceStore, createDanceStore } from './slices/dance';
+import { PanelStore, createPanelStore } from './slices/panel';
 
-export type MarketStore = AgentStore & DanceStore;
+export type MarketStore = PanelStore & AgentStore & DanceStore;
 
 const createStore: StateCreator<MarketStore, [['zustand/devtools', never]]> = (...parameters) => ({
   ...createAgentStore(...parameters),
   ...createDanceStore(...parameters),
+  ...createPanelStore(...parameters),
 });
 
 export const useMarketStore = createWithEqualityFn<MarketStore>()(
