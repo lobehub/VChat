@@ -1,4 +1,5 @@
 import { useConfigStore } from '@/store/config';
+import { useSessionStore } from '@/store/session';
 import { useThemeStore } from '@/store/theme';
 import { CheckCard } from '@ant-design/pro-card';
 import {
@@ -9,9 +10,10 @@ import {
   Swatches,
   findCustomThemeName,
 } from '@lobehub/ui';
+import { App, Button } from 'antd';
 import { ThemeMode, createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
-import { Settings2 } from 'lucide-react';
+import { Monitor, Settings2 } from 'lucide-react';
 
 interface CommonConfigProps {
   style?: React.CSSProperties;
@@ -37,6 +39,26 @@ const CommonConfig = (props: CommonConfigProps) => {
   const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
   const setConfig = useConfigStore((s) => s.setConfig);
   const theme = useTheme();
+  const clearSessions = useSessionStore((s) => s.clearSessions);
+
+  const { message, modal } = App.useApp();
+
+  const handleClear = () => {
+    modal.confirm({
+      cancelText: '取消',
+      centered: true,
+      okButtonProps: {
+        danger: true,
+      },
+      okText: '确定',
+      onOk: () => {
+        clearSessions();
+        message.success('清除成功');
+      },
+      title: '确认清除所有会话消息?',
+      content: '操作无法撤销，清除后数据将无法恢复，请慎重操作',
+    });
+  };
 
   return (
     <div style={style} className={classNames(styles.config, className)}>
@@ -77,6 +99,17 @@ const CommonConfig = (props: CommonConfigProps) => {
               <CheckCard title="🌙 暗色模式" value="dark" className={styles.effect} />
               <CheckCard title="💻 跟随系统" value="auto" className={styles.effect} />
             </CheckCard.Group>
+          </FormItem>
+        </FormGroup>
+        <FormGroup icon={Monitor} title={'系统设置'}>
+          <FormItem
+            desc={'将会清除所有会话数据，包括角色设置、消息等'}
+            divider
+            label={'清除所有会话消息'}
+          >
+            <Button danger type={'primary'} onClick={handleClear}>
+              立即清除
+            </Button>
           </FormItem>
         </FormGroup>
       </Form>

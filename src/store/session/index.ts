@@ -1,4 +1,3 @@
-import { VIDOL_SAMPLE_AGENT_A } from '@/constants/agent';
 import { chatCompletion, handleSpeakAi } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -11,6 +10,10 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { MessageActionType, messageReducer } from './reducers/message';
 import { sessionSelectors } from './selectors';
+
+const SESSON_STORAGE_KEY = 'vidol-chat-session-storage';
+
+import { initialState } from './initialState';
 
 export interface SessionStore {
   /**
@@ -91,6 +94,10 @@ export interface SessionStore {
    */
   clearHistory: () => void;
   /**
+   *  清空会话
+   */
+  clearSessions: () => void;
+  /**
    * 请求 AI 回复
    * @param messages
    * @returns
@@ -98,21 +105,11 @@ export interface SessionStore {
   fetchAIResponse: (messages: ChatMessage[], assistantId: string) => void;
 }
 
-const defaultSession: Session = {
-  agentId: VIDOL_SAMPLE_AGENT_A.agentId,
-  messages: [],
-};
-
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
   set,
   get,
 ) => ({
-  activeId: defaultSession.agentId,
-  liveId: undefined,
-  sessionList: [defaultSession],
-  chatLoadingId: undefined,
-  voiceOn: true,
-  messageInput: '',
+  ...initialState,
   setMessageInput: (messageInput) => {
     set({ messageInput });
   },
@@ -138,6 +135,10 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   clearHistory: () => {
     const { updateSessionMessages } = get();
     updateSessionMessages([]);
+  },
+  clearSessions: () => {
+    localStorage.removeItem(SESSON_STORAGE_KEY);
+    set({ ...initialState });
   },
 
   updateSessionMessages: (messages) => {
@@ -323,7 +324,7 @@ export const useSessionStore = createWithEqualityFn<SessionStore>()(
       name: 'VIDOL_SESSION_STORE',
     }),
     {
-      name: 'vidol-chat-session-storage', // name of the item in the storage (must be unique)
+      name: SESSON_STORAGE_KEY, // name of the item in the storage (must be unique)
     },
   ),
   shallow,
