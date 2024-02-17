@@ -67,12 +67,7 @@ const CommonConfig = (props: CommonConfigProps) => {
               }}
             />
           </FormItem>
-          <FormItem
-            desc={'自定义桌面粒子效果'}
-            divider
-            label={'粒子特效'}
-            name={'backgroundEffect'}
-          >
+          <FormItem desc={'自定义主题模式'} divider label={'主题模式'} name={'backgroundEffect'}>
             <CheckCard.Group
               size="small"
               value={backgroundEffect}
