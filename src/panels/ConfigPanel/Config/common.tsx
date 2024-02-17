@@ -1,5 +1,5 @@
 import { useConfigStore } from '@/store/config';
-import { BackgroundEffect } from '@/types/config';
+import { useThemeStore } from '@/store/theme';
 import { CheckCard } from '@ant-design/pro-card';
 import {
   Form,
@@ -9,7 +9,7 @@ import {
   Swatches,
   findCustomThemeName,
 } from '@lobehub/ui';
-import { createStyles, useTheme } from 'antd-style';
+import { ThemeMode, createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { Settings2 } from 'lucide-react';
 
@@ -26,17 +26,15 @@ const useStyles = createStyles(({ css }) => ({
   `,
   effect: css`
     margin-bottom: 0;
-    width: 120px;
+    width: 160px;
   `,
 }));
 
 const CommonConfig = (props: CommonConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [primaryColor, backgroundEffect] = useConfigStore((s) => [
-    s.config.primaryColor,
-    s.config.backgroundEffect,
-  ]);
+  const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
+  const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
   const setConfig = useConfigStore((s) => s.setConfig);
   const theme = useTheme();
 
@@ -67,18 +65,17 @@ const CommonConfig = (props: CommonConfigProps) => {
               }}
             />
           </FormItem>
-          <FormItem desc={'自定义主题模式'} divider label={'主题模式'} name={'backgroundEffect'}>
+          <FormItem desc={'自定义主题模式'} divider label={'主题模式'} name={'themeMode'}>
             <CheckCard.Group
               size="small"
-              value={backgroundEffect}
+              value={themeMode}
               onChange={(value) => {
-                setConfig({ backgroundEffect: (value as BackgroundEffect) || 'none' });
+                setThemeMode(value as ThemeMode);
               }}
             >
-              <CheckCard title="🌸 落樱缤纷" value="sakura" className={styles.effect} />
-              <CheckCard title="❄️ 冰雪王国" value="snow" className={styles.effect} />
-              <CheckCard title="✨ 仰望星空" value="star" className={styles.effect} />
-              <CheckCard title="🙌 无效果" value="none" className={styles.effect} />
+              <CheckCard title="🔆 亮色模式" value="light" className={styles.effect} />
+              <CheckCard title="🌙 暗色模式" value="dark" className={styles.effect} />
+              <CheckCard title="💻 跟随系统" value="auto" className={styles.effect} />
             </CheckCard.Group>
           </FormItem>
         </FormGroup>
