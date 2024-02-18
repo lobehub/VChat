@@ -1,6 +1,5 @@
 import { handleSpeakAi } from '@/services/chat';
 import { sessionSelectors, useSessionStore } from '@/store/session';
-import { ErrorTypeEnum } from '@/types/api';
 import {
   ActionIconGroup,
   ChatMessage,
@@ -12,6 +11,7 @@ import {
 import { ActionEvent, ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { Play } from 'lucide-react';
 import { memo } from 'react';
+import { renderErrorMessages } from './Error';
 
 interface ChatListProps {
   style?: React.CSSProperties;
@@ -20,8 +20,9 @@ interface ChatListProps {
 
 const ChatList = (props: ChatListProps) => {
   const { style, className } = props;
-  const chatLoadingId = useSessionStore((s) => s.chatLoadingId);
-  const [updateMessage, regenerateMessage, deleteMessage] = useSessionStore((s) => [
+
+  const [chatLoadingId, updateMessage, regenerateMessage, deleteMessage] = useSessionStore((s) => [
+    s.chatLoadingId,
     s.updateMessage,
     s.regenerateMessage,
     s.deleteMessage,
@@ -34,13 +35,15 @@ const ChatList = (props: ChatListProps) => {
   });
   const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s));
 
+  console.log('render chatlist');
+
   const tts = {
     icon: Play,
     key: 'tts',
     label: '语音合成',
   } as ActionIconGroupItems;
 
-  const AssistantActionsBar: RenderAction = ({ onActionClick, id }) => (
+  const AssistantActionsBar: RenderAction = ({ onActionClick }) => (
     <ActionIconGroup
       dropdownMenu={[tts, regenerate, copy, divider, del]}
       items={[regenerate, edit]}
@@ -49,7 +52,7 @@ const ChatList = (props: ChatListProps) => {
     />
   );
 
-  const userActionsBar: RenderAction = ({ onActionClick, id }) => (
+  const userActionsBar: RenderAction = ({ onActionClick }) => (
     <ActionIconGroup
       dropdownMenu={[copy, divider, del]}
       items={[edit]}
@@ -61,18 +64,6 @@ const ChatList = (props: ChatListProps) => {
   const renderActions: LobeChatListProps['renderActions'] = {
     assistant: AssistantActionsBar,
     user: userActionsBar,
-  };
-
-  const renderErrorMessages: LobeChatListProps['renderErrorMessages'] = {
-    [ErrorTypeEnum.API_KEY_MISSING]: {
-      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
-    },
-    [ErrorTypeEnum.OPENAI_API_ERROR]: {
-      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
-    },
-    [ErrorTypeEnum.INTERNAL_SERVER_ERROR]: {
-      Render: ({ error }: ChatMessage) => <div>{error.message}</div>,
-    },
   };
 
   const onActionsClick = (action: ActionEvent, message: ChatMessage) => {

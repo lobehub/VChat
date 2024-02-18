@@ -16,7 +16,7 @@ import { isEqual } from 'lodash-es';
 import { EarIcon, EarOffIcon, Eraser, Maximize2, Mic, Minimize2 } from 'lucide-react';
 import { memo, useCallback, useState } from 'react';
 
-interface ChatBotProps {
+interface ChatInputProps {
   style?: React.CSSProperties;
   className?: string;
   expand: boolean;
@@ -25,16 +25,12 @@ interface ChatBotProps {
 
 const INITIAL_INPUT_HEIGHT = 200;
 
-const ChatInput = (props: ChatBotProps) => {
+const ChatInput = (props: ChatInputProps) => {
   const { style, className, setExpand, expand } = props;
-  const [sendMessage, clearHistory, setMessageInput] = useSessionStore((s) => [
-    s.sendMessage,
-    s.clearHistory,
-    s.setMessageInput,
-  ]);
+  const [voiceOn, messageInput, sendMessage, clearHistory, setMessageInput] = useSessionStore(
+    (s) => [s.voiceOn, s.messageInput, s.sendMessage, s.clearHistory, s.setMessageInput],
+  );
   const [inputHeight, setInputHeight] = useState(INITIAL_INPUT_HEIGHT);
-  const messageInput = useSessionStore((s) => s.messageInput);
-  const voiceOn = useSessionStore((s) => s.voiceOn);
   const config = useConfigStore((s) => configSelectors.currentOpenAIConfig(s), isEqual);
 
   const handleMessageInput = useCallback(
@@ -62,9 +58,14 @@ const ChatInput = (props: ChatBotProps) => {
     [setInputHeight],
   );
 
+  const onSend = () => {
+    sendMessage(messageInput);
+    setMessageInput('');
+  };
+
   return (
     <ChatInputArea
-      bottomAddons={<ChatSendButton texts={{ send: '发送', warp: '换行' }} />}
+      bottomAddons={<ChatSendButton texts={{ send: '发送', warp: '换行' }} onSend={onSend} />}
       topAddons={
         <ChatInputActionBar
           leftAddons={
@@ -118,10 +119,7 @@ const ChatInput = (props: ChatBotProps) => {
       onSizeChange={handleSizeChange}
       setExpand={setExpand}
       heights={{ minHeight: INITIAL_INPUT_HEIGHT, inputHeight }}
-      onSend={() => {
-        sendMessage(messageInput);
-        setMessageInput('');
-      }}
+      onSend={onSend}
       placeholder="请输入内容开始聊天"
     />
   );
