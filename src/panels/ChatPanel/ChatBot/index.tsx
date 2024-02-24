@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { memo, useState } from 'react';
 import ChatHeader from './ChatHeader';
-import ChatInput from './ChatInput';
+import ChatInput from './ChatInput/index';
 import ChatList from './ChatList';
 import { useStyles } from './style';
 
