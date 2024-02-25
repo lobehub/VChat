@@ -5,6 +5,7 @@ import { LLMRoleType } from './llm';
  * 聊天消息错误对象
  */
 export interface ChatMessageError {
+  body?: any;
   message: string;
   type: ErrorTypeEnum;
 }

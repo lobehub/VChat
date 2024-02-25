@@ -1,5 +1,6 @@
 import { useConfigStore } from '@/store/config';
-import { BackgroundEffect } from '@/types/config';
+import { useSessionStore } from '@/store/session';
+import { useThemeStore } from '@/store/theme';
 import { CheckCard } from '@ant-design/pro-card';
 import {
   Form,
@@ -9,9 +10,10 @@ import {
   Swatches,
   findCustomThemeName,
 } from '@lobehub/ui';
-import { createStyles, useTheme } from 'antd-style';
+import { App, Button } from 'antd';
+import { ThemeMode, createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
-import { Settings2 } from 'lucide-react';
+import { Monitor, Settings2 } from 'lucide-react';
 
 interface CommonConfigProps {
   style?: React.CSSProperties;
@@ -26,19 +28,37 @@ const useStyles = createStyles(({ css }) => ({
   `,
   effect: css`
     margin-bottom: 0;
-    width: 120px;
+    width: 160px;
   `,
 }));
 
 const CommonConfig = (props: CommonConfigProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [primaryColor, backgroundEffect] = useConfigStore((s) => [
-    s.config.primaryColor,
-    s.config.backgroundEffect,
-  ]);
+  const [primaryColor] = useConfigStore((s) => [s.config.primaryColor]);
+  const [themeMode, setThemeMode] = useThemeStore((s) => [s.themeMode, s.setThemeMode]);
   const setConfig = useConfigStore((s) => s.setConfig);
   const theme = useTheme();
+  const clearSessions = useSessionStore((s) => s.clearSessions);
+
+  const { message, modal } = App.useApp();
+
+  const handleClear = () => {
+    modal.confirm({
+      cancelText: '取消',
+      centered: true,
+      okButtonProps: {
+        danger: true,
+      },
+      okText: '确定',
+      onOk: () => {
+        clearSessions();
+        message.success('清除成功');
+      },
+      title: '确认清除所有会话消息?',
+      content: '操作无法撤销，清除后数据将无法恢复，请慎重操作',
+    });
+  };
 
   return (
     <div style={style} className={classNames(styles.config, className)}>
@@ -67,24 +87,29 @@ const CommonConfig = (props: CommonConfigProps) => {
               }}
             />
           </FormItem>
-          <FormItem
-            desc={'自定义桌面粒子效果'}
-            divider
-            label={'粒子特效'}
-            name={'backgroundEffect'}
-          >
+          <FormItem desc={'自定义主题模式'} divider label={'主题模式'} name={'themeMode'}>
             <CheckCard.Group
               size="small"
-              value={backgroundEffect}
+              value={themeMode}
               onChange={(value) => {
-                setConfig({ backgroundEffect: (value as BackgroundEffect) || 'none' });
+                setThemeMode(value as ThemeMode);
               }}
             >
-              <CheckCard title="🌸 落樱缤纷" value="sakura" className={styles.effect} />
-              <CheckCard title="❄️ 冰雪王国" value="snow" className={styles.effect} />
-              <CheckCard title="✨ 仰望星空" value="star" className={styles.effect} />
-              <CheckCard title="🙌 无效果" value="none" className={styles.effect} />
+              <CheckCard title="🔆 亮色模式" value="light" className={styles.effect} />
+              <CheckCard title="🌙 暗色模式" value="dark" className={styles.effect} />
+              <CheckCard title="💻 跟随系统" value="auto" className={styles.effect} />
             </CheckCard.Group>
+          </FormItem>
+        </FormGroup>
+        <FormGroup icon={Monitor} title={'系统设置'}>
+          <FormItem
+            desc={'将会清除所有会话数据，包括角色设置、消息等'}
+            divider
+            label={'清除所有会话消息'}
+          >
+            <Button danger type={'primary'} onClick={handleClear}>
+              立即清除
+            </Button>
           </FormItem>
         </FormGroup>
       </Form>

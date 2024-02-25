@@ -34,7 +34,24 @@ export const POST = async (req: Request) => {
   } catch (error) {
     // https://platform.openai.com/docs/guides/error-codes/api-errors
     if (error instanceof OpenAI.APIError) {
-      return createErrorResponse(ErrorTypeEnum.OPENAI_API_ERROR, error.message);
+      let errorResult: any;
+
+      // if error is definitely OpenAI APIError, there will be an error object
+      if (error.error) {
+        errorResult = error.error;
+      }
+      // Or if there is a cause, we use error cause
+      // This often happened when there is a bug of the `openai` package.
+      else if (error.cause) {
+        errorResult = error.cause;
+      }
+      // if there is no other request error, the error object is a Response like object
+      else {
+        errorResult = { headers: error.headers, stack: error.stack, status: error.status };
+      }
+      return createErrorResponse(ErrorTypeEnum.OPENAI_API_ERROR, {
+        error: errorResult,
+      });
     } else {
       return createErrorResponse(ErrorTypeEnum.INTERNAL_SERVER_ERROR, JSON.stringify(error));
     }

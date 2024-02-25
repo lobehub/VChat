@@ -8,8 +8,9 @@ export const useStyles = createStyles(({ css, token }) => ({
     padding: 16px;
     border-radius: 2px;
     user-select: none;
+    cursor: pointer;
     &:hover {
-      background: ${token.colorBgBlur};
+      background: ${token.colorBgContainer};
     }
   `,
   selected: css`

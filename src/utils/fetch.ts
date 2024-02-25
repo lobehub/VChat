@@ -1,5 +1,14 @@
-import { APIErrorResponse } from '@/types/api';
+import { APIErrorResponse, ErrorTypeEnum } from '@/types/api';
 import { ChatMessageError } from '@/types/chat';
+
+const getMessageByErrorType = (errorType: ErrorTypeEnum) => {
+  const errorMap = {
+    API_KEY_MISSING: 'OpenAI API Key 为空，请添加自定义 OpenAI API Key',
+    OPENAI_API_ERROR: 'OpenAI API 错误，请检查 OpenAI API Key 和 Endpoint 是否正确',
+    INTERNAL_SERVER_ERROR: '服务器错误，请联系管理员',
+  };
+  return errorMap[errorType] || 'unknown error';
+};
 /**
  * @description: 封装fetch请求，使用流式方法获取数据
  */
@@ -17,7 +26,8 @@ export const fetchSEE = async (
 
     handler.onMessageError?.({
       type: data.errorType,
-      message: data.message,
+      body: data.body,
+      message: getMessageByErrorType(data.errorType),
     });
     return;
   }

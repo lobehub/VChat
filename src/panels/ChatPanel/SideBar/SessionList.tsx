@@ -53,7 +53,7 @@ const SessionList = (props: SessionListProps) => {
             style={{ padding: 12 }}
           >
             <List.Item.Meta
-              avatar={<Avatar src={avatar} />}
+              avatar={<Avatar src={avatar} size={48} />}
               title={name}
               description={<Text ellipsis>{description}</Text>}
             />
