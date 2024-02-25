@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import classNames from 'classnames';
 import ChatBot from './ChatBot';
@@ -21,6 +22,9 @@ const ChatPanel = (props: ChatPanelProps) => {
     <Panel
       style={style}
       className={className}
+      onFocus={() => setPanel('chat', { zIndex: FOCUS_Z_INDEX })}
+      onBlur={() => setPanel('chat', { zIndex: INITIAL_Z_INDEX })}
+      zIndex={panel.chat.zIndex}
       coordinates={panel.chat.coordinates}
       onCoordinatesChange={(coordinates) => setPanel('chat', { coordinates })}
       onClose={() => setPanel('chat', { open: false })}

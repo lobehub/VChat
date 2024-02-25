@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import AgentViewer from './AgentViewer';
 import { useStyles } from './style';
@@ -19,6 +20,9 @@ const LivePanel = (props: LivePanelProps) => {
     <Panel
       style={style}
       className={className}
+      onFocus={() => setPanel('live', { zIndex: FOCUS_Z_INDEX })}
+      onBlur={() => setPanel('live', { zIndex: INITIAL_Z_INDEX })}
+      zIndex={panel.live.zIndex}
       coordinates={panel.live.coordinates}
       onCoordinatesChange={(coordinates) => setPanel('live', { coordinates })}
       onClose={() => setPanel('live', { open: false })}

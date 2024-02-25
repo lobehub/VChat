@@ -12,9 +12,14 @@ export interface Panel {
    * 坐标
    */
   coordinates: Coordinates;
+  /**
+   * zIndex
+   */
+  zIndex: number;
 }
 
 export interface PanelConfig {
+  global: Panel;
   agent: Panel;
   role: Panel;
   market: Panel;

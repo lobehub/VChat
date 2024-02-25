@@ -1,3 +1,4 @@
+import { FOCUS_Z_INDEX } from '@/constants/common';
 import { Config, Panel, PanelKey } from '@/types/config';
 import { produce } from 'immer';
 import { isEqual, merge } from 'lodash-es';
@@ -22,7 +23,9 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     const prevSetting = get().panel[panel];
     const nextSetting = produce(prevSetting, (draftState) => {
       merge(draftState, config);
+      if (config.open) draftState.zIndex = FOCUS_Z_INDEX;
     });
+
     if (isEqual(prevSetting, nextSetting)) return;
     set((state) => ({
       panel: {

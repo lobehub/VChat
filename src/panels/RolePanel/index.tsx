@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
@@ -25,6 +26,9 @@ const RolePanel = (props: RolePanelProps) => {
     <Panel
       style={style}
       className={className}
+      zIndex={panel.role.zIndex}
+      onFocus={() => setPanel('role', { zIndex: FOCUS_Z_INDEX })}
+      onBlur={() => setPanel('role', { zIndex: INITIAL_Z_INDEX })}
       coordinates={panel.role.coordinates}
       onCoordinatesChange={(coordinates) => setPanel('role', { coordinates })}
       onClose={() => setPanel('role', { open: false })}

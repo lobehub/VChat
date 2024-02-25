@@ -1,3 +1,4 @@
+import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
 import {
   DndContext,
   KeyboardSensor,
@@ -7,10 +8,8 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import type { Coordinates } from '@dnd-kit/utilities';
-
-import Container from './Container';
-
 import React, { PropsWithChildren, useEffect, useState } from 'react';
+import Container from './Container';
 
 interface ControlPanelProps {
   style?: React.CSSProperties;
@@ -19,6 +18,9 @@ interface ControlPanelProps {
   onClose: () => void;
   onCoordinatesChange?: (coordinates: Coordinates) => void;
   coordinates?: Coordinates;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
+  zIndex?: number;
 }
 
 const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
@@ -29,10 +31,10 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
     onClose,
     title,
     onCoordinatesChange,
-    coordinates = {
-      x: window.innerWidth / 2 - 450,
-      y: window.innerHeight / 2 - 320,
-    },
+    onBlur,
+    onFocus,
+    zIndex = INITIAL_Z_INDEX,
+    coordinates = INITIAL_COORDINATES,
   } = props;
   const [{ x, y }, setCoordinates] = useState<Coordinates>(coordinates);
 
@@ -64,7 +66,17 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
         });
       }}
     >
-      <Container x={x} y={y} onClose={onClose} style={style} className={className} title={title}>
+      <Container
+        x={x}
+        y={y}
+        zIndex={zIndex}
+        onClose={onClose}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        style={style}
+        className={className}
+        title={title}
+      >
         {children}
       </Container>
     </DndContext>

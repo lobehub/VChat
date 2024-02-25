@@ -2,8 +2,9 @@ import { useDraggable } from '@dnd-kit/core';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
 
-import React, { PropsWithChildren, memo, useMemo, useRef, useState } from 'react';
+import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
 
+import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
 import { useStyles } from './style';
 
 interface ContainerProps {
@@ -13,13 +14,27 @@ interface ContainerProps {
   extra?: React.ReactNode;
   x: number;
   y: number;
+  zIndex?: number;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
   onClose: () => void;
 }
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
-  const { style, className, children, onClose, x, y, title, extra } = props;
-  const [focus, setFocus] = useState(false);
-  const { styles } = useStyles(focus);
+  const {
+    style,
+    className,
+    children,
+    onClose,
+    x = INITIAL_COORDINATES.x,
+    y = INITIAL_COORDINATES.y,
+    title,
+    extra,
+    zIndex = INITIAL_Z_INDEX,
+    onBlur,
+    onFocus,
+  } = props;
+  const { styles } = useStyles();
 
   const { attributes, listeners, transform, setNodeRef, setActivatorNodeRef } = useDraggable({
     id: 'draggable',
@@ -59,13 +74,14 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);
 
   return (
-    <div ref={setNodeRef} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
+    <div ref={setNodeRef} onFocus={onFocus} onBlur={onBlur}>
       <div
         className={classNames(styles.box, className)}
         style={{
           ...style,
           left: x,
           top: y,
+          zIndex,
           ...transformstyle,
         }}
         ref={draggleRef}

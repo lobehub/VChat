@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import Dance from './Dance';
 import { useStyles } from './style';
@@ -19,6 +20,9 @@ const DancePanel = (props: DancePanelProps) => {
     <Panel
       style={style}
       className={className}
+      onFocus={() => setPanel('dance', { zIndex: FOCUS_Z_INDEX })}
+      onBlur={() => setPanel('dance', { zIndex: INITIAL_Z_INDEX })}
+      zIndex={panel.dance.zIndex}
       coordinates={panel.dance.coordinates}
       onCoordinatesChange={(coordinates) => setPanel('dance', { coordinates })}
       onClose={() => setPanel('dance', { open: false })}

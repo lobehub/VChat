@@ -1,6 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
+import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
 import { useConfigStore } from '@/store/config';
 import Agent from './Agent';
 import { useStyles } from './style';
@@ -19,6 +20,9 @@ const ControlPanel = (props: ControlPanelProps) => {
     <Panel
       style={style}
       className={className}
+      onFocus={() => setPanel('agent', { zIndex: FOCUS_Z_INDEX })}
+      onBlur={() => setPanel('agent', { zIndex: INITIAL_Z_INDEX })}
+      zIndex={panel.agent.zIndex}
       coordinates={panel.agent.coordinates}
       onCoordinatesChange={(coordinates) => setPanel('agent', { coordinates })}
       onClose={() => setPanel('agent' as any, { open: false })}

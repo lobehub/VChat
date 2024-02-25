@@ -1,11 +1,6 @@
 'use client';
 
 import Application from '@/components/Application';
-import { useConfigStore } from '@/store/config';
-import { PanelKey } from '@/types/config';
-import { GithubIcon } from 'lucide-react';
-import { useStyles } from './style';
-
 import {
   AgentPanel,
   ChatPanel,
@@ -15,6 +10,10 @@ import {
   MarketPanel,
   RolePanel,
 } from '@/panels';
+import { useConfigStore } from '@/store/config';
+import { PanelKey } from '@/types/config';
+import { GithubIcon } from 'lucide-react';
+import { useStyles } from './style';
 
 const apps = [
   {

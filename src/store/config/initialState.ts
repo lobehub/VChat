@@ -1,3 +1,4 @@
+import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
 import { Config, PanelConfig } from '@/types/config';
 
 export interface ConfigState {
@@ -5,38 +6,48 @@ export interface ConfigState {
   panel: PanelConfig;
 }
 
-const INITIAL_COORDINATES = { x: 360, y: 360 };
-
 const initialState: ConfigState = {
   panel: {
+    global: {
+      open: false,
+      coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
+    },
     agent: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     role: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     dance: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     live: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     // 默认打开聊天窗口
     chat: {
       open: true,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     market: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
     config: {
       open: false,
       coordinates: INITIAL_COORDINATES,
+      zIndex: INITIAL_Z_INDEX,
     },
   },
 
