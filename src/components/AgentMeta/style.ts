@@ -7,15 +7,17 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   content: css`
     margin-left: ${token.marginSM}px;
-  `,
-  desc: css`
-    width: 480px;
-    line-height: 18px;
-    color: ${token.colorTextDescription};
+    line-height: 1;
   `,
   title: css`
-    line-height: 18px;
     font-size: ${token.fontSize}px;
+    line-height: 18px;
     font-weight: bold;
+  `,
+  desc: css`
+    line-height: 18px;
+    width: 480px;
+    font-size: ${token.fontSizeSM}px;
+    color: ${token.colorTextDescription};
   `,
 }));

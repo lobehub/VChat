@@ -9,6 +9,7 @@ import {
   useChatListActionsBar,
 } from '@lobehub/ui';
 import { ActionEvent, ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
+import { isEqual } from 'lodash-es';
 import { Play } from 'lucide-react';
 import { memo } from 'react';
 import { renderErrorMessages } from './Error';
@@ -33,9 +34,8 @@ const ChatList = (props: ChatListProps) => {
     regenerate: '重新生成',
     copy: '复制',
   });
-  const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s));
 
-  console.log('render chatlist');
+  const currentChats = useSessionStore((s) => sessionSelectors.currentChats(s), isEqual);
 
   const tts = {
     icon: Play,

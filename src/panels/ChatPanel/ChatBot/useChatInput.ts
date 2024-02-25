@@ -1,7 +1,8 @@
 import { useSessionStore } from '@/store/session';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 
 const useChatInput = () => {
+  const [expand, setExpand] = useState<boolean>(false);
   const [messageInput, sendMessage, setMessageInput] = useSessionStore((s) => [
     s.messageInput,
     s.sendMessage,
@@ -13,7 +14,7 @@ const useChatInput = () => {
     setMessageInput('');
   }, []);
 
-  return { messageInput, onSend };
+  return { messageInput, onSend, setMessageInput, expand, setExpand };
 };
 
 export default useChatInput;
