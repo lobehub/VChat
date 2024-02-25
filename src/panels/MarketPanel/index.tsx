@@ -16,15 +16,16 @@ interface MarketPanelProps {
 const MarketPanel = (props: MarketPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const { tab } = useMarketStore();
-  const { setPanel } = useConfigStore();
+  const tab = useMarketStore((s) => s.tab);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.market.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('market', { coordinates })}
       onClose={() => setPanel('market', { open: false })}
-      defaultCoordinates={{ x: 400, y: 400 }}
       title="虚拟商店"
     >
       <SideNav className="handle" />

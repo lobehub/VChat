@@ -15,12 +15,14 @@ interface ChatPanelProps {
 const ChatPanel = (props: ChatPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setPanel] = useConfigStore((s) => [s.setPanel]);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.chat.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('chat', { coordinates })}
       onClose={() => setPanel('chat', { open: false })}
       title="对话列表"
     >

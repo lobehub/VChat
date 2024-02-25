@@ -19,17 +19,15 @@ const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [tab, setTab] = useState('info');
-  const setPanel = useConfigStore((s) => s.setPanel);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.role.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('role', { coordinates })}
       onClose={() => setPanel('role', { open: false })}
-      defaultCoordinates={{
-        x: 320,
-        y: 250,
-      }}
       title="编辑角色"
     >
       <div

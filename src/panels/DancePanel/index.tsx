@@ -13,12 +13,14 @@ interface DancePanelProps {
 const DancePanel = (props: DancePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setPanel] = useConfigStore((s) => [s.setPanel]);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.dance.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('dance', { coordinates })}
       onClose={() => setPanel('dance', { open: false })}
       title="舞蹈"
     >

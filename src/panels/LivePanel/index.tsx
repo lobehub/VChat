@@ -13,12 +13,14 @@ interface LivePanelProps {
 const LivePanel = (props: LivePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setPanel] = useConfigStore((s) => [s.setPanel]);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.live.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('live', { coordinates })}
       onClose={() => setPanel('live', { open: false })}
       title="WebCam"
     >

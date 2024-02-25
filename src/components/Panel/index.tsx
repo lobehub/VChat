@@ -10,14 +10,15 @@ import type { Coordinates } from '@dnd-kit/utilities';
 
 import Container from './Container';
 
-import React, { PropsWithChildren, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
   title?: string;
   onClose: () => void;
-  defaultCoordinates?: Coordinates;
+  onCoordinatesChange?: (coordinates: Coordinates) => void;
+  coordinates?: Coordinates;
 }
 
 const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
@@ -27,12 +28,17 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
     children,
     onClose,
     title,
-    defaultCoordinates = {
-      x: 200,
-      y: 200,
+    onCoordinatesChange,
+    coordinates = {
+      x: window.innerWidth / 2 - 450,
+      y: window.innerHeight / 2 - 320,
     },
   } = props;
-  const [{ x, y }, setCoordinates] = useState<Coordinates>(defaultCoordinates);
+  const [{ x, y }, setCoordinates] = useState<Coordinates>(coordinates);
+
+  useEffect(() => {
+    if (coordinates.x !== x || coordinates.y !== y) setCoordinates(coordinates);
+  }, [coordinates.x, coordinates.y]);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -49,10 +55,12 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
       sensors={sensors}
       onDragEnd={({ delta }) => {
         setCoordinates(({ x, y }) => {
-          return {
+          const newCoordinates = {
             x: x + delta.x,
             y: y + delta.y,
           };
+          onCoordinatesChange?.(newCoordinates);
+          return newCoordinates;
         });
       }}
     >

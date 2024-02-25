@@ -13,12 +13,14 @@ interface ControlPanelProps {
 const ControlPanel = (props: ControlPanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setPanel] = useConfigStore((s) => [s.setPanel]);
+  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
     <Panel
       style={style}
       className={className}
+      coordinates={panel.agent.coordinates}
+      onCoordinatesChange={(coordinates) => setPanel('agent', { coordinates })}
       onClose={() => setPanel('agent' as any, { open: false })}
       title="Vidol.Chat"
     >
