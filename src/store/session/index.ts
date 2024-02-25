@@ -1,3 +1,4 @@
+import { LOADING_FLAG } from '@/constants/common';
 import { chatCompletion, handleSpeakAi } from '@/services/chat';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -8,12 +9,11 @@ import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
+import { initialState } from './initialState';
 import { MessageActionType, messageReducer } from './reducers/message';
 import { sessionSelectors } from './selectors';
 
-const SESSON_STORAGE_KEY = 'vidol-chat-session-storage';
-
-import { initialState } from './initialState';
+const SESSION_STORAGE_KEY = 'vidol-chat-session-storage';
 
 export interface SessionStore {
   /**
@@ -137,7 +137,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     updateSessionMessages([]);
   },
   clearSessions: () => {
-    localStorage.removeItem(SESSON_STORAGE_KEY);
+    localStorage.removeItem(SESSION_STORAGE_KEY);
     set({ ...initialState });
   },
 
@@ -232,7 +232,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       payload: {
         role: 'assistant',
         id: assistantId,
-        content: '...', // 占位符
+        content: LOADING_FLAG, // 占位符
       },
     });
 
@@ -280,10 +280,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
             receivedMessage = receivedMessage.slice(sentence.length).trimStart();
 
             if (
-              !sentence.replace(
-                /^[\s\[\(\{「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」\}\)\]]+$/g,
-                '',
-              )
+              !sentence.replace(/^[\s\[(「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」})\]]+$/g, '')
             ) {
               return;
             }
@@ -324,7 +321,7 @@ export const useSessionStore = createWithEqualityFn<SessionStore>()(
       name: 'VIDOL_SESSION_STORE',
     }),
     {
-      name: SESSON_STORAGE_KEY, // name of the item in the storage (must be unique)
+      name: SESSION_STORAGE_KEY, // name of the item in the storage (must be unique)
     },
   ),
   shallow,

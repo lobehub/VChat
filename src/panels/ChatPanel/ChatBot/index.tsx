@@ -20,9 +20,11 @@ const ChatBot = (props: ChatBotProps) => {
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
       <ChatHeader />
-      <div style={{ flex: 1, overflow: 'auto', position: 'relative' }} ref={ref} id="chat-list">
-        <ChatList />
-        <ScrollArcher />
+      <div style={{ flex: 1, overflow: 'hidden', position: 'relative' }} id="chat-list">
+        <div style={{ height: '100%', overflow: 'scroll' }} ref={ref}>
+          <ChatList />
+          <ScrollArcher />
+        </div>
         <BackBottom target={ref} text={'返回底部'} />
       </div>
       <ChatInput />
