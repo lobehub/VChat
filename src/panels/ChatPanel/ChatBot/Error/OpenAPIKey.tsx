@@ -1,12 +1,9 @@
+import { RenderErrorMessage } from '@lobehub/ui';
 import { memo } from 'react';
 import APIKeyForm from './ApiKeyForm';
 import { ErrorActionContainer } from './style';
 
-interface OpenAPIKeyProps {
-  id: string;
-}
-
-const OpenAPIKey = ({ id }: OpenAPIKeyProps) => (
+const OpenAPIKey: RenderErrorMessage['Render'] = ({ id }) => (
   <ErrorActionContainer>
     <APIKeyForm id={id} />
   </ErrorActionContainer>

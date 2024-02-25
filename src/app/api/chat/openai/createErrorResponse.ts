@@ -12,13 +12,13 @@ const getStatusCode = (errorType: ErrorTypeEnum) => {
   }
 };
 
-export const createErrorResponse = (errorType: ErrorTypeEnum, message: string) => {
+export const createErrorResponse = (errorType: ErrorTypeEnum, body: any) => {
   const statusCode = getStatusCode(errorType);
 
   return NextResponse.json(
     {
       success: false,
-      message,
+      body,
       errorType,
     },
     { status: statusCode },

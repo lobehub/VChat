@@ -6,6 +6,6 @@ export enum ErrorTypeEnum {
 
 export interface APIErrorResponse {
   success: boolean;
-  message: string;
+  body: any;
   errorType: ErrorTypeEnum;
 }
