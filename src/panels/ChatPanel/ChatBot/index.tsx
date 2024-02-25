@@ -1,5 +1,7 @@
+import ScrollArcher from '@/panels/ChatPanel/ChatBot/ScrollArcher';
+import { BackBottom } from '@lobehub/ui';
 import classNames from 'classnames';
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import ChatHeader from './ChatHeader';
 import ChatInput from './ChatInput/index';
 import ChatList from './ChatList';
@@ -12,12 +14,18 @@ interface ChatBotProps {
 
 const ChatBot = (props: ChatBotProps) => {
   const { style, className } = props;
+  const ref = useRef(null);
   const { styles } = useStyles();
 
   return (
     <div className={classNames(styles.chatbot, className)} style={style}>
       <ChatHeader />
-      <ChatList style={{ flex: 1, overflow: 'auto' }} />
+      <div style={{ flex: 1, overflow: 'auto', position: 'relative' }} ref={ref}>
+        <ChatList />
+        <ScrollArcher />
+        <BackBottom target={ref} text={'返回底部'} />
+      </div>
+
       <ChatInput />
     </div>
   );

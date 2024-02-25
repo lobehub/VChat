@@ -14,14 +14,7 @@ import { Play } from 'lucide-react';
 import { memo } from 'react';
 import { renderErrorMessages } from './Error';
 
-interface ChatListProps {
-  style?: React.CSSProperties;
-  className?: string;
-}
-
-const ChatList = (props: ChatListProps) => {
-  const { style, className } = props;
-
+const ChatList = () => {
   const [chatLoadingId, updateMessage, regenerateMessage, deleteMessage] = useSessionStore((s) => [
     s.chatLoadingId,
     s.updateMessage,
@@ -83,31 +76,28 @@ const ChatList = (props: ChatListProps) => {
   };
 
   return (
-    <div style={style} className={className}>
-      <LobeChatList
-        data={currentChats || []}
-        showTitle={true}
-        type="chat"
-        renderActions={renderActions}
-        renderMessages={renderMessages}
-        renderErrorMessages={renderErrorMessages}
-        onActionsClick={onActionsClick}
-        onMessageChange={(id, content) => {
-          updateMessage(id, content);
-        }}
-        text={{
-          cancel: '取消',
-          confirm: '确认',
-          edit: '编辑',
-          delete: '删除',
-          regenerate: '重新生成',
-          copy: '复制',
-          copySuccess: '复制成功',
-        }}
-        loadingId={chatLoadingId}
-      />
-      {/* <ScrollArchor /> */}
-    </div>
+    <LobeChatList
+      data={currentChats || []}
+      showTitle={true}
+      type="chat"
+      renderActions={renderActions}
+      renderMessages={renderMessages}
+      renderErrorMessages={renderErrorMessages}
+      onActionsClick={onActionsClick}
+      onMessageChange={(id, content) => {
+        updateMessage(id, content);
+      }}
+      text={{
+        cancel: '取消',
+        confirm: '确认',
+        edit: '编辑',
+        delete: '删除',
+        regenerate: '重新生成',
+        copy: '复制',
+        copySuccess: '复制成功',
+      }}
+      loadingId={chatLoadingId}
+    />
   );
 };
 

@@ -3,9 +3,9 @@ import { ChatMessageError } from '@/types/chat';
 
 const getMessageByErrorType = (errorType: ErrorTypeEnum) => {
   const errorMap = {
-    API_KEY_MISSING: 'openai api key missing',
-    OPENAI_API_ERROR: 'openai api error',
-    INTERNAL_SERVER_ERROR: 'internal server error',
+    API_KEY_MISSING: 'OpenAI API Key 为空，请添加自定义 OpenAI API Key',
+    OPENAI_API_ERROR: 'OpenAI API 错误，请检查 OpenAI API Key 和 Endpoint 是否正确',
+    INTERNAL_SERVER_ERROR: '服务器错误，请联系管理员',
   };
   return errorMap[errorType] || 'unknown error';
 };
