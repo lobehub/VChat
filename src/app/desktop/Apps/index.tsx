@@ -1,11 +1,6 @@
 'use client';
 
 import Application from '@/components/Application';
-import { useConfigStore } from '@/store/config';
-import { PanelKey } from '@/types/config';
-import { GithubIcon } from 'lucide-react';
-import { useStyles } from './style';
-
 import {
   AgentPanel,
   ChatPanel,
@@ -15,6 +10,10 @@ import {
   MarketPanel,
   RolePanel,
 } from '@/panels';
+import { useConfigStore } from '@/store/config';
+import { PanelKey } from '@/types/config';
+import { GithubIcon } from 'lucide-react';
+import { useStyles } from './style';
 
 const apps = [
   {
@@ -82,7 +81,7 @@ const apps = [
 ];
 
 const Apps = () => {
-  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
+  const [panel, openPanel] = useConfigStore((s) => [s.panel, s.openPanel]);
   const { styles } = useStyles();
 
   return (
@@ -98,7 +97,7 @@ const Apps = () => {
               name={app.label}
               onClick={() => {
                 if (app.component) {
-                  setPanel(app.key as any, { open: true });
+                  openPanel(app.key as PanelKey);
                 } else if (app.link) {
                   window.open(app.link);
                 }

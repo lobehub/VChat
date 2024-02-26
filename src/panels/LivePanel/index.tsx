@@ -1,7 +1,6 @@
 'use client';
 
-import Panel from '@/components/Panel';
-import { useConfigStore } from '@/store/config';
+import PanelContainer from '@/panels/PanelContainer';
 import AgentViewer from './AgentViewer';
 import { useStyles } from './style';
 
@@ -13,19 +12,13 @@ interface LivePanelProps {
 const LivePanel = (props: LivePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
-  const [setPanel] = useConfigStore((s) => [s.setPanel]);
 
   return (
-    <Panel
-      style={style}
-      className={className}
-      onClose={() => setPanel('live', { open: false })}
-      title="WebCam"
-    >
+    <PanelContainer style={style} className={className} panelKey="live" title="WebCam">
       <div className={styles.content}>
         <AgentViewer />
       </div>
-    </Panel>
+    </PanelContainer>
   );
 };
 

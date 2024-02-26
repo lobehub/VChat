@@ -1,3 +1,4 @@
+import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
 import {
   DndContext,
   KeyboardSensor,
@@ -7,17 +8,19 @@ import {
   useSensors,
 } from '@dnd-kit/core';
 import type { Coordinates } from '@dnd-kit/utilities';
-
+import React, { PropsWithChildren, useEffect, useState } from 'react';
 import Container from './Container';
-
-import React, { PropsWithChildren, useState } from 'react';
 
 interface ControlPanelProps {
   style?: React.CSSProperties;
   className?: string;
   title?: string;
   onClose: () => void;
-  defaultCoordinates?: Coordinates;
+  onCoordinatesChange?: (coordinates: Coordinates) => void;
+  coordinates?: Coordinates;
+  onFocus?: React.FocusEventHandler;
+  onBlur?: React.FocusEventHandler;
+  zIndex?: number;
 }
 
 const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
@@ -27,12 +30,17 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
     children,
     onClose,
     title,
-    defaultCoordinates = {
-      x: 200,
-      y: 200,
-    },
+    onCoordinatesChange,
+    onBlur,
+    onFocus,
+    zIndex = INITIAL_Z_INDEX,
+    coordinates = INITIAL_COORDINATES,
   } = props;
-  const [{ x, y }, setCoordinates] = useState<Coordinates>(defaultCoordinates);
+  const [{ x, y }, setCoordinates] = useState<Coordinates>(coordinates);
+
+  useEffect(() => {
+    if (coordinates.x !== x || coordinates.y !== y) setCoordinates(coordinates);
+  }, [coordinates.x, coordinates.y]);
 
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -49,14 +57,26 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
       sensors={sensors}
       onDragEnd={({ delta }) => {
         setCoordinates(({ x, y }) => {
-          return {
+          const newCoordinates = {
             x: x + delta.x,
             y: y + delta.y,
           };
+          onCoordinatesChange?.(newCoordinates);
+          return newCoordinates;
         });
       }}
     >
-      <Container x={x} y={y} onClose={onClose} style={style} className={className} title={title}>
+      <Container
+        x={x}
+        y={y}
+        zIndex={zIndex}
+        onClose={onClose}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        style={style}
+        className={className}
+        title={title}
+      >
         {children}
       </Container>
     </DndContext>

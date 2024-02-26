@@ -1,9 +1,17 @@
+import { Coordinates } from '@dnd-kit/utilities';
 import { PrimaryColors } from '@lobehub/ui';
 
 export type BackgroundEffect = 'sakura' | 'snow' | 'star' | 'none';
 
 export interface Panel {
+  /**
+   * 是否打开
+   */
   open: boolean;
+  /**
+   * 坐标
+   */
+  coordinates: Coordinates;
 }
 
 export interface PanelConfig {

@@ -1,32 +1,43 @@
-import { Config, PanelConfig } from '@/types/config';
+import { INITIAL_COORDINATES } from '@/constants/common';
+import { Config, PanelConfig, PanelKey } from '@/types/config';
 
 export interface ConfigState {
   config: Config;
   panel: PanelConfig;
+  focusList: PanelKey[];
 }
 
 const initialState: ConfigState = {
+  focusList: [],
   panel: {
     agent: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
     role: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
     dance: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
     live: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
+    // 默认打开聊天窗口
     chat: {
-      open: false,
+      open: true,
+      coordinates: INITIAL_COORDINATES,
     },
     market: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
     config: {
       open: false,
+      coordinates: INITIAL_COORDINATES,
     },
   },
 

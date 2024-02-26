@@ -12,6 +12,9 @@ export interface ConfigAction {
   setPanel: (panel: PanelKey, config: Partial<Panel>) => void;
   setConfig: (config: Partial<Config>) => void;
   setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
+  focusPanel: (key: PanelKey) => void;
+  openPanel: (key: PanelKey) => void;
+  closePanel: (key: PanelKey) => void;
 }
 
 export interface ConfigStore extends ConfigState, ConfigAction {}
@@ -23,6 +26,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     const nextSetting = produce(prevSetting, (draftState) => {
       merge(draftState, config);
     });
+
     if (isEqual(prevSetting, nextSetting)) return;
     set((state) => ({
       panel: {
@@ -30,6 +34,25 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
         [panel]: nextSetting,
       },
     }));
+  },
+
+  openPanel: (key: PanelKey) => {
+    const { setPanel, focusPanel } = get();
+    setPanel(key, { open: true });
+    focusPanel(key);
+  },
+
+  closePanel: (key: PanelKey) => {
+    const { setPanel, focusList } = get();
+    setPanel(key, { open: false });
+    const nextSetting = focusList.filter((item) => item !== key);
+    set({ focusList: nextSetting });
+  },
+
+  focusPanel: (key: PanelKey) => {
+    const { focusList } = get();
+    let nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
+    set({ focusList: nextSetting });
   },
 
   setConfig: (config) => {

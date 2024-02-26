@@ -9,3 +9,10 @@ export const VIDOL_THEME_PRIMARY_COLOR = 'VIDOL_THEME_PRIMARY_COLOR';
 export const COOKIE_CACHE_DAYS = 30;
 
 export const LOADING_FLAG = '...';
+
+// 默认坐标
+export const INITIAL_COORDINATES = { x: 360, y: 360 };
+
+// 默认 zIndex
+export const INITIAL_Z_INDEX = 10;
+export const FOCUS_Z_INDEX = 100;

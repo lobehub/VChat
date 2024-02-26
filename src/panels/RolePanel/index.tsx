@@ -1,7 +1,6 @@
 'use client';
 
-import Panel from '@/components/Panel';
-import { useConfigStore } from '@/store/config';
+import PanelContainer from '@/panels/PanelContainer';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
 import Info from './Info';
@@ -19,19 +18,9 @@ const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [tab, setTab] = useState('info');
-  const setPanel = useConfigStore((s) => s.setPanel);
 
   return (
-    <Panel
-      style={style}
-      className={className}
-      onClose={() => setPanel('role', { open: false })}
-      defaultCoordinates={{
-        x: 320,
-        y: 250,
-      }}
-      title="编辑角色"
-    >
+    <PanelContainer style={style} className={className} panelKey="role" title="编辑角色">
       <div
         style={{
           display: 'flex',
@@ -74,7 +63,7 @@ const RolePanel = (props: RolePanelProps) => {
           {tab === 'touch' ? <Touch /> : null}
         </div>
       </div>
-    </Panel>
+    </PanelContainer>
   );
 };
 

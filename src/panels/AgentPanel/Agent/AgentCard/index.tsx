@@ -29,7 +29,7 @@ const Header = () => {
     s.activateAgent,
     s.deactivateAgent,
   ]);
-  const setPanel = useConfigStore((s) => s.setPanel);
+  const openPanel = useConfigStore((s) => s.openPanel);
   const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
@@ -76,7 +76,7 @@ const Header = () => {
               if (!currentAgent) return;
               switchSession(currentAgent.agentId);
               setIsPlaying(false);
-              setPanel('chat', { open: true });
+              openPanel('chat');
             }}
             type={'primary'}
           >
@@ -84,7 +84,7 @@ const Header = () => {
           </Button>,
           <Button
             onClick={() => {
-              setPanel('role', { open: true });
+              openPanel('role');
             }}
             key="edit"
           >
