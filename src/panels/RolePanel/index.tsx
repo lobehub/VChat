@@ -1,8 +1,6 @@
 'use client';
 
-import Panel from '@/components/Panel';
-import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
-import { useConfigStore } from '@/store/config';
+import PanelContainer from '@/panels/PanelContainer';
 import { TabsNav } from '@lobehub/ui';
 import { useState } from 'react';
 import Info from './Info';
@@ -20,20 +18,9 @@ const RolePanel = (props: RolePanelProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [tab, setTab] = useState('info');
-  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
 
   return (
-    <Panel
-      style={style}
-      className={className}
-      zIndex={panel.role.zIndex}
-      onFocus={() => setPanel('role', { zIndex: FOCUS_Z_INDEX })}
-      onBlur={() => setPanel('role', { zIndex: INITIAL_Z_INDEX })}
-      coordinates={panel.role.coordinates}
-      onCoordinatesChange={(coordinates) => setPanel('role', { coordinates })}
-      onClose={() => setPanel('role', { open: false })}
-      title="编辑角色"
-    >
+    <PanelContainer style={style} className={className} panelKey="role" title="编辑角色">
       <div
         style={{
           display: 'flex',
@@ -76,7 +63,7 @@ const RolePanel = (props: RolePanelProps) => {
           {tab === 'touch' ? <Touch /> : null}
         </div>
       </div>
-    </Panel>
+    </PanelContainer>
   );
 };
 
