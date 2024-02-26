@@ -81,7 +81,7 @@ const apps = [
 ];
 
 const Apps = () => {
-  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
+  const [panel, openPanel] = useConfigStore((s) => [s.panel, s.openPanel]);
   const { styles } = useStyles();
 
   return (
@@ -97,7 +97,7 @@ const Apps = () => {
               name={app.label}
               onClick={() => {
                 if (app.component) {
-                  setPanel(app.key as any, { open: true });
+                  openPanel(app.key as PanelKey);
                 } else if (app.link) {
                   window.open(app.link);
                 }

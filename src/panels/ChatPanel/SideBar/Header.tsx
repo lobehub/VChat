@@ -13,7 +13,7 @@ interface HeaderProps {
 const Header = memo((props: HeaderProps) => {
   const { value, onChange } = props;
   const { styles } = useStyles();
-  const setPanel = useConfigStore((s) => s.setPanel);
+  const openPanel = useConfigStore((s) => s.openPanel);
 
   return (
     <div className={styles.header}>
@@ -27,11 +27,7 @@ const Header = memo((props: HeaderProps) => {
         }}
       />
       {/* @ts-ignore */}
-      <ActionIcon
-        icon={Plus}
-        onClick={() => setPanel('agent', { open: true })}
-        title={'找人聊天'}
-      />
+      <ActionIcon icon={Plus} onClick={() => openPanel('agent')} title={'找人聊天'} />
     </div>
   );
 });

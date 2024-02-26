@@ -1,8 +1,7 @@
 'use client';
 
 import Panel from '@/components/Panel';
-import { FOCUS_Z_INDEX, INITIAL_Z_INDEX } from '@/constants/common';
-import { useConfigStore } from '@/store/config';
+import { configSelectors, useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
 import { PropsWithChildren } from 'react';
 
@@ -15,18 +14,23 @@ interface PanelContainerProps {
 
 const PanelContainer = (props: PropsWithChildren<PanelContainerProps>) => {
   const { style, className, panelKey, title, children } = props;
-  const [panel, setPanel] = useConfigStore((s) => [s.panel, s.setPanel]);
+  const [panel, setPanel, focusPanel, closePanel] = useConfigStore((s) => [
+    s.panel,
+    s.setPanel,
+    s.focusPanel,
+    s.closePanel,
+  ]);
+  const zIndex = useConfigStore((s) => configSelectors.getPanelZIndex(s, panelKey));
 
   return (
     <Panel
       style={style}
       className={className}
-      zIndex={panel[panelKey].zIndex}
-      onFocus={() => setPanel(panelKey, { zIndex: FOCUS_Z_INDEX })}
-      onBlur={() => setPanel(panelKey, { zIndex: INITIAL_Z_INDEX })}
+      zIndex={zIndex}
+      onFocus={() => focusPanel(panelKey)}
       coordinates={panel[panelKey].coordinates}
       onCoordinatesChange={(coordinates) => setPanel(panelKey, { coordinates })}
-      onClose={() => setPanel(panelKey, { open: false })}
+      onClose={() => closePanel(panelKey)}
       title={title}
     >
       {children}
