@@ -2,7 +2,6 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   canvas: css`
-    z-index: 10;
     pointer-events: none;
     position: absolute;
     top: -250px;
