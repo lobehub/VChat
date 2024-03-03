@@ -109,12 +109,13 @@ const Apps = () => {
         .filter((app) => app.component)
         .map((app) => {
           const open = panel[app.key as PanelKey].open;
+          const min = panel[app.key as PanelKey].min;
           const component = app.component;
-          return (
-            <div key={app.key} style={{ display: open ? 'flex' : 'none' }}>
+          return open ? (
+            <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
               {component}
             </div>
-          );
+          ) : null;
         })}
     </div>
   );
