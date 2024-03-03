@@ -18,6 +18,7 @@ interface ContainerProps {
   onFocus?: React.FocusEventHandler;
   onBlur?: React.FocusEventHandler;
   onClose: () => void;
+  onMinify: () => void;
 }
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
@@ -26,6 +27,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     className,
     children,
     onClose,
+    onMinify,
     x = INITIAL_COORDINATES.x,
     y = INITIAL_COORDINATES.y,
     title,
@@ -60,6 +62,10 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     const handleClose = () => {
       if (onClose) onClose();
     };
+
+    const handleMinify = () => {
+      if (onMinify) onMinify();
+    };
     return [
       <Tooltip title="关闭" key="close">
         <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
@@ -68,7 +74,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
         <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
       </Tooltip>,
       <Tooltip title="最小化" key="min">
-        <div className={classNames(styles.button, styles.min)} onClick={handleClose} />
+        <div className={classNames(styles.button, styles.min)} onClick={handleMinify} />
       </Tooltip>,
     ];
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);

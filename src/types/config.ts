@@ -9,6 +9,10 @@ export interface Panel {
    */
   open: boolean;
   /**
+   * 最小化
+   */
+  min: boolean;
+  /**
    * 坐标
    */
   coordinates: Coordinates;

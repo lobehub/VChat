@@ -2,7 +2,7 @@ import AgentMeta from '@/components/AgentMeta';
 import { useConfigStore } from '@/store/config';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { ActionIcon } from '@lobehub/ui';
-import { Video, VideoOff } from 'lucide-react';
+import { Video } from 'lucide-react';
 import { useStyles } from './style';
 
 const Header = () => {
@@ -17,15 +17,10 @@ const Header = () => {
     <div className={styles.header}>
       <AgentMeta meta={currentAgent?.meta} />
       <ActionIcon
-        icon={panel.live.open ? VideoOff : Video}
+        icon={Video}
         onClick={() => {
-          if (panel.live.open) {
-            setLiveId(undefined);
-            openPanel('live');
-          } else {
-            setLiveId(currentAgent?.agentId);
-            openPanel('live');
-          }
+          setLiveId(currentAgent?.agentId);
+          openPanel('live');
         }}
         title={panel.live.open ? '关闭视频通话' : '发起视频通话'}
       />

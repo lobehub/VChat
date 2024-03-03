@@ -13,13 +13,20 @@ const { Meta } = List.Item;
 interface PlayListProps {
   open: boolean;
   onClose: () => void;
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
 }
 
 const PlayList = (props: PlayListProps) => {
-  const { open = false, onClose } = props;
+  const { open = false, onClose, isPlaying = false, setIsPlaying } = props;
   const { token } = theme.useToken();
-  const { isPlaying, playlist, playItem, removePlayItem, setPlayList, setIsPlaying, currentPlay } =
-    useDanceStore();
+  const [playlist, playItem, removePlayItem, setPlayList, currentPlay] = useDanceStore((s) => [
+    s.playlist,
+    s.playItem,
+    s.removePlayItem,
+    s.setPlayList,
+    s.currentPlay,
+  ]);
 
   return (
     <Drawer

@@ -1,5 +1,6 @@
 import { useConfigStore } from '@/store/config';
 import { useDanceStore } from '@/store/dance';
+import { useMarketStore } from '@/store/market';
 import { GradientButton } from '@lobehub/ui';
 import { Card, List } from 'antd';
 import { Flexbox } from 'react-layout-kit';
@@ -9,6 +10,7 @@ const { Meta } = Card;
 const DanceList = () => {
   const [danceList, activateDance] = useDanceStore((s) => [s.danceList, s.activateDance]);
   const [openPanel] = useConfigStore((s) => [s.openPanel]);
+  const [setTab] = useMarketStore((s) => [s.setTab]);
 
   return (
     <>
@@ -17,6 +19,7 @@ const DanceList = () => {
         <GradientButton
           onClick={() => {
             openPanel('market');
+            setTab('dance');
           }}
           glow
           size="middle"

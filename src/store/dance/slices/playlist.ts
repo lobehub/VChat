@@ -6,12 +6,10 @@ import { StateCreator } from 'zustand/vanilla';
 export interface PlayListStore {
   currentPlay: Dance | null;
   playlist: Dance[];
-  isPlaying: boolean;
   setPlayList: (playlist: Dance[]) => void;
   playItem: (dance: Dance) => void;
   addAndPlayItem: (dance: Dance) => void;
   removePlayItem: (dance: Dance) => void;
-  setIsPlaying: (play: boolean) => void;
   prevDance: () => void;
   nextDance: () => void;
 }
@@ -31,7 +29,7 @@ export const createPlayListStore: StateCreator<
       set({ playlist: playlist });
     },
     playItem: (dance) => {
-      set({ currentPlay: dance, isPlaying: true });
+      set({ currentPlay: dance });
     },
     addAndPlayItem: (dance) => {
       const { playlist, playItem } = get();
@@ -41,9 +39,6 @@ export const createPlayListStore: StateCreator<
         playlist.unshift(dance);
       }
       playItem(dance);
-    },
-    setIsPlaying: (play) => {
-      set({ isPlaying: play });
     },
     removePlayItem: (dance) => {
       const { playlist } = get();

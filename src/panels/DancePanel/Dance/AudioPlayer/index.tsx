@@ -20,12 +20,12 @@ import { useStyles } from './style';
 interface PlayerProps {
   style?: React.CSSProperties;
   className?: string;
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
 }
 
 const danceSelectors = (s: DanceStore) => {
   return {
-    isPlaying: s.isPlaying,
-    setIsPlaying: s.setIsPlaying,
     prevDance: s.prevDance,
     nextDance: s.nextDance,
     currentPlay: s.currentPlay,
@@ -33,15 +33,14 @@ const danceSelectors = (s: DanceStore) => {
 };
 
 function Player(props: PlayerProps) {
-  const { style, className } = props;
+  const { style, className, isPlaying, setIsPlaying } = props;
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
   const [open, setOpen] = useState(false);
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [currrentProgress, setCurrrentProgress] = useState(0);
-  const { isPlaying, setIsPlaying, prevDance, nextDance, currentPlay } =
-    useDanceStore(danceSelectors);
+  const [currentProgress, setCurrentProgress] = useState(0);
+  const { prevDance, nextDance, currentPlay } = useDanceStore(danceSelectors);
   const viewer = useViewerStore((s) => s.viewer);
 
   const { styles } = useStyles();
@@ -79,7 +78,12 @@ function Player(props: PlayerProps) {
 
   return (
     <div className={classNames(styles.container, className)} style={style}>
-      <PlayList open={open} onClose={() => setOpen(false)} />
+      <PlayList
+        open={open}
+        onClose={() => setOpen(false)}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
       <audio
         src={currentPlay?.audio}
         ref={ref}
@@ -93,7 +97,7 @@ function Player(props: PlayerProps) {
           nextDance();
         }}
         onTimeUpdate={(e) => {
-          setCurrrentProgress(e.currentTarget.currentTime);
+          setCurrentProgress(e.currentTarget.currentTime);
         }}
       />
       <div className={styles.player}>
@@ -150,11 +154,11 @@ function Player(props: PlayerProps) {
           </div>
 
           <Flexbox horizontal align="center">
-            <span style={{ marginRight: 8 }}>{formatDurationDisplay(currrentProgress)}</span>
+            <span style={{ marginRight: 8 }}>{formatDurationDisplay(currentProgress)}</span>
             <Slider
               min={0}
               max={duration}
-              value={currrentProgress}
+              value={currentProgress}
               tooltip={{ open: false }}
               style={{ width: '100%' }}
             />

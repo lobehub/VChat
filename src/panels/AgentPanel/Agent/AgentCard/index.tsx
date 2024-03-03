@@ -2,7 +2,6 @@ import AgentInfo from '@/components/AgentInfo';
 import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
-import { useDanceStore } from '@/store/dance';
 import { useSessionStore } from '@/store/session';
 import { DraggablePanel } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
@@ -30,7 +29,6 @@ const Header = () => {
     s.deactivateAgent,
   ]);
   const openPanel = useConfigStore((s) => s.openPanel);
-  const setIsPlaying = useDanceStore((s) => s.setIsPlaying);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
@@ -75,7 +73,6 @@ const Header = () => {
             onClick={() => {
               if (!currentAgent) return;
               switchSession(currentAgent.agentId);
-              setIsPlaying(false);
               openPanel('chat');
             }}
             type={'primary'}
