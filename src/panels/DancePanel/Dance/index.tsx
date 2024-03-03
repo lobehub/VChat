@@ -1,7 +1,7 @@
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { Center } from 'react-layout-kit';
 import AudioPlayer from './AudioPlayer';
 import DanceCard from './DanceCard';
@@ -42,6 +42,7 @@ interface DanceProps {
 const Dance = (props: DanceProps) => {
   const { style, className } = props;
   const { theme, styles } = useStyles();
+  const [isPlaying, setIsPlaying] = useState(false);
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
@@ -56,8 +57,10 @@ const Dance = (props: DanceProps) => {
         </Center>
         <DanceList />
       </div>
-      <DanceCard />
+      <DanceCard setIsPlaying={setIsPlaying} />
       <AudioPlayer
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
         style={{
           position: 'absolute',
           bottom: 0,

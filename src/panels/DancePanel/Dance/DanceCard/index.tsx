@@ -18,8 +18,13 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
+interface SideBarProps {
+  setIsPlaying: (isPlaying: boolean) => void;
+}
+
 // eslint-disable-next-line react/display-name
-const SideBar = memo(() => {
+const SideBar = memo((props: SideBarProps) => {
+  const { setIsPlaying } = props;
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
   const [showDanceSidebar, activateDance, deactivateDance, addAndPlayItem] = useDanceStore((s) => [
@@ -70,7 +75,10 @@ const SideBar = memo(() => {
           <Button
             key="play"
             onClick={() => {
-              if (currentDance) addAndPlayItem(currentDance);
+              if (currentDance) {
+                addAndPlayItem(currentDance);
+                setIsPlaying(true);
+              }
             }}
             type={'primary'}
           >

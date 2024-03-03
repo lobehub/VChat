@@ -1,5 +1,6 @@
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
+import { useMarketStore } from '@/store/market';
 import { Agent } from '@/types/agent';
 import { GradientButton } from '@lobehub/ui';
 import { Card, List, Typography } from 'antd';
@@ -22,6 +23,7 @@ const AgentList = (props: AgentListProps) => {
     agentListSelectors.showSideBar(s),
   ]);
   const openPanel = useConfigStore((s) => s.openPanel);
+  const [setTab] = useMarketStore((s) => [s.setTab]);
 
   return (
     <>
@@ -30,6 +32,7 @@ const AgentList = (props: AgentListProps) => {
         <GradientButton
           onClick={() => {
             openPanel('market');
+            setTab('agent');
           }}
           glow
           size="middle"
