@@ -168,17 +168,19 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     const previousChats = sessionSelectors.previousChats(get(), id);
 
+    const assistantId = nanoid();
+
     // 添加机器人消息占位
     dispatchMessage({
-      type: 'UPDATE_MESSAGE',
+      type: 'ADD_MESSAGE',
       payload: {
-        id: id,
-        key: 'content',
-        value: '...', // 占位符
+        role: 'assistant',
+        id: assistantId,
+        content: LOADING_FLAG, // 占位符
       },
     });
 
-    fetchAIResponse(previousChats, id);
+    fetchAIResponse(previousChats, assistantId);
   },
   dispatchMessage: (payload) => {
     const { updateSessionMessages } = get();
