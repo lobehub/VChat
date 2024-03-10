@@ -25,6 +25,7 @@ const ChatList = () => {
       handleSpeakAi(content);
     } else if (key === 'regenerate') {
       regenerateMessage(id);
+      deleteMessage(id);
     } else if (key === 'del') {
       deleteMessage(id);
     }
