@@ -3,7 +3,7 @@ import { BackBottom } from '@lobehub/ui';
 import classNames from 'classnames';
 import { memo, useRef } from 'react';
 import ChatHeader from './ChatHeader';
-import ChatInput from './ChatInput/index';
+import Index from './ChatInput';
 import ChatList from './ChatList';
 import { useStyles } from './style';
 
@@ -27,7 +27,7 @@ const ChatBot = (props: ChatBotProps) => {
         </div>
         <BackBottom target={ref} text={'返回底部'} />
       </div>
-      <ChatInput />
+      <Index />
     </div>
   );
 };

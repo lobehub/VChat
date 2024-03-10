@@ -15,3 +15,8 @@ export const INITIAL_COORDINATES = { x: 360, y: 360 };
 
 // 默认 zIndex
 export const INITIAL_Z_INDEX = 10;
+
+export const CHAT_TEXTAREA_MAX_HEIGHT = 570;
+export const CHAT_TEXTAREA_HEIGHT = 200;
+
+export const HEADER_HEIGHT = 64;
