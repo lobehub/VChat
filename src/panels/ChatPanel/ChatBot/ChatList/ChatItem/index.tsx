@@ -35,7 +35,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
     return [config.displayMode];
   });
 
-  const meta = useSessionStore(agentSelectors.currentAgentMeta, isEqual);
+  const meta = useSessionStore((s) => agentSelectors.currentAgent(s), isEqual);
   const item = useChatStore((s) => {
     const chats = chatSelectors.currentChatsWithGuideMessage(meta)(s);
 
@@ -113,9 +113,9 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           <RenderMessage data={item} editableContent={editableContent} />
         )}
         text={{
-          cancel: t('cancel'),
-          confirm: t('ok'),
-          edit: t('edit'),
+          cancel: '取消',
+          confirm: '确定',
+          edit: '编辑',
         }}
         time={item.updatedAt || item.createdAt}
         type={type === 'chat' ? 'block' : 'pure'}
