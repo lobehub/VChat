@@ -1,6 +1,10 @@
-import { ChatListProps as LobeChatListProps } from '@lobehub/ui/es/ChatList';
+import { ChatMessage } from '@lobehub/ui';
 import { DefaultMessage } from './Default';
 
-export const renderMessages: LobeChatListProps['renderMessages'] = {
+export type RenderMessage = React.FC<ChatMessage & { editableContent: React.ReactNode }>;
+
+export const renderMessages: Record<string, RenderMessage> = {
   default: DefaultMessage,
+  user: DefaultMessage,
+  assistant: DefaultMessage,
 };

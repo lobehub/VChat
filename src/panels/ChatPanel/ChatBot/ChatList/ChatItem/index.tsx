@@ -1,7 +1,5 @@
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
 import { useSessionStore } from '@/store/session';
-import { agentSelectors } from '@/store/session/selectors';
+import { sessionSelectors } from '@/store/session/selectors';
 import { ChatMessage } from '@/types/chat';
 import { AlertProps, ChatItem } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
@@ -30,25 +28,18 @@ export interface ChatListItemProps {
 const Item = memo<ChatListItemProps>(({ index, id }) => {
   const { styles } = useStyles();
   const [editing, setEditing] = useState(false);
-  const [type = 'chat'] = useSessionStore((s) => {
-    const config = agentSelectors.currentAgentConfig(s);
-    return [config.displayMode];
-  });
 
-  const meta = useSessionStore((s) => agentSelectors.currentAgent(s), isEqual);
-  const item = useChatStore((s) => {
-    const chats = chatSelectors.currentChatsWithGuideMessage(meta)(s);
+  const item = useSessionStore((s) => {
+    const chats = sessionSelectors.currentChats(s);
 
     if (index >= chats.length) return;
 
-    return chatSelectors.currentChatsWithGuideMessage(meta)(s)[index];
+    return sessionSelectors.currentChats(s)[index];
   }, isEqual);
 
-  const historyLength = useChatStore((s) => chatSelectors.currentChats(s).length);
-
-  const [loading, updateMessageContent] = useChatStore((s) => [
+  const [loading, updateMessageContent] = useSessionStore((s) => [
     s.chatLoadingId === id,
-    s.modifyMessageContent,
+    s.updateMessage,
   ]);
 
   const onAvatarsClick = useAvatarsClick();
@@ -83,7 +74,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
 
     const alertConfig = getErrorAlertConfig(messageError.type);
 
-    return { message: t(`response.${messageError.type}` as any, { ns: 'error' }), ...alertConfig };
+    return { message: messageError.message, ...alertConfig };
   }, [item?.error]);
 
   return (
@@ -107,7 +98,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           }
         }}
         onEditingChange={setEditing}
-        placement={type === 'chat' ? (item.role === 'user' ? 'right' : 'left') : 'left'}
+        placement={item.role === 'user' ? 'right' : 'left'}
         primary={item.role === 'user'}
         renderMessage={(editableContent) => (
           <RenderMessage data={item} editableContent={editableContent} />
@@ -118,7 +109,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           edit: '编辑',
         }}
         time={item.updatedAt || item.createdAt}
-        type={type === 'chat' ? 'block' : 'pure'}
+        type={'pure'}
       />
     )
   );

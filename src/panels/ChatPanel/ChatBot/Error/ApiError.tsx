@@ -1,7 +1,6 @@
-import { Highlighter, RenderErrorMessage } from '@lobehub/ui';
+import { ChatMessage } from '@/types/chat';
 import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
-
+import ErrorJsonViewer from './ErrorJsonViewer';
 import OpenAPIKey from './OpenAPIKey';
 
 interface OpenAIError {
@@ -15,20 +14,14 @@ interface OpenAIErrorResponse {
   error: OpenAIError;
 }
 
-const OpenAiBizError: RenderErrorMessage['Render'] = memo(({ error, id, ...props }) => {
+const OpenAiBizError = memo<ChatMessage>(({ error, id }) => {
   const errorBody: OpenAIErrorResponse = (error as any)?.body;
 
   const errorCode = errorBody.error?.code;
 
-  if (errorCode === 'invalid_api_key') return <OpenAPIKey error={error} id={id} {...props} />;
+  if (errorCode === 'invalid_api_key') return <OpenAPIKey id={id} />;
 
-  return (
-    <Flexbox style={{ maxWidth: 400 }}>
-      <Highlighter copyButtonSize={'small'} language={'json'}>
-        {JSON.stringify(errorBody, null, 2)}
-      </Highlighter>
-    </Flexbox>
-  );
+  return <ErrorJsonViewer error={error} id={id} />;
 });
 
 export default OpenAiBizError;
