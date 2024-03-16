@@ -1,5 +1,6 @@
-import { ActionIconGroup, RenderAction, useChatListActionsBar } from '@lobehub/ui';
+import { ActionIconGroup, useChatListActionsBar } from '@lobehub/ui';
 import { memo } from 'react';
+import { RenderAction } from '../../../type';
 
 const UserActionsBar: RenderAction = ({ onActionClick }) => {
   const { copy, divider, del, edit } = useChatListActionsBar({

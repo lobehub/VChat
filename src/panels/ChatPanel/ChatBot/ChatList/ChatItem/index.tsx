@@ -5,9 +5,8 @@ import { AlertProps, ChatItem } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import isEqual from 'fast-deep-equal';
 import { ReactNode, memo, useCallback, useMemo, useState } from 'react';
-
-import ErrorMessageExtra, { getErrorAlertConfig } from '../../Error';
-import { renderMessages } from '../../Messages';
+import ErrorMessageExtra, { getErrorAlertConfig } from '../Error';
+import { renderMessages } from '../Messages';
 import ActionsBar from './ActionsBar';
 
 const useStyles = createStyles(({ css, prefixCls }) => ({

@@ -1,11 +1,10 @@
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
+import { sessionSelectors, useSessionStore } from '@/store/session';
 import isEqual from 'fast-deep-equal';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
-import AutoScroll from '../AutoScroll';
-import Item from '../ChatItem';
+import AutoScroll from './AutoScroll';
+import Item from './ChatItem';
 
 const itemContent = (index: number, id: string) => {
   return index === 0 ? <div style={{ height: 24 + 64 }} /> : <Item id={id} index={index - 1} />;
@@ -18,14 +17,8 @@ const VirtualizedList = memo<VirtualizedListProps>(({ mobile }) => {
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   const [atBottom, setAtBottom] = useState(true);
 
-  const data = useChatStore(
-    (s) => ['empty', ...chatSelectors.currentChatIDsWithGuideMessage(s)],
-    isEqual,
-  );
-  const [id, chatLoading] = useChatStore((s) => [
-    chatSelectors.currentChatKey(s),
-    chatSelectors.currentChatLoadingState(s),
-  ]);
+  const data = useSessionStore((s) => ['empty', ...sessionSelectors.currentChatIDs(s)], isEqual);
+  const [id, chatLoading] = useSessionStore((s) => [s.activeId, !!s.chatLoadingId]);
 
   useEffect(() => {
     if (virtuosoRef.current) {

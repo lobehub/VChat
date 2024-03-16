@@ -1,7 +1,8 @@
-import { ActionIconGroup, RenderAction, useChatListActionsBar } from '@lobehub/ui';
+import { ActionIconGroup, useChatListActionsBar } from '@lobehub/ui';
 import { ActionIconGroupItems } from '@lobehub/ui/es/ActionIconGroup';
 import { Play } from 'lucide-react';
 import { memo } from 'react';
+import { RenderAction } from '../../../type';
 
 const AssistantActionsBar: RenderAction = ({ onActionClick }) => {
   const { copy, regenerate, divider, del, edit } = useChatListActionsBar({

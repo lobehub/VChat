@@ -1,4 +1,4 @@
-import ScrollArcher from '@/panels/ChatPanel/ChatBot/ScrollArcher';
+import ScrollArcher from '@/panels/ChatPanel/ChatBot/ChatList/ScrollArcher';
 import { BackBottom } from '@lobehub/ui';
 import classNames from 'classnames';
 import { memo, useRef } from 'react';

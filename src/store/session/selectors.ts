@@ -18,6 +18,12 @@ const sessionListIds = (s: SessionStore): string[] => {
 
 export const DEFAULT_USER_AVATAR = '😀';
 
+const currentChatIDs = (s: SessionStore): string[] => {
+  const session = currentSession(s);
+  if (!session) return [];
+  return session.messages.map((item) => item.id);
+};
+
 const currentChats = (s: SessionStore): ChatMessage[] => {
   const session = currentSession(s);
   const agent = currentAgent(s);
@@ -81,6 +87,7 @@ const currentLiveAgent = (s: SessionStore): Agent | undefined => {
 export const sessionSelectors = {
   currentLiveAgent,
   currentSession,
+  currentChatIDs,
   sessionListIds,
   currentChats,
   currentAgent,
