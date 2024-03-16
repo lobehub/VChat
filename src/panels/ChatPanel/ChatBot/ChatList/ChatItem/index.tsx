@@ -7,8 +7,7 @@ import isEqual from 'fast-deep-equal';
 import { ReactNode, memo, useCallback, useMemo, useState } from 'react';
 
 import ErrorMessageExtra, { getErrorAlertConfig } from '../../Error';
-import { renderMessagesExtra } from '../../Extras';
-import { renderMessages, useAvatarsClick } from '../../Messages';
+import { renderMessages } from '../../Messages';
 import ActionsBar from './ActionsBar';
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
@@ -42,8 +41,6 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
     s.updateMessage,
   ]);
 
-  const onAvatarsClick = useAvatarsClick();
-
   const RenderMessage = useCallback(
     ({ editableContent, data }: { data: ChatMessage; editableContent: ReactNode }) => {
       if (!item?.role) return;
@@ -52,18 +49,6 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
       if (!RenderFunction) return;
 
       return <RenderFunction {...data} editableContent={editableContent} />;
-    },
-    [item?.role],
-  );
-
-  const MessageExtra = useCallback(
-    ({ data }: { data: ChatMessage }) => {
-      if (!renderMessagesExtra || !item?.role) return;
-      let RenderFunction;
-      if (renderMessagesExtra?.[item.role]) RenderFunction = renderMessagesExtra[item.role];
-
-      if (!RenderFunction) return;
-      return <RenderFunction {...data} />;
     },
     [item?.role],
   );
@@ -88,8 +73,6 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
         errorMessage={<ErrorMessageExtra data={item} />}
         loading={loading}
         message={item.content}
-        messageExtra={<MessageExtra data={item} />}
-        onAvatarClick={onAvatarsClick?.(item.role)}
         onChange={(value) => updateMessageContent(item.id, value)}
         onDoubleClick={(e) => {
           if (item.id === 'default' || item.error) return;
