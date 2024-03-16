@@ -1,4 +1,4 @@
-import { ChatMessage } from '@lobehub/ui';
+import { ChatMessage } from '@/types/chat';
 import { DefaultMessage } from './Default';
 
 export type RenderMessage = React.FC<ChatMessage & { editableContent: React.ReactNode }>;

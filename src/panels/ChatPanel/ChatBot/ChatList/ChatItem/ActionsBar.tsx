@@ -1,16 +1,10 @@
-import { ActionEvent, ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
+import { useChatListActionsBar } from '@/hooks/useChatListActionsBar';
+import { sessionSelectors, useSessionStore } from '@/store/session';
+import { ActionEvent, ActionIconGroup } from '@lobehub/ui';
 import isEqual from 'fast-deep-equal';
 import { memo, useCallback } from 'react';
-
-import { useChatStore } from '@/store/chat';
-import { chatSelectors } from '@/store/chat/selectors';
-import { useSessionStore } from '@/store/session';
-import { agentSelectors } from '@/store/session/selectors';
-
-import { useChatListActionsBar } from '@/hooks/useChatListActionsBar';
 import { renderActions, useActionsClick } from '../../Actions';
-
-export type ActionsBarProps = ActionIconGroupProps;
+import { ActionsBarProps } from '../../type';
 
 const ActionsBar = memo<ActionsBarProps>((props) => {
   const { regenerate, edit, copy, divider, del } = useChatListActionsBar();
@@ -29,12 +23,7 @@ interface ActionsProps {
   setEditing: (edit: boolean) => void;
 }
 const Actions = memo<ActionsProps>(({ index, setEditing }) => {
-  const meta = useSessionStore(agentSelectors.currentAgentMeta, isEqual);
-
-  const item = useChatStore(
-    (s) => chatSelectors.currentChatsWithGuideMessage(meta)(s)[index],
-    isEqual,
-  );
+  const item = useSessionStore((s) => sessionSelectors.currentChats(s)[index], isEqual);
   const onActionsClick = useActionsClick();
 
   const handleActionClick = useCallback(

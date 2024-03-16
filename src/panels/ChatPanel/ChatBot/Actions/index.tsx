@@ -1,12 +1,14 @@
 import { handleSpeakAi } from '@/services/chat';
 import { useSessionStore } from '@/store/session';
-import { ChatListProps, OnActionsClick, copyToClipboard } from '@lobehub/ui';
+import { LLMRoleType } from '@/types/llm';
+import { copyToClipboard } from '@lobehub/ui';
 import { App } from 'antd';
 import { useCallback } from 'react';
+import { OnActionsClick, RenderAction } from '../type';
 import AssistantActionsBar from './Assistant';
 import UserActionsBar from './User';
 
-export const renderActions: ChatListProps['renderActions'] = {
+export const renderActions: Record<LLMRoleType, RenderAction> = {
   assistant: AssistantActionsBar,
   user: UserActionsBar,
 };
