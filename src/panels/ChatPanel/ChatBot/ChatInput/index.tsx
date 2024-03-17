@@ -1,57 +1,46 @@
-import useChatInput from '@/panels/ChatPanel/ChatBot/useChatInput';
-import { ActionIcon, ChatInputActionBar, ChatInputArea, ChatSendButton } from '@lobehub/ui';
-import { Maximize2, Minimize2 } from 'lucide-react';
-import { memo, useCallback, useMemo, useState } from 'react';
-import ActionBar from './ActionBar';
+import { DraggablePanel } from '@lobehub/ui';
+import { memo, useState } from 'react';
+import { Flexbox } from 'react-layout-kit';
 
-const INITIAL_INPUT_HEIGHT = 200;
+import { CHAT_TEXTAREA_HEIGHT, CHAT_TEXTAREA_MAX_HEIGHT, HEADER_HEIGHT } from '@/constants/common';
 
-const ChatInput = () => {
-  const { onSend, messageInput, setMessageInput, expand, setExpand } = useChatInput();
-  const [inputHeight, setInputHeight] = useState(INITIAL_INPUT_HEIGHT);
+import Footer from './Footer';
+import Head from './Header';
+import TextArea from './TextArea';
 
-  const handleSizeChange = useCallback(
-    (_: any, size: any) => {
-      if (!size) return;
-      setInputHeight(typeof size.height === 'string' ? Number.parseInt(size.height) : size.height);
-    },
-    [setInputHeight],
-  );
-
-  const bottomAddons = useMemo(() => {
-    return <ChatSendButton texts={{ send: '发送', warp: '换行' }} onSend={onSend} />;
-  }, [onSend]);
-
-  const topAddons = useMemo(() => {
-    return (
-      <ChatInputActionBar
-        leftAddons={<ActionBar />}
-        rightAddons={
-          <ActionIcon
-            icon={expand ? Minimize2 : Maximize2}
-            onClick={() => {
-              setExpand(!expand);
-            }}
-          />
-        }
-      />
-    );
-  }, [expand]);
+const Index = memo(() => {
+  const [expand, setExpand] = useState<boolean>(false);
+  const [inputHeight, setInputHeight] = useState(CHAT_TEXTAREA_HEIGHT);
 
   return (
-    <ChatInputArea
-      bottomAddons={bottomAddons}
-      topAddons={topAddons}
-      value={messageInput}
-      onInput={setMessageInput}
-      expand={expand}
-      onSizeChange={handleSizeChange}
-      setExpand={setExpand}
-      heights={{ minHeight: INITIAL_INPUT_HEIGHT, inputHeight }}
-      onSend={onSend}
-      placeholder="请输入内容开始聊天"
-    />
-  );
-};
+    <DraggablePanel
+      fullscreen={expand}
+      headerHeight={HEADER_HEIGHT}
+      maxHeight={CHAT_TEXTAREA_MAX_HEIGHT}
+      minHeight={CHAT_TEXTAREA_HEIGHT}
+      onSizeChange={(_, size) => {
+        if (!size) return;
 
-export default memo(ChatInput);
+        setInputHeight(
+          typeof size.height === 'string' ? Number.parseInt(size.height) : size.height,
+        );
+      }}
+      placement="bottom"
+      size={{ height: inputHeight, width: '100%' }}
+      style={{ zIndex: 10 }}
+    >
+      <Flexbox
+        gap={8}
+        height={'100%'}
+        padding={'12px 0 16px'}
+        style={{ minHeight: CHAT_TEXTAREA_HEIGHT, position: 'relative' }}
+      >
+        <Head expand={expand} setExpand={setExpand} />
+        <TextArea setExpand={setExpand} />
+        <Footer />
+      </Flexbox>
+    </DraggablePanel>
+  );
+});
+
+export default Index;

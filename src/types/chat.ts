@@ -51,11 +51,11 @@ export interface ChatMessage {
   /**
    * 创建时间
    */
-  createAt: number;
+  createdAt: number;
   /**
    * 更新时间
    */
-  updateAt: number;
+  updatedAt: number;
   /**
    * 额外信息
    */

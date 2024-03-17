@@ -37,8 +37,8 @@ export const messageReducer = (state: ChatMessage[], action: MessageActionType):
         draft.push({
           content,
           role,
-          createAt: Date.now(),
-          updateAt: Date.now(),
+          createdAt: Date.now(),
+          updatedAt: Date.now(),
           id,
           meta: {},
         });
@@ -51,7 +51,7 @@ export const messageReducer = (state: ChatMessage[], action: MessageActionType):
 
         // @ts-ignore
         message[key] = value;
-        message.updateAt = Date.now();
+        message.updatedAt = Date.now();
       });
     case 'DELETE_MESSAGE':
       return produce(state, (draft) => {
