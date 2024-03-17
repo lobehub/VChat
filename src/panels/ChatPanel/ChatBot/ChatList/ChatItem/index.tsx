@@ -91,7 +91,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           edit: '编辑',
         }}
         time={item.updatedAt || item.createdAt}
-        type={'pure'}
+        type={'block'}
       />
     )
   );
