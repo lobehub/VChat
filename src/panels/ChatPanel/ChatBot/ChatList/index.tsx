@@ -7,7 +7,7 @@ import AutoScroll from './AutoScroll';
 import Item from './ChatItem';
 
 const itemContent = (index: number, id: string) => {
-  return index === 0 ? <div style={{ height: 24 + 64 }} /> : <Item id={id} index={index - 1} />;
+  return index === 0 ? <div style={{ height: 24 }} /> : <Item id={id} index={index - 1} />;
 };
 
 interface VirtualizedListProps {
