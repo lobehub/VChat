@@ -6,12 +6,23 @@ import { useStyles } from './style';
 
 const Timer = () => {
   const { styles } = useStyles();
-  const [time, setTime] = useState(Date.now());
-  const [date, setDate] = useState(new Date().getFullYear());
+
+  const getTime = () => {
+    const date = new Date();
+    return date.toLocaleTimeString();
+  };
+
+  const getDate = () => {
+    const date = new Date();
+    return date.toLocaleDateString();
+  };
+
+  const [time, setTime] = useState(getTime());
+  const [date, setDate] = useState(getDate());
 
   useInterval(() => {
-    setTime(Date.now());
-    setDate(new Date().getFullYear());
+    setTime(getTime());
+    setDate(getDate());
   }, 1000);
 
   return (
