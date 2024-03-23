@@ -12,25 +12,23 @@ const Apps = () => {
 
   return (
     <div className={styles.apps}>
-      {apps
-        .filter((app) => app.show)
-        .map((app) => {
-          return (
-            <Application
-              key={app.key}
-              avatar={app.avatar}
-              icon={app.icon}
-              name={app.label}
-              onClick={() => {
-                if (app.component) {
-                  openPanel(app.key as PanelKey);
-                } else if (app.link) {
-                  window.open(app.link);
-                }
-              }}
-            />
-          );
-        })}
+      {apps.map((app) => {
+        return (
+          <Application
+            key={app.key}
+            avatar={app.avatar}
+            icon={app.icon}
+            name={app.label}
+            onClick={() => {
+              if (app.component) {
+                openPanel(app.key as PanelKey);
+              } else if (app.link) {
+                window.open(app.link);
+              }
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

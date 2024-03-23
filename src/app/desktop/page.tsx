@@ -16,7 +16,6 @@ export const apps = [
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/card-index.webp',
     key: 'agent',
     label: '角色',
-    show: true,
     component: <AgentPanel />,
   },
   {
@@ -24,7 +23,6 @@ export const apps = [
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
     key: 'dance',
     label: '舞蹈',
-    show: true,
     component: <DancePanel />,
   },
   {
@@ -32,7 +30,6 @@ export const apps = [
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/speech-balloon.webp',
     key: 'chat',
     label: '聊天',
-    show: true,
     component: <ChatPanel />,
   },
   {
@@ -40,22 +37,19 @@ export const apps = [
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/convenience-store.webp',
     key: 'market',
     label: '商店',
-    show: true,
     component: <MarketPanel />,
   },
   {
     avatar: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/gear.webp',
     key: 'config',
     label: '设置',
-    show: true,
     component: <ConfigPanel />,
   },
   {
     avatar:
-      'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/folding-hand-fan.webp',
+      'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/black-nib.webp',
     key: 'role',
-    label: '角色',
-    show: false,
+    label: '编辑',
     component: <RolePanel />,
   },
   {
@@ -63,7 +57,6 @@ export const apps = [
     key: 'github',
     label: 'Github',
     link: 'https://github.com/v-idol/vidol.chat',
-    show: true,
   },
 ];
 
