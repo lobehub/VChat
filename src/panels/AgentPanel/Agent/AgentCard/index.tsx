@@ -81,6 +81,8 @@ const Header = () => {
           </Button>,
           <Button
             onClick={() => {
+              if (!currentAgent) return;
+              switchSession(currentAgent.agentId);
               openPanel('role');
             }}
             key="edit"

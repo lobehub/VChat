@@ -7,5 +7,8 @@ export const useStyles = createStyles(({ css, token }) => ({
     grid-template-rows: repeat(auto-fill, 110px);
     grid-auto-flow: column;
     height: 100%;
+    position: absolute;
+    top: 64px;
+    left: 0;
   `,
 }));

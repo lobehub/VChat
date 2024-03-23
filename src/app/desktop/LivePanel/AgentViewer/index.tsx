@@ -45,7 +45,7 @@ function AgentViewer() {
         style={{
           position: 'absolute',
           display: 'flex',
-          left: 24,
+          right: 24,
           bottom: '50%',
         }}
         items={[
