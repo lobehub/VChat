@@ -3,7 +3,7 @@
 import Background from '@/app/desktop/Background';
 import Header from '@/app/desktop/Header';
 import LivePanel from '@/app/desktop/LivePanel';
-import Apps from './Apps';
+import Docker from './Docker';
 
 const Desktop = () => {
   return (
@@ -12,8 +12,8 @@ const Desktop = () => {
       <div style={{ height: 'calc(100vh - 64px)' }}>
         <LivePanel />
       </div>
+      <Docker />
       <Background />
-      <Apps />
     </div>
   );
 };
