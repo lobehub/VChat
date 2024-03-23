@@ -10,14 +10,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     user-select: none;
     cursor: pointer;
     &:hover {
-      background: ${token.colorBgContainer};
+      background: ${token.colorBgTextHover};
     }
-  `,
-  selected: css`
-    background: ${token.colorBgElevated};
-  `,
-  avatar: css``,
-  title: css`
-    margin-top: 8px;
   `,
 }));

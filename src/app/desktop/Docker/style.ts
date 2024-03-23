@@ -5,6 +5,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     display: flex;
     justify-content: space-between;
     backdrop-filter: saturate(180%) blur(10px);
+    background-color: ${token.colorBgMask};
     border-top: 1px solid #999;
     align-items: center;
     width: 100%;
