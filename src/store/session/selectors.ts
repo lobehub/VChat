@@ -77,15 +77,7 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
   return currentAgent;
 };
 
-const currentLiveAgent = (s: SessionStore): Agent | undefined => {
-  const { liveId } = s;
-  const { localAgentList } = useAgentStore.getState();
-  const currentAgent = localAgentList.find((item) => item.agentId === liveId);
-  return currentAgent;
-};
-
 export const sessionSelectors = {
-  currentLiveAgent,
   currentSession,
   currentChatIDs,
   sessionListIds,

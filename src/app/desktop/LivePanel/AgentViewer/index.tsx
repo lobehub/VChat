@@ -1,14 +1,12 @@
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
-import { ActionIconGroup, type ActionIconGroupProps } from '@lobehub/ui';
+import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, RotateCw } from 'lucide-react';
 import { memo, useCallback, useEffect, useRef } from 'react';
 
-export const items: ActionIconGroupProps['items'] = [];
-
 function AgentViewer() {
   const viewer = useViewerStore((s) => s.viewer);
-  const currentLiveAgent = useSessionStore((s) => sessionSelectors.currentLiveAgent(s));
+  const currentLiveAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

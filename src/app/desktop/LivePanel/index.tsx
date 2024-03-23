@@ -1,6 +1,6 @@
 'use client';
 
-import PanelContainer from '@/panels/PanelContainer';
+import React from 'react';
 import AgentViewer from './AgentViewer';
 import { useStyles } from './style';
 
@@ -10,15 +10,12 @@ interface LivePanelProps {
 }
 
 const LivePanel = (props: LivePanelProps) => {
-  const { style, className } = props;
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="live" title="WebCam">
-      <div className={styles.content}>
-        <AgentViewer />
-      </div>
-    </PanelContainer>
+    <div className={styles.content}>
+      <AgentViewer />
+    </div>
   );
 };
 

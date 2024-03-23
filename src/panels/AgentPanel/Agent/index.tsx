@@ -38,7 +38,7 @@ const Agent = (props: AgentProps) => {
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <TopBanner />
-        <AgentList title="好友列表" loading={loading} dataSource={localAgentList} />
+        <AgentList title="角色列表" loading={loading} dataSource={localAgentList} />
       </div>
       <AgentCard />
     </div>

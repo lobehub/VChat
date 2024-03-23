@@ -21,10 +21,6 @@ export interface SessionStore {
    */
   activeId: string;
   /**
-   * 当前视频 ID
-   */
-  liveId?: string;
-  /**
    * 会话列表
    */
   sessionList: Session[];
@@ -40,10 +36,6 @@ export interface SessionStore {
    * 触发语音开关
    */
   toogleVoice: () => void;
-  /**
-   * 设置视频 ID
-   */
-  setLiveId: (liveId?: string) => void;
   /**
    * 当前消息输入
    */
@@ -116,9 +108,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   toogleVoice: () => {
     const { voiceOn } = get();
     set({ voiceOn: !voiceOn });
-  },
-  setLiveId: (liveId?: string) => {
-    set({ liveId });
   },
   switchSession: (agentId) => {
     const { sessionList } = get();

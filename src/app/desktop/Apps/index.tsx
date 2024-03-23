@@ -1,15 +1,7 @@
 'use client';
 
 import Application from '@/components/Application';
-import {
-  AgentPanel,
-  ChatPanel,
-  ConfigPanel,
-  DancePanel,
-  LivePanel,
-  MarketPanel,
-  RolePanel,
-} from '@/panels';
+import { AgentPanel, ChatPanel, ConfigPanel, DancePanel, MarketPanel, RolePanel } from '@/panels';
 import { useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
 import { GithubIcon } from 'lucide-react';
@@ -20,7 +12,7 @@ const apps = [
     avatar:
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/card-index.webp',
     key: 'agent',
-    label: '联系人',
+    label: '角色',
     show: true,
     component: <AgentPanel />,
   },
@@ -39,14 +31,6 @@ const apps = [
     label: '聊天',
     show: true,
     component: <ChatPanel />,
-  },
-  {
-    avatar:
-      'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/play-button.webp',
-    key: 'live',
-    label: '视频聊天',
-    show: false,
-    component: <LivePanel />,
   },
   {
     avatar:
