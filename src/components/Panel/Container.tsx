@@ -67,14 +67,14 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
       if (onMinify) onMinify();
     };
     return [
-      <Tooltip title="关闭" key="close">
-        <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
+      <Tooltip title="最小化" key="min">
+        <div className={classNames(styles.button, styles.min)} onClick={handleMinify} />
       </Tooltip>,
       <Tooltip title="最大化" key="max">
         <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
       </Tooltip>,
-      <Tooltip title="最小化" key="min">
-        <div className={classNames(styles.button, styles.min)} onClick={handleMinify} />
+      <Tooltip title="关闭" key="close">
+        <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
       </Tooltip>,
     ];
   }, [onClose, styles.button, styles.close, styles.max, styles.min]);

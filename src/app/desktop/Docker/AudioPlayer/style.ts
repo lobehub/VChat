@@ -1,30 +1,44 @@
 import { createStyles } from 'antd-style';
 
-const useStyles = createStyles(({ css }) => ({
+const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    box-sizing: content-box;
     height: 64px;
   `,
   player: css`
     display: flex;
     align-items: center;
   `,
-  left: css`
+  spin: css`
+    @keyframes rotate-animation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    animation: rotate-animation 20s linear infinite;
+  `,
+  info: css`
     display: flex;
     align-items: center;
   `,
-  top: css`
+  content: css`
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-left: ${token.marginMD}px;
   `,
   name: css`
+    width: 140px;
     justify-content: flex-start;
   `,
-  right: css`
-    flex: 1;
+  controller: css`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+  `,
+  right: css`
+    display: flex;
     align-items: center;
   `,
 }));

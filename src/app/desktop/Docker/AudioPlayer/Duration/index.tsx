@@ -19,12 +19,15 @@ const Duration = (props: DurationProps) => {
 
   return (
     <div className={styles.duration}>
-      <span style={{ marginRight: 8 }}>{formatDurationDisplay(currentProgress)}</span>
+      <span style={{ marginRight: 8 }} className={styles.counter}>
+        {formatDurationDisplay(currentProgress)}
+      </span>
       <ConfigProvider
         theme={{
           components: {
             Slider: {
               controlSize: 6,
+              handleSize: 6,
             },
           },
         }}
@@ -34,10 +37,12 @@ const Duration = (props: DurationProps) => {
           max={duration}
           value={currentProgress}
           tooltip={{ open: false }}
-          style={{ width: 320 }}
+          style={{ width: 480, margin: 0 }}
         />
       </ConfigProvider>
-      <span style={{ marginLeft: 8 }}>{formatDurationDisplay(duration)}</span>
+      <span style={{ marginLeft: 8 }} className={styles.counter}>
+        {formatDurationDisplay(duration)}
+      </span>
     </div>
   );
 };

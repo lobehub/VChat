@@ -8,7 +8,6 @@ import { Typography } from 'antd';
 import classNames from 'classnames';
 import { ListMusic } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
-import { Flexbox } from 'react-layout-kit';
 import PlayList from './PlayList';
 import { useStyles } from './style';
 
@@ -38,9 +37,7 @@ function Player(props: PlayerProps) {
   const { styles } = useStyles();
 
   useEffect(() => {
-    if (!currentPlay) return;
-
-    if (isPlaying) {
+    if (isPlaying && currentPlay) {
       fetch(currentPlay.src)
         .then((res) => res.arrayBuffer())
         .then((buffer) => {
@@ -74,20 +71,24 @@ function Player(props: PlayerProps) {
         }}
       />
       <div className={styles.player}>
-        <div className={styles.left}>
-          <Avatar src={currentPlay?.cover} size={64} shape="square" />
-          <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
-            {currentPlay?.name || '请从舞蹈列表中选取'}
-          </Typography.Text>
-        </div>
-        <Flexbox style={{ margin: '0px 12px' }}>
-          <Control />
+        <Avatar
+          src={currentPlay?.cover}
+          size={64}
+          shape="circle"
+          className={isPlaying ? styles.spin : ''}
+        />
+        <div style={{ margin: '0px 12px' }}>
           <Duration duration={duration} currentProgress={currentProgress} />
-        </Flexbox>
-
-        <div className={styles.right}>
-          <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
-          <Volume volume={volume} setVolume={setVolume} audioRef={ref} />
+          <div className={styles.controller}>
+            <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
+              {currentPlay?.name || '请从舞蹈列表中选取'}
+            </Typography.Text>
+            <Control />
+            <div className={styles.right}>
+              <Volume volume={volume} setVolume={setVolume} audioRef={ref} />
+              <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

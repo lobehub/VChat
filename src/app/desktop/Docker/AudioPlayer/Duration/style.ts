@@ -6,6 +6,9 @@ const useStyles = createStyles(({ css }) => ({
     justify-content: center;
     align-items: center;
   `,
+  counter: css`
+    font-size: 12px;
+  `,
 }));
 
 export { useStyles };
