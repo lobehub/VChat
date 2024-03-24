@@ -14,7 +14,7 @@ const DancePanel = (props: DancePanelProps) => {
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="dance" title="舞蹈">
+    <PanelContainer style={style} className={className} panelKey="dance" title="舞蹈订阅">
       <div className={styles.content}>
         <Dance />
       </div>

@@ -72,7 +72,7 @@ export const createDanceStore: StateCreator<
           draft.splice(index, 1);
         }
       });
-      set({ danceList: newList });
+      set({ danceList: newList, currentIdentifier: newList[0]?.danceId });
     },
   };
 };

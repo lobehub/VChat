@@ -30,15 +30,15 @@ interface AgentProps {
 }
 
 const Agent = (props: AgentProps) => {
-  const { theme, styles } = useStyles();
+  const { styles } = useStyles();
   const { style, className } = props;
-  const [loading, localAgentList] = useAgentStore((s) => [s.loading, s.localAgentList]);
+  const [subscribedList] = useAgentStore((s) => [s.subscribedList]);
 
   return (
     <div style={style} className={classNames(className, styles.container)}>
       <div className={styles.content}>
         <TopBanner />
-        <AgentList title="角色列表" loading={loading} dataSource={localAgentList} />
+        <AgentList title="订阅列表" dataSource={subscribedList} />
       </div>
       <AgentCard />
     </div>

@@ -1,4 +1,3 @@
-import { DEFAULT_AGENTS } from '@/constants/agent';
 import { Agent } from '@/types/agent';
 import { produce } from 'immer';
 import { persist } from 'zustand/middleware';
@@ -7,11 +6,10 @@ import { createWithEqualityFn } from 'zustand/traditional';
 import { agentListSelectors } from './selectors/agent';
 
 export interface AgentStore {
-  loading: boolean;
   activateAgent: (identifier: string) => void;
   deactivateAgent: () => void;
   currentIdentifier: string;
-  localAgentList: Agent[];
+  subscribedList: Agent[];
   getAgentById: (agentId: string) => Agent | undefined;
   subscribe: (agent: Agent) => void;
   unsubscribe: (agentId: string) => void;
@@ -21,8 +19,7 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
   persist(
     (set, get) => ({
       currentIdentifier: '',
-      loading: false,
-      localAgentList: DEFAULT_AGENTS,
+      subscribedList: [],
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });
       },
@@ -30,32 +27,32 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
         set({ currentIdentifier: undefined });
       },
       subscribe: (agent) => {
-        const { localAgentList } = get();
+        const { subscribedList } = get();
 
-        const newList = produce(localAgentList, (draft) => {
+        const newList = produce(subscribedList, (draft) => {
           const index = draft.findIndex((item) => item.agentId === agent.agentId);
 
           if (index === -1) {
             draft.unshift(agent);
           }
         });
-        set({ localAgentList: newList });
+        set({ subscribedList: newList });
       },
       unsubscribe: (agentId) => {
-        const { localAgentList } = get();
-        const newList = produce(localAgentList, (draft) => {
+        const { subscribedList } = get();
+        const newList = produce(subscribedList, (draft) => {
           const index = draft.findIndex((item) => item.agentId === agentId);
 
           if (index !== -1) {
             draft.splice(index, 1);
           }
         });
-        set({ localAgentList: newList });
+        set({ subscribedList: newList, currentIdentifier: newList[0]?.agentId });
       },
       getAgentById: (agentId: string): Agent | undefined => {
-        const { localAgentList } = get();
+        const { subscribedList } = get();
 
-        const currentAgent = localAgentList.find((item) => item.agentId === agentId);
+        const currentAgent = subscribedList.find((item) => item.agentId === agentId);
         if (!currentAgent) return undefined;
 
         return currentAgent;

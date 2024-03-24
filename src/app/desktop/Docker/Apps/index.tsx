@@ -1,9 +1,9 @@
 'use client';
 
+import { apps } from '@/app/desktop/apps';
 import Application from '@/components/Application';
 import { useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
-import { apps } from '../../page';
 import { useStyles } from './style';
 
 const Apps = () => {

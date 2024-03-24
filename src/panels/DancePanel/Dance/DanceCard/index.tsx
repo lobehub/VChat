@@ -1,9 +1,7 @@
 import DanceInfo from '@/components/DanceInfo';
-import { deleteLocalDance } from '@/services/dance';
 import { danceListSelectors, useDanceStore } from '@/store/dance';
 import { DraggablePanel } from '@lobehub/ui';
-import { useRequest } from 'ahooks';
-import { Button, Popconfirm, message } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
 
@@ -22,31 +20,23 @@ const useStyles = createStyles(({ css, token }) => ({
 const SideBar = memo(() => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showDanceSidebar, activateDance, deactivateDance, addAndPlayItem, setIsPlaying] =
-    useDanceStore((s) => [
-      danceListSelectors.showSideBar(s),
-      s.activateDance,
-      s.deactivateDance,
-      s.addAndPlayItem,
-      s.setIsPlaying,
-    ]);
+  const [
+    showDanceSidebar,
+    activateDance,
+    deactivateDance,
+    addAndPlayItem,
+    setIsPlaying,
+    unsubscribe,
+  ] = useDanceStore((s) => [
+    danceListSelectors.showSideBar(s),
+    s.activateDance,
+    s.deactivateDance,
+    s.addAndPlayItem,
+    s.setIsPlaying,
+    s.unsubscribe,
+  ]);
 
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
-
-  const { loading, run } = useRequest((agentId) => deleteLocalDance(agentId), {
-    manual: true,
-    onSuccess: (data) => {
-      const { success, errorMessage } = data;
-      if (success) {
-        message.success('删除成功');
-        deactivateDance();
-      } else {
-        message.error(errorMessage);
-      }
-    },
-  });
-
-  const { danceId } = currentDance || {};
 
   return (
     <DraggablePanel
@@ -83,15 +73,17 @@ const SideBar = memo(() => {
           </Button>,
           <Popconfirm
             key="delete"
-            title="确定删除？"
-            description="确定删除本地舞蹈文件吗？"
-            onConfirm={() => run(danceId)}
+            title="取消订阅？"
+            description={`确定取消订阅音乐【${currentDance?.name}】吗？`}
+            onConfirm={() => {
+              if (currentDance) {
+                unsubscribe(currentDance.danceId);
+              }
+            }}
             okText="确定"
             cancelText="取消"
           >
-            <Button danger loading={loading}>
-              删除
-            </Button>
+            <Button danger>取消订阅</Button>
           </Popconfirm>,
         ]}
       />

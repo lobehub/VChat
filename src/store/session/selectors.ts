@@ -1,4 +1,3 @@
-import { useAgentStore } from '@/store/agent';
 import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -6,9 +5,7 @@ import { SessionStore } from './index';
 
 const currentSession = (s: SessionStore): Session | undefined => {
   const { activeId, sessionList } = s;
-  const currentSession = sessionList.find((item) => item.agentId === activeId);
-
-  return currentSession;
+  return sessionList.find((item) => item.agentId === activeId);
 };
 
 const sessionListIds = (s: SessionStore): string[] => {
@@ -71,10 +68,14 @@ const currentSystemRole = (s: SessionStore): string => {
 };
 
 const currentAgent = (s: SessionStore): Agent | undefined => {
-  const { activeId } = s;
-  const { localAgentList } = useAgentStore.getState();
-  const currentAgent = localAgentList.find((item) => item.agentId === activeId);
-  return currentAgent;
+  const { activeId, localAgentList } = s;
+  return localAgentList.find((item) => item.agentId === activeId);
+};
+
+const getAgentById = (s: SessionStore) => {
+  const { localAgentList } = s;
+
+  return (id: string): Agent | undefined => localAgentList.find((item) => item.agentId === id);
 };
 
 export const sessionSelectors = {
@@ -85,5 +86,6 @@ export const sessionSelectors = {
   currentAgent,
   currentChatsString,
   currentSystemRole,
+  getAgentById,
   previousChats,
 };

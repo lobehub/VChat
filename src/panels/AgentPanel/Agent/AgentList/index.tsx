@@ -12,12 +12,11 @@ const { Meta } = Card;
 
 interface AgentListProps {
   title: string;
-  loading: boolean;
   dataSource: Agent[];
 }
 
 const AgentList = (props: AgentListProps) => {
-  const { title, loading, dataSource } = props;
+  const { title, dataSource } = props;
   const [activateAgent, showAgentSidebar] = useAgentStore((s) => [
     s.activateAgent,
     agentListSelectors.showSideBar(s),
@@ -37,11 +36,10 @@ const AgentList = (props: AgentListProps) => {
           glow
           size="middle"
         >
-          + 加好友
+          + 订阅角色
         </GradientButton>
       </Flexbox>
       <List
-        loading={loading}
         grid={{ gutter: 8, column: showAgentSidebar ? 3 : 4 }}
         dataSource={dataSource}
         renderItem={(item) => {
