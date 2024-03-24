@@ -1,30 +1,23 @@
 import useChatInput from '@/hooks/useSendMessage';
 import { useSessionStore } from '@/store/session';
 import { isCommandPressed } from '@/utils/keyboard';
-import { TextArea } from '@lobehub/ui';
+import { Input } from '@lobehub/ui';
+import { Button, Space } from 'antd';
 import { createStyles } from 'antd-style';
-import { TextAreaRef } from 'antd/es/input/TextArea';
-import React, { memo, useRef } from 'react';
+import { InputRef } from 'antd/es/input/Input';
+import { memo, useRef } from 'react';
 
 const useStyles = createStyles(({ css }) => {
   return {
     textarea: css`
-      resize: none !important;
-      height: 100% !important;
-      padding: 0 24px;
-      line-height: 1.5;
-      box-shadow: none !important;
-    `,
-    textareaContainer: css`
-      position: relative;
-      flex: 1;
+      width: 360px;
     `,
   };
 });
 
-const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(({ setExpand }) => {
+const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
   const { styles } = useStyles();
-  const ref = useRef<TextAreaRef>(null);
+  const ref = useRef<InputRef>(null);
   const isChineseInput = useRef(false);
   const onSend = useChatInput();
 
@@ -34,15 +27,9 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(({ setExpand }
     s.setMessageInput,
   ]);
 
-  const send = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    e.preventDefault();
-    onSend();
-    setExpand?.(false);
-  };
-
   return (
-    <div className={styles.textareaContainer}>
-      <TextArea
+    <Space>
+      <Input
         autoFocus
         className={styles.textarea}
         onBlur={(e) => {
@@ -65,14 +52,24 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(({ setExpand }
             return;
           }
 
-          send(e);
+          e.preventDefault();
+          onSend();
         }}
-        placeholder="请输入内容开始聊天"
         ref={ref}
-        type={'pure'}
+        placeholder="请输入内容开始聊天"
+        type={'block'}
         value={messageInput}
       />
-    </div>
+      <Button
+        type="primary"
+        onClick={() => {
+          if (loading) return;
+          onSend();
+        }}
+      >
+        发送
+      </Button>
+    </Space>
   );
 });
 

@@ -28,7 +28,7 @@ const Header = () => {
     s.activateAgent,
     s.deactivateAgent,
   ]);
-  const openPanel = useConfigStore((s) => s.openPanel);
+  const [openPanel, minifyPanel] = useConfigStore((s) => [s.openPanel, s.minifyPanel]);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const switchSession = useSessionStore((s) => s.switchSession);
 
@@ -73,7 +73,7 @@ const Header = () => {
             onClick={() => {
               if (!currentAgent) return;
               switchSession(currentAgent.agentId);
-              openPanel('chat');
+              minifyPanel('agent');
             }}
             type={'primary'}
           >

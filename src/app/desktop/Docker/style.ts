@@ -11,7 +11,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     align-items: center;
     width: 100%;
     z-index: 100;
-    padding: 0 12px;
+    padding: 8px 12px;
     position: fixed;
     bottom: 0;
     left: 0;

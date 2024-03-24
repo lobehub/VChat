@@ -1,6 +1,6 @@
 import { DanceStore, useDanceStore } from '@/store/dance';
-import { Space } from 'antd';
 import { Pause, Play, SkipBack, SkipForward } from 'lucide-react';
+import { useStyles } from './style';
 
 const controlSelectors = (s: DanceStore) => {
   return {
@@ -14,17 +14,18 @@ const controlSelectors = (s: DanceStore) => {
 
 const Control = () => {
   const { prevDance, nextDance, isPlaying, togglePlayPause } = useDanceStore(controlSelectors);
+  const { styles } = useStyles();
 
   return (
-    <Space size={12} align="center">
-      <SkipBack style={{ cursor: 'pointer' }} onClick={prevDance} size={16} />
+    <div className={styles.control}>
+      <SkipBack className={styles.back} onClick={prevDance} size={16} />
       {isPlaying ? (
-        <Pause style={{ cursor: 'pointer' }} onClick={togglePlayPause} size={20} />
+        <Pause className={styles.playPause} onClick={togglePlayPause} size={24} />
       ) : (
-        <Play style={{ cursor: 'pointer' }} onClick={togglePlayPause} size={20} />
+        <Play className={styles.playPause} onClick={togglePlayPause} size={24} />
       )}
-      <SkipForward style={{ cursor: 'pointer' }} onClick={nextDance} size={16} />
-    </Space>
+      <SkipForward className={styles.forward} onClick={nextDance} size={16} />
+    </div>
   );
 };
 

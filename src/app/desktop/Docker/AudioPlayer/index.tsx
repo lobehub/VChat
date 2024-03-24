@@ -73,7 +73,7 @@ function Player(props: PlayerProps) {
       <div className={styles.player}>
         <Avatar
           src={currentPlay?.cover}
-          size={64}
+          size={48}
           shape="circle"
           className={isPlaying ? styles.spin : ''}
         />
@@ -86,7 +86,7 @@ function Player(props: PlayerProps) {
             <Control />
             <div className={styles.right}>
               <Volume volume={volume} setVolume={setVolume} audioRef={ref} />
-              <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
+              <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} size={20} />
             </div>
           </div>
         </div>

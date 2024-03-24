@@ -2,8 +2,7 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    width: 480px;
-    height: 64px;
+    width: 420px;
   `,
   player: css`
     display: flex;
