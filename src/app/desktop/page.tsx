@@ -8,7 +8,6 @@ import { PanelKey } from '@/types/config';
 import Docker from './Docker';
 
 import { AgentPanel, ChatPanel, ConfigPanel, DancePanel, MarketPanel, RolePanel } from '@/panels';
-import { GithubIcon } from 'lucide-react';
 
 export const apps = [
   {
@@ -39,12 +38,7 @@ export const apps = [
     label: '商店',
     component: <MarketPanel />,
   },
-  {
-    avatar: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/gear.webp',
-    key: 'config',
-    label: '设置',
-    component: <ConfigPanel />,
-  },
+
   {
     avatar:
       'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/black-nib.webp',
@@ -53,10 +47,10 @@ export const apps = [
     component: <RolePanel />,
   },
   {
-    icon: GithubIcon,
-    key: 'github',
-    label: 'Github',
-    link: 'https://github.com/v-idol/vidol.chat',
+    avatar: 'https://registry.npmmirror.com/@lobehub/assets-emoji/latest/files/assets/gear.webp',
+    key: 'config',
+    label: '设置',
+    component: <ConfigPanel />,
   },
 ];
 

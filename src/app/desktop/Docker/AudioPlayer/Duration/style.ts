@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ css }) => ({
-  control: css`
+  duration: css`
     display: flex;
     justify-content: center;
     align-items: center;

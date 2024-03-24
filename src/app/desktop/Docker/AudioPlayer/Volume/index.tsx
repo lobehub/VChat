@@ -1,6 +1,6 @@
 import { Slider } from 'antd';
 import { Volume2, VolumeXIcon } from 'lucide-react';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useStyles } from './style';
 
 interface VolumeProps {
@@ -44,4 +44,4 @@ const Volume = (props: VolumeProps) => {
   );
 };
 
-export default Volume;
+export default memo(Volume);

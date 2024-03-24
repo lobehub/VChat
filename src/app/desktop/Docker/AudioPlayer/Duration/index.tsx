@@ -1,6 +1,6 @@
-import { Slider } from 'antd';
+import { ConfigProvider, Slider } from 'antd';
 import { memo } from 'react';
-import { Flexbox } from 'react-layout-kit';
+import { useStyles } from './style';
 
 interface DurationProps {
   duration: number;
@@ -9,6 +9,7 @@ interface DurationProps {
 
 const Duration = (props: DurationProps) => {
   const { duration, currentProgress } = props;
+  const { styles } = useStyles();
 
   function formatDurationDisplay(duration: number) {
     const min = Math.floor(duration / 60);
@@ -17,17 +18,27 @@ const Duration = (props: DurationProps) => {
   }
 
   return (
-    <Flexbox horizontal align="center">
+    <div className={styles.duration}>
       <span style={{ marginRight: 8 }}>{formatDurationDisplay(currentProgress)}</span>
-      <Slider
-        min={0}
-        max={duration}
-        value={currentProgress}
-        tooltip={{ open: false }}
-        style={{ width: 180 }}
-      />
+      <ConfigProvider
+        theme={{
+          components: {
+            Slider: {
+              controlSize: 6,
+            },
+          },
+        }}
+      >
+        <Slider
+          min={0}
+          max={duration}
+          value={currentProgress}
+          tooltip={{ open: false }}
+          style={{ width: 320 }}
+        />
+      </ConfigProvider>
       <span style={{ marginLeft: 8 }}>{formatDurationDisplay(duration)}</span>
-    </Flexbox>
+    </div>
   );
 };
 

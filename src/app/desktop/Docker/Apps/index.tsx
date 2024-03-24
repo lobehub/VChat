@@ -20,11 +20,7 @@ const Apps = () => {
             icon={app.icon}
             name={app.label}
             onClick={() => {
-              if (app.component) {
-                openPanel(app.key as PanelKey);
-              } else if (app.link) {
-                window.open(app.link);
-              }
+              openPanel(app.key as PanelKey);
             }}
           />
         );

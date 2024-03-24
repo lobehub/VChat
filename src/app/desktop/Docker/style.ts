@@ -13,10 +13,14 @@ export const useStyles = createStyles(({ css, token }) => ({
     z-index: 100;
     padding: 0 24px;
     position: fixed;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0;
+    left: 0;
   `,
   player: css``,
   apps: css``,
-  sidebar: css``,
+  sidebar: css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `,
 }));

@@ -74,12 +74,12 @@ function Player(props: PlayerProps) {
         }}
       />
       <div className={styles.player}>
-        <Flexbox>
+        <div className={styles.left}>
           <Avatar src={currentPlay?.cover} size={64} shape="square" />
           <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
             {currentPlay?.name || '请从舞蹈列表中选取'}
           </Typography.Text>
-        </Flexbox>
+        </div>
         <Flexbox style={{ margin: '0px 12px' }}>
           <Control />
           <Duration duration={duration} currentProgress={currentProgress} />

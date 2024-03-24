@@ -10,7 +10,6 @@ const useStyles = createStyles(({ css }) => ({
   container: css`
     position: relative;
     display: flex;
-    padding-bottom: 96px;
     width: 100%;
     height: 100%;
     min-height: 500px;

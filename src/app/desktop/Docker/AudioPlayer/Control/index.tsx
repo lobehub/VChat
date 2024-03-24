@@ -22,7 +22,7 @@ const Control = () => {
       <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} onClick={prevDance} />
       <Icon
         icon={isPlaying ? PauseCircle : PlayCircle}
-        style={{ fontSize: 48, cursor: 'pointer' }}
+        style={{ fontSize: 32, cursor: 'pointer' }}
         onClick={togglePlayPause}
       />
       <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} onClick={nextDance} />
