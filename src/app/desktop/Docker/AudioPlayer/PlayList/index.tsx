@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useDanceStore } from '@/store/dance';
+import { DanceStore, useDanceStore } from '@/store/dance';
 import { DeleteOutlined } from '@ant-design/icons';
 import { ActionIcon } from '@lobehub/ui';
 import { Button, Drawer, List, Typography, theme } from 'antd';
@@ -15,19 +15,23 @@ interface PlayListProps {
   onClose: () => void;
 }
 
+const playListSelectors = (s: DanceStore) => {
+  return {
+    playlist: s.playlist,
+    currentPlay: s.currentPlay,
+    isPlaying: s.isPlaying,
+    setPlayList: s.setPlayList,
+    playItem: s.playItem,
+    removePlayItem: s.removePlayItem,
+    setIsPlaying: s.setIsPlaying,
+  };
+};
+
 const PlayList = (props: PlayListProps) => {
   const { open = false, onClose } = props;
   const { token } = theme.useToken();
-  const [playlist, playItem, removePlayItem, setPlayList, currentPlay, isPlaying, setIsPlaying] =
-    useDanceStore((s) => [
-      s.playlist,
-      s.playItem,
-      s.removePlayItem,
-      s.setPlayList,
-      s.currentPlay,
-      s.isPlaying,
-      s.setIsPlaying,
-    ]);
+  const { playlist, playItem, removePlayItem, setPlayList, currentPlay, isPlaying, setIsPlaying } =
+    useDanceStore((s) => playListSelectors(s));
 
   return (
     <Drawer

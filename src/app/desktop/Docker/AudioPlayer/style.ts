@@ -2,8 +2,6 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
-    backdrop-filter: saturate(180%) blur(10px);
-    background-color: ${token.colorBgBase};
     box-sizing: content-box;
     width: 640px;
     height: 64px;

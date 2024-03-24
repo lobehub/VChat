@@ -1,18 +1,11 @@
+import Control from '@/app/desktop/Docker/AudioPlayer/Control';
 import Duration from '@/app/desktop/Docker/AudioPlayer/Duration';
 import { DanceStore, useDanceStore } from '@/store/dance';
 import { useViewerStore } from '@/store/viewer';
-import { Avatar, Icon } from '@lobehub/ui';
+import { Avatar } from '@lobehub/ui';
 import { Slider, Typography } from 'antd';
 import classNames from 'classnames';
-import {
-  ListMusic,
-  PauseCircle,
-  PlayCircle,
-  SkipBack,
-  SkipForward,
-  Volume2,
-  VolumeXIcon,
-} from 'lucide-react';
+import { ListMusic, Volume2, VolumeXIcon } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import PlayList from './PlayList';
@@ -26,8 +19,6 @@ interface PlayerProps {
 const danceSelectors = (s: DanceStore) => {
   return {
     isPlaying: s.isPlaying,
-    setIsPlaying: s.setIsPlaying,
-    prevDance: s.prevDance,
     nextDance: s.nextDance,
     currentPlay: s.currentPlay,
   };
@@ -41,8 +32,7 @@ function Player(props: PlayerProps) {
   const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentProgress, setCurrentProgress] = useState(0);
-  const { prevDance, nextDance, currentPlay, isPlaying, setIsPlaying } =
-    useDanceStore(danceSelectors);
+  const { nextDance, currentPlay, isPlaying } = useDanceStore(danceSelectors);
   const viewer = useViewerStore((s) => s.viewer);
 
   const { styles } = useStyles();
@@ -58,19 +48,11 @@ function Player(props: PlayerProps) {
           ref.current && ref.current.play();
         });
     } else {
+      viewer.model?.stopDance();
       ref.current && ref.current.pause();
       ref.current && (ref.current.currentTime = 0);
     }
   }, [isPlaying, currentPlay, viewer]);
-
-  const togglePlayPause = () => {
-    if (isPlaying) {
-      viewer.model?.stopDance();
-      setIsPlaying(false);
-    } else {
-      setIsPlaying(true);
-    }
-  };
 
   return (
     <div className={classNames(styles.container, className)} style={style}>
@@ -99,17 +81,7 @@ function Player(props: PlayerProps) {
           </Typography.Text>
         </Flexbox>
         <Flexbox style={{ margin: '0px 12px' }}>
-          <div className={styles.top}>
-            <div className={styles.control}>
-              <SkipBack style={{ marginRight: 24, cursor: 'pointer' }} onClick={prevDance} />
-              <Icon
-                icon={isPlaying ? PauseCircle : PlayCircle}
-                style={{ fontSize: 48, cursor: 'pointer' }}
-                onClick={togglePlayPause}
-              />
-              <SkipForward style={{ marginLeft: 24, cursor: 'pointer' }} onClick={nextDance} />
-            </div>
-          </div>
+          <Control />
           <Duration duration={duration} currentProgress={currentProgress} />
         </Flexbox>
 

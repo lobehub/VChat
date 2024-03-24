@@ -12,6 +12,7 @@ export interface PlayListStore {
   removePlayItem: (dance: Dance) => void;
   prevDance: () => void;
   nextDance: () => void;
+  togglePlayPause: () => void;
 }
 
 export const createPlayListStore: StateCreator<
@@ -25,11 +26,15 @@ export const createPlayListStore: StateCreator<
     isPlaying: false,
     currentPlay: null,
 
+    togglePlayPause: () => {
+      set({ isPlaying: !get().isPlaying });
+    },
+
     setPlayList: (playlist) => {
       set({ playlist: playlist });
     },
     playItem: (dance) => {
-      set({ currentPlay: dance });
+      set({ currentPlay: dance, isPlaying: true });
     },
     addAndPlayItem: (dance) => {
       const { playlist, playItem } = get();
