@@ -1,5 +1,5 @@
 import { speechApi, voiceListApi } from '@/services/tts';
-import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { sessionSelectors, useSessionStore } from '@/store/session';
 import { Voice } from '@/types/tts';
 import { FormFooter } from '@lobehub/ui';
 import { useRequest } from 'ahooks';
@@ -80,7 +80,7 @@ const Config = (props: ConfigProps) => {
   const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
   const [voices, setVoices] = useState<Voice[]>([]);
-  const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
 
   useEffect(() => {

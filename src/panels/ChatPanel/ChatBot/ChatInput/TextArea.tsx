@@ -1,4 +1,4 @@
-import useChatInput from '@/panels/ChatPanel/ChatBot/useSendMessage';
+import useChatInput from '@/hooks/useSendMessage';
 import { useSessionStore } from '@/store/session';
 import { isCommandPressed } from '@/utils/keyboard';
 import { TextArea } from '@lobehub/ui';

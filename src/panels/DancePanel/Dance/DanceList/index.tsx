@@ -15,7 +15,7 @@ const DanceList = () => {
   return (
     <>
       <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
-        <h2>舞蹈列表</h2>
+        <h2>订阅列表</h2>
         <GradientButton
           onClick={() => {
             openPanel('market');
@@ -24,7 +24,7 @@ const DanceList = () => {
           glow
           size="middle"
         >
-          打开商店
+          + 订阅舞蹈
         </GradientButton>
       </Flexbox>
       <List

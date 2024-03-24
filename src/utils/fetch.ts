@@ -1,5 +1,6 @@
 import { APIErrorResponse, ErrorTypeEnum } from '@/types/api';
 import { ChatMessageError } from '@/types/chat';
+import { message } from 'antd';
 
 const getMessageByErrorType = (errorType: ErrorTypeEnum) => {
   const errorMap = {
@@ -29,6 +30,7 @@ export const fetchSEE = async (
       body: data.body,
       message: getMessageByErrorType(data.errorType),
     });
+    message.error(getMessageByErrorType(data.errorType));
     return;
   }
 

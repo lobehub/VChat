@@ -1,4 +1,4 @@
-import { agentListSelectors, useAgentStore } from '@/store/agent';
+import { sessionSelectors, useSessionStore } from '@/store/session';
 import { Avatar, FormFooter } from '@lobehub/ui';
 import { Button, Card, Form, Input, Upload } from 'antd';
 import { createStyles } from 'antd-style';
@@ -42,7 +42,7 @@ const Info = (props: InfoProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [form] = Form.useForm();
-  const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
 
   const { cover, avatar } = currentAgent?.meta || {};
 

@@ -1,11 +1,9 @@
 import AgentInfo from '@/components/AgentInfo';
-import { deleteLocalAgent } from '@/services/agent';
 import { agentListSelectors, useAgentStore } from '@/store/agent';
 import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { DraggablePanel } from '@lobehub/ui';
-import { useRequest } from 'ahooks';
-import { Button, Popconfirm, message } from 'antd';
+import { Button, Popconfirm } from 'antd';
 import { createStyles } from 'antd-style';
 import { memo, useState } from 'react';
 
@@ -23,29 +21,15 @@ const useStyles = createStyles(({ css, token }) => ({
 const Header = () => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showAgentSidebar, activateAgent, deactivateAgent] = useAgentStore((s) => [
+  const [showAgentSidebar, activateAgent, deactivateAgent, unsubscribe] = useAgentStore((s) => [
     agentListSelectors.showSideBar(s),
     s.activateAgent,
     s.deactivateAgent,
+    s.unsubscribe,
   ]);
-  const openPanel = useConfigStore((s) => s.openPanel);
+  const [openPanel, minifyPanel] = useConfigStore((s) => [s.openPanel, s.minifyPanel]);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
-  const switchSession = useSessionStore((s) => s.switchSession);
-
-  const { agentId } = currentAgent || {};
-
-  const { loading, run } = useRequest((agentId) => deleteLocalAgent(agentId), {
-    manual: true,
-    onSuccess: (data) => {
-      const { success, errorMessage } = data;
-      if (success) {
-        message.success('删除成功');
-        deactivateAgent();
-      } else {
-        message.error(errorMessage);
-      }
-    },
-  });
+  const createSession = useSessionStore((s) => s.createSession);
 
   return (
     <DraggablePanel
@@ -72,15 +56,17 @@ const Header = () => {
             key="chat"
             onClick={() => {
               if (!currentAgent) return;
-              switchSession(currentAgent.agentId);
-              openPanel('chat');
+              createSession(currentAgent);
+              minifyPanel('agent');
             }}
             type={'primary'}
           >
-            开始聊天
+            加载
           </Button>,
           <Button
             onClick={() => {
+              if (!currentAgent) return;
+              createSession(currentAgent);
               openPanel('role');
             }}
             key="edit"
@@ -88,16 +74,17 @@ const Header = () => {
             编辑
           </Button>,
           <Popconfirm
-            title="确定删除？"
-            description="确定删除本地角色文件吗？"
-            onConfirm={() => run(agentId)}
+            title="取消订阅？"
+            description={`确定取消角色 ${currentAgent?.meta.name} 的订阅吗？`}
+            onConfirm={() => {
+              if (!currentAgent) return;
+              unsubscribe(currentAgent.agentId);
+            }}
             okText="确定"
             key="delete"
             cancelText="取消"
           >
-            <Button loading={loading} danger>
-              删除
-            </Button>
+            <Button danger>取消订阅</Button>
           </Popconfirm>,
         ]}
       />

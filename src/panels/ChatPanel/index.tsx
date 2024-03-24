@@ -16,7 +16,7 @@ const ChatPanel = (props: ChatPanelProps) => {
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="chat" title="对话列表">
+    <PanelContainer style={style} className={className} panelKey="chat" title="聊天">
       <div style={style} className={classNames(className, styles.content)}>
         <SideBar />
         <ChatBot />

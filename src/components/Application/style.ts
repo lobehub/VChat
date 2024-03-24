@@ -5,19 +5,12 @@ export const useStyles = createStyles(({ css, token }) => ({
     display: inline-flex;
     align-items: center;
     flex-direction: column;
-    padding: 16px;
+    padding: 8px;
     border-radius: 2px;
     user-select: none;
     cursor: pointer;
     &:hover {
-      background: ${token.colorBgContainer};
+      background: ${token.colorBgTextHover};
     }
-  `,
-  selected: css`
-    background: ${token.colorBgElevated};
-  `,
-  avatar: css``,
-  title: css`
-    margin-top: 8px;
   `,
 }));

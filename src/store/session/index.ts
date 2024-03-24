@@ -1,5 +1,6 @@
 import { LOADING_FLAG } from '@/constants/common';
 import { chatCompletion, handleSpeakAi } from '@/services/chat';
+import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
 import { fetchSEE } from '@/utils/fetch';
@@ -21,9 +22,9 @@ export interface SessionStore {
    */
   activeId: string;
   /**
-   * 当前视频 ID
+   * 本地角色列表
    */
-  liveId?: string;
+  localAgentList: Agent[];
   /**
    * 会话列表
    */
@@ -40,10 +41,6 @@ export interface SessionStore {
    * 触发语音开关
    */
   toogleVoice: () => void;
-  /**
-   * 设置视频 ID
-   */
-  setLiveId: (liveId?: string) => void;
   /**
    * 当前消息输入
    */
@@ -64,6 +61,12 @@ export interface SessionStore {
    * @param payload - 消息分发参数
    */
   dispatchMessage: (payload: MessageActionType) => void;
+  /**
+   * 创建会话
+   * @param agent
+   * @returns
+   */
+  createSession: (agent: Agent) => void;
   /**
    * 切换会话
    * @param agent
@@ -117,8 +120,24 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     const { voiceOn } = get();
     set({ voiceOn: !voiceOn });
   },
-  setLiveId: (liveId?: string) => {
-    set({ liveId });
+  createSession: (agent: Agent) => {
+    const { sessionList, localAgentList } = get();
+    // 判断是否已经在本地角色列表中
+    const targetAgent = localAgentList.find((localAgent) => localAgent.agentId === agent.agentId);
+    if (!targetAgent) {
+      set({ localAgentList: [...localAgentList, agent] });
+    }
+
+    // 判断是否已经在会话列表中
+    const targetSession = sessionList.find((session) => session.agentId === agent.agentId);
+    if (!targetSession) {
+      const session = {
+        agentId: agent.agentId,
+        messages: [],
+      };
+      set({ sessionList: [...sessionList, session] });
+    }
+    set({ activeId: agent.agentId });
   },
   switchSession: (agentId) => {
     const { sessionList } = get();

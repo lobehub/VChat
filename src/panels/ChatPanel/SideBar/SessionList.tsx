@@ -1,10 +1,8 @@
-import { useAgentStore } from '@/store/agent';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { List, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { isEqual } from 'lodash-es';
 import { memo } from 'react';
 
 const { Text } = Typography;
@@ -27,9 +25,11 @@ interface SessionListProps {
 const SessionList = (props: SessionListProps) => {
   const { filter } = props;
   const [switchSession] = useSessionStore((s) => [s.switchSession]);
-  const sessionListIds = useSessionStore((s) => sessionSelectors.sessionListIds(s), isEqual);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s), isEqual);
-  const getAgentById = useAgentStore((s) => s.getAgentById);
+  const [sessionListIds, getAgentById] = useSessionStore((s) => [
+    sessionSelectors.sessionListIds(s),
+    sessionSelectors.getAgentById(s),
+  ]);
+  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
   const { styles } = useStyles();
 
   // TODO: 滚动到当前 agent

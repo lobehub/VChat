@@ -26,9 +26,8 @@ const initialState: ConfigState = {
       open: false,
       coordinates: INITIAL_COORDINATES,
     },
-    // 默认打开聊天窗口
     chat: {
-      open: true,
+      open: false,
       coordinates: INITIAL_COORDINATES,
     },
     market: {

@@ -14,7 +14,7 @@ const ControlPanel = (props: ControlPanelProps) => {
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="agent" title="Vidol.Chat">
+    <PanelContainer style={style} className={className} panelKey="agent" title="角色订阅">
       <div className={styles.content}>
         <Agent />
       </div>
