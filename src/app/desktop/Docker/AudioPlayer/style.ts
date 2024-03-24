@@ -2,6 +2,7 @@ import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
   container: css`
+    width: 480px;
     height: 64px;
   `,
   player: css`
@@ -26,10 +27,12 @@ const useStyles = createStyles(({ token, css }) => ({
   content: css`
     display: flex;
     flex-direction: column;
-    margin-left: ${token.marginMD}px;
+    flex-grow: 2;
+    margin-left: ${token.marginXS}px;
   `,
   name: css`
-    width: 140px;
+    width: 108px;
+    font-size: ${token.fontSizeSM}px;
     justify-content: flex-start;
   `,
   controller: css`

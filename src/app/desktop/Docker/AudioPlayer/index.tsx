@@ -77,7 +77,7 @@ function Player(props: PlayerProps) {
           shape="circle"
           className={isPlaying ? styles.spin : ''}
         />
-        <div style={{ margin: '0px 12px' }}>
+        <div className={styles.content}>
           <Duration duration={duration} currentProgress={currentProgress} />
           <div className={styles.controller}>
             <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>

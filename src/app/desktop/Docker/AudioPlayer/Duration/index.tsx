@@ -37,7 +37,7 @@ const Duration = (props: DurationProps) => {
           max={duration}
           value={currentProgress}
           tooltip={{ open: false }}
-          style={{ width: 480, margin: 0 }}
+          style={{ width: '100%', margin: 0 }}
         />
       </ConfigProvider>
       <span style={{ marginLeft: 8 }} className={styles.counter}>
