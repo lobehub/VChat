@@ -18,21 +18,18 @@ const useStyles = createStyles(({ css, token }) => ({
   `,
 }));
 
-interface SideBarProps {
-  setIsPlaying: (isPlaying: boolean) => void;
-}
-
 // eslint-disable-next-line react/display-name
-const SideBar = memo((props: SideBarProps) => {
-  const { setIsPlaying } = props;
+const SideBar = memo(() => {
   const { styles } = useStyles();
   const [tempId, setTempId] = useState<string>('');
-  const [showDanceSidebar, activateDance, deactivateDance, addAndPlayItem] = useDanceStore((s) => [
-    danceListSelectors.showSideBar(s),
-    s.activateDance,
-    s.deactivateDance,
-    s.addAndPlayItem,
-  ]);
+  const [showDanceSidebar, activateDance, deactivateDance, addAndPlayItem, setIsPlaying] =
+    useDanceStore((s) => [
+      danceListSelectors.showSideBar(s),
+      s.activateDance,
+      s.deactivateDance,
+      s.addAndPlayItem,
+      s.setIsPlaying,
+    ]);
 
   const currentDance = useDanceStore((s) => danceListSelectors.currentDanceItem(s));
 

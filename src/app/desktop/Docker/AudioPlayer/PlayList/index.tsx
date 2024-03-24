@@ -13,20 +13,21 @@ const { Meta } = List.Item;
 interface PlayListProps {
   open: boolean;
   onClose: () => void;
-  isPlaying: boolean;
-  setIsPlaying: (isPlaying: boolean) => void;
 }
 
 const PlayList = (props: PlayListProps) => {
-  const { open = false, onClose, isPlaying = false, setIsPlaying } = props;
+  const { open = false, onClose } = props;
   const { token } = theme.useToken();
-  const [playlist, playItem, removePlayItem, setPlayList, currentPlay] = useDanceStore((s) => [
-    s.playlist,
-    s.playItem,
-    s.removePlayItem,
-    s.setPlayList,
-    s.currentPlay,
-  ]);
+  const [playlist, playItem, removePlayItem, setPlayList, currentPlay, isPlaying, setIsPlaying] =
+    useDanceStore((s) => [
+      s.playlist,
+      s.playItem,
+      s.removePlayItem,
+      s.setPlayList,
+      s.currentPlay,
+      s.isPlaying,
+      s.setIsPlaying,
+    ]);
 
   return (
     <Drawer
@@ -56,7 +57,6 @@ const PlayList = (props: PlayListProps) => {
               actions={[
                 mark && isPlaying ? (
                   <ActionIcon
-                    // @ts-ignore
                     icon={Pause}
                     key="pause"
                     onClick={() => setIsPlaying(false)}
@@ -64,7 +64,6 @@ const PlayList = (props: PlayListProps) => {
                   />
                 ) : (
                   <ActionIcon
-                    // @ts-ignore
                     icon={PlayIcon}
                     key="play"
                     onClick={() => playItem(item)}
@@ -72,7 +71,6 @@ const PlayList = (props: PlayListProps) => {
                   />
                 ),
                 <ActionIcon
-                  // @ts-ignore
                   icon={XIcon}
                   key="delete"
                   onClick={() => removePlayItem(item)}

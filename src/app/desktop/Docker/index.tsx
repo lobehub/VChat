@@ -1,7 +1,8 @@
 'use client';
 
+import AudioPlayer from '@/app/desktop/Docker/AudioPlayer';
+import Timer from '@/app/desktop/Docker/Timer';
 import Apps from './Apps';
-import Timer from './Timer';
 import { useStyles } from './style';
 
 const Docker = () => {
@@ -9,9 +10,11 @@ const Docker = () => {
 
   return (
     <div className={styles.docker}>
-      <div className={styles.player}>1</div>
       <div className={styles.apps}>
         <Apps />
+      </div>
+      <div className={styles.player}>
+        <AudioPlayer />
       </div>
       <div className={styles.sidebar}>
         <Timer />

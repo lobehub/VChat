@@ -5,7 +5,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     display: inline-flex;
     align-items: center;
     flex-direction: column;
-    padding: 16px;
+    padding: 8px;
     border-radius: 2px;
     user-select: none;
     cursor: pointer;

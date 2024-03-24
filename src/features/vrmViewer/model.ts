@@ -17,7 +17,7 @@ import { LipSync } from '../lipSync/lipSync';
 export class Model {
   public vrm?: VRM | null;
   public mixer?: THREE.AnimationMixer;
-  public ikHandler?: any;
+  public ikHandler?: IKHandler;
   public emoteController?: EmoteController;
 
   private _lookAtTargetParent: THREE.Object3D;
@@ -98,6 +98,7 @@ export class Model {
     const { vrm, mixer } = this;
     if (vrm && mixer) {
       mixer.stopAllAction();
+      this.ikHandler?.disableAll();
       await this.loadIdleAnimation();
     }
   }

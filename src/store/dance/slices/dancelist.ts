@@ -7,6 +7,8 @@ import { isEqual } from 'lodash-es';
 import { StateCreator } from 'zustand/vanilla';
 
 export interface DanceListStore {
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
   currentIdentifier: string;
   danceList: Dance[];
   danceLoading: boolean;
@@ -24,9 +26,13 @@ export const createDanceStore: StateCreator<
   DanceListStore
 > = (set, get) => {
   return {
+    isPlaying: false,
     currentIdentifier: '',
     danceList: [DEFAULT_DANCE],
     danceLoading: false,
+    setIsPlaying: (isPlaying) => {
+      set({ isPlaying });
+    },
     activateDance: (identifier) => {
       set({ currentIdentifier: identifier });
     },
