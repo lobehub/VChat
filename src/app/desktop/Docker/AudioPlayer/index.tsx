@@ -1,11 +1,12 @@
 import Control from '@/app/desktop/Docker/AudioPlayer/Control';
 import Duration from '@/app/desktop/Docker/AudioPlayer/Duration';
+import Volume from '@/app/desktop/Docker/AudioPlayer/Volume';
 import { DanceStore, useDanceStore } from '@/store/dance';
 import { useViewerStore } from '@/store/viewer';
 import { Avatar } from '@lobehub/ui';
-import { Slider, Typography } from 'antd';
+import { Typography } from 'antd';
 import classNames from 'classnames';
-import { ListMusic, Volume2, VolumeXIcon } from 'lucide-react';
+import { ListMusic } from 'lucide-react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import PlayList from './PlayList';
@@ -29,7 +30,6 @@ function Player(props: PlayerProps) {
   const ref = useRef<HTMLAudioElement>(null);
   const [volume, setVolume] = useState(0.2);
   const [open, setOpen] = useState(false);
-  const [tempVolume, setTempVolume] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currentProgress, setCurrentProgress] = useState(0);
   const { nextDance, currentPlay, isPlaying } = useDanceStore(danceSelectors);
@@ -87,32 +87,7 @@ function Player(props: PlayerProps) {
 
         <div className={styles.right}>
           <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} />
-          <div className={styles.volume} style={{ marginLeft: 18 }}>
-            {volume === 0 ? (
-              <VolumeXIcon style={{ cursor: 'pointer' }} onClick={() => setVolume(tempVolume)} />
-            ) : (
-              <Volume2
-                style={{ cursor: 'pointer' }}
-                onClick={() => {
-                  setTempVolume(volume);
-                  setVolume(0);
-                }}
-              />
-            )}
-            <Slider
-              min={0}
-              max={1}
-              tooltip={{ open: false }}
-              step={0.05}
-              style={{ width: 80, marginLeft: 12 }}
-              value={volume}
-              onChange={(volume) => {
-                if (!ref.current) return;
-                ref.current.volume = volume;
-                setVolume(volume);
-              }}
-            />
-          </div>
+          <Volume volume={volume} setVolume={setVolume} audioRef={ref} />
         </div>
       </div>
     </div>

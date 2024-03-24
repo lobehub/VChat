@@ -20,18 +20,25 @@ const playListSelectors = (s: DanceStore) => {
     playlist: s.playlist,
     currentPlay: s.currentPlay,
     isPlaying: s.isPlaying,
-    setPlayList: s.setPlayList,
     playItem: s.playItem,
     removePlayItem: s.removePlayItem,
     setIsPlaying: s.setIsPlaying,
+    clearPlayList: s.clearPlayList,
   };
 };
 
 const PlayList = (props: PlayListProps) => {
   const { open = false, onClose } = props;
   const { token } = theme.useToken();
-  const { playlist, playItem, removePlayItem, setPlayList, currentPlay, isPlaying, setIsPlaying } =
-    useDanceStore((s) => playListSelectors(s));
+  const {
+    playlist,
+    playItem,
+    removePlayItem,
+    currentPlay,
+    isPlaying,
+    setIsPlaying,
+    clearPlayList,
+  } = useDanceStore((s) => playListSelectors(s));
 
   return (
     <Drawer
@@ -45,7 +52,7 @@ const PlayList = (props: PlayListProps) => {
       }}
       title="当前播放列表"
       extra={
-        <Button size="small" icon={<DeleteOutlined />} onClick={() => setPlayList([])}>
+        <Button size="small" icon={<DeleteOutlined />} onClick={() => clearPlayList()}>
           清空列表
         </Button>
       }
@@ -54,12 +61,12 @@ const PlayList = (props: PlayListProps) => {
         size="small"
         dataSource={playlist}
         renderItem={(item) => {
-          const mark = currentPlay ? currentPlay!.name === item.name : false;
+          const isCurrentPlay = currentPlay ? currentPlay!.name === item.name : false;
 
           return (
             <List.Item
               actions={[
-                mark && isPlaying ? (
+                isCurrentPlay && isPlaying ? (
                   <ActionIcon
                     icon={Pause}
                     key="pause"
@@ -83,9 +90,15 @@ const PlayList = (props: PlayListProps) => {
               ]}
               style={{
                 cursor: 'pointer',
-                backgroundColor: mark ? token.colorBgSpotlight : undefined,
+                backgroundColor: isCurrentPlay ? token.colorBgSpotlight : undefined,
               }}
-              onDoubleClick={() => playItem(item)}
+              onDoubleClick={() => {
+                if (isPlaying) {
+                  setIsPlaying(false);
+                } else {
+                  playItem(item);
+                }
+              }}
             >
               <Meta
                 title={
