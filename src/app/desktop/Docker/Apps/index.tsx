@@ -17,7 +17,6 @@ const Apps = () => {
           <Application
             key={app.key}
             avatar={app.avatar}
-            icon={app.icon}
             name={app.label}
             onClick={() => {
               openPanel(app.key as PanelKey);

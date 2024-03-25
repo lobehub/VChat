@@ -3,7 +3,6 @@ import { rgba } from 'polished';
 
 export const useStyles = createStyles(({ token, css, stylish, cx, responsive }) => ({
   container: cx(
-    stylish.blur,
     css`
       pointer-events: none;
 

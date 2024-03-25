@@ -4,8 +4,10 @@ import { sessionSelectors, useSessionStore } from '@/store/session';
 import { Avatar } from '@lobehub/ui';
 import { useStyles } from './style';
 
+const AvatarSize = 64;
+
 const RoleSelect = () => {
-  const { styles } = useStyles();
+  const { styles } = useStyles({ avatarSize: AvatarSize });
   const [sessionList, getAgentById] = useSessionStore((s) => [
     s.sessionList,
     sessionSelectors.getAgentById(s),
@@ -17,13 +19,22 @@ const RoleSelect = () => {
       {sessionList.map((session) => {
         const agent = getAgentById(session.agentId);
         if (!agent) return null;
+        const isActive = activeId === agent.agentId;
         return (
-          <Avatar
-            src={agent.meta.avatar}
-            size={64}
-            onClick={() => switchSession(agent.agentId)}
-            className={activeId === agent.agentId ? styles.active : ''}
-          />
+          <div style={{ position: 'relative' }}>
+            <Avatar
+              src={agent.meta.avatar}
+              size={AvatarSize}
+              onClick={() => switchSession(agent.agentId)}
+              className={isActive ? styles.active : ''}
+            />
+            {isActive ? (
+              <>
+                <div className={styles.satellite} />
+                <div className={styles.orbit} />
+              </>
+            ) : null}
+          </div>
         );
       })}
     </div>
