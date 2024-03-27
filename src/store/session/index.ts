@@ -16,6 +16,11 @@ import { sessionSelectors } from './selectors';
 
 const SESSION_STORAGE_KEY = 'vidol-chat-session-storage';
 
+export enum ViewerModeEnum {
+  Normal = 'Normal',
+  Img = 'Img',
+}
+
 export interface SessionStore {
   /**
    * 当前会话 ID
@@ -38,9 +43,17 @@ export interface SessionStore {
    */
   voiceOn: boolean;
   /**
+   * 角色渲染模式
+   */
+  viewerMode: boolean;
+  /**
+   * 触发 3D 渲染开关
+   */
+  setViewerMode: (mode: boolean) => void;
+  /**
    * 触发语音开关
    */
-  toogleVoice: () => void;
+  toggleVoice: () => void;
   /**
    * 当前消息输入
    */
@@ -116,9 +129,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   setMessageInput: (messageInput) => {
     set({ messageInput });
   },
-  toogleVoice: () => {
+  toggleVoice: () => {
     const { voiceOn } = get();
     set({ voiceOn: !voiceOn });
+  },
+  setViewerMode: (mode) => {
+    set({ viewerMode: mode });
   },
   createSession: (agent: Agent) => {
     const { sessionList, localAgentList } = get();

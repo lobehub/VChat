@@ -18,7 +18,7 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
   player: css``,
   apps: css``,
-  sidebar: css`
+  message: css`
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -16,18 +16,16 @@ const Desktop = () => {
       <Header />
       <div style={{ height: 'calc(100vh - 64px)' }}>
         <VirtualIdol />
-        {apps
-          .filter((app) => app.component)
-          .map((app) => {
-            const open = panel[app.key as PanelKey].open;
-            const min = panel[app.key as PanelKey].min;
-            const component = app.component;
-            return open ? (
-              <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
-                {component}
-              </div>
-            ) : null;
-          })}
+        {apps.map((app) => {
+          const open = panel[app.key as PanelKey].open;
+          const min = panel[app.key as PanelKey].min;
+          const component = app.component;
+          return open ? (
+            <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
+              {component}
+            </div>
+          ) : null;
+        })}
       </div>
       <Docker />
       <RoleSelect />
