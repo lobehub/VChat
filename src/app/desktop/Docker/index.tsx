@@ -24,8 +24,8 @@ const Docker = () => {
         <Segmented
           value={viewerMode ? 'true' : 'false'}
           options={[
-            { label: '视频', value: 'true' },
-            { label: '聊天', value: 'false' },
+            { label: '3D', value: 'true' },
+            { label: '立绘', value: 'false' },
           ]}
           style={{ marginLeft: '8px' }}
           onChange={(value) => {

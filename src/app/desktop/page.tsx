@@ -1,6 +1,7 @@
 'use client';
 
 import Background from '@/app/desktop/Background';
+import Dialog from '@/app/desktop/Dialog';
 import Header from '@/app/desktop/Header';
 import RoleSelect from '@/app/desktop/RoleSelect';
 import VirtualIdol from '@/app/desktop/VirtualIdol';
@@ -29,6 +30,7 @@ const Desktop = () => {
       </div>
       <Docker />
       <RoleSelect />
+      <Dialog />
       <Background />
     </div>
   );
