@@ -12,6 +12,10 @@ const StoreHydration = () => {
     useSessionStore.persist.rehydrate();
     useConfigStore.persist.rehydrate();
   }, []);
+
+  useEffect(() => {
+    router.prefetch('/home');
+  }, [router]);
   return null;
 };
 

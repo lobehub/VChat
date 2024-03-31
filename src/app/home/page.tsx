@@ -1,11 +1,11 @@
 'use client';
 
-import Background from '@/app/desktop/Background';
-import Dialog from '@/app/desktop/Dialog';
-import Header from '@/app/desktop/Header';
-import RoleSelect from '@/app/desktop/RoleSelect';
-import VirtualIdol from '@/app/desktop/VirtualIdol';
-import { apps } from '@/app/desktop/apps';
+import Background from '@/app/home/Background';
+import Dialog from '@/app/home/Dialog';
+import Header from '@/app/home/Header';
+import RoleSelect from '@/app/home/RoleSelect';
+import VirtualIdol from '@/app/home/VirtualIdol';
+import { apps } from '@/app/home/apps';
 import { useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
 import Docker from './Docker';

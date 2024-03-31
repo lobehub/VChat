@@ -1,6 +1,6 @@
-import Control from '@/app/desktop/Docker/AudioPlayer/Control';
-import Duration from '@/app/desktop/Docker/AudioPlayer/Duration';
-import Volume from '@/app/desktop/Docker/AudioPlayer/Volume';
+import Control from '@/app/home/Docker/AudioPlayer/Control';
+import Duration from '@/app/home/Docker/AudioPlayer/Duration';
+import Volume from '@/app/home/Docker/AudioPlayer/Volume';
 import { DanceStore, useDanceStore } from '@/store/dance';
 import { useViewerStore } from '@/store/viewer';
 import { Avatar } from '@lobehub/ui';

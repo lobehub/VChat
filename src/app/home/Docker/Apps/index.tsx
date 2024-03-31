@@ -1,6 +1,6 @@
 'use client';
 
-import { apps } from '@/app/desktop/apps';
+import { apps } from '@/app/home/apps';
 import Application from '@/components/Application';
 import { useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';

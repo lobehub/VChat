@@ -30,7 +30,7 @@ const RoleSelect = () => {
             />
             {isActive ? (
               <>
-                <div className={styles.satellite} />
+                {/*<div className={styles.satellite} />*/}
                 <div className={styles.orbit} />
               </>
             ) : null}
