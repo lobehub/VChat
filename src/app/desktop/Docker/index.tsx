@@ -2,13 +2,17 @@
 
 import AudioPlayer from '@/app/desktop/Docker/AudioPlayer';
 import MessageInput from '@/app/desktop/Docker/MessageInput';
+import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
-import { Segmented } from 'antd';
+import { ActionIcon } from '@lobehub/ui';
+import { Segmented, Space } from 'antd';
+import { History } from 'lucide-react';
 import Apps from './Apps';
 import { useStyles } from './style';
 
 const Docker = () => {
   const { styles } = useStyles();
+  const [openPanel] = useConfigStore((s) => [s.openPanel]);
   const { viewerMode, setViewerMode } = useSessionStore((s) => ({
     viewerMode: s.viewerMode,
     setViewerMode: s.setViewerMode,
@@ -20,22 +24,30 @@ const Docker = () => {
         <Apps />
       </div>
       <div className={styles.message}>
-        <MessageInput />
-        <Segmented
-          value={viewerMode ? 'true' : 'false'}
-          options={[
-            { label: '3D', value: 'true' },
-            { label: '立绘', value: 'false' },
-          ]}
-          style={{ marginLeft: '8px' }}
-          onChange={(value) => {
-            if (value === 'true') {
-              setViewerMode(true);
-            } else {
-              setViewerMode(false);
-            }
-          }}
-        />
+        <Space>
+          <MessageInput />
+          <ActionIcon
+            icon={History}
+            title={'聊天记录'}
+            onClick={() => {
+              openPanel('chat');
+            }}
+          />
+          <Segmented
+            value={viewerMode ? 'true' : 'false'}
+            options={[
+              { label: '3D', value: 'true' },
+              { label: '立绘', value: 'false' },
+            ]}
+            onChange={(value) => {
+              if (value === 'true') {
+                setViewerMode(true);
+              } else {
+                setViewerMode(false);
+              }
+            }}
+          />
+        </Space>
       </div>
       <div className={styles.player}>
         <AudioPlayer />
