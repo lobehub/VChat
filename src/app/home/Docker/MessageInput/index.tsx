@@ -1,10 +1,14 @@
 import useChatInput from '@/hooks/useSendMessage';
+import Record from '@/panels/ChatPanel/ChatBot/ChatInput/Header/ActionBar/Record';
+import Voice from '@/panels/ChatPanel/ChatBot/ChatInput/Header/ActionBar/Voice';
+import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { isCommandPressed } from '@/utils/keyboard';
-import { Input } from '@lobehub/ui';
+import { ActionIcon, Input } from '@lobehub/ui';
 import { Button, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import { InputRef } from 'antd/es/input/Input';
+import { History } from 'lucide-react';
 import { memo, useRef } from 'react';
 
 const useStyles = createStyles(({ css }) => {
@@ -20,6 +24,7 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
   const ref = useRef<InputRef>(null);
   const isChineseInput = useRef(false);
   const onSend = useChatInput();
+  const [openPanel] = useConfigStore((s) => [s.openPanel]);
 
   const [loading, messageInput, setMessageInput] = useSessionStore((s) => [
     !!s.chatLoadingId,
@@ -69,6 +74,15 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
       >
         发送
       </Button>
+      <ActionIcon
+        icon={History}
+        title={'聊天记录'}
+        onClick={() => {
+          openPanel('chat');
+        }}
+      />
+      <Voice />
+      <Record />
     </Space>
   );
 });

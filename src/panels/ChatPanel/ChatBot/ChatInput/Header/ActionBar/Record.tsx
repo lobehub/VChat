@@ -21,7 +21,14 @@ const Record = () => {
   const { isRecording, toggleRecord } = useSpeechRecognition({
     onMessage: handleMessageInput,
   });
-  return <ActionIcon icon={Mic} onClick={toggleRecord} loading={isRecording} title="语音识别" />;
+  return (
+    <ActionIcon
+      icon={Mic}
+      onClick={toggleRecord}
+      loading={isRecording}
+      title="语音识别（需科学上网）"
+    />
+  );
 };
 
 export default Record;
