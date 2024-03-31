@@ -102,14 +102,15 @@ export class Viewer {
     this._renderer.setPixelRatio(window.devicePixelRatio);
 
     // camera 全身
-    // this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    // this._camera.position.set(0, 1.5, 1.5);
-    // this._cameraControls?.target.set(0, 1.3, 0);
+    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20.0);
+    this._camera.position.set(0, 1.3, 1.3);
+    this._cameraControls?.target.set(0, 1.3, 0);
 
     // Camera 上半身
-    this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
-    this._camera.position.set(0, 1.3, 1.5);
-    this._cameraControls?.target.set(0, 1.3, 0);
+    // this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
+    // this._camera.position.set(0, 1.3, 1.5);
+    // this._cameraControls?.target.set(0, 1.3, 0);
+
     this._cameraControls?.update();
 
     // camera controls
@@ -161,16 +162,13 @@ export class Viewer {
     this._camera.updateProjectionMatrix();
   }
 
-  /**
-   * VRMのheadノードを参照してカメラ位置を調整する
-   */
   public resetCamera() {
-    const headNode = this.model?.vrm?.humanoid.getNormalizedBoneNode('head');
+    const chestNode = this.model?.vrm?.humanoid.getNormalizedBoneNode('chest');
 
-    if (headNode) {
-      const headWPos = headNode.getWorldPosition(new THREE.Vector3());
-      this._camera?.position.set(this._camera.position.x, headWPos.y, this._camera.position.z);
-      this._cameraControls?.target.set(headWPos.x, headWPos.y, headWPos.z);
+    if (chestNode) {
+      const chestWPos = chestNode.getWorldPosition(new THREE.Vector3());
+      this._camera?.position.set(this._camera.position.x, chestWPos.y, this._camera.position.z);
+      this._cameraControls?.target.set(chestWPos.x, chestWPos.y, chestWPos.z);
       this._cameraControls?.update();
     }
   }
