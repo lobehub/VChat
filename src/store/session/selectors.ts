@@ -72,6 +72,11 @@ const currentAgent = (s: SessionStore): Agent | undefined => {
   return localAgentList.find((item) => item.agentId === activeId);
 };
 
+const currentChatMessage = (s: SessionStore): ChatMessage | undefined => {
+  const { chatLoadingId } = s;
+  return currentChats(s).find((item) => item.id === chatLoadingId);
+};
+
 const getAgentById = (s: SessionStore) => {
   const { localAgentList } = s;
 
@@ -82,6 +87,7 @@ export const sessionSelectors = {
   currentSession,
   currentChatIDs,
   sessionListIds,
+  currentChatMessage,
   currentChats,
   currentAgent,
   currentChatsString,

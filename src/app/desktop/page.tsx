@@ -1,6 +1,7 @@
 'use client';
 
 import Background from '@/app/desktop/Background';
+import Dialog from '@/app/desktop/Dialog';
 import Header from '@/app/desktop/Header';
 import RoleSelect from '@/app/desktop/RoleSelect';
 import VirtualIdol from '@/app/desktop/VirtualIdol';
@@ -14,23 +15,22 @@ const Desktop = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', position: 'relative' }}>
       <Header />
-      <div style={{ height: 'calc(100vh - 64px)' }}>
+      <div style={{ height: 'calc(100vh - 64px - 64px)' }}>
         <VirtualIdol />
-        {apps
-          .filter((app) => app.component)
-          .map((app) => {
-            const open = panel[app.key as PanelKey].open;
-            const min = panel[app.key as PanelKey].min;
-            const component = app.component;
-            return open ? (
-              <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
-                {component}
-              </div>
-            ) : null;
-          })}
+        {apps.map((app) => {
+          const open = panel[app.key as PanelKey].open;
+          const min = panel[app.key as PanelKey].min;
+          const component = app.component;
+          return open ? (
+            <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
+              {component}
+            </div>
+          ) : null;
+        })}
       </div>
       <Docker />
       <RoleSelect />
+      <Dialog />
       <Background />
     </div>
   );

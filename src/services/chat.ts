@@ -45,10 +45,10 @@ export const handleSpeakAi = async (message: string) => {
 };
 
 export const toogleVoice = async () => {
-  const { toogleVoice, voiceOn } = useSessionStore.getState();
+  const { toggleVoice, voiceOn } = useSessionStore.getState();
   if (voiceOn) {
     const viewer = useViewerStore.getState().viewer;
     viewer.model?.stopSpeak();
   }
-  toogleVoice();
+  toggleVoice();
 };

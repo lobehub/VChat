@@ -12,6 +12,7 @@ const initialState = {
   sessionList: [defaultSession],
   chatLoadingId: undefined,
   voiceOn: true,
+  viewerMode: true,
   messageInput: '',
 };
 

@@ -1,13 +1,13 @@
 import { useSessionStore } from '@/store/session';
 import { sessionSelectors } from '@/store/session/selectors';
 import { ChatMessage } from '@/types/chat';
-import { AlertProps, ChatItem } from '@lobehub/ui';
+import { AlertProps, ChatItem, ChatItemProps } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import isEqual from 'fast-deep-equal';
 import { ReactNode, memo, useCallback, useMemo, useState } from 'react';
 import ErrorMessageExtra, { getErrorAlertConfig } from '../Error';
-import { renderMessages } from '../Messages';
 import ActionsBar from './ActionsBar';
+import { renderMessages } from './Messages';
 
 const useStyles = createStyles(({ css, prefixCls }) => ({
   message: css`
@@ -21,9 +21,11 @@ const useStyles = createStyles(({ css, prefixCls }) => ({
 export interface ChatListItemProps {
   id: string;
   index: number;
+  showTitle?: boolean;
+  type?: ChatItemProps['type'];
 }
 
-const Item = memo<ChatListItemProps>(({ index, id }) => {
+const Item = memo<ChatListItemProps>(({ index, id, showTitle = false, type = 'block' }) => {
   const { styles } = useStyles();
   const [editing, setEditing] = useState(false);
 
@@ -66,6 +68,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
       <ChatItem
         actions={<ActionsBar index={index} setEditing={setEditing} />}
         avatar={item.meta}
+        showTitle={showTitle}
         className={styles.message}
         editing={editing}
         error={error}
@@ -91,7 +94,7 @@ const Item = memo<ChatListItemProps>(({ index, id }) => {
           edit: '编辑',
         }}
         time={item.updatedAt || item.createdAt}
-        type={'block'}
+        type={type}
       />
     )
   );
