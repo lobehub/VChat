@@ -1,7 +1,7 @@
 import AudioPlayer from '@/app/home/Docker/AudioPlayer';
-import MessageInput from '@/app/home/Docker/MessageInput';
 import { useSessionStore } from '@/store/session';
 import { Segmented, Space } from 'antd';
+import MessageInput from '../../../features/ChatInput/MessageInput';
 import Apps from './Apps';
 import { useStyles } from './style';
 

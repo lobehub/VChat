@@ -1,6 +1,5 @@
+import Record from '@/features/ChatInput/Actions/Record';
 import useChatInput from '@/hooks/useSendMessage';
-import Record from '@/panels/ChatPanel/ChatBot/ChatInput/Header/ActionBar/Record';
-import Voice from '@/panels/ChatPanel/ChatBot/ChatInput/Header/ActionBar/Voice';
 import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { isCommandPressed } from '@/utils/keyboard';
@@ -10,6 +9,7 @@ import { createStyles } from 'antd-style';
 import { InputRef } from 'antd/es/input/Input';
 import { History } from 'lucide-react';
 import { memo, useRef } from 'react';
+import Voice from '../Actions/Voice';
 
 const useStyles = createStyles(({ css }) => {
   return {
