@@ -1,4 +1,4 @@
-import ChatItem from '@/panels/ChatPanel/ChatBot/ChatList/ChatItem';
+import ChatItem from '@/features/ChatItem';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useStyles } from './style';
 
@@ -12,7 +12,7 @@ const Dialog = () => {
         id={currentChats[lastAgentChatIndex].id}
         index={lastAgentChatIndex}
         showTitle={true}
-        type="block"
+        type="pure"
       />
     </div>
   ) : null;

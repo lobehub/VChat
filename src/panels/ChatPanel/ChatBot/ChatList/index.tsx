@@ -1,10 +1,10 @@
+import Item from '@/features/ChatItem';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import isEqual from 'fast-deep-equal';
 import { memo, useEffect, useRef, useState } from 'react';
 import { Flexbox } from 'react-layout-kit';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import AutoScroll from './AutoScroll';
-import Item from './ChatItem';
 
 const itemContent = (index: number, id: string) => {
   return index === 0 ? <div style={{ height: 24 }} /> : <Item id={id} index={index - 1} />;
