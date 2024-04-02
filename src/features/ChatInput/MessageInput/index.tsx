@@ -1,20 +1,20 @@
+import { DEFAULT_USER_AVATAR } from '@/constants/common';
 import Record from '@/features/ChatInput/Actions/Record';
 import useChatInput from '@/hooks/useSendMessage';
 import { useConfigStore } from '@/store/config';
 import { useSessionStore } from '@/store/session';
 import { isCommandPressed } from '@/utils/keyboard';
-import { ActionIcon, Input } from '@lobehub/ui';
+import { ActionIcon, Avatar, Input } from '@lobehub/ui';
 import { Button, Space } from 'antd';
 import { createStyles } from 'antd-style';
 import { InputRef } from 'antd/es/input/Input';
 import { History } from 'lucide-react';
 import { memo, useRef } from 'react';
-import Voice from '../Actions/Voice';
 
 const useStyles = createStyles(({ css }) => {
   return {
     textarea: css`
-      width: 360px;
+      width: 400px;
     `,
   };
 });
@@ -33,7 +33,8 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
   ]);
 
   return (
-    <Space>
+    <Space size={4}>
+      <Avatar avatar={DEFAULT_USER_AVATAR} />
       <Input
         autoFocus
         className={styles.textarea}
@@ -81,7 +82,6 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
           openPanel('chat');
         }}
       />
-      <Voice />
       <Record />
     </Space>
   );

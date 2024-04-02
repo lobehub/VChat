@@ -20,3 +20,5 @@ export const CHAT_TEXTAREA_MAX_HEIGHT = 570;
 export const CHAT_TEXTAREA_HEIGHT = 200;
 
 export const HEADER_HEIGHT = 64;
+
+export const DEFAULT_USER_AVATAR = '😀';

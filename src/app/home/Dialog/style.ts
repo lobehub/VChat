@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style';
 import { rgba } from 'polished';
 
-const DIALOG_WIDTH = 800;
+const DIALOG_WIDTH = 720;
 
 export const useStyles = createStyles(({ css, token }) => ({
   dialog: css`
