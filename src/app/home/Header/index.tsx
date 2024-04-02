@@ -10,6 +10,7 @@ const Header = () => {
       actions={[
         <ActionIcon
           size="large"
+          key="github"
           icon={GithubIcon}
           onClick={() => window.open('https://github.com/v-idol/vidol.chat', '_blank')}
         />,

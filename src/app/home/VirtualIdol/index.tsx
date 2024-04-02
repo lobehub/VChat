@@ -1,8 +1,8 @@
 'use client';
 
+import AgentViewer from '@/features/AgentViewer';
+import ImageViewer from '@/features/ImageViewer';
 import { useSessionStore } from '@/store/session';
-import AgentViewer from './AgentViewer';
-import ImageViewer from './ImageViewer';
 import { useStyles } from './style';
 
 const VirtualIdol = () => {

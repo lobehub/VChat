@@ -1,17 +1,22 @@
+import PageLoading from '@/components/PageLoading';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, RotateCw } from 'lucide-react';
-import { memo, useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 function AgentViewer() {
   const viewer = useViewerStore((s) => s.viewer);
+  const [loading, setLoading] = useState(false);
   const currentLiveAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (currentLiveAgent) {
-      viewer.loadVrm(currentLiveAgent.meta.model);
+      setLoading(true);
+      viewer.loadVrm(currentLiveAgent.meta.model).finally(() => {
+        setLoading(false);
+      });
     }
   }, [currentLiveAgent, viewer]);
 
@@ -69,9 +74,10 @@ function AgentViewer() {
           }
         }}
       />
+      {loading ? <PageLoading title={'模型加载中，请稍后...'} /> : null}
       <canvas ref={canvasRef} width={900} height={640}></canvas>
     </div>
   );
 }
 
-export default memo(AgentViewer);
+export default AgentViewer;

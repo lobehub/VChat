@@ -21,7 +21,7 @@ const RoleSelect = () => {
         if (!agent) return null;
         const isActive = activeId === agent.agentId;
         return (
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative' }} key={agent.agentId}>
             <Avatar
               src={agent.meta.avatar}
               size={AvatarSize}
