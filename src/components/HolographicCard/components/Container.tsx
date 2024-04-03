@@ -15,7 +15,6 @@ export interface ContainerProps {
 const Container = memo<ContainerProps>(({ back, foil, mask, children, className, loading }) => {
   const { styles, cx } = useStyles();
   const { style: shineStyle, onMouseMove, onMouseOut } = useLaserShine();
-  console.log('mask', mask);
 
   return (
     <Orbit
@@ -28,7 +27,7 @@ const Container = memo<ContainerProps>(({ back, foil, mask, children, className,
           ...shineStyle,
           '--mask': `url(${mask ?? ''})`,
           '--foil': `url(${foil ?? ''})`,
-          width: 380,
+          width: 320,
         } as CSSProperties,
         content: {
           display: 'grid',

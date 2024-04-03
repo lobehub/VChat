@@ -8,10 +8,7 @@ const Docker = () => {
 
   return (
     <div className={styles.content}>
-      <HolographicCard
-        img={currentAgent?.meta.cover}
-        mask={'https://gw.alipayobjects.com/zos/kitchen/nbf5vouUl/illusion.png'}
-      />
+      <HolographicCard img={currentAgent?.meta.cover} />
     </div>
   );
 };
