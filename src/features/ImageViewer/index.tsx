@@ -1,5 +1,4 @@
-'use client';
-
+import HolographicCard from '@/components/HolographicCard';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useStyles } from './style';
 
@@ -9,7 +8,10 @@ const Docker = () => {
 
   return (
     <div className={styles.content}>
-      <img src={currentAgent?.meta.cover} alt="cover" width={300} height={400} />
+      <HolographicCard
+        img={currentAgent?.meta.cover}
+        mask={'https://gw.alipayobjects.com/zos/kitchen/nbf5vouUl/illusion.png'}
+      />
     </div>
   );
 };
