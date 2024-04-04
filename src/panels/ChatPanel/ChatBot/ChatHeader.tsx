@@ -1,7 +1,6 @@
 import AgentMeta from '@/components/AgentMeta';
 import { sessionSelectors, useSessionStore } from '@/store/session';
-import { ActionIcon } from '@lobehub/ui';
-import { Volume2 } from 'lucide-react';
+import Voice from '../../../features/ChatInput/Actions/Voice';
 import { useStyles } from './style';
 
 const Header = () => {
@@ -11,7 +10,7 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <AgentMeta meta={currentAgent?.meta} />
-      <ActionIcon icon={Volume2} onClick={() => {}} />
+      <Voice />
     </div>
   );
 };

@@ -52,28 +52,28 @@ export class Viewer {
     this._scene.add(pmx);
   }
 
-  public loadVrm(url: string) {
+  public async loadVrm(url: string) {
     if (this.model?.vrm) {
       this.unloadVRM();
     }
 
     // gltf and vrm
     this.model = new Model(this._camera || new THREE.Object3D());
-    this.model.loadVRM(url).then(async () => {
-      if (!this.model?.vrm) return;
+    await this.model.loadVRM(url);
 
-      // Disable frustum culling
-      this.model.vrm.scene.traverse((obj) => {
-        obj.frustumCulled = false;
-      });
+    if (!this.model?.vrm) return;
 
-      this._scene.add(this.model.vrm.scene);
-      await this.model.loadIdleAnimation();
+    // Disable frustum culling
+    this.model.vrm.scene.traverse((obj) => {
+      obj.frustumCulled = false;
+    });
 
-      // HACK: アニメーションの原点がずれているので再生後にカメラ位置を調整する
-      requestAnimationFrame(() => {
-        this.resetCamera();
-      });
+    this._scene.add(this.model.vrm.scene);
+    await this.model.loadIdleAnimation();
+
+    // HACK: アニメーションの原点がずれているので再生後にカメラ位置を調整する
+    requestAnimationFrame(() => {
+      this.resetCamera();
     });
   }
 

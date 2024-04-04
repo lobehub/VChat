@@ -9,6 +9,13 @@ const useStyles = createStyles(({ token, css }) => ({
     justify-content: space-between;
     align-items: center;
   `,
+  voice: css`
+    cursor: pointer;
+    transition: color 0.3s;
+  `,
+  voiceOn: css`
+    color: ${token.colorLinkActive};
+  `,
   chatbot: css`
     position: relative;
     display: flex;

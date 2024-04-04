@@ -1,3 +1,4 @@
+import { DEFAULT_USER_AVATAR } from '@/constants/common';
 import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
 import { Session } from '@/types/session';
@@ -12,8 +13,6 @@ const sessionListIds = (s: SessionStore): string[] => {
   const { sessionList } = s;
   return sessionList.map((item) => item.agentId);
 };
-
-export const DEFAULT_USER_AVATAR = '😀';
 
 const currentChatIDs = (s: SessionStore): string[] => {
   const session = currentSession(s);
