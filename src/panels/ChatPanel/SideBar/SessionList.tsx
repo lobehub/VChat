@@ -1,9 +1,11 @@
 import { sessionSelectors, useSessionStore } from '@/store/session';
-import { Avatar } from '@lobehub/ui';
-import { List, Typography } from 'antd';
+import { ActionIcon, Avatar } from '@lobehub/ui';
+import { useHover } from 'ahooks';
+import { Dropdown, List, MenuProps, Typography } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo } from 'react';
+import { MoreVertical, Trash2 } from 'lucide-react';
+import { memo, useRef } from 'react';
 
 const { Text } = Typography;
 
@@ -32,6 +34,15 @@ const SessionList = (props: SessionListProps) => {
   const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
   const { styles } = useStyles();
 
+  const items: MenuProps['items'] = [
+    {
+      key: 'delete',
+      label: '删除对话',
+      icon: <Trash2 />,
+      danger: true,
+    },
+  ];
+
   // TODO: 滚动到当前 agent
 
   return (
@@ -44,12 +55,16 @@ const SessionList = (props: SessionListProps) => {
       renderItem={(agentId) => {
         const agent = getAgentById(agentId);
         const { name, description, avatar } = agent?.meta || {};
+        const ref = useRef(null);
+        const isHovering = useHover(ref);
+
         return (
           <List.Item
             onClick={() => switchSession(agentId)}
             className={classNames(styles.listItem, {
               [styles.active]: agentId === currentAgent?.agentId,
             })}
+            ref={ref}
             style={{ padding: 12 }}
           >
             <List.Item.Meta
@@ -57,6 +72,24 @@ const SessionList = (props: SessionListProps) => {
               title={name}
               description={<Text ellipsis>{description}</Text>}
             />
+            {isHovering ? (
+              <Dropdown
+                menu={{
+                  items,
+                  onClick: ({ domEvent }) => {
+                    domEvent.stopPropagation();
+                  },
+                }}
+                trigger={['click']}
+              >
+                <ActionIcon
+                  icon={MoreVertical}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                />
+              </Dropdown>
+            ) : null}
           </List.Item>
         );
       }}
