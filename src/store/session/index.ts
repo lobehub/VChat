@@ -35,6 +35,10 @@ export interface SessionStore {
    */
   sessionList: Session[];
   /**
+   *  移除会话
+   */
+  removeSession: (id: string) => void;
+  /**
    * 聊天加载中的消息 ID
    */
   chatLoadingId: string | undefined;
@@ -166,6 +170,20 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       set({ sessionList: [...sessionList, session] });
     }
     set({ activeId: agentId });
+  },
+  removeSession: (id) => {
+    const { sessionList, activeId } = get();
+
+    const sessions = produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agentId === id);
+      if (index === -1) return;
+      draft.splice(index, 1);
+    });
+    set({ sessionList: sessions });
+
+    if (activeId === id) {
+      set({ activeId: sessions[0]?.agentId });
+    }
   },
   clearHistory: () => {
     const { updateSessionMessages } = get();

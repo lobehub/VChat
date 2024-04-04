@@ -1,5 +1,6 @@
+import { useSessionStore } from '@/store/session';
 import { ActionIcon } from '@lobehub/ui';
-import { Dropdown, MenuProps } from 'antd';
+import { App, Dropdown, MenuProps } from 'antd';
 import { MoreVertical, Trash2 } from 'lucide-react';
 
 interface ActionsProps {
@@ -9,12 +10,25 @@ interface ActionsProps {
 
 export default (props: ActionsProps) => {
   const { id, setOpen } = props;
+  const { modal } = App.useApp();
+  const [removeSession] = useSessionStore((s) => [s.removeSession]);
 
   const items: MenuProps['items'] = [
     {
       key: 'delete',
       label: '删除对话',
       icon: <Trash2 />,
+      onClick: ({ domEvent }) => {
+        domEvent.stopPropagation();
+        modal.confirm({
+          centered: true,
+          okButtonProps: { danger: true },
+          onOk: () => {
+            removeSession(id);
+          },
+          title: '确认删除对话吗？删除后无法恢复, 请谨慎操作！',
+        });
+      },
       danger: true,
     },
   ];
