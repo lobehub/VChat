@@ -1,9 +1,8 @@
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { FormFooter } from '@lobehub/ui';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useEffect } from 'react';
 
 const FormItem = Form.Item;
 
@@ -42,20 +41,34 @@ const Info = (props: InfoProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [form] = Form.useForm();
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
-
-  useEffect(() => {
-    form.setFieldsValue(currentAgent);
-  }, [currentAgent, form]);
+  const [currentAgent, updateAgentConfig] = useSessionStore((s) => [
+    sessionSelectors.currentAgent(s),
+    s.updateAgentConfig,
+  ]);
 
   return (
-    <Form onFinish={(values) => {}} layout="horizontal" requiredMark={false} form={form}>
+    <Form
+      onFinish={(values) => {
+        form.validateFields().then((values) => {
+          updateAgentConfig(values);
+          message.success('保存成功');
+        });
+      }}
+      layout="horizontal"
+      requiredMark={false}
+      form={form}
+      initialValues={currentAgent}
+    >
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
           <div className={styles.config}>
-            <FormItem label={'系统设定'} name="systemRole">
+            <FormItem
+              label={'系统设定'}
+              name="systemRole"
+              rules={[{ required: true, message: '请输入角色的系统设定' }]}
+            >
               <Input.TextArea
-                placeholder="请输入要转换的文字"
+                placeholder="请输入角色的系统设定"
                 showCount
                 autoSize={{ maxRows: 18, minRows: 18 }}
               />

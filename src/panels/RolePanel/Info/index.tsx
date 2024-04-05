@@ -1,9 +1,8 @@
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { Avatar, FormFooter } from '@lobehub/ui';
-import { Button, Card, Form, Input, Upload } from 'antd';
+import { Button, Form, Input, Upload, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useEffect } from 'react';
 
 const FormItem = Form.Item;
 
@@ -42,13 +41,12 @@ const Info = (props: InfoProps) => {
   const { style, className } = props;
   const { styles } = useStyles();
   const [form] = Form.useForm();
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
+  const [currentAgent, updateAgentConfig] = useSessionStore((s) => [
+    sessionSelectors.currentAgent(s),
+    s.updateAgentConfig,
+  ]);
 
   const { cover, avatar } = currentAgent?.meta || {};
-
-  useEffect(() => {
-    form.setFieldsValue(currentAgent);
-  }, [currentAgent, form]);
 
   const uploadButton = (
     <div>
@@ -58,17 +56,41 @@ const Info = (props: InfoProps) => {
   );
 
   return (
-    <Form onFinish={(values) => {}} layout="horizontal" requiredMark={false} form={form}>
+    <Form
+      onFinish={() => {
+        form.validateFields().then((values) => {
+          updateAgentConfig(values);
+          message.success('保存成功');
+        });
+      }}
+      initialValues={currentAgent}
+      layout="horizontal"
+      requiredMark={false}
+      form={form}
+    >
       <div style={style} className={classNames(className, styles.container)}>
         <div className={styles.form}>
           <div className={styles.config}>
-            <FormItem label={'名称'} name={['meta', 'name']}>
+            <FormItem
+              label={'名称'}
+              name={['meta', 'name']}
+              required
+              rules={[{ required: true, message: '请输入角色名称' }]}
+            >
               <Input placeholder="请输入角色名称" />
             </FormItem>
-            <FormItem label={'描述'} name={['meta', 'description']}>
+            <FormItem
+              label={'描述'}
+              name={['meta', 'description']}
+              rules={[{ required: true, message: '请输入角色描述' }]}
+            >
               <Input placeholder="请输入角色描述" />
             </FormItem>
-            <FormItem label={'说明'} name={['meta', 'readme']}>
+            <FormItem
+              label={'说明'}
+              name={['meta', 'readme']}
+              rules={[{ required: true, message: '请输入角色说明' }]}
+            >
               <Input.TextArea
                 placeholder="请输入角色说明"
                 showCount
@@ -77,7 +99,7 @@ const Info = (props: InfoProps) => {
             </FormItem>
           </div>
           <div className={styles.more}>
-            <FormItem label={'头像'} name={['meta', 'name']}>
+            <FormItem label={'头像'} name={['meta', 'avatar']}>
               <Upload
                 showUploadList={false}
                 // action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
@@ -94,11 +116,7 @@ const Info = (props: InfoProps) => {
                 // beforeUpload={beforeUpload}
                 // onChange={handleChange}
               >
-                <Card
-                  /* eslint-disable-next-line @next/next/no-img-element */
-                  cover={<img alt="example" src={cover} />}
-                  style={{ width: 200, cursor: 'pointer' }}
-                />
+                <img alt="example" src={cover} width={200} />
               </Upload>
             </FormItem>
           </div>
