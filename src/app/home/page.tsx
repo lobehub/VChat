@@ -19,10 +19,9 @@ const Desktop = () => {
         <VirtualIdol />
         {apps.map((app) => {
           const open = panel[app.key as PanelKey].open;
-          const min = panel[app.key as PanelKey].min;
           const component = app.component;
           return open ? (
-            <div key={app.key} style={{ display: min ? 'none' : 'flex' }}>
+            <div key={app.key} style={{ display: 'flex' }}>
               {component}
             </div>
           ) : null;

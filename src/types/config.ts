@@ -1,7 +1,7 @@
 import { Coordinates } from '@dnd-kit/utilities';
 import { PrimaryColors } from '@lobehub/ui';
 
-export type BackgroundEffect = 'sakura' | 'snow' | 'star' | 'none';
+export type BackgroundEffect = 'glow' | 'none';
 
 export interface Panel {
   /**

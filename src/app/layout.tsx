@@ -25,5 +25,5 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 export default RootLayout;
 
 export const metadata: Metadata = {
-  title: 'Vidol.Chat',
+  title: 'V-idol',
 };
