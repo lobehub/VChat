@@ -15,7 +15,6 @@ export interface ConfigAction {
   focusPanel: (key: PanelKey) => void;
   openPanel: (key: PanelKey) => void;
   closePanel: (key: PanelKey) => void;
-  minifyPanel: (key: PanelKey) => void;
 }
 
 export interface ConfigStore extends ConfigState, ConfigAction {}
@@ -39,7 +38,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
 
   openPanel: (key: PanelKey) => {
     const { setPanel, focusPanel } = get();
-    setPanel(key, { open: true, min: false });
+    setPanel(key, { open: true });
     focusPanel(key);
   },
 
@@ -48,10 +47,6 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     setPanel(key, { open: false });
     const nextSetting = focusList.filter((item) => item !== key);
     set({ focusList: nextSetting });
-  },
-  minifyPanel: (key: PanelKey) => {
-    const { setPanel } = get();
-    setPanel(key, { min: true });
   },
 
   focusPanel: (key: PanelKey) => {

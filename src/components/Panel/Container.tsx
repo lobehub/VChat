@@ -1,10 +1,10 @@
+import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
 import { useDraggable } from '@dnd-kit/core';
+import { ActionIcon, Logo } from '@lobehub/ui';
 import { Tooltip } from 'antd';
 import classNames from 'classnames';
-
-import React, { PropsWithChildren, memo, useMemo, useRef } from 'react';
-
-import { INITIAL_COORDINATES, INITIAL_Z_INDEX } from '@/constants/common';
+import { XIcon } from 'lucide-react';
+import React, { PropsWithChildren, memo } from 'react';
 import { useStyles } from './style';
 
 interface ContainerProps {
@@ -18,7 +18,6 @@ interface ContainerProps {
   onFocus?: React.FocusEventHandler;
   onBlur?: React.FocusEventHandler;
   onClose: () => void;
-  onMinify: () => void;
 }
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
@@ -27,7 +26,6 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     className,
     children,
     onClose,
-    onMinify,
     x = INITIAL_COORDINATES.x,
     y = INITIAL_COORDINATES.y,
     title,
@@ -42,42 +40,15 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
     id: 'draggable',
   });
 
-  const transformstyle = transform
+  const transformer = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
       }
     : undefined;
 
-  const draggleRef = useRef<HTMLDivElement>(null);
-
-  function toggleFullScreen() {
-    if (!document.fullscreenElement) {
-      draggleRef.current && draggleRef.current.requestFullscreen();
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
-
-  const switches = useMemo(() => {
-    const handleClose = () => {
-      if (onClose) onClose();
-    };
-
-    const handleMinify = () => {
-      if (onMinify) onMinify();
-    };
-    return [
-      <Tooltip title="最小化" key="min">
-        <div className={classNames(styles.button, styles.min)} onClick={handleMinify} />
-      </Tooltip>,
-      <Tooltip title="最大化" key="max">
-        <div className={classNames(styles.button, styles.max)} onClick={toggleFullScreen} />
-      </Tooltip>,
-      <Tooltip title="关闭" key="close">
-        <div className={classNames(styles.button, styles.close)} onClick={handleClose} />
-      </Tooltip>,
-    ];
-  }, [onClose, styles.button, styles.close, styles.max, styles.min]);
+  const handleClose = () => {
+    if (onClose) onClose();
+  };
 
   return (
     <div ref={setNodeRef} onFocus={onFocus} onBlur={onBlur}>
@@ -88,20 +59,21 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
           left: x,
           top: y,
           zIndex,
-          ...transformstyle,
+          ...transformer,
         }}
-        ref={draggleRef}
         {...attributes}
       >
-        <div
-          className={classNames(styles.header)}
-          onDoubleClick={toggleFullScreen}
-          ref={setActivatorNodeRef}
-          {...listeners}
-        >
-          <div className={styles.swtich}>{switches}</div>
+        <div className={classNames(styles.header)} ref={setActivatorNodeRef} {...listeners}>
+          <div className={styles.logo}>
+            <Logo extra={'V-idol'} size={24} type={'combine'} />
+          </div>
           <div className={styles.title}>{title ? title : null}</div>
-          <div className={styles.extra}>{extra ? extra : null}</div>
+          <div className={styles.extra}>
+            {extra ? extra : null}
+            <Tooltip title="关闭" key="close">
+              <ActionIcon icon={XIcon} onClick={handleClose} />
+            </Tooltip>
+          </div>
         </div>
         <div className={styles.container}>{children}</div>
       </div>

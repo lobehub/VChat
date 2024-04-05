@@ -16,14 +16,15 @@ export const useStyles = createStyles(({ css, token }) => ({
     height: 32px;
     cursor: move;
     width: 100%;
+    padding: 0 ${token.paddingXS}px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   `,
-  swtich: css`
+  extra: css`
     flex: 1;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
   `,
   title: css`
@@ -31,8 +32,9 @@ export const useStyles = createStyles(({ css, token }) => ({
     text-align: center;
     font-weight: bold;
   `,
-  extra: css`
+  logo: css`
     flex: 1;
+    justify-content: flex-start;
   `,
 
   container: css`

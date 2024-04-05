@@ -16,7 +16,6 @@ interface ControlPanelProps {
   className?: string;
   title?: string;
   onClose: () => void;
-  onMinify: () => void;
   onCoordinatesChange?: (coordinates: Coordinates) => void;
   coordinates?: Coordinates;
   onFocus?: React.FocusEventHandler;
@@ -30,7 +29,6 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
     className,
     children,
     onClose,
-    onMinify,
     title,
     onCoordinatesChange,
     onBlur,
@@ -73,7 +71,6 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
         y={y}
         zIndex={zIndex}
         onClose={onClose}
-        onMinify={onMinify}
         onBlur={onBlur}
         onFocus={onFocus}
         style={style}
