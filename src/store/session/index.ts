@@ -98,10 +98,11 @@ export interface SessionStore {
    */
   setViewerMode: (mode: boolean) => void;
   /**
-   * 更新会话消息
-   * @param messages
+   * 切换会话
+   * @param agent
+   * @returns
    */
-  updateSessionMessages: (messages: ChatMessage[]) => void;
+  switchSession: (agentId: string) => void;
   /**
    * 触发语音开关
    */
@@ -116,19 +117,18 @@ export interface SessionStore {
    */
   updateMessage: (id: string, content: string) => void;
   /**
-   * 切换会话
-   * @param agent
-   * @returns
+   * 更新会话消息
+   * @param messages
    */
-  switchSession: (agentId: string) => void;
-  /**
-   * 语音开关
-   */
-  voiceOn: boolean;
+  updateSessionMessages: (messages: ChatMessage[]) => void;
   /**
    * 角色渲染模式
    */
   viewerMode: boolean;
+  /**
+   * 语音开关
+   */
+  voiceOn: boolean;
 }
 
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
@@ -189,46 +189,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     const messages = messageReducer(session.messages, payload);
 
     updateSessionMessages(messages);
-  },
-  removeSession: (id) => {
-    const { sessionList, activeId } = get();
-
-    const sessions = produce(sessionList, (draft) => {
-      const index = draft.findIndex((session) => session.agentId === id);
-      if (index === -1) return;
-      draft.splice(index, 1);
-    });
-    set({ sessionList: sessions });
-
-    if (activeId === id) {
-      set({ activeId: sessions[0]?.agentId });
-    }
-  },
-  regenerateMessage: (id) => {
-    const { dispatchMessage, fetchAIResponse } = get();
-    const currentSession = sessionSelectors.currentSession(get());
-    if (!currentSession) {
-      return;
-    }
-
-    const previousChats = sessionSelectors.previousChats(get(), id);
-
-    const assistantId = nanoid();
-
-    // 添加机器人消息占位
-    dispatchMessage({
-      payload: {
-        id: assistantId,
-        content: LOADING_FLAG,
-        role: 'assistant', // 占位符
-      },
-      type: 'ADD_MESSAGE',
-    });
-
-    fetchAIResponse(previousChats, assistantId);
-  },
-  setMessageInput: (messageInput) => {
-    set({ messageInput });
   },
   fetchAIResponse: async (messages, assistantId) => {
     const { dispatchMessage } = get();
@@ -305,9 +265,42 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     });
     set({ chatLoadingId: undefined });
   },
+  regenerateMessage: (id) => {
+    const { dispatchMessage, fetchAIResponse } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+    if (!currentSession) {
+      return;
+    }
 
-  setViewerMode: (mode) => {
-    set({ viewerMode: mode });
+    const previousChats = sessionSelectors.previousChats(get(), id);
+
+    const assistantId = nanoid();
+
+    // 添加机器人消息占位
+    dispatchMessage({
+      payload: {
+        content: LOADING_FLAG,
+        id: assistantId,
+        role: 'assistant', // 占位符
+      },
+      type: 'ADD_MESSAGE',
+    });
+
+    fetchAIResponse(previousChats, assistantId);
+  },
+  removeSession: (id) => {
+    const { sessionList, activeId } = get();
+
+    const sessions = produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agentId === id);
+      if (index === -1) return;
+      draft.splice(index, 1);
+    });
+    set({ sessionList: sessions });
+
+    if (activeId === id) {
+      set({ activeId: sessions[0]?.agentId });
+    }
   },
   sendMessage: async (message: string) => {
     const { dispatchMessage, fetchAIResponse } = get();
@@ -344,9 +337,12 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
 
     await fetchAIResponse(currentChats, assistantId);
   },
-  toggleVoice: () => {
-    const { voiceOn } = get();
-    set({ voiceOn: !voiceOn });
+
+  setMessageInput: (messageInput) => {
+    set({ messageInput });
+  },
+  setViewerMode: (mode) => {
+    set({ viewerMode: mode });
   },
   switchSession: (agentId) => {
     const { sessionList } = get();
@@ -359,6 +355,10 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       set({ sessionList: [...sessionList, session] });
     }
     set({ activeId: agentId });
+  },
+  toggleVoice: () => {
+    const { voiceOn } = get();
+    set({ voiceOn: !voiceOn });
   },
   updateAgentConfig: (agent) => {
     const { localAgentList, activeId } = get();
