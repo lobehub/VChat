@@ -55,13 +55,13 @@ interface SpeechRecognition extends EventTarget {
     listener: (this: SpeechRecognition, ev: SpeechRecognitionEventMap[K]) => any,
     options?: boolean | EventListenerOptions,
   ): void;
-  start(): void;
-  stop(): void;
   removeEventListener(
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | EventListenerOptions,
   ): void;
+  start(): void;
+  stop(): void;
 }
 
 declare var SpeechRecognition: { prototype: SpeechRecognition; new (): SpeechRecognition };
