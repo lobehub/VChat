@@ -1,6 +1,6 @@
 import { Parser } from 'mmd-parser';
 import * as THREE from 'three';
-import { GridHelper } from 'three';
+import { GridHelper, Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Model } from './model';
 
@@ -20,6 +20,7 @@ export class Viewer {
   private _camera?: THREE.PerspectiveCamera;
   private _cameraControls?: OrbitControls;
   private _gridHelper?: THREE.GridHelper;
+  private _floor?: THREE.Mesh;
 
   constructor() {
     this.isReady = false;
@@ -106,42 +107,35 @@ export class Viewer {
 
     // camera 全身
     this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20.0);
-    this._camera.position.set(0, 1.3, 1.3);
-    this._cameraControls?.target.set(0, 1.3, 0);
+    this._camera.position.set(0, 1.3, 1.5);
 
-    // Camera 上半身
-    // this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
-    // this._camera.position.set(0, 1.3, 1.5);
-    // this._cameraControls?.target.set(0, 1.3, 0);
-
-    this._cameraControls?.update();
-
-    // camera controls
+    // camera 控制
     this._cameraControls = new OrbitControls(this._camera, this._renderer.domElement);
     this._cameraControls.screenSpacePanning = true;
+    this._cameraControls?.target.set(0, 1.3, 0);
     this._cameraControls.update();
-
-    // this._cameraHelper = new THREE.CameraHelper(this._camera);
-    // this._scene.add(this._cameraHelper);
-
-    // floor
-    // const floor = new Mesh(
-    //   new PlaneGeometry(100, 100),
-    //   new MeshLambertMaterial({
-    //     color: 0x999999,
-    //     depthWrite: true,
-    //   }),
-    // );
-    // floor.position.y = -0.5;
-    // floor.rotation.x = -Math.PI / 2;
-    //
-    // this._scene.add(floor);
 
     window.addEventListener('resize', () => {
       this.resize();
     });
     this.isReady = true;
     this.update();
+  }
+
+  public toggleCameraHelper() {
+    if (this._cameraHelper) {
+      this._scene.remove(this._cameraHelper);
+      this._cameraHelper = undefined;
+    } else {
+      if (!this._camera) return;
+      this._cameraHelper = new THREE.CameraHelper(this._camera);
+      this._scene.add(this._cameraHelper);
+    }
+  }
+
+  public toggleCameraControls() {
+    if (!this._cameraControls) return;
+    this._cameraControls.enabled = !this._cameraControls.enabled;
   }
 
   public toggleGrid() {
@@ -151,6 +145,24 @@ export class Viewer {
     } else {
       this._gridHelper = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
       this._scene.add(this._gridHelper);
+    }
+  }
+
+  public toggleFloor() {
+    if (this._floor) {
+      this._scene.remove(this._floor);
+      this._floor = undefined;
+    } else {
+      this._floor = new Mesh(
+        new PlaneGeometry(100, 100),
+        new MeshLambertMaterial({
+          color: 0x999999,
+          depthWrite: true,
+        }),
+      );
+      this._floor.position.y = -0.5;
+      this._floor.rotation.x = -Math.PI / 2;
+      this._scene.add(this._floor);
     }
   }
 

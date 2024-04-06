@@ -39,6 +39,10 @@ export class Model {
 
     const gltf = await loader.loadAsync(url);
 
+    // 提升性能
+    VRMUtils.removeUnnecessaryVertices(gltf.scene);
+    VRMUtils.removeUnnecessaryJoints(gltf.scene);
+
     const vrm = (this.vrm = gltf.userData.vrm);
     vrm.scene.name = 'VRMRoot';
 
