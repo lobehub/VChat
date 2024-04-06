@@ -37,25 +37,25 @@ export const useLaserShine = (delay = 500) => {
 
   const onMouseOut = () => {
     setTimeout(() => {
-      api.start({ glare: [50, 50, 0], background: [50, 50] });
+      api.start({ background: [50, 50], glare: [50, 50, 0] });
     }, delay);
   };
 
   const style = {
-    '--pointer-x': glare.to((x) => `${x}%`),
-    '--pointer-y': glare.to((_, y) => `${y}%`),
+    '--background-x': background.to((x) => `${x}%`),
+    '--background-y': background.to((_, y) => `${y}%`),
+    '--card-opacity': glare.to((_, __, o) => o),
+
+    '--cosmosbg': `${cosmosPosition.x}px ${cosmosPosition.y}px`,
     '--pointer-from-center': glare.to((x, y) =>
       clamp(Math.sqrt((y - 50) * (y - 50) + (x - 50) * (x - 50)) / 50, 0, 1),
     ),
-
-    '--pointer-from-top': glare.to((_, y) => y / 100),
     '--pointer-from-left': glare.to((x) => x / 100),
-    '--card-opacity': glare.to((_, __, o) => o),
-    '--background-x': background.to((x) => `${x}%`),
-    '--background-y': background.to((_, y) => `${y}%`),
+    '--pointer-from-top': glare.to((_, y) => y / 100),
+    '--pointer-x': glare.to((x) => `${x}%`),
+    '--pointer-y': glare.to((_, y) => `${y}%`),
     '--seedx': randomSeed.x,
     '--seedy': randomSeed.y,
-    '--cosmosbg': `${cosmosPosition.x}px ${cosmosPosition.y}px`,
   } as CSSProperties;
 
   return { onMouseMove, onMouseOut, style };

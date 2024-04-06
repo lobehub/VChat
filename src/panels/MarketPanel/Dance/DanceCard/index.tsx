@@ -37,10 +37,10 @@ const Header = () => {
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      expand={showDanceSidebar}
-      minWidth={280}
       defaultSize={{ width: 280 }}
+      expand={showDanceSidebar}
       maxWidth={400}
+      minWidth={280}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
@@ -52,7 +52,7 @@ const Header = () => {
       }}
       placement={'right'}
     >
-      <DanceInfo dance={currentDanceItem} actions={actions} />
+      <DanceInfo actions={actions} dance={currentDanceItem} />
     </DraggablePanel>
   );
 };

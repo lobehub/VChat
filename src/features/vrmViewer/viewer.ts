@@ -30,8 +30,8 @@ export class Viewer {
     this._scene = scene;
 
     // 方向光
-    const directionalLight = new THREE.DirectionalLight(0xffffff, Math.PI);
-    directionalLight.position.set(1.0, 1.0, 1.0).normalize();
+    const directionalLight = new THREE.DirectionalLight(0xFF_FF_FF, Math.PI);
+    directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
 
     // 环境光
@@ -98,15 +98,15 @@ export class Viewer {
     const height = parentElement?.clientHeight || canvas.height;
     // renderer
     this._renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
       alpha: true,
       antialias: true,
+      canvas: canvas,
     });
     this._renderer.setSize(width, height);
     this._renderer.setPixelRatio(window.devicePixelRatio);
 
     // camera 全身
-    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20.0);
+    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20);
     this._camera.position.set(0, 1.3, 1.5);
 
     // camera 控制
@@ -143,7 +143,7 @@ export class Viewer {
       this._scene.remove(this._gridHelper);
       this._gridHelper = undefined;
     } else {
-      this._gridHelper = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
+      this._gridHelper = new GridHelper(50, 100, 0xAA_AA_AA, 0xAA_AA_AA);
       this._scene.add(this._gridHelper);
     }
   }
@@ -156,7 +156,7 @@ export class Viewer {
       this._floor = new Mesh(
         new PlaneGeometry(100, 100),
         new MeshLambertMaterial({
-          color: 0x999999,
+          color: 0x99_99_99,
           depthWrite: true,
         }),
       );

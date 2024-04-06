@@ -23,25 +23,7 @@ interface SpeechRecognitionEventMap {
 
 // https://wicg.github.io/speech-api/#speechreco-section
 interface SpeechRecognition extends EventTarget {
-  continuous: boolean;
-  grammars: SpeechGrammarList;
-  interimResults: boolean;
-  lang: string;
-  maxAlternatives: number;
-  onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
-  onnomatch: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
-  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
-  onsoundend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onsoundstart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onspeechend: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | null;
-  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
   abort(): void;
-  start(): void;
-  stop(): void;
   addEventListener<K extends keyof SpeechRecognitionEventMap>(
     type: K,
     listener: (this: SpeechRecognition, ev: SpeechRecognitionEventMap[K]) => any,
@@ -52,6 +34,24 @@ interface SpeechRecognition extends EventTarget {
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions,
   ): void;
+  continuous: boolean;
+  grammars: SpeechGrammarList;
+  interimResults: boolean;
+  lang: string;
+  maxAlternatives: number;
+  onaudioend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onaudiostart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  onsoundend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onsoundstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onspeechend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onspeechstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onstart: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onnomatch: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => any) | null;
+  start(): void;
+  stop(): void;
+  onend: ((this: SpeechRecognition, ev: Event) => any) | null;
+  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => any) | null;
   removeEventListener<K extends keyof SpeechRecognitionEventMap>(
     type: K,
     listener: (this: SpeechRecognition, ev: SpeechRecognitionEventMap[K]) => any,
@@ -124,20 +124,20 @@ declare var SpeechGrammar: {
 
 // https://wicg.github.io/speech-api/#speechgrammarlist
 interface SpeechGrammarList {
-  readonly length: number;
+  [index: number]: SpeechGrammar;
   addFromString(string: string, weight?: number): void;
   addFromURI(src: string, weight?: number): void;
   item(index: number): SpeechGrammar;
-  [index: number]: SpeechGrammar;
+  readonly length: number;
 }
 
 declare var SpeechGrammarList: { prototype: SpeechGrammarList; new (): SpeechGrammarList };
 
 // prefixed global variables in Chrome; should match the equivalents above
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API/Using_the_Web_Speech_API#chrome_support
-declare var webkitSpeechRecognition: { prototype: SpeechRecognition; new (): SpeechRecognition };
-declare var webkitSpeechGrammarList: { prototype: SpeechGrammarList; new (): SpeechGrammarList };
-declare var webkitSpeechRecognitionEvent: {
+declare let webkitSpeechRecognition: { prototype: SpeechRecognition; new (): SpeechRecognition };
+declare let webkitSpeechGrammarList: { prototype: SpeechGrammarList; new (): SpeechGrammarList };
+declare let webkitSpeechRecognitionEvent: {
   prototype: SpeechRecognitionEvent;
   new (type: string, eventInitDict: SpeechRecognitionEventInit): SpeechRecognitionEvent;
 };
@@ -156,34 +156,34 @@ declare module 'mmd-parser' {
   }
 
   export interface VmdFile {
+    cameras: {
+      distance: number;
+      fov: number;
+      frameNum: number;
+      interpolation: number[];
+      perspective: number;
+      position: number[];
+      rotation: number[];
+    }[];
     metadata: {
+      cameraCount: number;
       coordinateSystem: string;
       magic: string;
-      name: string;
-      motionCount: number;
       morphCount: number;
-      cameraCount: number;
+      motionCount: number;
+      name: string;
     };
+    morphs: {
+      frameNum: number;
+      morphName: string;
+      weight: number;
+    }[];
     motions: {
       boneName: string;
       frameNum: number;
+      interpolation: number[];
       position: number[];
       rotation: number[];
-      interpolation: number[];
-    }[];
-    morphs: {
-      morphName: string;
-      frameNum: number;
-      weight: number;
-    }[];
-    cameras: {
-      frameNum: number;
-      distance: number;
-      position: number[];
-      rotation: number[];
-      interpolation: number[];
-      fov: number;
-      perspective: number;
     }[];
   }
 }

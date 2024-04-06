@@ -30,10 +30,10 @@ const APIKeyForm = ({ id }: APIKeyFormProps) => {
         title={'自定义 API Key'}
       >
         <Input.Password
+          autoComplete="new-password"
           onChange={(e) => {
             setConfig({ apikey: e.target.value });
           }}
-          autoComplete="new-password"
           placeholder={'sk-************************************'}
           type={'block'}
           value={currentOpenAIConfig?.apikey}

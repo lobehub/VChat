@@ -7,14 +7,24 @@ import classNames from 'classnames';
 const FormItem = Form.Item;
 
 interface InfoProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const useStyles = createStyles(({ css, token }) => ({
+  config: css`
+    padding: 12px;
+    border: 1px solid ${token.colorBorderSecondary};
+    border-radius: ${token.borderRadius}px;
+    flex: 3;
+    margin-right: 12px;
+  `,
   container: css`
     display: flex;
     flex-direction: column;
+  `,
+  footer: css`
+    margin-top: 20px;
   `,
   form: css`
     display: flex;
@@ -24,16 +34,6 @@ const useStyles = createStyles(({ css, token }) => ({
     padding: 12px;
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadius}px;
-  `,
-  config: css`
-    padding: 12px;
-    border: 1px solid ${token.colorBorderSecondary};
-    border-radius: ${token.borderRadius}px;
-    flex: 3;
-    margin-right: 12px;
-  `,
-  footer: css`
-    margin-top: 20px;
   `,
 }));
 
@@ -48,29 +48,29 @@ const Info = (props: InfoProps) => {
 
   return (
     <Form
+      form={form}
+      initialValues={currentAgent}
+      layout="horizontal"
       onFinish={(values) => {
         form.validateFields().then((values) => {
           updateAgentConfig(values);
           message.success('保存成功');
         });
       }}
-      layout="horizontal"
       requiredMark={false}
-      form={form}
-      initialValues={currentAgent}
     >
-      <div style={style} className={classNames(className, styles.container)}>
+      <div className={classNames(className, styles.container)} style={style}>
         <div className={styles.form}>
           <div className={styles.config}>
             <FormItem
               label={'系统设定'}
               name="systemRole"
-              rules={[{ required: true, message: '请输入角色的系统设定' }]}
+              rules={[{ message: '请输入角色的系统设定', required: true }]}
             >
               <Input.TextArea
+                autoSize={{ maxRows: 18, minRows: 18 }}
                 placeholder="请输入角色的系统设定"
                 showCount
-                autoSize={{ maxRows: 18, minRows: 18 }}
               />
             </FormItem>
           </div>

@@ -6,8 +6,8 @@ import ChatList from './ChatList';
 import { useStyles } from './style';
 
 interface ChatBotProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const ChatBot = (props: ChatBotProps) => {

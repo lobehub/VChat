@@ -4,8 +4,8 @@ import { DivProps } from 'react-layout-kit';
 import { useStyles } from './style';
 
 export interface LaserShineProps extends DivProps {
-  mask?: boolean;
   className?: string;
+  mask?: boolean;
   style?: CSSProperties;
 }
 

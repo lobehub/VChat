@@ -34,10 +34,10 @@ const Header = () => {
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      expand={showAgentSidebar}
-      minWidth={280}
       defaultSize={{ width: 280 }}
+      expand={showAgentSidebar}
       maxWidth={400}
+      minWidth={280}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
@@ -50,7 +50,6 @@ const Header = () => {
       placement={'right'}
     >
       <AgentInfo
-        agent={currentAgent}
         actions={[
           <Button
             key="chat"
@@ -64,29 +63,30 @@ const Header = () => {
             加载
           </Button>,
           <Button
+            key="edit"
             onClick={() => {
               if (!currentAgent) return;
               createSession(currentAgent);
               openPanel('role');
             }}
-            key="edit"
           >
             编辑
           </Button>,
           <Popconfirm
-            title="取消订阅？"
+            cancelText="取消"
             description={`确定取消角色 ${currentAgent?.meta.name} 的订阅吗？`}
+            key="delete"
+            okText="确定"
             onConfirm={() => {
               if (!currentAgent) return;
               unsubscribe(currentAgent.agentId);
             }}
-            okText="确定"
-            key="delete"
-            cancelText="取消"
+            title="取消订阅？"
           >
             <Button danger>取消订阅</Button>
           </Popconfirm>,
         ]}
+        agent={currentAgent}
       />
     </DraggablePanel>
   );

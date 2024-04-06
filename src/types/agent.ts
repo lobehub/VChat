@@ -3,9 +3,13 @@ import { TTS } from './tts';
 
 export interface AgentMeta {
   /**
-   * 角色名
+   * 头像图片路径
    */
-  name: string;
+  avatar: string;
+  /**
+   * 封面图片路径
+   */
+  cover: string;
   /**
    * 角色描述
    */
@@ -19,13 +23,9 @@ export interface AgentMeta {
    */
   model: string;
   /**
-   * 封面图片路径
+   * 角色名
    */
-  cover: string;
-  /**
-   * 头像图片路径
-   */
-  avatar: string;
+  name: string;
   /**
    * 说明文件
    */
@@ -47,11 +47,11 @@ export interface Agent {
    */
   systemRole: string;
   /**
-   * 角色 tts 配置文件
-   */
-  tts: TTS;
-  /**
    * 触摸配置
    */
   touch: TouchActionConfig;
+  /**
+   * 角色 tts 配置文件
+   */
+  tts: TTS;
 }

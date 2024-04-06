@@ -41,31 +41,31 @@ export interface ChatMessage {
    */
   content: string;
   /**
-   * 错误
-   */
-  error?: ChatMessageError;
-  /**
-   * 角色
-   */
-  role: LLMRoleType;
-  /**
    * 创建时间
    */
   createdAt: number;
   /**
-   * 更新时间
+   * 错误
    */
-  updatedAt: number;
+  error?: ChatMessageError;
   /**
    * 额外信息
    */
   extra?: any;
   /**
+   * 消息id
+   */
+  id: string;
+  /**
    * 元数据
    */
   meta: MetaData;
   /**
-   * 消息id
+   * 角色
    */
-  id: string;
+  role: LLMRoleType;
+  /**
+   * 更新时间
+   */
+  updatedAt: number;
 }

@@ -41,11 +41,11 @@ const SideBar = memo(() => {
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      minWidth={280}
       defaultSize={{ width: 280 }}
-      maxWidth={400}
-      mode={'fixed'}
       expand={showDanceSidebar}
+      maxWidth={400}
+      minWidth={280}
+      mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
           setTempId(useDanceStore.getState().currentIdentifier);
@@ -57,7 +57,6 @@ const SideBar = memo(() => {
       placement={'right'}
     >
       <DanceInfo
-        dance={currentDance}
         actions={[
           <Button
             key="play"
@@ -72,20 +71,21 @@ const SideBar = memo(() => {
             播放并添加到歌单
           </Button>,
           <Popconfirm
-            key="delete"
-            title="取消订阅？"
+            cancelText="取消"
             description={`确定取消订阅音乐【${currentDance?.name}】吗？`}
+            key="delete"
+            okText="确定"
             onConfirm={() => {
               if (currentDance) {
                 unsubscribe(currentDance.danceId);
               }
             }}
-            okText="确定"
-            cancelText="取消"
+            title="取消订阅？"
           >
             <Button danger>取消订阅</Button>
           </Popconfirm>,
         ]}
+        dance={currentDance}
       />
     </DraggablePanel>
   );

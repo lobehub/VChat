@@ -19,7 +19,7 @@ const subscribed = (s: AgentStore) => (agentId: string) => {
 };
 
 export const agentListSelectors = {
-  showSideBar,
   currentAgentItem,
+  showSideBar,
   subscribed,
 };

@@ -2,6 +2,7 @@ import { createStyles } from 'antd-style';
 import { rgba } from 'polished';
 
 export const useStyles = createStyles(({ css, token }) => ({
+  apps: css``,
   docker: css`
     display: flex;
     justify-content: space-between;
@@ -13,11 +14,10 @@ export const useStyles = createStyles(({ css, token }) => ({
     z-index: 100;
     padding: 8px 12px;
   `,
-  player: css``,
-  apps: css``,
   message: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
   `,
+  player: css``,
 }));

@@ -3,12 +3,15 @@ import { NextResponse } from 'next/server';
 
 const getStatusCode = (errorType: ErrorTypeEnum) => {
   switch (errorType) {
-    case ErrorTypeEnum.API_KEY_MISSING:
+    case ErrorTypeEnum.API_KEY_MISSING: {
       return 401;
-    case ErrorTypeEnum.OPENAI_API_ERROR:
+    }
+    case ErrorTypeEnum.OPENAI_API_ERROR: {
       return 577;
-    default:
+    }
+    default: {
       return 500;
+    }
   }
 };
 
@@ -17,9 +20,9 @@ export const createErrorResponse = (errorType: ErrorTypeEnum, body: any) => {
 
   return NextResponse.json(
     {
-      success: false,
       body,
       errorType,
+      success: false,
     },
     { status: statusCode },
   );

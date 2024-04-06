@@ -11,8 +11,8 @@ import { BotIcon } from 'lucide-react';
 import { useEffect } from 'react';
 
 interface ConfigProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const useStyles = createStyles(({ css }) => ({
@@ -46,7 +46,7 @@ const Config = (props: ConfigProps) => {
   });
 
   return (
-    <div style={style} className={classNames(styles.config, className)}>
+    <div className={classNames(styles.config, className)} style={style}>
       <Form
         form={form}
         onValuesChange={debounce(setOpenAIConfig, 100)}
@@ -56,7 +56,6 @@ const Config = (props: ConfigProps) => {
         <FormGroup icon={BotIcon} title={'OpenAI 语言模型'}>
           <FormItem desc={'Chat GPT 模型'} label={'模型'} name="model">
             <Select
-              style={{ width: 300 }}
               options={OPENAI_MODEL_LIST.map((model) => ({
                 label: (
                   <>
@@ -65,6 +64,7 @@ const Config = (props: ConfigProps) => {
                 ),
                 value: model.name,
               }))}
+              style={{ width: 300 }}
             />
           </FormItem>
           <FormItem desc={'请使用自己的 OpenAI Key'} divider label={'API Key'} name="apikey">

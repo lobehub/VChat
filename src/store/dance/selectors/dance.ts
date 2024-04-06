@@ -19,7 +19,7 @@ const subscribed = (s: DanceStore) => (danceId: string) => {
 };
 
 export const danceListSelectors = {
-  showSideBar,
   currentDanceItem,
+  showSideBar,
   subscribed,
 };

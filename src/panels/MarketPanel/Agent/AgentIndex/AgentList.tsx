@@ -16,8 +16,8 @@ const AgentList = () => {
   const [subscribed] = useAgentStore((s) => [agentListSelectors.subscribed(s)]);
   return (
     <List
-      grid={{ gutter: 8, column: showAgentSidebar ? 3 : 4 }}
       dataSource={agentList}
+      grid={{ column: showAgentSidebar ? 3 : 4, gutter: 8 }}
       loading={agentLoading}
       renderItem={(item) => {
         const { avatar, name } = item?.meta;
@@ -25,19 +25,19 @@ const AgentList = () => {
         return (
           <List.Item style={{ position: 'relative' }}>
             <Card
-              hoverable
-              // eslint-disable-next-line @next/next/no-img-element,
-              cover={<img src={avatar} alt="cover" />}
               onClick={() => {
                 activateAgent(item.agentId);
               }}
+              hoverable
+              // eslint-disable-next-line @next/next/no-img-element,
+              cover={<img src={avatar} alt="cover" />}
             >
               <Meta title={name} />
             </Card>
             {isSubscribed ? (
               <CheckCircleTwoTone
+                style={{ fontSize: 24, position: 'absolute', right: 8, top: 8 }}
                 twoToneColor="#52c41a"
-                style={{ position: 'absolute', right: 8, top: 8, fontSize: 24 }}
               />
             ) : null}
           </List.Item>

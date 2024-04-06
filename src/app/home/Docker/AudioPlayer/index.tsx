@@ -12,15 +12,15 @@ import PlayList from './PlayList';
 import { useStyles } from './style';
 
 interface PlayerProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const danceSelectors = (s: DanceStore) => {
   return {
+    currentPlay: s.currentPlay,
     isPlaying: s.isPlaying,
     nextDance: s.nextDance,
-    currentPlay: s.currentPlay,
   };
 };
 
@@ -53,15 +53,12 @@ function Player(props: PlayerProps) {
 
   return (
     <div className={classNames(styles.container, className)} style={style}>
-      <PlayList open={open} onClose={() => setOpen(false)} />
+      <PlayList onClose={() => setOpen(false)} open={open} />
       <audio
-        src={currentPlay?.audio}
-        ref={ref}
-        preload="metadata"
-        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
         onCanPlay={(e) => {
           e.currentTarget.volume = volume;
         }}
+        onDurationChange={(e) => setDuration(e.currentTarget.duration)}
         onEnded={() => {
           viewer.model?.stopDance();
           nextDance();
@@ -69,24 +66,27 @@ function Player(props: PlayerProps) {
         onTimeUpdate={(e) => {
           setCurrentProgress(e.currentTarget.currentTime);
         }}
+        preload="metadata"
+        ref={ref}
+        src={currentPlay?.audio}
       />
       <div className={styles.player}>
         <Avatar
-          src={currentPlay?.cover}
-          size={48}
-          shape="circle"
           className={isPlaying ? styles.spin : ''}
+          shape="circle"
+          size={48}
+          src={currentPlay?.cover}
         />
         <div className={styles.content}>
-          <Duration duration={duration} currentProgress={currentProgress} />
+          <Duration currentProgress={currentProgress} duration={duration} />
           <div className={styles.controller}>
-            <Typography.Text ellipsis={{ tooltip: currentPlay?.name }} className={styles.name}>
+            <Typography.Text className={styles.name} ellipsis={{ tooltip: currentPlay?.name }}>
               {currentPlay?.name || '请从舞蹈列表中选取'}
             </Typography.Text>
             <Control />
             <div className={styles.right}>
-              <Volume volume={volume} setVolume={setVolume} audioRef={ref} />
-              <ListMusic style={{ cursor: 'pointer' }} onClick={() => setOpen(true)} size={20} />
+              <Volume audioRef={ref} setVolume={setVolume} volume={volume} />
+              <ListMusic onClick={() => setOpen(true)} size={20} style={{ cursor: 'pointer' }} />
             </div>
           </div>
         </div>

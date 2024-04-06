@@ -15,9 +15,10 @@ export default (props: ActionsProps) => {
 
   const items: MenuProps['items'] = [
     {
+      danger: true,
+      icon: <Trash2 />,
       key: 'delete',
       label: '删除对话',
-      icon: <Trash2 />,
       onClick: ({ domEvent }) => {
         domEvent.stopPropagation();
         modal.confirm({
@@ -29,7 +30,6 @@ export default (props: ActionsProps) => {
           title: '确认删除对话吗？删除后无法恢复, 请谨慎操作！',
         });
       },
-      danger: true,
     },
   ];
   return (
@@ -40,8 +40,8 @@ export default (props: ActionsProps) => {
           domEvent.stopPropagation();
         },
       }}
-      trigger={['click']}
       onOpenChange={(open) => setOpen(open)}
+      trigger={['click']}
     >
       <ActionIcon
         icon={MoreVertical}

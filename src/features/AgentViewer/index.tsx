@@ -25,7 +25,6 @@ function AgentViewer() {
       if (canvas) {
         viewer.setup(canvas);
       }
-      return canvas;
     },
     [viewer],
   );

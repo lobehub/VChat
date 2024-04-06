@@ -6,8 +6,8 @@ import OpenAIConfig from './model/openai';
 import { useStyles } from './style';
 
 interface ConfigProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const Config = (props: ConfigProps) => {
@@ -16,13 +16,10 @@ const Config = (props: ConfigProps) => {
   const [tab, setTab] = useState('common');
 
   return (
-    <div style={style} className={classNames(styles.container, className)}>
+    <div className={classNames(styles.container, className)} style={style}>
       <div style={{ marginBottom: 12 }}>
         <TabsNav
           activeKey={tab}
-          onChange={(key) => {
-            setTab(key);
-          }}
           items={[
             {
               key: 'common',
@@ -33,6 +30,9 @@ const Config = (props: ConfigProps) => {
               label: '语言模型',
             },
           ]}
+          onChange={(key) => {
+            setTab(key);
+          }}
         />
       </div>
       <div className={styles.content}>

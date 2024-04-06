@@ -1,8 +1,8 @@
-const { randomBytes } = require('crypto');
+import { NextResponse } from 'next/server';
+
+const { randomBytes } = require('node:crypto');
 
 const { WebSocket } = require('ws');
-
-import { NextResponse } from 'next/server';
 
 const FORMAT_CONTENT_TYPE = new Map([
   ['raw-16khz-16bit-mono-pcm', 'audio/basic'],
@@ -53,12 +53,12 @@ class Service {
     const connectionId = randomBytes(16).toString('hex').toLowerCase();
     let url = `wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=${connectionId}`;
     let ws = new WebSocket(url, {
-      host: 'speech.platform.bing.com',
-      origin: 'chrome-extension://jdiccldimpdaibmpdkjnbmckianbfold',
       headers: {
         'User-Agent':
           'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.66 Safari/537.36 Edg/103.0.1264.44',
       },
+      host: 'speech.platform.bing.com',
+      origin: 'chrome-extension://jdiccldimpdaibmpdkjnbmckianbfold',
     });
     return new Promise((resolve, reject) => {
       ws.on('open', () => {
@@ -80,7 +80,7 @@ class Service {
       });
 
       ws.on('message', (message: string, isBinary: boolean) => {
-        let pattern = /X-RequestId:(?<id>[a-z|0-9]*)/;
+        let pattern = /X-RequestId:(?<id>[\da-z|]*)/;
         if (!isBinary) {
           let data = message.toString();
           if (data.includes('Path:turn.start')) {
@@ -142,8 +142,8 @@ class Service {
     let result = new Promise((resolve, reject) => {
       // 等待服务器返回后这个方法才会返回结果
       this.executorMap.set(requestId, {
-        resolve,
         reject,
+        resolve,
       });
       // 发送配置消息
       let configData = {
@@ -160,7 +160,7 @@ class Service {
         },
       };
       let configMessage =
-        `X-Timestamp:${Date()}\r\n` +
+        `X-Timestamp:${new Date()}\r\n` +
         'Content-Type:application/json; charset=utf-8\r\n' +
         'Path:speech.config\r\n\r\n' +
         JSON.stringify(configData);
@@ -172,7 +172,7 @@ class Service {
 
         // 发送SSML消息
         let ssmlMessage =
-          `X-Timestamp:${Date()}\r\n` +
+          `X-Timestamp:${new Date()}\r\n` +
           `X-RequestId:${requestId}\r\n` +
           `Content-Type:application/ssml+xml\r\n` +
           `Path:ssml\r\n\r\n` +
@@ -200,7 +200,7 @@ class Service {
         this.ws.close(1000);
         this.timer = null;
       }
-    }, 10000);
+    }, 10_000);
 
     let data = await Promise.race([
       result,
@@ -209,7 +209,7 @@ class Service {
           this.executorMap.delete(requestId);
           this.bufferMap.delete(requestId);
           reject('转换超时');
-        }, 10000);
+        }, 10_000);
       }),
     ]);
     return data;

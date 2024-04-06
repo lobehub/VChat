@@ -5,36 +5,36 @@ export type BackgroundEffect = 'glow' | 'none';
 
 export interface Panel {
   /**
-   * 是否打开
-   */
-  open: boolean;
-  /**
    * 坐标
    */
   coordinates: Coordinates;
+  /**
+   * 是否打开
+   */
+  open: boolean;
 }
 
 export interface PanelConfig {
   agent: Panel;
-  role: Panel;
-  market: Panel;
-  dance: Panel;
-  live: Panel;
   chat: Panel;
   config: Panel;
+  dance: Panel;
+  live: Panel;
+  market: Panel;
+  role: Panel;
 }
 
 export type PanelKey = keyof PanelConfig;
 
 export interface CommonConfig {
   /**
-   * 主题色
-   */
-  primaryColor: PrimaryColors;
-  /**
    * 背景类型
    */
   backgroundEffect: BackgroundEffect;
+  /**
+   * 主题色
+   */
+  primaryColor: PrimaryColors;
 }
 
 export interface OpenAIConfig {

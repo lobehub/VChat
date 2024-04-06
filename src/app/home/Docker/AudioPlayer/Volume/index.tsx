@@ -4,9 +4,9 @@ import { memo, useState } from 'react';
 import { useStyles } from './style';
 
 interface VolumeProps {
-  volume: number;
-  setVolume: (volume: number) => void;
   audioRef: React.RefObject<HTMLAudioElement>;
+  setVolume: (volume: number) => void;
+  volume: number;
 }
 
 const Volume = (props: VolumeProps) => {
@@ -25,11 +25,11 @@ const Volume = (props: VolumeProps) => {
       ) : (
         <Volume2
           className={styles.volumeIcon}
-          size={20}
           onClick={() => {
             setTempVolume(volume);
             setVolume(0);
           }}
+          size={20}
         />
       )}
       <ConfigProvider
@@ -43,17 +43,17 @@ const Volume = (props: VolumeProps) => {
         }}
       >
         <Slider
-          min={0}
           max={1}
-          tooltip={{ open: false }}
-          step={0.05}
-          style={{ width: 64, margin: 0 }}
-          value={volume}
+          min={0}
           onChange={(volume) => {
             if (!audioRef.current) return;
             audioRef.current.volume = volume;
             setVolume(volume);
           }}
+          step={0.05}
+          style={{ margin: 0, width: 64 }}
+          tooltip={{ open: false }}
+          value={volume}
         />
       </ConfigProvider>
     </div>

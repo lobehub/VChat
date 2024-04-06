@@ -6,8 +6,8 @@ import { Flexbox } from 'react-layout-kit';
 import { useStyles } from './style';
 
 interface HeaderProps {
-  value?: string;
   onChange?: (value: string) => void;
+  value?: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -20,13 +20,13 @@ const Header = memo((props: HeaderProps) => {
     <div className={styles.header}>
       <Flexbox flex={1} style={{ marginRight: 4 }}>
         <SearchBar
-          shortKey="f"
           enableShortKey
-          placeholder="搜索"
-          value={value}
           onChange={(e) => {
             if (onChange) onChange(e.target.value);
           }}
+          placeholder="搜索"
+          shortKey="f"
+          value={value}
         />
       </Flexbox>
       <ActionIcon icon={Plus} onClick={() => openPanel('agent')} title={'找人聊天'} />

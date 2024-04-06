@@ -6,10 +6,10 @@ import { memo } from 'react';
 
 const AssistantActionsBar: RenderAction = ({ onActionClick }) => {
   const { copy, regenerate, divider, del, edit } = useChatListActionsBar({
-    edit: '编辑',
-    delete: '删除',
-    regenerate: '重新生成',
     copy: '复制',
+    delete: '删除',
+    edit: '编辑',
+    regenerate: '重新生成',
   });
 
   const tts = {

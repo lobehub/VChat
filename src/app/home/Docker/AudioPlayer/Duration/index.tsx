@@ -3,8 +3,8 @@ import { memo } from 'react';
 import { useStyles } from './style';
 
 interface DurationProps {
-  duration: number;
   currentProgress: number;
+  duration: number;
 }
 
 const Duration = (props: DurationProps) => {
@@ -19,7 +19,7 @@ const Duration = (props: DurationProps) => {
 
   return (
     <div className={styles.duration}>
-      <span style={{ marginRight: 8 }} className={styles.counter}>
+      <span className={styles.counter} style={{ marginRight: 8 }}>
         {formatDurationDisplay(currentProgress)}
       </span>
       <ConfigProvider
@@ -33,14 +33,14 @@ const Duration = (props: DurationProps) => {
         }}
       >
         <Slider
-          min={0}
           max={duration}
-          value={currentProgress}
+          min={0}
+          style={{ margin: 0, width: '100%' }}
           tooltip={{ open: false }}
-          style={{ width: '100%', margin: 0 }}
+          value={currentProgress}
         />
       </ConfigProvider>
-      <span style={{ marginLeft: 8 }} className={styles.counter}>
+      <span className={styles.counter} style={{ marginLeft: 8 }}>
         {formatDurationDisplay(duration)}
       </span>
     </div>

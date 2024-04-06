@@ -44,6 +44,9 @@ export const useStyles = createStyles(({ css, cx }) => {
         }
       `,
     ),
+    content: css`
+      height: 100%;
+    `,
     rotator: cx(
       `${prefix}-rotator`,
       css`
@@ -73,8 +76,5 @@ export const useStyles = createStyles(({ css, cx }) => {
           scale(var(--card-scale));
       `,
     ),
-    content: css`
-      height: 100%;
-    `,
   };
 });

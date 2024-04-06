@@ -12,8 +12,8 @@ const SideNav = (props: SideNavProps) => {
 
   return (
     <LobeSideNav
-      className={className}
       bottomActions={null}
+      className={className}
       topActions={
         <>
           <ActionIcon

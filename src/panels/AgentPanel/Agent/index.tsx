@@ -25,8 +25,8 @@ const useStyles = createStyles(({ css }) => ({
 }));
 
 interface AgentProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const Agent = (props: AgentProps) => {
@@ -35,10 +35,10 @@ const Agent = (props: AgentProps) => {
   const [subscribedList] = useAgentStore((s) => [s.subscribedList]);
 
   return (
-    <div style={style} className={classNames(className, styles.container)}>
+    <div className={classNames(className, styles.container)} style={style}>
       <div className={styles.content}>
         <TopBanner />
-        <AgentList title="订阅列表" dataSource={subscribedList} />
+        <AgentList dataSource={subscribedList} title="订阅列表" />
       </div>
       <AgentCard />
     </div>

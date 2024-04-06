@@ -11,8 +11,8 @@ const VoiceSwitch = () => {
 
   return (
     <ActionIcon
-      icon={Volume2}
       className={classNames(styles.voice, voiceOn && styles.voiceOn)}
+      icon={Volume2}
       onClick={toogleVoice}
       title={voiceOn ? '关闭语音合成' : '开启语音合成'}
     />

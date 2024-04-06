@@ -5,12 +5,17 @@ import classNames from 'classnames';
 import { memo, useEffect } from 'react';
 
 const useStyles = createStyles(({ css }) => ({
-  content: css`
+  actions: css`
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+  `,
+  address: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
   `,
-  address: css`
+  content: css`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -18,16 +23,11 @@ const useStyles = createStyles(({ css }) => ({
   label: css`
     flex-shrink: 0;
   `,
-  actions: css`
-    margin-top: 12px;
-    display: flex;
-    justify-content: flex-end;
-  `,
 }));
 
 interface AgentLoaderProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const Header = (props: AgentLoaderProps) => {
@@ -45,7 +45,7 @@ const Header = (props: AgentLoaderProps) => {
   return (
     <div className={classNames(styles.content, className)} style={style}>
       <h2>模型列表</h2>
-      <Button type="primary" loading={agentLoading} onClick={() => fetchAgentIndex()}>
+      <Button loading={agentLoading} onClick={() => fetchAgentIndex()} type="primary">
         重新加载
       </Button>
     </div>

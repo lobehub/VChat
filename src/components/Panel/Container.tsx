@@ -8,16 +8,16 @@ import React, { PropsWithChildren, memo } from 'react';
 import { useStyles } from './style';
 
 interface ContainerProps {
-  style?: React.CSSProperties;
   className?: string;
-  title?: React.ReactNode;
   extra?: React.ReactNode;
+  onBlur?: React.FocusEventHandler;
+  onClose: () => void;
+  onFocus?: React.FocusEventHandler;
+  style?: React.CSSProperties;
+  title?: React.ReactNode;
   x: number;
   y: number;
   zIndex?: number;
-  onFocus?: React.FocusEventHandler;
-  onBlur?: React.FocusEventHandler;
-  onClose: () => void;
 }
 
 const Container = (props: PropsWithChildren<ContainerProps>) => {
@@ -51,7 +51,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
   };
 
   return (
-    <div ref={setNodeRef} onFocus={onFocus} onBlur={onBlur}>
+    <div onBlur={onBlur} onFocus={onFocus} ref={setNodeRef}>
       <div
         className={classNames(styles.box, className)}
         style={{
@@ -70,7 +70,7 @@ const Container = (props: PropsWithChildren<ContainerProps>) => {
           <div className={styles.title}>{title ? title : null}</div>
           <div className={styles.extra}>
             {extra ? extra : null}
-            <Tooltip title="关闭" key="close">
+            <Tooltip key="close" title="关闭">
               <ActionIcon icon={XIcon} onClick={handleClose} />
             </Tooltip>
           </div>

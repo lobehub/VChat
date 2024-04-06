@@ -3,8 +3,8 @@ import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, Grid3x3, LandPlot, Orbit, RotateCw, SwitchCamera } from 'lucide-react';
 
 interface ToolBarProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const ToolBar = (props: ToolBarProps) => {
@@ -39,9 +39,8 @@ const ToolBar = (props: ToolBarProps) => {
 
   return (
     <ActionIconGroup
-      style={style}
       className={className}
-      type={'block'}
+      direction="column"
       dropdownMenu={dropdownMenu}
       items={[
         {
@@ -60,22 +59,43 @@ const ToolBar = (props: ToolBarProps) => {
           label: '网格',
         },
       ]}
-      direction="column"
       onActionClick={(action) => {
-        if (action.key === 'resetCamera') {
+        switch (action.key) {
+        case 'resetCamera': {
           viewer.resetCamera();
-        } else if (action.key === 'expand') {
+        
+        break;
+        }
+        case 'expand': {
           toggleFullScreen();
-        } else if (action.key === 'grid') {
+        
+        break;
+        }
+        case 'grid': {
           viewer.toggleGrid();
-        } else if (action.key === 'cameraHelper') {
+        
+        break;
+        }
+        case 'cameraHelper': {
           viewer.toggleCameraHelper();
-        } else if (action.key === 'cameraControl') {
+        
+        break;
+        }
+        case 'cameraControl': {
           viewer.toggleCameraControls();
-        } else if (action.key === 'floor') {
+        
+        break;
+        }
+        case 'floor': {
           viewer.toggleFloor();
+        
+        break;
+        }
+        // No default
         }
       }}
+      style={style}
+      type={'block'}
     />
   );
 };

@@ -1,13 +1,6 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  header: css`
-    padding: 16px 8px;
-    border-bottom: 1px solid ${token.colorBorderSecondary};
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-  `,
   date: css`
     font-size: 12px;
     color: ${token.colorTextDescription};
@@ -15,6 +8,13 @@ export const useStyles = createStyles(({ css, token }) => ({
   desc: css`
     color: ${token.colorTextDescription};
     text-align: center;
+  `,
+  header: css`
+    padding: 16px 8px;
+    border-bottom: 1px solid ${token.colorBorderSecondary};
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   `,
 
   title: css`

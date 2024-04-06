@@ -24,8 +24,8 @@ const Record = () => {
   return (
     <ActionIcon
       icon={Mic}
-      onClick={toggleRecord}
       loading={isRecording}
+      onClick={toggleRecord}
       title="语音识别（需科学上网）"
     />
   );

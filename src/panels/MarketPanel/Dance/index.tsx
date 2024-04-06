@@ -6,6 +6,10 @@ import DanceCard from './DanceCard';
 import DanceIndex from './DanceIndex';
 
 const useStyles = createStyles(({ css }) => ({
+  background: css`
+    width: 90%;
+    margin: -24px 0 -12px;
+  `,
   container: css`
     position: relative;
     display: flex;
@@ -19,10 +23,6 @@ const useStyles = createStyles(({ css }) => ({
     flex-grow: 1;
     overflow-y: auto;
   `,
-  background: css`
-    width: 90%;
-    margin: -24px 0 -12px;
-  `,
   title: css`
     z-index: 2;
     margin-top: 24px;
@@ -32,15 +32,15 @@ const useStyles = createStyles(({ css }) => ({
 }));
 
 interface DanceProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const Dance = (props: DanceProps) => {
   const { style, className } = props;
   const { theme, styles } = useStyles();
   return (
-    <div style={style} className={classNames(className, styles.container)}>
+    <div className={classNames(className, styles.container)} style={style}>
       <div className={styles.content}>
         <Center>
           <h1 className={styles.title}>Find Your Favorite Dance</h1>

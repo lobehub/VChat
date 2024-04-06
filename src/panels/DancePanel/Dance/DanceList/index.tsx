@@ -14,30 +14,30 @@ const DanceList = () => {
 
   return (
     <>
-      <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
+      <Flexbox align="center" distribution="space-between" horizontal style={{ marginBottom: 12 }}>
         <h2>订阅列表</h2>
         <GradientButton
+          glow
           onClick={() => {
             openPanel('market');
             setTab('dance');
           }}
-          glow
           size="middle"
         >
           + 订阅舞蹈
         </GradientButton>
       </Flexbox>
       <List
-        grid={{ gutter: 8, column: 4 }}
         dataSource={danceList}
+        grid={{ column: 4, gutter: 8 }}
         renderItem={(item) => (
           <List.Item>
             <Card
-              hoverable
               cover={
                 // eslint-disable-next-line @next/next/no-img-element,
-                <img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />
+                <img alt="thumb" height={108} src={item.thumb} style={{ objectFit: 'cover' }} />
               }
+              hoverable
               onClick={() => {
                 activateDance(item.danceId);
               }}

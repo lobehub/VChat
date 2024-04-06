@@ -6,6 +6,9 @@ import classNames from 'classnames';
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ css, token }) => ({
+  active: css`
+    background-color: ${token.controlItemBgActiveHover};
+  `,
   list: css`
     width: 240px;
     border-right: 1px solid ${token.colorBorder};
@@ -14,9 +17,6 @@ const useStyles = createStyles(({ css, token }) => ({
     &:hover {
       cursor: pointer;
     }
-  `,
-  active: css`
-    background-color: ${token.controlItemBgActiveHover};
   `,
 }));
 
@@ -34,8 +34,9 @@ const AreaList = () => {
 
   return (
     <List
-      header={<div style={{ padding: 12 }}>触摸区域列表</div>}
+      className={styles.list}
       dataSource={data}
+      header={<div style={{ padding: 12 }}>触摸区域列表</div>}
       renderItem={(item) => (
         <List.Item
           className={classNames(styles.listItem, {
@@ -47,7 +48,6 @@ const AreaList = () => {
           {item.label}
         </List.Item>
       )}
-      className={styles.list}
     />
   );
 };

@@ -33,7 +33,6 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <ThemeProvider
-      themeMode={themeMode}
       customTheme={{
         primaryColor: primaryColor,
       }}
@@ -41,6 +40,7 @@ const Layout = (props: LayoutProps) => {
       onAppearanceChange={(appearance) => {
         setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
+      themeMode={themeMode}
     >
       <StoreHydration />
       <GlobalStyle />

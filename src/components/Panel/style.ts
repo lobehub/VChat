@@ -11,38 +11,6 @@ export const useStyles = createStyles(({ css, token }) => ({
     position: fixed;
     width: 900px;
   `,
-  header: css`
-    border-bottom: 1px solid #999;
-    height: 32px;
-    cursor: move;
-    width: 100%;
-    padding: 0 ${token.paddingXS}px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  `,
-  extra: css`
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  `,
-  title: css`
-    flex: 1;
-    text-align: center;
-    font-weight: bold;
-  `,
-  logo: css`
-    flex: 1;
-    justify-content: flex-start;
-  `,
-
-  container: css`
-    display: flex;
-    height: 640px;
-    flex-direction: row;
-    flex-grow: 1;
-  `,
   button: css`
     border-radius: 8px;
     width: 14px;
@@ -53,18 +21,50 @@ export const useStyles = createStyles(({ css, token }) => ({
   close: css`
     background-color: ${token['red-7']};
   `,
-  min: css`
-    background-color: ${token['yellow-7']};
+  container: css`
+    display: flex;
+    height: 640px;
+    flex-direction: row;
+    flex-grow: 1;
   `,
-  max: css`
-    background-color: ${token['green-7']};
-  `,
-
   content: css`
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
     flex-grow: 1;
+  `,
+
+  extra: css`
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  `,
+  header: css`
+    border-bottom: 1px solid #999;
+    height: 32px;
+    cursor: move;
+    width: 100%;
+    padding: 0 ${token.paddingXS}px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  `,
+  logo: css`
+    flex: 1;
+    justify-content: flex-start;
+  `,
+  max: css`
+    background-color: ${token['green-7']};
+  `,
+  min: css`
+    background-color: ${token['yellow-7']};
+  `,
+
+  title: css`
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
   `,
 }));

@@ -1,17 +1,5 @@
 export interface Dance {
   /**
-   * 舞蹈名
-   */
-  name: string;
-  /**
-   * 舞蹈 ID
-   */
-  danceId: string;
-  /**
-   * 舞蹈文件
-   */
-  src: string;
-  /**
    * 音频文件
    */
   audio: string;
@@ -20,11 +8,23 @@ export interface Dance {
    */
   cover: string;
   /**
-   * 缩略图
+   * 舞蹈 ID
    */
-  thumb: string;
+  danceId: string;
+  /**
+   * 舞蹈名
+   */
+  name: string;
   /**
    * 说明文件
    */
   readme: string;
+  /**
+   * 舞蹈文件
+   */
+  src: string;
+  /**
+   * 缩略图
+   */
+  thumb: string;
 }

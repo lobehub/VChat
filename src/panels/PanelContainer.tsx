@@ -6,9 +6,9 @@ import { PanelKey } from '@/types/config';
 import { PropsWithChildren } from 'react';
 
 interface PanelContainerProps {
-  style?: React.CSSProperties;
   className?: string;
   panelKey: PanelKey;
+  style?: React.CSSProperties;
   title?: string;
 }
 
@@ -24,14 +24,14 @@ const PanelContainer = (props: PropsWithChildren<PanelContainerProps>) => {
 
   return (
     <Panel
-      style={style}
       className={className}
-      zIndex={zIndex}
-      onFocus={() => focusPanel(panelKey)}
       coordinates={panel[panelKey].coordinates}
-      onCoordinatesChange={(coordinates) => setPanel(panelKey, { coordinates })}
       onClose={() => closePanel(panelKey)}
+      onCoordinatesChange={(coordinates) => setPanel(panelKey, { coordinates })}
+      onFocus={() => focusPanel(panelKey)}
+      style={style}
       title={title}
+      zIndex={zIndex}
     >
       {children}
     </Panel>

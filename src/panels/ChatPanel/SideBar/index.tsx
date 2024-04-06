@@ -24,17 +24,17 @@ const SideBar = () => {
   return (
     <DraggablePanel
       className={styles.content}
-      minWidth={256}
       defaultSize={{ width: 256 }}
       maxWidth={316}
+      minWidth={256}
       mode={'fixed'}
       placement={'left'}
     >
       <Header
-        value={searchName}
         onChange={(value) => {
           setSearchName(value);
         }}
+        value={searchName}
       />
       <div className={styles.list}>
         <SessionList filter={searchName} />

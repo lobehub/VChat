@@ -17,9 +17,9 @@ const useStyles = createStyles(({ css }) => ({
 }));
 
 export interface HolographicCardProps {
+  children?: ReactNode;
   img?: string;
   mask?: string;
-  children?: ReactNode;
 }
 
 const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }) => {
@@ -33,7 +33,7 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
   }, []);
 
   return (
-    <Container mask={mask} loading={loading}>
+    <Container loading={loading} mask={mask}>
       {children ? (
         <div
           className={'card_children_container'}
@@ -48,15 +48,15 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
       ) : (
         <img
           className={styles.img}
-          src={img}
+          height="921"
+          loading="lazy"
           onLoad={() => {
             setTimeout(() => {
               setLoading(false);
             }, 500);
           }}
-          loading="lazy"
+          src={img}
           width="660"
-          height="921"
         />
       )}
     </Container>

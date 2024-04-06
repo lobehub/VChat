@@ -4,8 +4,8 @@ import { StateCreator } from 'zustand/vanilla';
 export type tabType = 'agent' | 'dance';
 
 export interface PanelStore {
-  tab: tabType;
   setTab: (tab: tabType) => void;
+  tab: tabType;
 }
 
 export const createPanelStore: StateCreator<
@@ -15,7 +15,7 @@ export const createPanelStore: StateCreator<
   PanelStore
 > = (set) => {
   return {
-    tab: 'agent',
     setTab: (tab) => set({ tab }),
+    tab: 'agent',
   };
 };

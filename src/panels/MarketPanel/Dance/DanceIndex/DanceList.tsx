@@ -16,19 +16,19 @@ const DanceList = () => {
   const [subscribed] = useDanceStore((s) => [danceListSelectors.subscribed(s)]);
   return (
     <List
-      grid={{ gutter: 8, column: showDanceSidebar ? 3 : 4 }}
       dataSource={danceList}
+      grid={{ column: showDanceSidebar ? 3 : 4, gutter: 8 }}
       loading={danceLoading}
       renderItem={(item) => {
         const isSubscribed = subscribed(item.danceId);
         return (
           <List.Item style={{ position: 'relative' }}>
             <Card
-              hoverable
               cover={
                 // eslint-disable-next-line @next/next/no-img-element,
-                <img src={item.thumb} alt="thumb" height={108} style={{ objectFit: 'cover' }} />
+                <img alt="thumb" height={108} src={item.thumb} style={{ objectFit: 'cover' }} />
               }
+              hoverable
               onClick={() => {
                 activateDance(item.danceId);
               }}
@@ -37,8 +37,8 @@ const DanceList = () => {
             </Card>
             {isSubscribed ? (
               <CheckCircleTwoTone
+                style={{ fontSize: 24, position: 'absolute', right: 8, top: 8 }}
                 twoToneColor="#52c41a"
-                style={{ position: 'absolute', right: 8, top: 8, fontSize: 24 }}
               />
             ) : null}
           </List.Item>

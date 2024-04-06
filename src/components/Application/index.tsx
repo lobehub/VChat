@@ -16,9 +16,9 @@ const Application = (props: ApplicationProps) => {
   const { styles } = useStyles();
 
   return (
-    <Tooltip title={name} mouseEnterDelay={0.8}>
+    <Tooltip mouseEnterDelay={0.8} title={name}>
       <div className={cx(styles.application)} onClick={onClick} tabIndex={0}>
-        {avatar ? <Avatar avatar={avatar} size={32} shape="square" /> : null}
+        {avatar ? <Avatar avatar={avatar} shape="square" size={32} /> : null}
         {icon ? <Icon icon={icon} size={{ fontSize: 32 }} /> : null}
       </div>
     </Tooltip>

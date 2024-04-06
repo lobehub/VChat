@@ -1,6 +1,12 @@
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
+  chatbot: css`
+    position: relative;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+  `,
   header: css`
     padding: 16px 8px;
     border-bottom: 1px solid ${token.colorBorderSecondary};
@@ -15,12 +21,6 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   voiceOn: css`
     color: ${token.colorLinkActive};
-  `,
-  chatbot: css`
-    position: relative;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
   `,
 }));
 

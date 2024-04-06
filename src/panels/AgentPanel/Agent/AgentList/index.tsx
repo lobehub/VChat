@@ -11,8 +11,8 @@ const { Text } = Typography;
 const { Meta } = Card;
 
 interface AgentListProps {
-  title: string;
   dataSource: Agent[];
+  title: string;
 }
 
 const AgentList = (props: AgentListProps) => {
@@ -26,41 +26,41 @@ const AgentList = (props: AgentListProps) => {
 
   return (
     <>
-      <Flexbox style={{ marginBottom: 12 }} horizontal align="center" distribution="space-between">
+      <Flexbox align="center" distribution="space-between" horizontal style={{ marginBottom: 12 }}>
         <h2>{title}</h2>
         <GradientButton
+          glow
           onClick={() => {
             openPanel('market');
             setTab('agent');
           }}
-          glow
           size="middle"
         >
           + 订阅角色
         </GradientButton>
       </Flexbox>
       <List
-        grid={{ gutter: 8, column: showAgentSidebar ? 3 : 4 }}
         dataSource={dataSource}
+        grid={{ column: showAgentSidebar ? 3 : 4, gutter: 8 }}
         renderItem={(item) => {
           const { cover, name, description } = item.meta;
           return (
             <List.Item>
               <Card
-                hoverable
-                // eslint-disable-next-line @next/next/no-img-element,
-                cover={<img src={cover} alt="cover" />}
                 onClick={() => {
                   activateAgent(item.agentId);
                 }}
+                hoverable
+                // eslint-disable-next-line @next/next/no-img-element,
+                cover={<img src={cover} alt="cover" />}
               >
                 <Meta
-                  title={name}
                   description={
-                    <Text style={{ width: 200 }} ellipsis={{ tooltip: description }}>
+                    <Text ellipsis={{ tooltip: description }} style={{ width: 200 }}>
                       {description}
                     </Text>
                   }
+                  title={name}
                 />
               </Card>
             </List.Item>

@@ -7,14 +7,24 @@ import classNames from 'classnames';
 const FormItem = Form.Item;
 
 interface InfoProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const useStyles = createStyles(({ css, token }) => ({
+  config: css`
+    padding: 12px;
+    border: 1px solid ${token.colorBorderSecondary};
+    border-radius: ${token.borderRadius}px;
+    flex: 3;
+    margin-right: 12px;
+  `,
   container: css`
     display: flex;
     flex-direction: column;
+  `,
+  footer: css`
+    margin-top: 20px;
   `,
   form: css`
     display: flex;
@@ -24,16 +34,6 @@ const useStyles = createStyles(({ css, token }) => ({
     padding: 12px;
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadius}px;
-  `,
-  config: css`
-    padding: 12px;
-    border: 1px solid ${token.colorBorderSecondary};
-    border-radius: ${token.borderRadius}px;
-    flex: 3;
-    margin-right: 12px;
-  `,
-  footer: css`
-    margin-top: 20px;
   `,
 }));
 
@@ -57,44 +57,44 @@ const Info = (props: InfoProps) => {
 
   return (
     <Form
+      form={form}
+      initialValues={currentAgent}
+      layout="horizontal"
       onFinish={() => {
         form.validateFields().then((values) => {
           updateAgentConfig(values);
           message.success('保存成功');
         });
       }}
-      initialValues={currentAgent}
-      layout="horizontal"
       requiredMark={false}
-      form={form}
     >
-      <div style={style} className={classNames(className, styles.container)}>
+      <div className={classNames(className, styles.container)} style={style}>
         <div className={styles.form}>
           <div className={styles.config}>
             <FormItem
               label={'名称'}
               name={['meta', 'name']}
               required
-              rules={[{ required: true, message: '请输入角色名称' }]}
+              rules={[{ message: '请输入角色名称', required: true }]}
             >
               <Input placeholder="请输入角色名称" />
             </FormItem>
             <FormItem
               label={'描述'}
               name={['meta', 'description']}
-              rules={[{ required: true, message: '请输入角色描述' }]}
+              rules={[{ message: '请输入角色描述', required: true }]}
             >
               <Input placeholder="请输入角色描述" />
             </FormItem>
             <FormItem
               label={'说明'}
               name={['meta', 'readme']}
-              rules={[{ required: true, message: '请输入角色说明' }]}
+              rules={[{ message: '请输入角色说明', required: true }]}
             >
               <Input.TextArea
+                autoSize={{ maxRows: 11, minRows: 11 }}
                 placeholder="请输入角色说明"
                 showCount
-                autoSize={{ maxRows: 11, minRows: 11 }}
               />
             </FormItem>
           </div>
@@ -106,7 +106,7 @@ const Info = (props: InfoProps) => {
                 // beforeUpload={beforeUpload}
                 // onChange={handleChange}
               >
-                <Avatar src={avatar} size={96} shape="circle" />
+                <Avatar shape="circle" size={96} src={avatar} />
               </Upload>
             </FormItem>
             <FormItem label={'封面'} name={['meta', 'cover']}>

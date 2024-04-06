@@ -18,12 +18,12 @@ export const chatCompletion = async (payload: any) => {
   const config = configSelectors.currentOpenAIConfig(useConfigStore.getState());
 
   const res = await fetch('/api/chat/openai', {
-    method: 'POST',
-    headers: createHeader(),
     body: JSON.stringify({
       model: config?.model,
       ...payload,
     }),
+    headers: createHeader(),
+    method: 'POST',
   });
   return res;
 };

@@ -5,8 +5,8 @@ import { message } from 'antd';
 const getMessageByErrorType = (errorType: ErrorTypeEnum) => {
   const errorMap = {
     API_KEY_MISSING: 'OpenAI API Key 为空，请添加自定义 OpenAI API Key',
-    OPENAI_API_ERROR: 'OpenAI API 错误，请检查 OpenAI API Key 和 Endpoint 是否正确',
     INTERNAL_SERVER_ERROR: '服务器错误，请联系管理员',
+    OPENAI_API_ERROR: 'OpenAI API 错误，请检查 OpenAI API Key 和 Endpoint 是否正确',
   };
   return errorMap[errorType] || 'unknown error';
 };
@@ -26,9 +26,9 @@ export const fetchSEE = async (
     const data = (await res.json()) as APIErrorResponse;
 
     handler.onMessageError?.({
-      type: data.errorType,
       body: data.body,
       message: getMessageByErrorType(data.errorType),
+      type: data.errorType,
     });
     message.error(getMessageByErrorType(data.errorType));
     return;

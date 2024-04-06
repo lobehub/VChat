@@ -4,11 +4,11 @@ import Orbit from './Orbit';
 import { useStyles } from './style';
 
 export interface ContainerProps {
-  foil?: string;
-  mask?: string;
   children?: ReactNode;
   className?: string;
+  foil?: string;
   loading?: boolean;
+  mask?: string;
 }
 
 const Container = memo<ContainerProps>(({ foil, mask, children, className, loading }) => {
@@ -21,23 +21,23 @@ const Container = memo<ContainerProps>(({ foil, mask, children, className, loadi
         container: cx(`${className} ${mask ? 'masked' : ''}`, styles.container),
         rotator: cx(styles.rotator),
       }}
+      onMouseMove={onMouseMove}
+      onMouseOut={onMouseOut}
       styles={{
         container: {
           ...shineStyle,
-          '--mask': `url(${mask ?? ''})`,
           '--foil': `url(${foil ?? ''})`,
+          '--mask': `url(${mask ?? ''})`,
           width: 320,
         } as CSSProperties,
         content: {
           display: 'grid',
         },
       }}
-      onMouseMove={onMouseMove}
-      onMouseOut={onMouseOut}
     >
       <div className={cx(styles.front, loading && styles.fontLoading)}>
         {children}
-        <LaserShine mask={!!mask} className={styles.shine} />
+        <LaserShine className={styles.shine} mask={!!mask} />
         <div className={cx('card__glare', styles.glare)} />
       </div>
     </Orbit>

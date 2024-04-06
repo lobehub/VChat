@@ -3,28 +3,35 @@ import { produce } from 'immer';
 import { persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
-import { agentListSelectors } from './selectors/agent';
+
 
 export interface AgentStore {
   activateAgent: (identifier: string) => void;
-  deactivateAgent: () => void;
   currentIdentifier: string;
-  subscribedList: Agent[];
+  deactivateAgent: () => void;
   getAgentById: (agentId: string) => Agent | undefined;
   subscribe: (agent: Agent) => void;
+  subscribedList: Agent[];
   unsubscribe: (agentId: string) => void;
 }
 
 export const useAgentStore = createWithEqualityFn<AgentStore>()(
   persist(
     (set, get) => ({
-      currentIdentifier: '',
-      subscribedList: [],
       activateAgent: (identifier) => {
         set({ currentIdentifier: identifier });
       },
+      currentIdentifier: '',
       deactivateAgent: () => {
         set({ currentIdentifier: undefined });
+      },
+      getAgentById: (agentId: string): Agent | undefined => {
+        const { subscribedList } = get();
+
+        const currentAgent = subscribedList.find((item) => item.agentId === agentId);
+        if (!currentAgent) return undefined;
+
+        return currentAgent;
       },
       subscribe: (agent) => {
         const { subscribedList } = get();
@@ -38,6 +45,7 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
         });
         set({ subscribedList: newList });
       },
+      subscribedList: [],
       unsubscribe: (agentId) => {
         const { subscribedList } = get();
         const newList = produce(subscribedList, (draft) => {
@@ -47,15 +55,7 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
             draft.splice(index, 1);
           }
         });
-        set({ subscribedList: newList, currentIdentifier: newList[0]?.agentId });
-      },
-      getAgentById: (agentId: string): Agent | undefined => {
-        const { subscribedList } = get();
-
-        const currentAgent = subscribedList.find((item) => item.agentId === agentId);
-        if (!currentAgent) return undefined;
-
-        return currentAgent;
+        set({ currentIdentifier: newList[0]?.agentId, subscribedList: newList });
       },
     }),
     {
@@ -65,4 +65,6 @@ export const useAgentStore = createWithEqualityFn<AgentStore>()(
   shallow,
 );
 
-export { agentListSelectors };
+
+
+export {agentListSelectors} from './selectors/agent';

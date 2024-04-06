@@ -3,45 +3,12 @@ import { Config, PanelConfig, PanelKey } from '@/types/config';
 
 export interface ConfigState {
   config: Config;
-  panel: PanelConfig;
   focusList: PanelKey[];
+  panel: PanelConfig;
 }
 
 const initialState: ConfigState = {
-  focusList: [],
-  panel: {
-    agent: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    role: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    dance: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    live: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    chat: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    market: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-    config: {
-      open: false,
-      coordinates: INITIAL_COORDINATES,
-    },
-  },
-
   config: {
-    primaryColor: 'blue',
     backgroundEffect: 'glow',
     languageModel: {
       openAI: {
@@ -49,6 +16,39 @@ const initialState: ConfigState = {
         endpoint: '',
         model: 'gpt-3.5-turbo',
       },
+    },
+    primaryColor: 'blue',
+  },
+  focusList: [],
+
+  panel: {
+    agent: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    chat: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    config: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    dance: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    live: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    market: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
+    },
+    role: {
+      coordinates: INITIAL_COORDINATES,
+      open: false,
     },
   },
 };

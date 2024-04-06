@@ -33,8 +33,8 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
       ...message,
       meta: {
         avatar: message.role === 'user' ? DEFAULT_USER_AVATAR : avatar,
-        title: message.role === 'user' ? '你' : name,
         description: message.role === 'user' ? undefined : description,
+        title: message.role === 'user' ? '你' : name,
       },
     };
   });
@@ -89,15 +89,15 @@ const getAgentById = (s: SessionStore) => {
 };
 
 export const sessionSelectors = {
-  currentSession,
-  currentChatIDs,
-  sessionListIds,
+  currentAgent,
   currentAgentModel,
+  currentChatIDs,
   currentChatMessage,
   currentChats,
-  currentAgent,
   currentChatsString,
+  currentSession,
   currentSystemRole,
   getAgentById,
   previousChats,
+  sessionListIds,
 };

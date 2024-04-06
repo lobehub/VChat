@@ -16,8 +16,8 @@ const useStyles = createStyles(({ css, token }) => ({
 }));
 
 interface TouchProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const Touch = (props: TouchProps) => {
@@ -25,7 +25,7 @@ const Touch = (props: TouchProps) => {
   const { styles } = useStyles();
 
   return (
-    <div style={style} className={classNames(className, styles.container)}>
+    <div className={classNames(className, styles.container)} style={style}>
       <SideBar />
       <ActionList />
     </div>

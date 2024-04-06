@@ -27,6 +27,18 @@ export const useStyles = createStyles(({ css, cx }) => {
   `;
 
   return {
+    active: cx(shadow),
+
+    back: css`
+      background-color: var(--card-back);
+      transform: rotateY(180deg) translateZ(1px);
+      backface-visibility: visible;
+
+      ${view}
+    `,
+    backLoading: css`
+      transform: rotateY(0deg);
+    `,
     container: css`
       --card-radius: 4.55% / 3.5%;
 
@@ -51,13 +63,22 @@ export const useStyles = createStyles(({ css, cx }) => {
       --imgsize: cover;
     `,
 
-    active: cx(shadow),
-    shine: cx(
-      perf,
-      css`
-        ${view}
-      `,
-    ),
+    fontLoading: css`
+      opacity: 0;
+    `,
+    front: css`
+      & * {
+        backface-visibility: hidden;
+      }
+
+      opacity: 1;
+      backface-visibility: hidden;
+      transition: opacity 0.33s ease-out;
+      transform: translate3d(0px, 0px, 0.01px);
+      display: grid;
+
+      ${view}
+    `,
     glare: cx(
       perf,
       css`
@@ -86,34 +107,6 @@ export const useStyles = createStyles(({ css, cx }) => {
         background-size: 170% 170%;
       `,
     ),
-
-    front: css`
-      & * {
-        backface-visibility: hidden;
-      }
-
-      opacity: 1;
-      backface-visibility: hidden;
-      transition: opacity 0.33s ease-out;
-      transform: translate3d(0px, 0px, 0.01px);
-      display: grid;
-
-      ${view}
-    `,
-    back: css`
-      background-color: var(--card-back);
-      transform: rotateY(180deg) translateZ(1px);
-      backface-visibility: visible;
-
-      ${view}
-    `,
-    fontLoading: css`
-      opacity: 0;
-    `,
-    backLoading: css`
-      transform: rotateY(0deg);
-    `,
-
     rotator: css`
       ${shadow}
 
@@ -122,5 +115,12 @@ export const useStyles = createStyles(({ css, cx }) => {
         transform: translate3d(0px, 0px, 0.01px);
       }
     `,
+
+    shine: cx(
+      perf,
+      css`
+        ${view}
+      `,
+    ),
   };
 });

@@ -11,19 +11,19 @@ const { Text } = Typography;
 const { Meta } = List.Item;
 
 interface PlayListProps {
-  open: boolean;
   onClose: () => void;
+  open: boolean;
 }
 
 const playListSelectors = (s: DanceStore) => {
   return {
-    playlist: s.playlist,
+    clearPlayList: s.clearPlayList,
     currentPlay: s.currentPlay,
     isPlaying: s.isPlaying,
     playItem: s.playItem,
+    playlist: s.playlist,
     removePlayItem: s.removePlayItem,
     setIsPlaying: s.setIsPlaying,
-    clearPlayList: s.clearPlayList,
   };
 };
 
@@ -42,23 +42,22 @@ const PlayList = (props: PlayListProps) => {
 
   return (
     <Drawer
-      open={open}
-      onClose={onClose}
-      width={400}
       closeIcon={null}
-      styles={{
-        header: { padding: 12 },
-        body: { padding: 0 },
-      }}
-      title="当前播放列表"
       extra={
-        <Button size="small" icon={<DeleteOutlined />} onClick={() => clearPlayList()}>
+        <Button icon={<DeleteOutlined />} onClick={() => clearPlayList()} size="small">
           清空列表
         </Button>
       }
+      onClose={onClose}
+      open={open}
+      styles={{
+        body: { padding: 0 },
+        header: { padding: 12 },
+      }}
+      title="当前播放列表"
+      width={400}
     >
       <List
-        size="small"
         dataSource={playlist}
         renderItem={(item) => {
           const isCurrentPlay = currentPlay ? currentPlay!.name === item.name : false;
@@ -88,10 +87,6 @@ const PlayList = (props: PlayListProps) => {
                   size="small"
                 />,
               ]}
-              style={{
-                cursor: 'pointer',
-                backgroundColor: isCurrentPlay ? token.colorBgSpotlight : undefined,
-              }}
               onDoubleClick={() => {
                 if (isPlaying) {
                   setIsPlaying(false);
@@ -99,10 +94,14 @@ const PlayList = (props: PlayListProps) => {
                   playItem(item);
                 }
               }}
+              style={{
+                backgroundColor: isCurrentPlay ? token.colorBgSpotlight : undefined,
+                cursor: 'pointer',
+              }}
             >
               <Meta
                 title={
-                  <Text style={{ width: 600 }} ellipsis={{ tooltip: item.name }}>
+                  <Text ellipsis={{ tooltip: item.name }} style={{ width: 600 }}>
                     {item.name}
                   </Text>
                 }
@@ -110,6 +109,7 @@ const PlayList = (props: PlayListProps) => {
             </List.Item>
           );
         }}
+        size="small"
       />
     </Drawer>
   );
