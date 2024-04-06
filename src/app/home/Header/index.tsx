@@ -6,7 +6,7 @@ import { GithubIcon } from 'lucide-react';
 const Header = () => {
   return (
     <LobeHeader
-      logo={<Logo extra={'V-idol'} size={36} type={'combine'} />}
+      logo={<Logo extra={'VChat'} size={36} type={'combine'} />}
       actions={[
         <ActionIcon
           size="large"
