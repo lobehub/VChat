@@ -20988,7 +20988,7 @@ const convert = (voices: any[]) => {
   return voices.map((voice) => voiceMap[voice.shortName]).filter((voice) => !!voice);
 };
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
   const data = JSON.stringify({
     queryCondition: {
       items: [

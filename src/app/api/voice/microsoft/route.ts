@@ -39,8 +39,7 @@ export const POST = async (req: Request) => {
   };
 
   try {
-    const response = await axios(config);
-    return response;
+    return await axios(config);
   } catch {
     return NextResponse.json({ errorMessage: '转换失败', success: false }, { status: 400 });
   }
