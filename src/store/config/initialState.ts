@@ -42,7 +42,7 @@ const initialState: ConfigState = {
 
   config: {
     primaryColor: 'blue',
-    backgroundEffect: 'sakura',
+    backgroundEffect: 'glow',
     languageModel: {
       openAI: {
         apikey: '',

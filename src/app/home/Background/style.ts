@@ -1,7 +1,7 @@
 import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
-  canvas: css`
+  glow: css`
     pointer-events: none;
     position: absolute;
     top: -250px;

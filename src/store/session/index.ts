@@ -6,6 +6,8 @@ import { Session } from '@/types/session';
 import { fetchSEE } from '@/utils/fetch';
 import { nanoid } from 'ai';
 import { produce } from 'immer';
+import { merge } from 'lodash-es';
+import { DeepPartial } from 'utility-types';
 import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
@@ -30,6 +32,10 @@ export interface SessionStore {
    * 本地角色列表
    */
   localAgentList: Agent[];
+  /**
+   * 更新角色配置
+   */
+  updateAgentConfig: (agent: DeepPartial<Agent>) => void;
   /**
    * 会话列表
    */
@@ -142,22 +148,28 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   },
   createSession: (agent: Agent) => {
     const { sessionList, localAgentList } = get();
-    // 判断是否已经在本地角色列表中
-    const targetAgent = localAgentList.find((localAgent) => localAgent.agentId === agent.agentId);
-    if (!targetAgent) {
-      set({ localAgentList: [...localAgentList, agent] });
-    }
 
-    // 判断是否已经在会话列表中
-    const targetSession = sessionList.find((session) => session.agentId === agent.agentId);
-    if (!targetSession) {
-      const session = {
-        agentId: agent.agentId,
-        messages: [],
-      };
-      set({ sessionList: [...sessionList, session] });
-    }
-    set({ activeId: agent.agentId });
+    const newAgentList = produce(localAgentList, (draft) => {
+      const index = draft.findIndex((localAgent) => localAgent.agentId === agent.agentId);
+      if (index === -1) {
+        draft.push(agent);
+      } else {
+        draft[index] = merge(agent, draft[index]);
+      }
+    });
+    set({ localAgentList: newAgentList });
+
+    const newSessionList = produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agentId === agent.agentId);
+      if (index === -1) {
+        draft.push({
+          agentId: agent.agentId,
+          messages: [],
+        });
+      }
+    });
+
+    set({ sessionList: newSessionList, activeId: agent.agentId });
   },
   switchSession: (agentId) => {
     const { sessionList } = get();
@@ -192,6 +204,15 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   clearSessions: () => {
     localStorage.removeItem(SESSION_STORAGE_KEY);
     set({ ...initialState });
+  },
+  updateAgentConfig: (agent) => {
+    const { localAgentList, activeId } = get();
+    const agents = produce(localAgentList, (draft) => {
+      const index = draft.findIndex((localAgent) => localAgent.agentId === activeId);
+      if (index === -1) return;
+      draft[index] = merge(draft[index], agent);
+    });
+    set({ localAgentList: agents });
   },
 
   updateSessionMessages: (messages) => {

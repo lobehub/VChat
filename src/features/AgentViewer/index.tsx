@@ -12,13 +12,13 @@ function AgentViewer() {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (currentLiveAgent) {
+    if (currentLiveAgent && currentLiveAgent.meta.model) {
       setLoading(true);
       viewer.loadVrm(currentLiveAgent.meta.model).finally(() => {
         setLoading(false);
       });
     }
-  }, [currentLiveAgent, viewer]);
+  }, [currentLiveAgent?.meta.model, viewer]);
 
   const canvasRef = useCallback(
     (canvas: HTMLCanvasElement) => {

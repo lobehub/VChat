@@ -80,7 +80,10 @@ const Config = (props: ConfigProps) => {
   const ref = useRef<HTMLAudioElement>(null);
   const [form] = Form.useForm();
   const [voices, setVoices] = useState<Voice[]>([]);
-  const currentAgent = useSessionStore((s) => sessionSelectors.currentAgent(s));
+  const [currentAgent, updateAgentConfig] = useSessionStore((s) => [
+    sessionSelectors.currentAgent(s),
+    s.updateAgentConfig,
+  ]);
   const [audioUrl, setAudioUrl] = useState<string | undefined>(undefined);
 
   useEffect(() => {
@@ -93,13 +96,14 @@ const Config = (props: ConfigProps) => {
       message.success('转换成功');
       const adUrl = URL.createObjectURL(new Blob([res]));
       setAudioUrl(adUrl);
+      ref.current && (ref.current.src = adUrl);
+      ref.current && ref.current.play();
     },
     onError: (err) => {
       message.error(err.message);
       ref.current && ref.current.pause();
       ref.current && (ref.current.currentTime = 0);
       ref.current && (ref.current.src = '');
-      setAudioUrl(undefined);
     },
   });
 
@@ -137,7 +141,10 @@ const Config = (props: ConfigProps) => {
     <Form
       initialValues={currentAgent?.tts}
       onFinish={(values) => {
-        speek(values);
+        form.validateFields().then((values) => {
+          updateAgentConfig({ tts: values });
+          message.success('保存成功');
+        });
       }}
       preserve={false}
       onValuesChange={(changedValues) => {
@@ -229,26 +236,25 @@ const Config = (props: ConfigProps) => {
                   );
                 }}
               >
-                下载
+                下载试听片段
               </Button>
-              <Button htmlType="button" onClick={() => form.resetFields()}>
-                保存
+              <Button
+                htmlType="button"
+                loading={loading}
+                onClick={() => {
+                  const values = form.getFieldsValue();
+                  speek(values);
+                }}
+              >
+                试听
               </Button>
-              <Button htmlType="submit" type="primary" loading={loading}>
-                转换
+              <Button htmlType="submit" type="primary">
+                应用
               </Button>
             </FormFooter>
           </div>
         </div>
-        <div className={styles.audio}>
-          <audio
-            src={audioUrl}
-            controls
-            controlsList="nodownload"
-            style={{ width: '100%' }}
-            ref={ref}
-          />
-        </div>
+        <audio ref={ref} />
       </div>
     </Form>
   );

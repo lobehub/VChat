@@ -8,14 +8,44 @@ import { StateCreator } from 'zustand/vanilla';
 import { ConfigState, initialState } from './initialState';
 import { configSelectors } from './selectors/config';
 
+const CONFIG_STORAGE_KEY = 'vidol-chat-config-storage';
+
 export interface ConfigAction {
+  /**
+   * Set panel config
+   * @param panel
+   * @param config
+   */
   setPanel: (panel: PanelKey, config: Partial<Panel>) => void;
+  /**
+   * Set config
+   * @param config
+   */
   setConfig: (config: Partial<Config>) => void;
+  /**
+   * Reset config
+   */
+  resetConfig: () => void;
+  /**
+   * Set OpenAI config
+   * @param config
+   */
   setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
+  /**
+   * Focus panel
+   * @param key
+   */
   focusPanel: (key: PanelKey) => void;
+  /**
+   * Open panel
+   * @param key
+   */
   openPanel: (key: PanelKey) => void;
+  /**
+   * Close panel
+   * @param key
+   */
   closePanel: (key: PanelKey) => void;
-  minifyPanel: (key: PanelKey) => void;
 }
 
 export interface ConfigStore extends ConfigState, ConfigAction {}
@@ -39,7 +69,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
 
   openPanel: (key: PanelKey) => {
     const { setPanel, focusPanel } = get();
-    setPanel(key, { open: true, min: false });
+    setPanel(key, { open: true });
     focusPanel(key);
   },
 
@@ -49,15 +79,16 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     const nextSetting = focusList.filter((item) => item !== key);
     set({ focusList: nextSetting });
   },
-  minifyPanel: (key: PanelKey) => {
-    const { setPanel } = get();
-    setPanel(key, { min: true });
-  },
 
   focusPanel: (key: PanelKey) => {
     const { focusList } = get();
     let nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
     set({ focusList: nextSetting });
+  },
+
+  resetConfig: () => {
+    localStorage.removeItem(CONFIG_STORAGE_KEY);
+    set({ ...initialState });
   },
 
   setConfig: (config) => {
@@ -78,7 +109,7 @@ export const useConfigStore = createWithEqualityFn<ConfigStore>()(
     devtools(createStore, {
       name: 'VIDOL_CONFIG_STORE',
     }),
-    { name: 'vidol-chat-config-storage' },
+    { name: CONFIG_STORAGE_KEY },
   ),
   shallow,
 );

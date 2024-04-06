@@ -1,17 +1,13 @@
 import { Coordinates } from '@dnd-kit/utilities';
 import { PrimaryColors } from '@lobehub/ui';
 
-export type BackgroundEffect = 'sakura' | 'snow' | 'star' | 'none';
+export type BackgroundEffect = 'glow' | 'none';
 
 export interface Panel {
   /**
    * 是否打开
    */
   open: boolean;
-  /**
-   * 最小化
-   */
-  min?: boolean;
   /**
    * 坐标
    */

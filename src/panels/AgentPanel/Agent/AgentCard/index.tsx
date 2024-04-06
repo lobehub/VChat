@@ -27,7 +27,7 @@ const Header = () => {
     s.deactivateAgent,
     s.unsubscribe,
   ]);
-  const [openPanel, minifyPanel] = useConfigStore((s) => [s.openPanel, s.minifyPanel]);
+  const [openPanel, closePanel] = useConfigStore((s) => [s.openPanel, s.closePanel]);
   const currentAgent = useAgentStore((s) => agentListSelectors.currentAgentItem(s));
   const createSession = useSessionStore((s) => s.createSession);
 
@@ -57,7 +57,7 @@ const Header = () => {
             onClick={() => {
               if (!currentAgent) return;
               createSession(currentAgent);
-              minifyPanel('agent');
+              closePanel('agent');
             }}
             type={'primary'}
           >

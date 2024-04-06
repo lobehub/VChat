@@ -4,7 +4,6 @@ import Orbit from './Orbit';
 import { useStyles } from './style';
 
 export interface ContainerProps {
-  back?: string;
   foil?: string;
   mask?: string;
   children?: ReactNode;
@@ -12,7 +11,7 @@ export interface ContainerProps {
   loading?: boolean;
 }
 
-const Container = memo<ContainerProps>(({ back, foil, mask, children, className, loading }) => {
+const Container = memo<ContainerProps>(({ foil, mask, children, className, loading }) => {
   const { styles, cx } = useStyles();
   const { style: shineStyle, onMouseMove, onMouseOut } = useLaserShine();
 
@@ -36,13 +35,6 @@ const Container = memo<ContainerProps>(({ back, foil, mask, children, className,
       onMouseMove={onMouseMove}
       onMouseOut={onMouseOut}
     >
-      <img
-        className={cx(styles.back, loading && styles.backLoading)}
-        src={back}
-        loading="lazy"
-        width="660"
-        height="921"
-      />
       <div className={cx(styles.front, loading && styles.fontLoading)}>
         {children}
         <LaserShine mask={!!mask} className={styles.shine} />

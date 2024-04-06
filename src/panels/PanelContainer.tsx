@@ -14,12 +14,11 @@ interface PanelContainerProps {
 
 const PanelContainer = (props: PropsWithChildren<PanelContainerProps>) => {
   const { style, className, panelKey, title, children } = props;
-  const [panel, setPanel, focusPanel, closePanel, minifyPanel] = useConfigStore((s) => [
+  const [panel, setPanel, focusPanel, closePanel] = useConfigStore((s) => [
     s.panel,
     s.setPanel,
     s.focusPanel,
     s.closePanel,
-    s.minifyPanel,
   ]);
   const zIndex = useConfigStore((s) => configSelectors.getPanelZIndex(s, panelKey));
 
@@ -32,7 +31,6 @@ const PanelContainer = (props: PropsWithChildren<PanelContainerProps>) => {
       coordinates={panel[panelKey].coordinates}
       onCoordinatesChange={(coordinates) => setPanel(panelKey, { coordinates })}
       onClose={() => closePanel(panelKey)}
-      onMinify={() => minifyPanel(panelKey)}
       title={title}
     >
       {children}
