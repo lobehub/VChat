@@ -1,5 +1,6 @@
 import { Parser } from 'mmd-parser';
 import * as THREE from 'three';
+import { GridHelper } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Model } from './model';
 
@@ -18,6 +19,7 @@ export class Viewer {
   private _cameraHelper?: THREE.CameraHelper;
   private _camera?: THREE.PerspectiveCamera;
   private _cameraControls?: OrbitControls;
+  private _gridHelper?: THREE.GridHelper;
 
   constructor() {
     this.isReady = false;
@@ -26,17 +28,19 @@ export class Viewer {
     const scene = new THREE.Scene();
     this._scene = scene;
 
-    // light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    // 方向光
+    const directionalLight = new THREE.DirectionalLight(0xffffff, Math.PI);
     directionalLight.position.set(1.0, 1.0, 1.0).normalize();
     scene.add(directionalLight);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambientLight);
+    // 环境光
+    // const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // scene.add(ambientLight);
 
-    // const ambiantLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-    // ambiantLight.position.set(0, 20, 0);
-    // scene.add(ambiantLight);
+    // 渐变光
+    // const HemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+    // HemisphereLight.position.set(0, 20, 0);
+    // scene.add(HemisphereLight);
 
     // animate
     this._clock = new THREE.Clock();
@@ -45,7 +49,7 @@ export class Viewer {
 
   /**
    * 加载舞台
-   * @param url
+   * @param buffer
    */
   public async loadStage(buffer: ArrayBuffer) {
     const pmx = new Parser().parsePmx(buffer);
@@ -97,7 +101,6 @@ export class Viewer {
       alpha: true,
       antialias: true,
     });
-    this._renderer.outputEncoding = THREE.sRGBEncoding;
     this._renderer.setSize(width, height);
     this._renderer.setPixelRatio(window.devicePixelRatio);
 
@@ -131,12 +134,8 @@ export class Viewer {
     // );
     // floor.position.y = -0.5;
     // floor.rotation.x = -Math.PI / 2;
-
+    //
     // this._scene.add(floor);
-
-    // grid
-    // const grid = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
-    // this._scene.add(grid);
 
     window.addEventListener('resize', () => {
       this.resize();
@@ -145,9 +144,16 @@ export class Viewer {
     this.update();
   }
 
-  /**
-   * canvasの親要素を参照してサイズを変更する
-   */
+  public toggleGrid() {
+    if (this._gridHelper) {
+      this._scene.remove(this._gridHelper);
+      this._gridHelper = undefined;
+    } else {
+      this._gridHelper = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
+      this._scene.add(this._gridHelper);
+    }
+  }
+
   public resize() {
     if (!this._renderer) return;
 
