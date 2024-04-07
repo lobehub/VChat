@@ -17,9 +17,9 @@ interface ConfigProps {
 
 const useStyles = createStyles(({ css }) => ({
   config: css`
-    justify-content: center;
     display: flex;
     flex-grow: 1;
+    justify-content: center;
   `,
 }));
 

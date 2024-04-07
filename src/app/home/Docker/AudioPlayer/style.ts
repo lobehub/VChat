@@ -12,17 +12,17 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   controller: css`
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   `,
   info: css`
     display: flex;
     align-items: center;
   `,
   name: css`
+    justify-content: flex-start;
     width: 108px;
     font-size: ${token.fontSizeSM}px;
-    justify-content: flex-start;
   `,
   player: css`
     display: flex;
@@ -37,10 +37,12 @@ const useStyles = createStyles(({ token, css }) => ({
       from {
         transform: rotate(0deg);
       }
+
       to {
         transform: rotate(360deg);
       }
     }
+
     animation: rotate-animation 20s linear infinite;
   `,
 }));

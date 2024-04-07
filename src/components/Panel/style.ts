@@ -2,54 +2,63 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   box: css`
-    backdrop-filter: saturate(180%) blur(10px);
-    background-color: ${token.colorBgContainer};
-    border: 1px solid #999;
+    position: fixed;
+
     display: flex;
     flex-direction: column;
-    border-radius: ${token.borderRadius}px;
-    position: fixed;
+
     width: 900px;
+
+    background-color: ${token.colorBgContainer};
+    backdrop-filter: saturate(180%) blur(10px);
+    border: 1px solid #999;
+    border-radius: ${token.borderRadius}px;
   `,
   button: css`
-    border-radius: 8px;
+    cursor: pointer;
+
     width: 14px;
     height: 14px;
     margin-left: ${token.marginXS}px;
-    cursor: pointer;
+
+    border-radius: 8px;
   `,
   close: css`
     background-color: ${token['red-7']};
   `,
   container: css`
     display: flex;
-    height: 640px;
     flex-direction: row;
     flex-grow: 1;
+    height: 640px;
   `,
   content: css`
     display: flex;
     flex-direction: row;
-    height: 100%;
-    width: 100%;
     flex-grow: 1;
+
+    width: 100%;
+    height: 100%;
   `,
 
   extra: css`
-    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    flex: 1;
     align-items: center;
+    justify-content: flex-end;
   `,
   header: css`
-    border-bottom: 1px solid #999;
-    height: 32px;
     cursor: move;
-    width: 100%;
-    padding: 0 ${token.paddingXS}px;
+
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    height: 32px;
+    padding: 0 ${token.paddingXS}px;
+
+    border-bottom: 1px solid #999;
   `,
   logo: css`
     flex: 1;
@@ -64,7 +73,7 @@ export const useStyles = createStyles(({ css, token }) => ({
 
   title: css`
     flex: 1;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
   `,
 }));

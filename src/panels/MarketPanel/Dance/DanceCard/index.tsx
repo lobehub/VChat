@@ -9,8 +9,8 @@ import SubscribeButton from './SubscribeButton';
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
-    height: 100% !important;
     flex-direction: column;
+    height: 100% !important;
   `,
   header: css`
     border-bottom: 1px solid ${token.colorBorder};

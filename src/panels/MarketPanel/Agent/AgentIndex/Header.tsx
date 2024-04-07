@@ -6,9 +6,9 @@ import React, { memo, useEffect } from 'react';
 
 const useStyles = createStyles(({ css }) => ({
   actions: css`
-    margin-top: 12px;
     display: flex;
     justify-content: flex-end;
+    margin-top: 12px;
   `,
   address: css`
     display: flex;

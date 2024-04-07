@@ -24,13 +24,13 @@ interface CommonConfigProps {
 
 const useStyles = createStyles(({ css }) => ({
   config: css`
-    justify-content: center;
     display: flex;
     flex-grow: 1;
+    justify-content: center;
   `,
   effect: css`
-    margin-bottom: 0;
     width: 160px;
+    margin-bottom: 0;
   `,
 }));
 

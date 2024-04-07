@@ -9,9 +9,11 @@ const useStyles = createStyles(({ css, token }) => {
   return {
     container: css`
       position: relative;
+
       margin-block: 2px;
       padding-right: 16px;
       padding-left: 8px;
+
       border-radius: ${token.borderRadius}px;
     `,
   };

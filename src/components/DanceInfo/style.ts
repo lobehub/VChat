@@ -9,8 +9,8 @@ export const useStyles = createStyles(({ css, token }) => ({
     flex: none;
   `,
   container: css`
-    height: 100%;
     overflow-y: auto;
+    height: 100%;
   `,
   date: css`
     font-size: 12px;
@@ -21,8 +21,8 @@ export const useStyles = createStyles(({ css, token }) => ({
     text-align: center;
   `,
   footer: css`
-    white-space: break-spaces;
     padding: 16px 16px 24px;
+    white-space: break-spaces;
   `,
   header: css`
     position: relative;
@@ -31,10 +31,11 @@ export const useStyles = createStyles(({ css, token }) => ({
   `,
 
   title: css`
+    display: flex;
+    align-items: center;
+
     font-size: 20px;
     font-weight: 600;
     text-align: center;
-    display: flex;
-    align-items: center;
   `,
 }));

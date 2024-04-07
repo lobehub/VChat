@@ -4,15 +4,17 @@ import Container from './components/Container';
 
 const useStyles = createStyles(({ css }) => ({
   img: css`
-    width: 100%;
+    transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
     grid-area: 1/1;
 
     aspect-ratio: var(--card-aspect);
-    border-radius: var(--card-radius);
-    image-rendering: optimizeQuality;
+    width: 100%;
 
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    border-radius: var(--card-radius);
+
+    image-rendering: optimizequality;
   `,
 }));
 

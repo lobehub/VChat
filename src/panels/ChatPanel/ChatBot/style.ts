@@ -4,16 +4,18 @@ const useStyles = createStyles(({ token, css }) => ({
   chatbot: css`
     position: relative;
     display: flex;
-    flex-grow: 1;
     flex-direction: column;
+    flex-grow: 1;
   `,
   header: css`
-    padding: 16px 8px;
-    border-bottom: 1px solid ${token.colorBorderSecondary};
     display: flex;
-    width: 100%;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 16px 8px;
+
+    border-bottom: 1px solid ${token.colorBorderSecondary};
   `,
   voice: css`
     cursor: pointer;

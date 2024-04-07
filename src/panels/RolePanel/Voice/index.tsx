@@ -56,10 +56,10 @@ const useStyles = createStyles(({ css, token }) => ({
     margin-top: 20px;
   `,
   config: css`
+    flex: 3;
     padding: 12px;
     border: 1px solid ${token.colorBorderSecondary};
     border-radius: ${token.borderRadius}px;
-    flex: 3;
   `,
   container: css`
     display: flex;

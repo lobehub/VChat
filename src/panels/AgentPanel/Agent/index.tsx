@@ -11,16 +11,18 @@ const TopBanner = dynamic(() => import('./TopBanner'), { ssr: false });
 const useStyles = createStyles(({ css }) => ({
   container: css`
     position: relative;
+
     display: flex;
+
     width: 100%;
     height: 100%;
     min-height: 500px;
   `,
   content: css`
-    padding-left: 24px;
-    padding-right: 24px;
-    flex-grow: 1;
     overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 24px;
+    padding-left: 24px;
   `,
 }));
 

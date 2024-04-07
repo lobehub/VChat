@@ -28,10 +28,12 @@ orbit: css`
     position: absolute;
     top: 50%;
     left: 50%;
+
     width: 72px; /* 轨道直径 */
     height: 72px; /* 轨道直径 */
     margin-top: -36px; /* 轨道直径的一半，用于居中 */
     margin-left: -36px; /* 轨道直径的一半，用于居中 */
+
     border: 3px solid ${token.colorPrimary}; /* 轨道颜色和透明度 */
     border-radius: 50%;
   `,
@@ -56,17 +58,19 @@ orbit: css`
   
   
   roleSelect: css`
+    position: fixed;
+    top: 64px;
+    left: 0;
+
+    overflow: auto;
     display: grid;
+    grid-auto-flow: row;
     grid-gap: 24px;
-    justify-items: center;
     grid-template-columns: repeat(auto-fill, 64px);
     grid-template-rows: repeat(auto-fill, 64px);
-    grid-auto-flow: row;
-    position: fixed;
-    left: 0;
-    top: 64px;
+    justify-items: center;
+
     height: calc(100vh - 64px - 64px);
-    overflow: auto;
     padding: 32px;
   `,
 }));
