@@ -2,13 +2,17 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css, token }) => ({
   application: css`
-    display: inline-flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 8px;
-    border-radius: 2px;
-    user-select: none;
     cursor: pointer;
+    user-select: none;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 8px;
+
+    border-radius: 2px;
+
     &:hover {
       background: ${token.colorBgTextHover};
     }

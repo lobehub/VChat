@@ -1,14 +1,14 @@
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
-  control: css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `,
   back: css`
     cursor: pointer;
     margin-right: ${token.marginSM}px;
+  `,
+  control: css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
   `,
   forward: css`
     cursor: pointer;

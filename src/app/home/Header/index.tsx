@@ -6,15 +6,15 @@ import { GithubIcon } from 'lucide-react';
 const Header = () => {
   return (
     <LobeHeader
-      logo={<Logo extra={'V-idol'} size={36} type={'combine'} />}
       actions={[
         <ActionIcon
-          size="large"
-          key="github"
           icon={GithubIcon}
+          key="github"
           onClick={() => window.open('https://github.com/v-idol/vidol.chat', '_blank')}
+          size="large"
         />,
       ]}
+      logo={<Logo extra={'VChat'} size={36} type={'combine'} />}
     />
   );
 };

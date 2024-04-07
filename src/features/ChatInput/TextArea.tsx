@@ -10,9 +10,12 @@ const useStyles = createStyles(({ css }) => {
   return {
     textarea: css`
       resize: none !important;
+
       height: 100% !important;
       padding: 0 24px;
+
       line-height: 1.5;
+
       box-shadow: none !important;
     `,
     textareaContainer: css`
@@ -22,7 +25,11 @@ const useStyles = createStyles(({ css }) => {
   };
 });
 
-const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(({ setExpand }) => {
+interface InputAreaProps {
+  setExpand?: (expand: boolean) => void;
+}
+
+const InputArea = memo<InputAreaProps>(({ setExpand }) => {
   const { styles } = useStyles();
   const ref = useRef<TextAreaRef>(null);
   const isChineseInput = useRef(false);

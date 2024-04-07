@@ -1,13 +1,13 @@
 import { Dance } from '@/types/dance';
 import { Avatar } from '@lobehub/ui';
 import { Space } from 'antd';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 
 interface DanceInfoProps {
-  dance?: Dance;
   actions?: React.ReactNode[];
+  dance?: Dance;
 }
 
 const DanceInfo = (props: DanceInfoProps) => {
@@ -18,7 +18,7 @@ const DanceInfo = (props: DanceInfoProps) => {
   return (
     <div className={styles.container}>
       <Center className={styles.header} gap={16}>
-        <Avatar avatar={cover} shape="square" background={theme.colorFillTertiary} size={120} />
+        <Avatar avatar={cover} background={theme.colorFillTertiary} shape="square" size={120} />
         <div className={styles.title}>{name}</div>
         <div className={styles.actions}>
           <Space>{actions}</Space>

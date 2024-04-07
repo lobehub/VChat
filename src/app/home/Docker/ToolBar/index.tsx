@@ -10,27 +10,22 @@ const ToolBar = () => {
   const [openPanel] = useConfigStore((s) => [s.openPanel]);
 
   const { viewerMode, setViewerMode } = useSessionStore((s) => ({
-    viewerMode: s.viewerMode,
     setViewerMode: s.setViewerMode,
+    viewerMode: s.viewerMode,
   }));
 
   return (
     <Space size={4}>
       <ActionIcon
         icon={History}
-        title={'聊天记录'}
         onClick={() => {
           openPanel('chat');
         }}
+        title={'聊天记录'}
       />
       <Record />
       <Voice />
       <Segmented
-        value={viewerMode ? 'true' : 'false'}
-        options={[
-          { label: '3D', value: 'true' },
-          { label: '立绘', value: 'false' },
-        ]}
         onChange={(value) => {
           if (value === 'true') {
             setViewerMode(true);
@@ -38,6 +33,11 @@ const ToolBar = () => {
             setViewerMode(false);
           }
         }}
+        options={[
+          { label: '3D', value: 'true' },
+          { label: '立绘', value: 'false' },
+        ]}
+        value={viewerMode ? 'true' : 'false'}
       />
     </Space>
   );

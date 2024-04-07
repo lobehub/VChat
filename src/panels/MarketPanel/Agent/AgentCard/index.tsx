@@ -9,8 +9,8 @@ import DownloadButton from './SubscribeButton';
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
     display: flex;
-    height: 100% !important;
     flex-direction: column;
+    height: 100% !important;
   `,
   header: css`
     border-bottom: 1px solid ${token.colorBorder};
@@ -37,10 +37,10 @@ const Header = () => {
   return (
     <DraggablePanel
       classNames={{ content: styles.content }}
-      expand={showAgentSidebar}
-      minWidth={280}
       defaultSize={{ width: 280 }}
+      expand={showAgentSidebar}
       maxWidth={400}
+      minWidth={280}
       mode={'fixed'}
       onExpandChange={(show) => {
         if (!show) {
@@ -52,7 +52,7 @@ const Header = () => {
       }}
       placement={'right'}
     >
-      <AgentInfo agent={currentAgentItem} actions={actions} />
+      <AgentInfo actions={actions} agent={currentAgentItem} />
     </DraggablePanel>
   );
 };

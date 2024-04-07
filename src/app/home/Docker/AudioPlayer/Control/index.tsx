@@ -5,9 +5,9 @@ import { useStyles } from './style';
 const controlSelectors = (s: DanceStore) => {
   return {
     isPlaying: s.isPlaying,
-    setIsPlaying: s.setIsPlaying,
-    prevDance: s.prevDance,
     nextDance: s.nextDance,
+    prevDance: s.prevDance,
+    setIsPlaying: s.setIsPlaying,
     togglePlayPause: s.togglePlayPause,
   };
 };

@@ -2,11 +2,13 @@ import { createStyles } from 'antd-style';
 
 export const useStyles = createStyles(({ css }) => ({
   content: css`
+    position: relative;
+
     display: flex;
     flex-direction: row;
-    height: 100%;
-    width: 100%;
     flex-grow: 1;
-    position: relative;
+
+    width: 100%;
+    height: 100%;
   `,
 }));

@@ -10,12 +10,13 @@ import { ThemeAppearance, createStyles } from 'antd-style';
 import { ReactNode } from 'react';
 import StoreHydration from './StoreHydration';
 
-const useStyles = createStyles(({ css, token }) => ({
+const useStyles = createStyles(({ css }) => ({
   bg: css`
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+
     height: 100%;
   `,
 }));
@@ -33,7 +34,6 @@ const Layout = (props: LayoutProps) => {
 
   return (
     <ThemeProvider
-      themeMode={themeMode}
       customTheme={{
         primaryColor: primaryColor,
       }}
@@ -41,6 +41,7 @@ const Layout = (props: LayoutProps) => {
       onAppearanceChange={(appearance) => {
         setCookie(VIDOL_THEME_APPEARANCE, appearance);
       }}
+      themeMode={themeMode}
     >
       <StoreHydration />
       <GlobalStyle />

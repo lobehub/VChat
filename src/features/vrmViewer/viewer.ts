@@ -1,5 +1,6 @@
 import { Parser } from 'mmd-parser';
 import * as THREE from 'three';
+import { GridHelper, Mesh, MeshLambertMaterial, PlaneGeometry } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Model } from './model';
 
@@ -18,6 +19,8 @@ export class Viewer {
   private _cameraHelper?: THREE.CameraHelper;
   private _camera?: THREE.PerspectiveCamera;
   private _cameraControls?: OrbitControls;
+  private _gridHelper?: THREE.GridHelper;
+  private _floor?: THREE.Mesh;
 
   constructor() {
     this.isReady = false;
@@ -26,17 +29,19 @@ export class Viewer {
     const scene = new THREE.Scene();
     this._scene = scene;
 
-    // light
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
-    directionalLight.position.set(1.0, 1.0, 1.0).normalize();
+    // 方向光
+    const directionalLight = new THREE.DirectionalLight(0xFF_FF_FF, Math.PI);
+    directionalLight.position.set(1, 1, 1).normalize();
     scene.add(directionalLight);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-    scene.add(ambientLight);
+    // 环境光
+    // const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+    // scene.add(ambientLight);
 
-    // const ambiantLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-    // ambiantLight.position.set(0, 20, 0);
-    // scene.add(ambiantLight);
+    // 渐变光
+    // const HemisphereLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+    // HemisphereLight.position.set(0, 20, 0);
+    // scene.add(HemisphereLight);
 
     // animate
     this._clock = new THREE.Clock();
@@ -45,7 +50,7 @@ export class Viewer {
 
   /**
    * 加载舞台
-   * @param url
+   * @param buffer
    */
   public async loadStage(buffer: ArrayBuffer) {
     const pmx = new Parser().parsePmx(buffer);
@@ -93,50 +98,22 @@ export class Viewer {
     const height = parentElement?.clientHeight || canvas.height;
     // renderer
     this._renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
       alpha: true,
       antialias: true,
+      canvas: canvas,
     });
-    this._renderer.outputEncoding = THREE.sRGBEncoding;
     this._renderer.setSize(width, height);
     this._renderer.setPixelRatio(window.devicePixelRatio);
 
     // camera 全身
-    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20.0);
-    this._camera.position.set(0, 1.3, 1.3);
-    this._cameraControls?.target.set(0, 1.3, 0);
+    this._camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 20);
+    this._camera.position.set(0, 1.3, 1.5);
 
-    // Camera 上半身
-    // this._camera = new THREE.PerspectiveCamera(20.0, width / height, 0.1, 20.0);
-    // this._camera.position.set(0, 1.3, 1.5);
-    // this._cameraControls?.target.set(0, 1.3, 0);
-
-    this._cameraControls?.update();
-
-    // camera controls
+    // camera 控制
     this._cameraControls = new OrbitControls(this._camera, this._renderer.domElement);
     this._cameraControls.screenSpacePanning = true;
+    this._cameraControls?.target.set(0, 1.3, 0);
     this._cameraControls.update();
-
-    // this._cameraHelper = new THREE.CameraHelper(this._camera);
-    // this._scene.add(this._cameraHelper);
-
-    // floor
-    // const floor = new Mesh(
-    //   new PlaneGeometry(100, 100),
-    //   new MeshLambertMaterial({
-    //     color: 0x999999,
-    //     depthWrite: true,
-    //   }),
-    // );
-    // floor.position.y = -0.5;
-    // floor.rotation.x = -Math.PI / 2;
-
-    // this._scene.add(floor);
-
-    // grid
-    // const grid = new GridHelper(50, 100, 0xaaaaaa, 0xaaaaaa);
-    // this._scene.add(grid);
 
     window.addEventListener('resize', () => {
       this.resize();
@@ -145,9 +122,50 @@ export class Viewer {
     this.update();
   }
 
-  /**
-   * canvasの親要素を参照してサイズを変更する
-   */
+  public toggleCameraHelper() {
+    if (this._cameraHelper) {
+      this._scene.remove(this._cameraHelper);
+      this._cameraHelper = undefined;
+    } else {
+      if (!this._camera) return;
+      this._cameraHelper = new THREE.CameraHelper(this._camera);
+      this._scene.add(this._cameraHelper);
+    }
+  }
+
+  public toggleCameraControls() {
+    if (!this._cameraControls) return;
+    this._cameraControls.enabled = !this._cameraControls.enabled;
+  }
+
+  public toggleGrid() {
+    if (this._gridHelper) {
+      this._scene.remove(this._gridHelper);
+      this._gridHelper = undefined;
+    } else {
+      this._gridHelper = new GridHelper(50, 100, 0xAA_AA_AA, 0xAA_AA_AA);
+      this._scene.add(this._gridHelper);
+    }
+  }
+
+  public toggleFloor() {
+    if (this._floor) {
+      this._scene.remove(this._floor);
+      this._floor = undefined;
+    } else {
+      this._floor = new Mesh(
+        new PlaneGeometry(100, 100),
+        new MeshLambertMaterial({
+          color: 0x99_99_99,
+          depthWrite: true,
+        }),
+      );
+      this._floor.position.y = -0.5;
+      this._floor.rotation.x = -Math.PI / 2;
+      this._scene.add(this._floor);
+    }
+  }
+
   public resize() {
     if (!this._renderer) return;
 

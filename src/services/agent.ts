@@ -11,11 +11,11 @@ export const getAgentIndex = async (url: string = AGENT_INDEX_URL) => {
 
 export const downloadGithubAgent = async (url: string) => {
   const res = await fetch('/api/agent/download', {
-    method: 'POST',
+    body: JSON.stringify({ url }),
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ url }),
+    method: 'POST',
   });
 
   return res.json();

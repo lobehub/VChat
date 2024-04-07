@@ -2,7 +2,7 @@ import { StateCreator } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
-import { danceListSelectors } from './selectors/dance';
+
 import { DanceListStore, createDanceStore } from './slices/dancelist';
 import { PlayListStore, createPlayListStore } from './slices/playlist';
 
@@ -25,4 +25,6 @@ export const useDanceStore = createWithEqualityFn<DanceStore>()(
   shallow,
 );
 
-export { danceListSelectors };
+
+
+export {danceListSelectors} from './selectors/dance';

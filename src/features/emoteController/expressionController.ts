@@ -29,11 +29,11 @@ export class ExpressionController {
   }
 
   public playEmotion(preset: VRMExpressionPresetName) {
-    if (this._currentEmotion != 'neutral') {
+    if (this._currentEmotion !== 'neutral') {
       this._expressionManager?.setValue(this._currentEmotion, 0);
     }
 
-    if (preset == 'neutral') {
+    if (preset === 'neutral') {
       this._autoBlink?.setEnable(true);
       this._currentEmotion = preset;
       return;

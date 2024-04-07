@@ -4,22 +4,23 @@ import Container from './components/Container';
 
 const useStyles = createStyles(({ css }) => ({
   img: css`
-    width: 100%;
+    transform-style: preserve-3d;
+
     grid-area: 1/1;
 
     aspect-ratio: var(--card-aspect);
-    border-radius: var(--card-radius);
-    image-rendering: optimizeQuality;
+    width: 100%;
 
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+    border-radius: var(--card-radius);
+
+    image-rendering: optimizequality;
   `,
 }));
 
 export interface HolographicCardProps {
+  children?: ReactNode;
   img?: string;
   mask?: string;
-  children?: ReactNode;
 }
 
 const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }) => {
@@ -33,7 +34,7 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
   }, []);
 
   return (
-    <Container mask={mask} loading={loading}>
+    <Container loading={loading} mask={mask}>
       {children ? (
         <div
           className={'card_children_container'}
@@ -46,17 +47,19 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
           {children}
         </div>
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           className={styles.img}
-          src={img}
+          height="921"
+          loading="lazy"
           onLoad={() => {
             setTimeout(() => {
               setLoading(false);
             }, 500);
           }}
-          loading="lazy"
+          src={img}
           width="660"
-          height="921"
+          alt="image card"
         />
       )}
     </Container>

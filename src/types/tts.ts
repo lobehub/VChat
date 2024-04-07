@@ -11,14 +11,6 @@ export type TTS = {
    */
   engine?: TTS_ENGINE;
   /**
-   * 风格
-   */
-  style?: TalkStyle;
-  /**
-   * 语音模型
-   */
-  voice?: string;
-  /**
    * 多语音标识
    */
   locale?: string;
@@ -27,21 +19,29 @@ export type TTS = {
    */
   message?: string;
   /**
+   * 音调
+   */
+  pitch?: number;
+  /**
    * 速度
    */
   speed?: number;
   /**
-   * 音调
+   * 风格
    */
-  pitch?: number;
+  style?: TalkStyle;
+  /**
+   * 语音模型
+   */
+  voice?: string;
 };
 
 export interface Voice {
+  DisplayName: string;
+  DisplayVoiceName: string;
+  LocalName: string;
+  PreviewSentence: string;
+  ShortName: string;
   locale: string;
   localeZH: string;
-  DisplayVoiceName: string;
-  DisplayName: string;
-  LocalName: string;
-  ShortName: string;
-  PreviewSentence: string;
 }

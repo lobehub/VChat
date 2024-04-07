@@ -20,17 +20,15 @@ const SessionItem = memo<SessionItemProps>(({ id, onClick }) => {
   const actions = useMemo(() => <Actions id={id} setOpen={setOpen} />, [id]);
 
   return (
-    <>
-      <ListItem
+    <ListItem
         actions={actions}
         active={active}
-        onClick={onClick}
         avatar={avatar || ''}
         description={description || agent?.systemRole}
+        onClick={onClick}
         showAction={open}
         title={name}
       />
-    </>
   );
 }, shallow);
 

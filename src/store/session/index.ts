@@ -19,8 +19,8 @@ import { sessionSelectors } from './selectors';
 const SESSION_STORAGE_KEY = 'vidol-chat-session-storage';
 
 export enum ViewerModeEnum {
-  Normal = 'Normal',
   Img = 'Img',
+  Normal = 'Normal'
 }
 
 export interface SessionStore {
@@ -29,92 +29,9 @@ export interface SessionStore {
    */
   activeId: string;
   /**
-   * 本地角色列表
-   */
-  localAgentList: Agent[];
-  /**
-   * 更新角色配置
-   */
-  updateAgentConfig: (agent: DeepPartial<Agent>) => void;
-  /**
-   * 会话列表
-   */
-  sessionList: Session[];
-  /**
-   *  移除会话
-   */
-  removeSession: (id: string) => void;
-  /**
    * 聊天加载中的消息 ID
    */
   chatLoadingId: string | undefined;
-  /**
-   * 语音开关
-   */
-  voiceOn: boolean;
-  /**
-   * 角色渲染模式
-   */
-  viewerMode: boolean;
-  /**
-   * 触发 3D 渲染开关
-   */
-  setViewerMode: (mode: boolean) => void;
-  /**
-   * 触发语音开关
-   */
-  toggleVoice: () => void;
-  /**
-   * 当前消息输入
-   */
-  messageInput: string;
-  /**
-   * 设置消息输入
-   * @param messageInput
-   */
-  setMessageInput: (messageInput: string) => void;
-  /**
-   * 发送消息
-   * @param message 消息内容
-   * @returns
-   */
-  sendMessage: (message: string) => void;
-  /**
-   * 分发消息
-   * @param payload - 消息分发参数
-   */
-  dispatchMessage: (payload: MessageActionType) => void;
-  /**
-   * 创建会话
-   * @param agent
-   * @returns
-   */
-  createSession: (agent: Agent) => void;
-  /**
-   * 切换会话
-   * @param agent
-   * @returns
-   */
-  switchSession: (agentId: string) => void;
-  /**
-   * 更新会话消息
-   * @param messages
-   */
-  updateSessionMessages: (messages: ChatMessage[]) => void;
-  /**
-   * 更新消息
-   * @returns
-   */
-  updateMessage: (id: string, content: string) => void;
-  /**
-   *  删除消息
-   */
-  deleteMessage: (id: string) => void;
-  /**
-   * 重新生成消息
-   * @returns
-   */
-  regenerateMessage: (id: string) => void;
   /**
    * 清空历史消息
    */
@@ -124,11 +41,94 @@ export interface SessionStore {
    */
   clearSessions: () => void;
   /**
+   * 创建会话
+   * @param agent
+   * @returns
+   */
+  createSession: (agent: Agent) => void;
+  /**
+   *  删除消息
+   */
+  deleteMessage: (id: string) => void;
+  /**
+   * 分发消息
+   * @param payload - 消息分发参数
+   */
+  dispatchMessage: (payload: MessageActionType) => void;
+  /**
    * 请求 AI 回复
    * @param messages
    * @returns
    */
   fetchAIResponse: (messages: ChatMessage[], assistantId: string) => void;
+  /**
+   * 本地角色列表
+   */
+  localAgentList: Agent[];
+  /**
+   * 当前消息输入
+   */
+  messageInput: string;
+  /**
+   * 重新生成消息
+   * @returns
+   */
+  regenerateMessage: (id: string) => void;
+  /**
+   *  移除会话
+   */
+  removeSession: (id: string) => void;
+  /**
+   * 发送消息
+   * @param message 消息内容
+   * @returns
+   */
+  sendMessage: (message: string) => void;
+  /**
+   * 会话列表
+   */
+  sessionList: Session[];
+  /**
+   * 设置消息输入
+   * @param messageInput
+   */
+  setMessageInput: (messageInput: string) => void;
+  /**
+   * 触发 3D 渲染开关
+   */
+  setViewerMode: (mode: boolean) => void;
+  /**
+   * 切换会话
+   * @param agent
+   * @returns
+   */
+  switchSession: (agentId: string) => void;
+  /**
+   * 触发语音开关
+   */
+  toggleVoice: () => void;
+  /**
+   * 更新角色配置
+   */
+  updateAgentConfig: (agent: DeepPartial<Agent>) => void;
+  /**
+   * 更新消息
+   * @returns
+   */
+  updateMessage: (id: string, content: string) => void;
+  /**
+   * 更新会话消息
+   * @param messages
+   */
+  updateSessionMessages: (messages: ChatMessage[]) => void;
+  /**
+   * 角色渲染模式
+   */
+  viewerMode: boolean;
+  /**
+   * 语音开关
+   */
+  voiceOn: boolean;
 }
 
 const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (
@@ -136,15 +136,13 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
   get,
 ) => ({
   ...initialState,
-  setMessageInput: (messageInput) => {
-    set({ messageInput });
+  clearHistory: () => {
+    const { updateSessionMessages } = get();
+    updateSessionMessages([]);
   },
-  toggleVoice: () => {
-    const { voiceOn } = get();
-    set({ voiceOn: !voiceOn });
-  },
-  setViewerMode: (mode) => {
-    set({ viewerMode: mode });
+  clearSessions: () => {
+    localStorage.removeItem(SESSION_STORAGE_KEY);
+    set({ ...initialState });
   },
   createSession: (agent: Agent) => {
     const { sessionList, localAgentList } = get();
@@ -169,60 +167,7 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       }
     });
 
-    set({ sessionList: newSessionList, activeId: agent.agentId });
-  },
-  switchSession: (agentId) => {
-    const { sessionList } = get();
-    const targetSession = sessionList.find((session) => session.agentId === agentId);
-    if (!targetSession) {
-      const session = {
-        agentId: agentId,
-        messages: [],
-      };
-      set({ sessionList: [...sessionList, session] });
-    }
-    set({ activeId: agentId });
-  },
-  removeSession: (id) => {
-    const { sessionList, activeId } = get();
-
-    const sessions = produce(sessionList, (draft) => {
-      const index = draft.findIndex((session) => session.agentId === id);
-      if (index === -1) return;
-      draft.splice(index, 1);
-    });
-    set({ sessionList: sessions });
-
-    if (activeId === id) {
-      set({ activeId: sessions[0]?.agentId });
-    }
-  },
-  clearHistory: () => {
-    const { updateSessionMessages } = get();
-    updateSessionMessages([]);
-  },
-  clearSessions: () => {
-    localStorage.removeItem(SESSION_STORAGE_KEY);
-    set({ ...initialState });
-  },
-  updateAgentConfig: (agent) => {
-    const { localAgentList, activeId } = get();
-    const agents = produce(localAgentList, (draft) => {
-      const index = draft.findIndex((localAgent) => localAgent.agentId === activeId);
-      if (index === -1) return;
-      draft[index] = merge(draft[index], agent);
-    });
-    set({ localAgentList: agents });
-  },
-
-  updateSessionMessages: (messages) => {
-    const { sessionList, activeId } = get();
-    const sessions = produce(sessionList, (draft) => {
-      const index = draft.findIndex((session) => session.agentId === activeId);
-      if (index === -1) return;
-      draft[index].messages = messages;
-    });
-    set({ sessionList: sessions });
+    set({ activeId: agent.agentId, sessionList: newSessionList });
   },
   deleteMessage: (id) => {
     const { dispatchMessage } = get();
@@ -232,29 +177,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
       },
       type: 'DELETE_MESSAGE',
     });
-  },
-  regenerateMessage: (id) => {
-    const { dispatchMessage, fetchAIResponse } = get();
-    const currentSession = sessionSelectors.currentSession(get());
-    if (!currentSession) {
-      return;
-    }
-
-    const previousChats = sessionSelectors.previousChats(get(), id);
-
-    const assistantId = nanoid();
-
-    // 添加机器人消息占位
-    dispatchMessage({
-      type: 'ADD_MESSAGE',
-      payload: {
-        role: 'assistant',
-        id: assistantId,
-        content: LOADING_FLAG, // 占位符
-      },
-    });
-
-    fetchAIResponse(previousChats, assistantId);
   },
   dispatchMessage: (payload) => {
     const { updateSessionMessages } = get();
@@ -267,52 +189,6 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     const messages = messageReducer(session.messages, payload);
 
     updateSessionMessages(messages);
-  },
-  updateMessage: (id, content) => {
-    const { dispatchMessage } = get();
-    dispatchMessage({
-      payload: {
-        id,
-        key: 'content',
-        value: content,
-      },
-      type: 'UPDATE_MESSAGE',
-    });
-  },
-  sendMessage: async (message: string) => {
-    const { dispatchMessage, fetchAIResponse } = get();
-    const currentSession = sessionSelectors.currentSession(get());
-    if (!currentSession) {
-      return;
-    }
-
-    const userId = nanoid();
-
-    // 添加用户消息
-    dispatchMessage({
-      type: 'ADD_MESSAGE',
-      payload: {
-        role: 'user',
-        id: userId,
-        content: message,
-      },
-    });
-
-    const currentChats = sessionSelectors.currentChats(get());
-
-    const assistantId = nanoid();
-
-    // 添加机器人消息占位
-    dispatchMessage({
-      type: 'ADD_MESSAGE',
-      payload: {
-        role: 'assistant',
-        id: assistantId,
-        content: LOADING_FLAG, // 占位符
-      },
-    });
-
-    await fetchAIResponse(currentChats, assistantId);
   },
   fetchAIResponse: async (messages, assistantId) => {
     const { dispatchMessage } = get();
@@ -342,6 +218,16 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
     const sentences = [];
 
     await fetchSEE(fetcher, {
+      onMessageError: (error) => {
+        dispatchMessage({
+          payload: {
+            id: assistantId,
+            key: 'error',
+            value: error,
+          },
+          type: 'UPDATE_MESSAGE',
+        });
+      },
       onMessageUpdate: (txt: string) => {
         const { voiceOn } = get();
 
@@ -349,14 +235,14 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
           // 语音合成
           receivedMessage += txt;
           // 文本切割
-          const sentenceMatch = receivedMessage.match(/^(.+[。．！？~\n]|.{10,}[、,])/);
+          const sentenceMatch = receivedMessage.match(/^(.+[\n~。！．？]|.{10,}[,、])/);
           if (sentenceMatch && sentenceMatch[0]) {
             const sentence = sentenceMatch[0];
             sentences.push(sentence);
             receivedMessage = receivedMessage.slice(sentence.length).trimStart();
 
             if (
-              !sentence.replace(/^[\s\[(「［（【『〈《〔｛«‹〘〚〛〙›»〕》〉』】）］」})\]]+$/g, '')
+              !sentence.replaceAll(/^[\s()[\]}«»‹›〈〉《》「」『』【】〔〕〘〙〚〛（）［］｛]+$/g, '')
             ) {
               return;
             }
@@ -376,18 +262,132 @@ const createSessonStore: StateCreator<SessionStore, [['zustand/devtools', never]
           type: 'UPDATE_MESSAGE',
         });
       },
-      onMessageError: (error) => {
-        dispatchMessage({
-          payload: {
-            id: assistantId,
-            key: 'error',
-            value: error,
-          },
-          type: 'UPDATE_MESSAGE',
-        });
-      },
     });
     set({ chatLoadingId: undefined });
+  },
+  regenerateMessage: (id) => {
+    const { dispatchMessage, fetchAIResponse } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+    if (!currentSession) {
+      return;
+    }
+
+    const previousChats = sessionSelectors.previousChats(get(), id);
+
+    const assistantId = nanoid();
+
+    // 添加机器人消息占位
+    dispatchMessage({
+      payload: {
+        content: LOADING_FLAG,
+        id: assistantId,
+        role: 'assistant', // 占位符
+      },
+      type: 'ADD_MESSAGE',
+    });
+
+    fetchAIResponse(previousChats, assistantId);
+  },
+  removeSession: (id) => {
+    const { sessionList, activeId } = get();
+
+    const sessions = produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agentId === id);
+      if (index === -1) return;
+      draft.splice(index, 1);
+    });
+    set({ sessionList: sessions });
+
+    if (activeId === id) {
+      set({ activeId: sessions[0]?.agentId });
+    }
+  },
+  sendMessage: async (message: string) => {
+    const { dispatchMessage, fetchAIResponse } = get();
+    const currentSession = sessionSelectors.currentSession(get());
+    if (!currentSession) {
+      return;
+    }
+
+    const userId = nanoid();
+
+    // 添加用户消息
+    dispatchMessage({
+      payload: {
+        content: message,
+        id: userId,
+        role: 'user',
+      },
+      type: 'ADD_MESSAGE',
+    });
+
+    const currentChats = sessionSelectors.currentChats(get());
+
+    const assistantId = nanoid();
+
+    // 添加机器人消息占位
+    dispatchMessage({
+      payload: {
+        content: LOADING_FLAG,
+        id: assistantId,
+        role: 'assistant', // 占位符
+      },
+      type: 'ADD_MESSAGE',
+    });
+
+    await fetchAIResponse(currentChats, assistantId);
+  },
+
+  setMessageInput: (messageInput) => {
+    set({ messageInput });
+  },
+  setViewerMode: (mode) => {
+    set({ viewerMode: mode });
+  },
+  switchSession: (agentId) => {
+    const { sessionList } = get();
+    const targetSession = sessionList.find((session) => session.agentId === agentId);
+    if (!targetSession) {
+      const session = {
+        agentId: agentId,
+        messages: [],
+      };
+      set({ sessionList: [...sessionList, session] });
+    }
+    set({ activeId: agentId });
+  },
+  toggleVoice: () => {
+    const { voiceOn } = get();
+    set({ voiceOn: !voiceOn });
+  },
+  updateAgentConfig: (agent) => {
+    const { localAgentList, activeId } = get();
+    const agents = produce(localAgentList, (draft) => {
+      const index = draft.findIndex((localAgent) => localAgent.agentId === activeId);
+      if (index === -1) return;
+      draft[index] = merge(draft[index], agent);
+    });
+    set({ localAgentList: agents });
+  },
+  updateMessage: (id, content) => {
+    const { dispatchMessage } = get();
+    dispatchMessage({
+      payload: {
+        id,
+        key: 'content',
+        value: content,
+      },
+      type: 'UPDATE_MESSAGE',
+    });
+  },
+  updateSessionMessages: (messages) => {
+    const { sessionList, activeId } = get();
+    const sessions = produce(sessionList, (draft) => {
+      const index = draft.findIndex((session) => session.agentId === activeId);
+      if (index === -1) return;
+      draft[index].messages = messages;
+    });
+    set({ sessionList: sessions });
   },
 });
 
@@ -403,4 +403,6 @@ export const useSessionStore = createWithEqualityFn<SessionStore>()(
   shallow,
 );
 
-export { sessionSelectors };
+
+
+export {sessionSelectors} from './selectors';

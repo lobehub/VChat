@@ -1,13 +1,21 @@
 import { createStyles } from 'antd-style';
 
 const useStyles = createStyles(({ token, css }) => ({
-  header: css`
-    padding: 16px 8px;
-    border-bottom: 1px solid ${token.colorBorderSecondary};
+  chatbot: css`
+    position: relative;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    flex-direction: column;
+    flex-grow: 1;
+  `,
+  header: css`
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+    padding: 16px 8px;
+
+    border-bottom: 1px solid ${token.colorBorderSecondary};
   `,
   voice: css`
     cursor: pointer;
@@ -15,12 +23,6 @@ const useStyles = createStyles(({ token, css }) => ({
   `,
   voiceOn: css`
     color: ${token.colorLinkActive};
-  `,
-  chatbot: css`
-    position: relative;
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
   `,
 }));
 

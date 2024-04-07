@@ -5,7 +5,7 @@ const convertSSML = (values: TTS) => {
 
   return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" xmlns:emo="http://www.w3.org/2009/10/emotionml" version="1.0" xml:lang="en-US">
       <voice name="${voice}">
-        <prosody rate="${((speed - 1) * 100).toFixed()}%" pitch="${((pitch - 1) * 50).toFixed()}%">
+        <prosody rate="${((speed - 1) * 100).toFixed(0)}%" pitch="${((pitch - 1) * 50).toFixed(0)}%">
               ${message}
         </prosody>
       </voice>
@@ -17,11 +17,11 @@ export const speechApi = async (tts: TTS) => {
   const { engine = 'edge' } = tts;
   const ssml = convertSSML(tts);
   const res = await fetch(`/api/voice/${engine}`, {
-    method: 'POST',
+    body: JSON.stringify({ ssml }),
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ssml }),
+    method: 'POST',
   });
   if (res.status !== 200) {
     const data = await res.json();
@@ -42,10 +42,10 @@ export const voiceListApi = async (engine: TTS_ENGINE): Promise<{ data: Voice[] 
     return JSON.parse(sessionStorage.getItem(key) || '');
   }
   const res = await fetch(`/api/voice/${engine}/voices`, {
-    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
+    method: 'GET',
   });
   const result = await res.json();
   sessionStorage.setItem(key, JSON.stringify(result));

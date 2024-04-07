@@ -20,6 +20,11 @@ const currentChatIDs = (s: SessionStore): string[] => {
   return session.messages.map((item) => item.id);
 };
 
+const currentAgent = (s: SessionStore): Agent | undefined => {
+  const { activeId, localAgentList } = s;
+  return localAgentList.find((item) => item.agentId === activeId);
+};
+
 const currentChats = (s: SessionStore): ChatMessage[] => {
   const session = currentSession(s);
   const agent = currentAgent(s);
@@ -33,8 +38,8 @@ const currentChats = (s: SessionStore): ChatMessage[] => {
       ...message,
       meta: {
         avatar: message.role === 'user' ? DEFAULT_USER_AVATAR : avatar,
-        title: message.role === 'user' ? '你' : name,
         description: message.role === 'user' ? undefined : description,
+        title: message.role === 'user' ? '你' : name,
       },
     };
   });
@@ -66,9 +71,10 @@ const currentSystemRole = (s: SessionStore): string => {
   return agent.systemRole;
 };
 
-const currentAgent = (s: SessionStore): Agent | undefined => {
-  const { activeId, localAgentList } = s;
-  return localAgentList.find((item) => item.agentId === activeId);
+const currentAgentModel = (s: SessionStore): string => {
+  const agent = currentAgent(s);
+  if (!agent) return '';
+  return agent.meta.model;
 };
 
 const currentChatMessage = (s: SessionStore): ChatMessage | undefined => {
@@ -83,14 +89,15 @@ const getAgentById = (s: SessionStore) => {
 };
 
 export const sessionSelectors = {
-  currentSession,
+  currentAgent,
+  currentAgentModel,
   currentChatIDs,
-  sessionListIds,
   currentChatMessage,
   currentChats,
-  currentAgent,
   currentChatsString,
+  currentSession,
   currentSystemRole,
   getAgentById,
   previousChats,
+  sessionListIds,
 };

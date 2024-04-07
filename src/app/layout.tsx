@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import { PropsWithChildren } from 'react';
 
@@ -24,6 +23,4 @@ const RootLayout = ({ children }: PropsWithChildren) => {
 
 export default RootLayout;
 
-export const metadata: Metadata = {
-  title: 'V-idol',
-};
+export { default as metadata } from './metadata';

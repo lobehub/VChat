@@ -30,11 +30,11 @@ export const getDanceIndex = async (url: string = DANCE_INDEX_URL) => {
 
 export const downloadGithubDance = async (url: string) => {
   const res = await fetch('/api/dance/download', {
-    method: 'POST',
+    body: JSON.stringify({ url }),
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ url }),
+    method: 'POST',
   });
 
   return res.json();

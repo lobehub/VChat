@@ -2,7 +2,7 @@
 
 import PanelContainer from '@/panels/PanelContainer';
 import { TabsNav } from '@lobehub/ui';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Info from './Info';
 import Role from './Role';
 import Touch from './Touch';
@@ -10,8 +10,8 @@ import Voice from './Voice';
 import { useStyles } from './style';
 
 interface RolePanelProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const RolePanel = (props: RolePanelProps) => {
@@ -20,22 +20,19 @@ const RolePanel = (props: RolePanelProps) => {
   const [tab, setTab] = useState('info');
 
   return (
-    <PanelContainer style={style} className={className} panelKey="role" title="编辑角色">
+    <PanelContainer className={className} panelKey="role" style={style} title="编辑角色">
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          width: '100%',
           paddingLeft: 24,
           paddingRight: 24,
+          width: '100%',
         }}
       >
         <div style={{ marginBottom: 12 }}>
           <TabsNav
             activeKey={tab}
-            onChange={(key) => {
-              setTab(key);
-            }}
             items={[
               {
                 key: 'info',
@@ -54,6 +51,9 @@ const RolePanel = (props: RolePanelProps) => {
                 label: '触摸设置',
               },
             ]}
+            onChange={(key) => {
+              setTab(key);
+            }}
           />
         </div>
         <div className={styles.content}>

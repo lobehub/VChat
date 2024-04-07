@@ -9,6 +9,9 @@ import { isEqual } from 'lodash-es';
 import { PlayIcon } from 'lucide-react';
 
 const useStyles = createStyles(({ css, token }) => ({
+  active: css`
+    background-color: ${token.controlItemBgActiveHover};
+  `,
   list: css`
     width: 100%;
     padding: 24px;
@@ -17,9 +20,6 @@ const useStyles = createStyles(({ css, token }) => ({
     &:hover {
       cursor: pointer;
     }
-  `,
-  active: css`
-    background-color: ${token.controlItemBgActiveHover};
   `,
 }));
 
@@ -33,11 +33,11 @@ const AreaList = () => {
   const data = actionConfig[currentTouchArea];
   return (
     <List
-      header={<div>触摸反应列表</div>}
+      className={styles.list}
       dataSource={data}
+      header={<div>触摸反应列表</div>}
       renderItem={(item) => (
         <List.Item
-          className={styles.listItem}
           actions={[
             <ActionIcon
               /* @ts-ignore */
@@ -57,11 +57,11 @@ const AreaList = () => {
               }}
             />,
           ]}
+          className={styles.listItem}
         >
           <List.Item.Meta title={item.text}></List.Item.Meta>
         </List.Item>
       )}
-      className={styles.list}
     />
   );
 };

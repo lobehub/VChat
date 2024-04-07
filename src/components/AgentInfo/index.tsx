@@ -1,13 +1,13 @@
 import { Agent } from '@/types/agent';
 import { Avatar } from '@lobehub/ui';
 import { Space, Tag } from 'antd';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 
 interface AgentInfoProps {
-  agent?: Agent;
   actions?: React.ReactNode[];
+  agent?: Agent;
 }
 
 const AgentInfo = (props: AgentInfoProps) => {
@@ -28,7 +28,7 @@ const AgentInfo = (props: AgentInfoProps) => {
         <div className={styles.title}>
           {name}
           <Tag color="#108ee9" style={{ marginLeft: 8 }}>
-            <a href={homepage} target="_blank">
+            <a href={homepage} rel="noreferrer" target="_blank">
               主页
             </a>
           </Tag>

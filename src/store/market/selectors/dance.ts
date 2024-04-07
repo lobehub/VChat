@@ -12,6 +12,6 @@ const currentDanceItem = (s: MarketStore): Dance | undefined => {
 };
 
 export const danceSelectors = {
-  showDanceSideBar,
   currentDanceItem,
+  showDanceSideBar,
 };

@@ -9,15 +9,15 @@ export const useStyles = createStyles(({ css, token }) => ({
     margin-left: ${token.marginSM}px;
     line-height: 1;
   `,
-  title: css`
-    font-size: ${token.fontSize}px;
-    line-height: 18px;
-    font-weight: bold;
-  `,
   desc: css`
-    line-height: 18px;
     width: 480px;
     font-size: ${token.fontSizeSM}px;
+    line-height: 18px;
     color: ${token.colorTextDescription};
+  `,
+  title: css`
+    font-size: ${token.fontSize}px;
+    font-weight: bold;
+    line-height: 18px;
   `,
 }));

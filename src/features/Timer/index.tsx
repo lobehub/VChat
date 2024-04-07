@@ -4,18 +4,18 @@ import { useInterval } from 'ahooks';
 import { useState } from 'react';
 import { useStyles } from './style';
 
+const getTime = () => {
+  const date = new Date();
+  return date.toLocaleTimeString();
+};
+
+const getDate = () => {
+  const date = new Date();
+  return date.toLocaleDateString();
+};
+
 const Timer = () => {
   const { styles } = useStyles();
-
-  const getTime = () => {
-    const date = new Date();
-    return date.toLocaleTimeString();
-  };
-
-  const getDate = () => {
-    const date = new Date();
-    return date.toLocaleDateString();
-  };
 
   const [time, setTime] = useState(getTime());
   const [date, setDate] = useState(getDate());

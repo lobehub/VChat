@@ -12,14 +12,14 @@ import React, { PropsWithChildren, useEffect, useState } from 'react';
 import Container from './Container';
 
 interface ControlPanelProps {
-  style?: React.CSSProperties;
   className?: string;
-  title?: string;
+  coordinates?: Coordinates;
+  onBlur?: React.FocusEventHandler;
   onClose: () => void;
   onCoordinatesChange?: (coordinates: Coordinates) => void;
-  coordinates?: Coordinates;
   onFocus?: React.FocusEventHandler;
-  onBlur?: React.FocusEventHandler;
+  style?: React.CSSProperties;
+  title?: string;
   zIndex?: number;
 }
 
@@ -54,7 +54,6 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
 
   return (
     <DndContext
-      sensors={sensors}
       onDragEnd={({ delta }) => {
         setCoordinates(({ x, y }) => {
           const newCoordinates = {
@@ -65,17 +64,18 @@ const Panel = (props: PropsWithChildren<ControlPanelProps>) => {
           return newCoordinates;
         });
       }}
+      sensors={sensors}
     >
       <Container
+        className={className}
+        onBlur={onBlur}
+        onClose={onClose}
+        onFocus={onFocus}
+        style={style}
+        title={title}
         x={x}
         y={y}
         zIndex={zIndex}
-        onClose={onClose}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        style={style}
-        className={className}
-        title={title}
       >
         {children}
       </Container>

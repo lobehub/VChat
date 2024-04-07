@@ -5,10 +5,11 @@ import { memo, useMemo, useRef } from 'react';
 
 const { Item } = List;
 
-const useStyles = createStyles(({ css, token, responsive }) => {
+const useStyles = createStyles(({ css, token }) => {
   return {
     container: css`
       position: relative;
+
       margin-block: 2px;
       padding-right: 16px;
       padding-left: 8px;

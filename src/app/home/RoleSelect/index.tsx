@@ -21,12 +21,12 @@ const RoleSelect = () => {
         if (!agent) return null;
         const isActive = activeId === agent.agentId;
         return (
-          <div style={{ position: 'relative' }} key={agent.agentId}>
+          <div key={agent.agentId} style={{ position: 'relative' }}>
             <Avatar
-              src={agent.meta.avatar}
-              size={AvatarSize}
-              onClick={() => switchSession(agent.agentId)}
               className={isActive ? styles.active : ''}
+              onClick={() => switchSession(agent.agentId)}
+              size={AvatarSize}
+              src={agent.meta.avatar}
             />
             {isActive ? (
               <>

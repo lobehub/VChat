@@ -1,12 +1,13 @@
 'use client';
 
 import PanelContainer from '@/panels/PanelContainer';
+import React from 'react';
 import Agent from './Agent';
 import { useStyles } from './style';
 
 interface ControlPanelProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const ControlPanel = (props: ControlPanelProps) => {
@@ -14,7 +15,7 @@ const ControlPanel = (props: ControlPanelProps) => {
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="agent" title="角色订阅">
+    <PanelContainer className={className} panelKey="agent" style={style} title="角色订阅">
       <div className={styles.content}>
         <Agent />
       </div>

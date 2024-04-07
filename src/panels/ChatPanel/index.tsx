@@ -2,13 +2,14 @@
 
 import PanelContainer from '@/panels/PanelContainer';
 import classNames from 'classnames';
+import React from 'react';
 import ChatBot from './ChatBot';
 import SideBar from './SideBar';
 import { useStyles } from './style';
 
 interface ChatPanelProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const ChatPanel = (props: ChatPanelProps) => {
@@ -16,8 +17,8 @@ const ChatPanel = (props: ChatPanelProps) => {
   const { styles } = useStyles();
 
   return (
-    <PanelContainer style={style} className={className} panelKey="chat" title="聊天">
-      <div style={style} className={classNames(className, styles.content)}>
+    <PanelContainer className={className} panelKey="chat" style={style} title="聊天">
+      <div className={classNames(className, styles.content)} style={style}>
         <SideBar />
         <ChatBot />
       </div>

@@ -19,7 +19,6 @@ const SubscribeButton = (props: SubscribeButtonProps) => {
 
   return (
     <Button
-      type={isSubscribed ? 'default' : 'primary'}
       onClick={() => {
         if (isSubscribed) {
           unsubscribe(agent.agentId);
@@ -27,6 +26,7 @@ const SubscribeButton = (props: SubscribeButtonProps) => {
           subscribe(agent);
         }
       }}
+      type={isSubscribed ? 'default' : 'primary'}
     >
       {isSubscribed ? '取消订阅' : '订阅'}
     </Button>

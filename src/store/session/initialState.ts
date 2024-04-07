@@ -8,12 +8,12 @@ const defaultSession: Session = {
 
 const initialState = {
   activeId: defaultSession.agentId,
-  localAgentList: DEFAULT_AGENTS,
-  sessionList: [defaultSession],
   chatLoadingId: undefined,
-  voiceOn: true,
-  viewerMode: true,
+  localAgentList: DEFAULT_AGENTS,
   messageInput: '',
+  sessionList: [defaultSession],
+  viewerMode: true,
+  voiceOn: true,
 };
 
 export { initialState };

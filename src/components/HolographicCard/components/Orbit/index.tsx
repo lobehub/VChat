@@ -6,33 +6,29 @@ import { useStyles } from './styles';
 export interface OrbitProps {
   children?: ReactNode;
   className?: string;
-  style?: CSSProperties;
-
   classNames?: {
     container?: string;
-    translator?: string;
-    rotator?: string;
     content?: string;
+    rotator?: string;
+    translator?: string;
   };
-  /**
-   * @default: 400
-   */
-  width?: number;
-  /**
-   * @default: 560
-   */
-  height?: number;
-  styles?: {
-    container?: CSSProperties;
-    translator?: CSSProperties;
-    rotator?: CSSProperties;
-    content?: CSSProperties;
-  };
+
+  damping?: number;
   /**
    * 延迟恢复动画的时间，单位：ms
    * @default: 500
    */
   delay?: number;
+  /**
+   * @default: false
+   */
+  followPointer?: boolean;
+  /**
+   * @default: 560
+   */
+  height?: number;
+  onMouseMove?: MouseEventHandler<HTMLDivElement>;
+  onMouseOut?: MouseEventHandler<HTMLDivElement>;
   /**
    * 可旋转方向
    * @default both
@@ -42,13 +38,17 @@ export interface OrbitProps {
    * @default: 1
    */
   sensitivity?: number;
-  damping?: number;
-  onMouseMove?: MouseEventHandler<HTMLDivElement>;
-  onMouseOut?: MouseEventHandler<HTMLDivElement>;
+  style?: CSSProperties;
+  styles?: {
+    container?: CSSProperties;
+    content?: CSSProperties;
+    rotator?: CSSProperties;
+    translator?: CSSProperties;
+  };
   /**
-   * @default: false
+   * @default: 400
    */
-  followPointer?: boolean;
+  width?: number;
 }
 
 const Orbit = forwardRef<HTMLDivElement, OrbitProps>(
@@ -100,18 +100,21 @@ const Orbit = forwardRef<HTMLDivElement, OrbitProps>(
       const calcY = () => round((center.y / 2) * sensitivity);
 
       switch (orbitDirection) {
-        case 'both':
+        case 'both': {
           x = calcX();
           y = calcY();
           break;
+        }
 
-        case 'horizontal':
+        case 'horizontal': {
           x = calcX();
           break;
+        }
 
-        case 'vertical':
+        case 'vertical': {
           y = calcY();
           break;
+        }
       }
 
       api.start({ rotate: [x, y] });
@@ -126,17 +129,17 @@ const Orbit = forwardRef<HTMLDivElement, OrbitProps>(
     return (
       <animated.div
         className={cx(styles.container, classNames.container)}
+        ref={ref}
         style={
           {
             '--card-aspect': width / height,
             '--rotate-x': rotate.to((x) => `${x}deg`),
             '--rotate-y': rotate.to((_, y) => `${y}deg`),
-            width,
             height,
+            width,
             ...outStyles.container,
           } as CSSProperties
         }
-        ref={ref}
         {...res}
       >
         <div className={cx(styles.translator, classNames.translator)} style={outStyles.translator}>

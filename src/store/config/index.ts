@@ -6,31 +6,16 @@ import { shallow } from 'zustand/shallow';
 import { createWithEqualityFn } from 'zustand/traditional';
 import { StateCreator } from 'zustand/vanilla';
 import { ConfigState, initialState } from './initialState';
-import { configSelectors } from './selectors/config';
+
 
 const CONFIG_STORAGE_KEY = 'vidol-chat-config-storage';
 
 export interface ConfigAction {
   /**
-   * Set panel config
-   * @param panel
-   * @param config
+   * Close panel
+   * @param key
    */
-  setPanel: (panel: PanelKey, config: Partial<Panel>) => void;
-  /**
-   * Set config
-   * @param config
-   */
-  setConfig: (config: Partial<Config>) => void;
-  /**
-   * Reset config
-   */
-  resetConfig: () => void;
-  /**
-   * Set OpenAI config
-   * @param config
-   */
-  setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
+  closePanel: (key: PanelKey) => void;
   /**
    * Focus panel
    * @param key
@@ -42,37 +27,31 @@ export interface ConfigAction {
    */
   openPanel: (key: PanelKey) => void;
   /**
-   * Close panel
-   * @param key
+   * Reset config
    */
-  closePanel: (key: PanelKey) => void;
+  resetConfig: () => void;
+  /**
+   * Set config
+   * @param config
+   */
+  setConfig: (config: Partial<Config>) => void;
+  /**
+   * Set OpenAI config
+   * @param config
+   */
+  setOpenAIConfig: (config: Partial<Config['languageModel']['openAI']>) => void;
+  /**
+   * Set panel config
+   * @param panel
+   * @param config
+   */
+  setPanel: (panel: PanelKey, config: Partial<Panel>) => void;
 }
 
 export interface ConfigStore extends ConfigState, ConfigAction {}
 
 const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (set, get) => ({
   ...initialState,
-  setPanel: (panel, config) => {
-    const prevSetting = get().panel[panel];
-    const nextSetting = produce(prevSetting, (draftState) => {
-      merge(draftState, config);
-    });
-
-    if (isEqual(prevSetting, nextSetting)) return;
-    set((state) => ({
-      panel: {
-        ...state.panel,
-        [panel]: nextSetting,
-      },
-    }));
-  },
-
-  openPanel: (key: PanelKey) => {
-    const { setPanel, focusPanel } = get();
-    setPanel(key, { open: true });
-    focusPanel(key);
-  },
-
   closePanel: (key: PanelKey) => {
     const { setPanel, focusList } = get();
     setPanel(key, { open: false });
@@ -82,8 +61,14 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
 
   focusPanel: (key: PanelKey) => {
     const { focusList } = get();
-    let nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
+    const nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
     set({ focusList: nextSetting });
+  },
+
+  openPanel: (key: PanelKey) => {
+    const { setPanel, focusPanel } = get();
+    setPanel(key, { open: true });
+    focusPanel(key);
   },
 
   resetConfig: () => {
@@ -99,8 +84,23 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
     if (isEqual(prevSetting, nextSetting)) return;
     set({ config: nextSetting });
   },
+
   setOpenAIConfig: (config) => {
     get().setConfig({ languageModel: { openAI: config } });
+  },
+  setPanel: (panel, config) => {
+    const prevSetting = get().panel[panel];
+    const nextSetting = produce(prevSetting, (draftState) => {
+      merge(draftState, config);
+    });
+
+    if (isEqual(prevSetting, nextSetting)) return;
+    set((state) => ({
+      panel: {
+        ...state.panel,
+        [panel]: nextSetting,
+      },
+    }));
   },
 });
 
@@ -114,4 +114,6 @@ export const useConfigStore = createWithEqualityFn<ConfigStore>()(
   shallow,
 );
 
-export { configSelectors };
+
+
+export {configSelectors} from './selectors/config';

@@ -6,10 +6,13 @@ import { StateCreator } from 'zustand/vanilla';
 
 export interface DanceStore {
   // 更改这里
-  currentDanceId: string; // 更改这里
-  danceList: Dance[]; // 更改这里
+  activateDance: (identifier: string) => void; 
+  // 更改这里
+  currentDanceId: string; 
+  // 更改这里
+  danceList: Dance[]; 
+  // 更改这里
   danceLoading: boolean; // 更改这里
-  activateDance: (identifier: string) => void; // 更改这里
   deactivateDance: () => void; // 更改这里
   fetchDanceIndex: () => void; // 更改这里
 }
@@ -22,13 +25,18 @@ export const createDanceStore: StateCreator<
   DanceStore // 更改这里
 > = (set, get) => {
   return {
-    currentDanceId: '', // 更改这里
-    danceList: [], // 更改这里
-    danceLoading: false, // 更改这里
-    activateDance: (identifier) => {
+    // 更改这里
+activateDance: (identifier) => {
       // 更改这里
       set({ currentDanceId: identifier }); // 更改这里
-    },
+    }, 
+    
+currentDanceId: '', 
+    
+// 更改这里
+danceList: [], 
+    // 更改这里
+danceLoading: false,
     deactivateDance: () => {
       // 更改这里
       set({ currentDanceId: undefined }); // 更改这里
@@ -40,7 +48,7 @@ export const createDanceStore: StateCreator<
         const { dances = [] } = await getDanceIndex();
         const { danceList } = get(); // 更改这里
         if (!isEqual(danceList, dances)) set({ danceList: dances }); // 更改这里
-      } catch (error) {
+      } catch {
         set({ danceList: [] }); // 更改这里
       } finally {
         set({ danceLoading: false }); // 更改这里

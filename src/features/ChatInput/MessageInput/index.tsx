@@ -16,7 +16,7 @@ const useStyles = createStyles(({ css }) => {
   };
 });
 
-const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
+const InputArea = memo(() => {
   const { styles } = useStyles();
   const ref = useRef<InputRef>(null);
   const isChineseInput = useRef(false);
@@ -57,17 +57,17 @@ const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
           e.preventDefault();
           onSend();
         }}
-        ref={ref}
         placeholder="请输入内容开始聊天"
+        ref={ref}
         type={'block'}
         value={messageInput}
       />
       <Button
-        type="primary"
         onClick={() => {
           if (loading) return;
           onSend();
         }}
+        type="primary"
       >
         发送
       </Button>

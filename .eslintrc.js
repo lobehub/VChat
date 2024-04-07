@@ -14,5 +14,10 @@ config.rules['unicorn/no-useless-undefined'] = 0;
 config.rules['react/no-unknown-property'] = 0;
 config.rules['unicorn/prefer-ternary'] = 0;
 config.rules['unicorn/prefer-spread'] = 0;
+config.rules['unicorn/catch-error-name'] = 0;
+config.rules['unicorn/no-array-for-each'] = 0;
+config.rules['unicorn/prefer-number-properties'] = 0;
+config.rules['sort-keys-fix/sort-keys-fix'] = 0;
+config.rules['react/jsx-sort-props'] = 0;
 
 module.exports = config;

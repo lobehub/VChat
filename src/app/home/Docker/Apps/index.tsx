@@ -15,8 +15,8 @@ const Apps = () => {
       {apps.map((app) => {
         return (
           <Application
-            key={app.key}
             avatar={app.avatar}
+            key={app.key}
             name={app.label}
             onClick={() => {
               openPanel(app.key as PanelKey);

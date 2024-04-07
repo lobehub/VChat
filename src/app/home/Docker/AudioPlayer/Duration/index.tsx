@@ -3,23 +3,23 @@ import { memo } from 'react';
 import { useStyles } from './style';
 
 interface DurationProps {
-  duration: number;
   currentProgress: number;
+  duration: number;
+}
+
+function formatDurationDisplay(duration: number) {
+  const min = Math.floor(duration / 60);
+  const sec = Math.floor(duration - min * 60);
+  return [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':');
 }
 
 const Duration = (props: DurationProps) => {
   const { duration, currentProgress } = props;
   const { styles } = useStyles();
 
-  function formatDurationDisplay(duration: number) {
-    const min = Math.floor(duration / 60);
-    const sec = Math.floor(duration - min * 60);
-    return [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':');
-  }
-
   return (
     <div className={styles.duration}>
-      <span style={{ marginRight: 8 }} className={styles.counter}>
+      <span className={styles.counter} style={{ marginRight: 8 }}>
         {formatDurationDisplay(currentProgress)}
       </span>
       <ConfigProvider
@@ -33,14 +33,14 @@ const Duration = (props: DurationProps) => {
         }}
       >
         <Slider
-          min={0}
           max={duration}
-          value={currentProgress}
+          min={0}
+          style={{ margin: 0, width: '100%' }}
           tooltip={{ open: false }}
-          style={{ width: '100%', margin: 0 }}
+          value={currentProgress}
         />
       </ConfigProvider>
-      <span style={{ marginLeft: 8 }} className={styles.counter}>
+      <span className={styles.counter} style={{ marginLeft: 8 }}>
         {formatDurationDisplay(duration)}
       </span>
     </div>

@@ -6,52 +6,61 @@ import { useRequest } from 'ahooks';
 import { Button, Divider, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const FormItem = Form.Item;
 
 interface ConfigProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const suportedLocales = [
   {
     label: '中文(普通话)',
-    value: 'zh-CN',
     samples: ['哈喽，早上好', '正在为你准备我的整个世界', '你好，旅行者!'],
+    value: 'zh-CN',
   },
   {
     label: '日语(日本)',
-    value: 'ja-JP',
     samples: [
       'こんにちは、おはようございます！',
       'あなたのために私の全世界を準備しています',
       'こんにちは、旅行者さん！',
     ],
+    value: 'ja-JP',
   },
   {
     label: '英语(美国)',
-    value: 'en-US',
     samples: ['Hello, traveler!', "I'm preparing my whole world for you.", 'Hello, traveler!'],
+    value: 'en-US',
   },
   {
     label: '韩语(韩国)',
-    value: 'ko-KR',
     samples: [
       '안녕하세요, 여행자!',
       '당신을 위해 내 전 세계를 준비하고 있습니다.',
       '안녕, 여행자!',
     ],
+    value: 'ko-KR',
   },
   {
     label: '中文(粤语)',
-    value: 'zh-HK',
     samples: ['哈喽，早晨好', '正在为您准备我的整个世界', '你好，旅行者！'],
+    value: 'zh-HK',
   },
 ];
 
 const useStyles = createStyles(({ css, token }) => ({
+  audio: css`
+    margin-top: 20px;
+  `,
+  config: css`
+    flex: 3;
+    padding: 12px;
+    border: 1px solid ${token.colorBorderSecondary};
+    border-radius: ${token.borderRadius}px;
+  `,
   container: css`
     display: flex;
     flex-direction: column;
@@ -62,15 +71,6 @@ const useStyles = createStyles(({ css, token }) => ({
   message: css`
     flex: 5;
     margin-right: 12px;
-  `,
-  config: css`
-    padding: 12px;
-    border: 1px solid ${token.colorBorderSecondary};
-    border-radius: ${token.borderRadius}px;
-    flex: 3;
-  `,
-  audio: css`
-    margin-top: 20px;
   `,
 }));
 
@@ -92,18 +92,22 @@ const Config = (props: ConfigProps) => {
 
   const { loading, run: speek } = useRequest(speechApi, {
     manual: true,
+    onError: (err) => {
+      message.error(err.message);
+      if (ref.current) {
+        ref.current.pause();
+        ref.current.currentTime = 0;
+        ref.current.src = '';
+      }
+    },
     onSuccess: (res) => {
       message.success('转换成功');
       const adUrl = URL.createObjectURL(new Blob([res]));
       setAudioUrl(adUrl);
-      ref.current && (ref.current.src = adUrl);
-      ref.current && ref.current.play();
-    },
-    onError: (err) => {
-      message.error(err.message);
-      ref.current && ref.current.pause();
-      ref.current && (ref.current.currentTime = 0);
-      ref.current && (ref.current.src = '');
+      if (ref.current) {
+        ref.current.src = adUrl;
+        ref.current.play();
+      }
     },
   });
 
@@ -139,14 +143,15 @@ const Config = (props: ConfigProps) => {
 
   return (
     <Form
+      form={form}
       initialValues={currentAgent?.tts}
-      onFinish={(values) => {
+      layout="horizontal"
+      onFinish={() => {
         form.validateFields().then((values) => {
           updateAgentConfig({ tts: values });
           message.success('保存成功');
         });
       }}
-      preserve={false}
       onValuesChange={(changedValues) => {
         if (changedValues.engine) {
           getVoiceList();
@@ -155,20 +160,19 @@ const Config = (props: ConfigProps) => {
           form.setFieldsValue({ voice: undefined });
         }
       }}
-      layout="horizontal"
+      preserve={false}
       requiredMark={false}
-      form={form}
     >
-      <div style={style} className={classNames(className, styles.container)}>
+      <div className={classNames(className, styles.container)} style={style}>
         <div className={styles.form}>
           <div className={styles.message}>
             <FormItem dependencies={['locale']} noStyle>
               {() => (
-                <FormItem name="message" style={{ marginBottom: 0 }} extra={getExtraNode()}>
+                <FormItem extra={getExtraNode()} name="message" style={{ marginBottom: 0 }}>
                   <Input.TextArea
-                    placeholder="请输入要转换的文字"
-                    maxLength={800}
                     autoSize={{ maxRows: 18, minRows: 18 }}
+                    maxLength={800}
+                    placeholder="请输入要转换的文字"
                   />
                 </FormItem>
               )}
@@ -197,12 +201,12 @@ const Config = (props: ConfigProps) => {
                 <FormItem
                   label={'语音'}
                   name="voice"
-                  rules={[{ required: true, message: '请选择语音' }]}
+                  rules={[{ message: '请选择语音', required: true }]}
                 >
                   <Select
-                    loading={voiceLoading}
-                    disabled={voiceLoading}
                     defaultActiveFirstOption
+                    disabled={voiceLoading}
+                    loading={voiceLoading}
                     options={voices
                       .filter((voice) => voice.locale === form.getFieldValue('locale'))
                       .map((item) => ({

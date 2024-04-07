@@ -15,21 +15,22 @@ import { App, Button, Segmented } from 'antd';
 import { ThemeMode, createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { Monitor, Settings2 } from 'lucide-react';
+import React from 'react';
 
 interface CommonConfigProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const useStyles = createStyles(({ css }) => ({
   config: css`
-    justify-content: center;
     display: flex;
     flex-grow: 1;
+    justify-content: center;
   `,
   effect: css`
-    margin-bottom: 0;
     width: 160px;
+    margin-bottom: 0;
   `,
 }));
 
@@ -51,6 +52,7 @@ const CommonConfig = (props: CommonConfigProps) => {
     modal.confirm({
       cancelText: '取消',
       centered: true,
+      content: '操作无法撤销，清除后数据将无法恢复，请慎重操作',
       okButtonProps: {
         danger: true,
       },
@@ -60,7 +62,6 @@ const CommonConfig = (props: CommonConfigProps) => {
         message.success('清除成功');
       },
       title: '确认清除所有会话消息?',
-      content: '操作无法撤销，清除后数据将无法恢复，请慎重操作',
     });
   };
 
@@ -68,6 +69,7 @@ const CommonConfig = (props: CommonConfigProps) => {
     modal.confirm({
       cancelText: '取消',
       centered: true,
+      content: '操作无法撤销，重置后数据将无法恢复，请慎重操作',
       okButtonProps: {
         danger: true,
       },
@@ -77,12 +79,11 @@ const CommonConfig = (props: CommonConfigProps) => {
         message.success('重置成功');
       },
       title: '确认重置所有系统设置?',
-      content: '操作无法撤销，重置后数据将无法恢复，请慎重操作',
     });
   };
 
   return (
-    <div style={style} className={classNames(styles.config, className)}>
+    <div className={classNames(styles.config, className)} style={style}>
       <Form style={{ display: 'flex', flexGrow: 1 }}>
         <FormGroup icon={Settings2} title={'主题设置'}>
           <FormItem desc={'主题色'} divider label={'自定义主题色'} name={'primaryColor'}>
@@ -110,15 +111,15 @@ const CommonConfig = (props: CommonConfigProps) => {
           </FormItem>
           <FormItem desc={'自定义主题模式'} divider label={'主题模式'} name={'themeMode'}>
             <CheckCard.Group
-              size="small"
               defaultValue={themeMode}
               onChange={(value) => {
                 setThemeMode(value as ThemeMode);
               }}
+              size="small"
             >
-              <CheckCard title="🔆 亮色模式" value="light" className={styles.effect} />
-              <CheckCard title="🌙 暗色模式" value="dark" className={styles.effect} />
-              <CheckCard title="💻 跟随系统" value="auto" className={styles.effect} />
+              <CheckCard className={styles.effect} title="🔆 亮色模式" value="light" />
+              <CheckCard className={styles.effect} title="🌙 暗色模式" value="dark" />
+              <CheckCard className={styles.effect} title="💻 跟随系统" value="auto" />
             </CheckCard.Group>
           </FormItem>
           <FormItem
@@ -151,7 +152,7 @@ const CommonConfig = (props: CommonConfigProps) => {
             divider
             label={'清除所有会话消息'}
           >
-            <Button danger type={'primary'} onClick={handleClear}>
+            <Button danger onClick={handleClear} type={'primary'}>
               立即清除
             </Button>
           </FormItem>
@@ -160,7 +161,7 @@ const CommonConfig = (props: CommonConfigProps) => {
             divider
             label={'重置系统设置'}
           >
-            <Button danger type={'primary'} onClick={handleReset}>
+            <Button danger onClick={handleReset} type={'primary'}>
               立即重置
             </Button>
           </FormItem>

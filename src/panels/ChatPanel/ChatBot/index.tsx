@@ -1,13 +1,13 @@
 import classNames from 'classnames';
-import { memo } from 'react';
-import ChatHeader from './ChatHeader';
+import React, { memo } from 'react';
 import ChatInput from '../../../features/ChatInput';
+import ChatHeader from './ChatHeader';
 import ChatList from './ChatList';
 import { useStyles } from './style';
 
 interface ChatBotProps {
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const ChatBot = (props: ChatBotProps) => {

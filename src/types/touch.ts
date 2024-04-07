@@ -5,18 +5,18 @@ export const emotions = ['neutral', 'happy', 'angry', 'sad', 'relaxed'] as const
 export type EmotionType = (typeof emotions)[number] | VRMExpressionPresetName;
 
 export enum TouchAreaEnum {
-  Head = 'head',
   Arm = 'arm',
-  Leg = 'leg',
-  Chest = 'chest',
   Belly = 'belly',
+  Chest = 'chest',
+  Head = 'head',
+  Leg = 'leg'
 }
 
 export interface TouchAction {
-  text: string;
-  motion?: string;
   emotion: EmotionType;
   enabled: boolean;
+  motion?: string;
+  text: string;
 }
 
 export interface TouchActionConfig {

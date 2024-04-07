@@ -7,14 +7,14 @@ import { isEqual } from 'lodash-es';
 import { StateCreator } from 'zustand/vanilla';
 
 export interface DanceListStore {
-  isPlaying: boolean;
-  setIsPlaying: (isPlaying: boolean) => void;
+  activateDance: (identifier: string) => void;
   currentIdentifier: string;
   danceList: Dance[];
   danceLoading: boolean;
-  activateDance: (identifier: string) => void;
   deactivateDance: () => void;
   fetchDanceIndex: () => void;
+  isPlaying: boolean;
+  setIsPlaying: (isPlaying: boolean) => void;
   subscribe: (dance: Dance) => void;
   unsubscribe: (danceId: string) => void;
 }
@@ -26,16 +26,12 @@ export const createDanceStore: StateCreator<
   DanceListStore
 > = (set, get) => {
   return {
-    isPlaying: false,
-    currentIdentifier: '',
-    danceList: [DEFAULT_DANCE],
-    danceLoading: false,
-    setIsPlaying: (isPlaying) => {
-      set({ isPlaying });
-    },
     activateDance: (identifier) => {
       set({ currentIdentifier: identifier });
     },
+    currentIdentifier: '',
+    danceList: [DEFAULT_DANCE],
+    danceLoading: false,
     deactivateDance: () => {
       set({ currentIdentifier: undefined });
     },
@@ -45,11 +41,15 @@ export const createDanceStore: StateCreator<
         const { dances = [] } = await getDanceIndex();
         const { danceList } = get();
         if (!isEqual(danceList, dances)) set({ danceList: dances });
-      } catch (error) {
+      } catch {
         set({ danceList: [] });
       } finally {
         set({ danceLoading: false });
       }
+    },
+    isPlaying: false,
+    setIsPlaying: (isPlaying) => {
+      set({ isPlaying });
     },
     subscribe: (dance) => {
       const { danceList } = get();
@@ -72,7 +72,7 @@ export const createDanceStore: StateCreator<
           draft.splice(index, 1);
         }
       });
-      set({ danceList: newList, currentIdentifier: newList[0]?.danceId });
+      set({ currentIdentifier: newList[0]?.danceId, danceList: newList });
     },
   };
 };

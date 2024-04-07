@@ -12,6 +12,6 @@ const currentAgentItem = (s: MarketStore): Agent | undefined => {
 };
 
 export const agentSelectors = {
-  showAgentSideBar,
   currentAgentItem,
+  showAgentSideBar,
 };

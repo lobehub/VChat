@@ -13,7 +13,7 @@ import Docker from './Docker';
 const Desktop = () => {
   const [panel] = useConfigStore((s) => [s.panel]);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', position: 'relative' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', width: '100%' }}>
       <Header />
       <div style={{ height: 'calc(100vh - 64px - 64px)' }}>
         <VirtualIdol />

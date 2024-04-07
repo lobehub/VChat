@@ -68,7 +68,6 @@ const Item = memo<ChatListItemProps>(({ index, id, showTitle = false, type = 'bl
       <ChatItem
         actions={<ActionsBar index={index} setEditing={setEditing} />}
         avatar={item.meta}
-        showTitle={showTitle}
         className={styles.message}
         editing={editing}
         error={error}
@@ -88,6 +87,7 @@ const Item = memo<ChatListItemProps>(({ index, id, showTitle = false, type = 'bl
         renderMessage={(editableContent) => (
           <RenderMessage data={item} editableContent={editableContent} />
         )}
+        showTitle={showTitle}
         text={{
           cancel: '取消',
           confirm: '确定',
