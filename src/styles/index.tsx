@@ -3,4 +3,4 @@ import global from './global';
 
 const prefixCls = 'ant';
 
-export const GlobalStyle = createGlobalStyle(({ theme }) => [global({ prefixCls })]);
+export const GlobalStyle = createGlobalStyle(() => [global({ prefixCls })]);

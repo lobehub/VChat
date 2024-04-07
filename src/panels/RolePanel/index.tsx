@@ -2,7 +2,7 @@
 
 import PanelContainer from '@/panels/PanelContainer';
 import { TabsNav } from '@lobehub/ui';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Info from './Info';
 import Role from './Role';
 import Touch from './Touch';

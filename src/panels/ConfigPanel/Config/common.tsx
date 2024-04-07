@@ -15,6 +15,7 @@ import { App, Button, Segmented } from 'antd';
 import { ThemeMode, createStyles, useTheme } from 'antd-style';
 import classNames from 'classnames';
 import { Monitor, Settings2 } from 'lucide-react';
+import React from 'react';
 
 interface CommonConfigProps {
   className?: string;

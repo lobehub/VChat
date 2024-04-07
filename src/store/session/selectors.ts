@@ -20,6 +20,11 @@ const currentChatIDs = (s: SessionStore): string[] => {
   return session.messages.map((item) => item.id);
 };
 
+const currentAgent = (s: SessionStore): Agent | undefined => {
+  const { activeId, localAgentList } = s;
+  return localAgentList.find((item) => item.agentId === activeId);
+};
+
 const currentChats = (s: SessionStore): ChatMessage[] => {
   const session = currentSession(s);
   const agent = currentAgent(s);
@@ -64,11 +69,6 @@ const currentSystemRole = (s: SessionStore): string => {
   const agent = currentAgent(s);
   if (!agent) return '';
   return agent.systemRole;
-};
-
-const currentAgent = (s: SessionStore): Agent | undefined => {
-  const { activeId, localAgentList } = s;
-  return localAgentList.find((item) => item.agentId === activeId);
 };
 
 const currentAgentModel = (s: SessionStore): string => {

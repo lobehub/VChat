@@ -4,7 +4,7 @@ import { configSelectors, useConfigStore } from '@/store/config';
 import { sessionSelectors, useSessionStore } from '@/store/session';
 import { useViewerStore } from '@/store/viewer';
 
-const createHeader = (header?: HeadersInit) => {
+const createHeader = (header?: any) => {
   const config = configSelectors.currentOpenAIConfig(useConfigStore.getState());
   return {
     'Content-Type': 'application/json',

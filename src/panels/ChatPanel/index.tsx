@@ -2,6 +2,7 @@
 
 import PanelContainer from '@/panels/PanelContainer';
 import classNames from 'classnames';
+import React from 'react';
 import ChatBot from './ChatBot';
 import SideBar from './SideBar';
 import { useStyles } from './style';

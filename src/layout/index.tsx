@@ -10,7 +10,7 @@ import { ThemeAppearance, createStyles } from 'antd-style';
 import { ReactNode } from 'react';
 import StoreHydration from './StoreHydration';
 
-const useStyles = createStyles(({ css, token }) => ({
+const useStyles = createStyles(({ css }) => ({
   bg: css`
     overflow-y: hidden;
     display: flex;

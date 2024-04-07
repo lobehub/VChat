@@ -2,7 +2,7 @@ import { useMarketStore } from '@/store/market';
 import { Button } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 const useStyles = createStyles(({ css }) => ({
   actions: css`

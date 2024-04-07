@@ -6,7 +6,7 @@ import { useRequest } from 'ahooks';
 import { Button, Divider, Form, Input, Select, Slider, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const FormItem = Form.Item;
 
@@ -94,16 +94,20 @@ const Config = (props: ConfigProps) => {
     manual: true,
     onError: (err) => {
       message.error(err.message);
-      ref.current && ref.current.pause();
-      ref.current && (ref.current.currentTime = 0);
-      ref.current && (ref.current.src = '');
+      if (ref.current) {
+        ref.current.pause();
+        ref.current.currentTime = 0;
+        ref.current.src = '';
+      }
     },
     onSuccess: (res) => {
       message.success('转换成功');
       const adUrl = URL.createObjectURL(new Blob([res]));
       setAudioUrl(adUrl);
-      ref.current && (ref.current.src = adUrl);
-      ref.current && ref.current.play();
+      if (ref.current) {
+        ref.current.src = adUrl;
+        ref.current.play();
+      }
     },
   });
 
@@ -142,7 +146,7 @@ const Config = (props: ConfigProps) => {
       form={form}
       initialValues={currentAgent?.tts}
       layout="horizontal"
-      onFinish={(values) => {
+      onFinish={() => {
         form.validateFields().then((values) => {
           updateAgentConfig({ tts: values });
           message.success('保存成功');

@@ -61,7 +61,7 @@ const createStore: StateCreator<ConfigStore, [['zustand/devtools', never]]> = (s
 
   focusPanel: (key: PanelKey) => {
     const { focusList } = get();
-    let nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
+    const nextSetting: PanelKey[] = focusList.filter((item) => item !== key).concat(key);
     set({ focusList: nextSetting });
   },
 

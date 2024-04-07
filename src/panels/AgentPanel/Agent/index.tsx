@@ -2,7 +2,7 @@ import { useAgentStore } from '@/store/agent';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import AgentCard from './AgentCard';
 import AgentList from './AgentList';
 

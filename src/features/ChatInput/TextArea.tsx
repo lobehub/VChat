@@ -22,7 +22,11 @@ const useStyles = createStyles(({ css }) => {
   };
 });
 
-const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(({ setExpand }) => {
+interface InputAreaProps {
+  setExpand?: (expand: boolean) => void;
+}
+
+const InputArea = memo<InputAreaProps>(({ setExpand }) => {
   const { styles } = useStyles();
   const ref = useRef<TextAreaRef>(null);
   const isChineseInput = useRef(false);

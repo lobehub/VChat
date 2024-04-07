@@ -1,6 +1,7 @@
 'use client';
 
 import PanelContainer from '@/panels/PanelContainer';
+import React from 'react';
 import Config from './Config';
 import { useStyles } from './style';
 

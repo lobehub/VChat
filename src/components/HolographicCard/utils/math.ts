@@ -4,7 +4,7 @@
  * @param {Number} precision the precision (decimal places), default: 3
  * @returns {Number}
  */
-const round = (value: number, precision: number = 3) => parseFloat(value.toFixed(precision));
+const round = (value: number, precision = 3) => parseFloat(value.toFixed(precision));
 
 /**
  * return a value that has been limited between min & max

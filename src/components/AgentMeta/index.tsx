@@ -7,7 +7,7 @@ interface AgentMetaProps {
   meta?: AgentMeta;
 }
 
-const AgentMeta = (props: AgentMetaProps) => {
+export default (props: AgentMetaProps) => {
   const { styles } = useStyles();
   const { meta } = props;
   const { avatar, name, description } = meta || {};
@@ -24,5 +24,3 @@ const AgentMeta = (props: AgentMetaProps) => {
     </div>
   );
 };
-
-export default AgentMeta;

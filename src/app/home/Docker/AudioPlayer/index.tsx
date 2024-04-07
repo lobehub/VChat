@@ -7,7 +7,7 @@ import { Avatar } from '@lobehub/ui';
 import { Typography } from 'antd';
 import classNames from 'classnames';
 import { ListMusic } from 'lucide-react';
-import { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import PlayList from './PlayList';
 import { useStyles } from './style';
 
@@ -42,12 +42,12 @@ function Player(props: PlayerProps) {
         .then((res) => res.arrayBuffer())
         .then((buffer) => {
           viewer.model?.dance(buffer);
-          ref.current && ref.current.play();
+          ref.current?.play();
         });
     } else {
       viewer.model?.stopDance();
-      ref.current && ref.current.pause();
-      ref.current && (ref.current.currentTime = 0);
+      ref.current?.pause();
+      if (ref.current) ref.current.currentTime = 0;
     }
   }, [isPlaying, currentPlay, viewer]);
 

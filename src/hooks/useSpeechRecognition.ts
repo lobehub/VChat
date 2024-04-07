@@ -7,6 +7,7 @@ interface useSpeechRecognitionProps {
 export const useSpeechRecognition = (props: useSpeechRecognitionProps) => {
   const { onMessage } = props;
   const [isRecording, setIsRecording] = useState<boolean>(false);
+  // eslint-disable-next-line no-undef
   const [speechRecognition, setSpeechRecognition] = useState<SpeechRecognition>();
 
   const handleRecognitionEnd = useCallback(() => {
@@ -26,6 +27,7 @@ export const useSpeechRecognition = (props: useSpeechRecognitionProps) => {
   };
 
   const handleRecognitionResult = useCallback(
+    // eslint-disable-next-line no-undef
     (event: SpeechRecognitionEvent) => {
       const text = event.results[0][0].transcript;
       if (onMessage) onMessage(text, event.results[0].isFinal);

@@ -41,7 +41,7 @@ export const fetchSEE = async (
   if (!data) return;
 
   const reader = data.getReader();
-  const decoder = new TextDecoder('utf-8');
+  const decoder = new TextDecoder('utf8');
 
   let done = false;
 

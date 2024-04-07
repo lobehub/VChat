@@ -1,23 +1,24 @@
 import { useViewerStore } from '@/store/viewer';
 import { ActionIconGroup } from '@lobehub/ui';
 import { Expand, Grid3x3, LandPlot, Orbit, RotateCw, SwitchCamera } from 'lucide-react';
+import React from 'react';
 
 interface ToolBarProps {
   className?: string;
   style?: React.CSSProperties;
 }
 
+const toggleFullScreen = () => {
+  if (!document.fullscreenElement) {
+    document.body.requestFullscreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+};
+
 const ToolBar = (props: ToolBarProps) => {
   const { style, className } = props;
   const viewer = useViewerStore((s) => s.viewer);
-
-  const toggleFullScreen = () => {
-    if (!document.fullscreenElement) {
-      document.body.requestFullscreen();
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  };
 
   const dropdownMenu = [
     {
@@ -61,37 +62,37 @@ const ToolBar = (props: ToolBarProps) => {
       ]}
       onActionClick={(action) => {
         switch (action.key) {
-        case 'resetCamera': {
-          viewer.resetCamera();
-        
-        break;
-        }
-        case 'expand': {
-          toggleFullScreen();
-        
-        break;
-        }
-        case 'grid': {
-          viewer.toggleGrid();
-        
-        break;
-        }
-        case 'cameraHelper': {
-          viewer.toggleCameraHelper();
-        
-        break;
-        }
-        case 'cameraControl': {
-          viewer.toggleCameraControls();
-        
-        break;
-        }
-        case 'floor': {
-          viewer.toggleFloor();
-        
-        break;
-        }
-        // No default
+          case 'resetCamera': {
+            viewer.resetCamera();
+
+            break;
+          }
+          case 'expand': {
+            toggleFullScreen();
+
+            break;
+          }
+          case 'grid': {
+            viewer.toggleGrid();
+
+            break;
+          }
+          case 'cameraHelper': {
+            viewer.toggleCameraHelper();
+
+            break;
+          }
+          case 'cameraControl': {
+            viewer.toggleCameraControls();
+
+            break;
+          }
+          case 'floor': {
+            viewer.toggleFloor();
+
+            break;
+          }
+          // No default
         }
       }}
       style={style}

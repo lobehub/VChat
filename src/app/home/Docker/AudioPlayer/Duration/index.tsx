@@ -7,15 +7,15 @@ interface DurationProps {
   duration: number;
 }
 
+function formatDurationDisplay(duration: number) {
+  const min = Math.floor(duration / 60);
+  const sec = Math.floor(duration - min * 60);
+  return [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':');
+}
+
 const Duration = (props: DurationProps) => {
   const { duration, currentProgress } = props;
   const { styles } = useStyles();
-
-  function formatDurationDisplay(duration: number) {
-    const min = Math.floor(duration / 60);
-    const sec = Math.floor(duration - min * 60);
-    return [min, sec].map((n) => (n < 10 ? '0' + n : n)).join(':');
-  }
 
   return (
     <div className={styles.duration}>

@@ -8,7 +8,7 @@ import { createStyles } from 'antd-style';
 import classNames from 'classnames';
 import { debounce, isEqual } from 'lodash-es';
 import { BotIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 interface ConfigProps {
   className?: string;

@@ -1,4 +1,5 @@
 import { ChatMessage } from '@/types/chat';
+import React from 'react';
 import { DefaultMessage } from './Default';
 
 export type RenderMessage = React.FC<ChatMessage & { editableContent: React.ReactNode }>;

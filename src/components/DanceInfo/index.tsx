@@ -1,7 +1,7 @@
 import { Dance } from '@/types/dance';
 import { Avatar } from '@lobehub/ui';
 import { Space } from 'antd';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import { useStyles } from './style';
 

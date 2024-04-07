@@ -1,7 +1,7 @@
 import { GridBackground } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
-import { memo } from 'react';
+import React, { memo } from 'react';
 import { Center } from 'react-layout-kit';
 import DanceCard from './DanceCard';
 import DanceList from './DanceList';

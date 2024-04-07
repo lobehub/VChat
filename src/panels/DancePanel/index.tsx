@@ -1,6 +1,7 @@
 'use client';
 
 import PanelContainer from '@/panels/PanelContainer';
+import React from 'react';
 import Dance from './Dance';
 import { useStyles } from './style';
 

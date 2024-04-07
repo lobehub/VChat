@@ -16,7 +16,7 @@ const useStyles = createStyles(({ css }) => {
   };
 });
 
-const InputArea = memo<{ setExpand?: (expand: boolean) => void }>(() => {
+const InputArea = memo(() => {
   const { styles } = useStyles();
   const ref = useRef<InputRef>(null);
   const isChineseInput = useRef(false);

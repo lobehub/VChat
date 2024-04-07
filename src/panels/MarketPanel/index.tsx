@@ -2,6 +2,7 @@
 
 import PanelContainer from '@/panels/PanelContainer';
 import { useMarketStore } from '@/store/market';
+import React from 'react';
 import Agent from './Agent';
 import Dance from './Dance';
 import SideNav from './SideNav';

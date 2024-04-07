@@ -3,7 +3,7 @@
 import Panel from '@/components/Panel';
 import { configSelectors, useConfigStore } from '@/store/config';
 import { PanelKey } from '@/types/config';
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 interface PanelContainerProps {
   className?: string;

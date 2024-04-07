@@ -3,6 +3,7 @@ import { Avatar, FormFooter } from '@lobehub/ui';
 import { Button, Form, Input, Upload, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import React from 'react';
 
 const FormItem = Form.Item;
 
@@ -48,12 +49,12 @@ const Info = (props: InfoProps) => {
 
   const { cover, avatar } = currentAgent?.meta || {};
 
-  const uploadButton = (
-    <div>
-      {/* {loading ? <LoadingOutlined /> : <PlusOutlined />} */}
-      <div style={{ marginTop: 8 }}>上传</div>
-    </div>
-  );
+  // const uploadButton = (
+  //   <div>
+  //     {/* {loading ? <LoadingOutlined /> : <PlusOutlined />} */}
+  //     <div style={{ marginTop: 8 }}>上传</div>
+  //   </div>
+  // );
 
   return (
     <Form
@@ -116,6 +117,7 @@ const Info = (props: InfoProps) => {
                 // beforeUpload={beforeUpload}
                 // onChange={handleChange}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img alt="example" src={cover} width={200} />
               </Upload>
             </FormItem>
@@ -123,9 +125,7 @@ const Info = (props: InfoProps) => {
         </div>
         <div className={styles.footer}>
           <FormFooter>
-            <Button htmlType="button" onClick={() => {}}>
-              取消
-            </Button>
+            <Button htmlType="button">取消</Button>
             <Button htmlType="submit" type="primary">
               应用
             </Button>

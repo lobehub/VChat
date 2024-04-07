@@ -3,6 +3,7 @@ import { FormFooter } from '@lobehub/ui';
 import { Button, Form, Input, message } from 'antd';
 import { createStyles } from 'antd-style';
 import classNames from 'classnames';
+import React from 'react';
 
 const FormItem = Form.Item;
 
@@ -51,7 +52,7 @@ const Info = (props: InfoProps) => {
       form={form}
       initialValues={currentAgent}
       layout="horizontal"
-      onFinish={(values) => {
+      onFinish={() => {
         form.validateFields().then((values) => {
           updateAgentConfig(values);
           message.success('保存成功');

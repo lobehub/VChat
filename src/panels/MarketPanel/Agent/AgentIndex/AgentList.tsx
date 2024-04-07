@@ -20,7 +20,7 @@ const AgentList = () => {
       grid={{ column: showAgentSidebar ? 3 : 4, gutter: 8 }}
       loading={agentLoading}
       renderItem={(item) => {
-        const { avatar, name } = item?.meta;
+        const { avatar, name } = item?.meta || {};
         const isSubscribed = subscribed(item.agentId);
         return (
           <List.Item style={{ position: 'relative' }}>

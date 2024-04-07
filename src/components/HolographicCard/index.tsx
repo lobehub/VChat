@@ -46,6 +46,7 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
           {children}
         </div>
       ) : (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           className={styles.img}
           height="921"
@@ -57,6 +58,7 @@ const HolographicCard = memo<HolographicCardProps>(({ img = '', mask, children }
           }}
           src={img}
           width="660"
+          alt="image card"
         />
       )}
     </Container>
