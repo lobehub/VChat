@@ -7,15 +7,18 @@ export const useStyles = createStyles(({ css, cx }) => {
   `;
 
   const shadow = css`
-    box-shadow: rgba(255, 255, 255, 10%) 0 1px 1px 0 inset,
-      rgba(50, 50, 93, 25%) 0 50px 100px -20px, rgba(0, 0, 0, 30%) 0 30px 60px -30px;
-    transition: box-shadow 0.4s ease, opacity 0.33s ease-out;
+    box-shadow:
+      rgba(255, 255, 255, 10%) 0 1px 1px 0 inset,
+      rgba(50, 50, 93, 25%) 0 50px 100px -20px,
+      rgba(0, 0, 0, 30%) 0 30px 60px -30px;
+    transition:
+      box-shadow 0.4s ease,
+      opacity 0.33s ease-out;
   `;
 
   const view = css`
     pointer-events: none;
 
-    transform-style: preserve-3d;
     transform-style: preserve-3d;
 
     overflow: hidden;
@@ -43,7 +46,6 @@ export const useStyles = createStyles(({ css, cx }) => {
       transform: rotateY(0deg);
     `,
     container: css`
-
       --card-radius: 4.55% / 3.5%;
       --card-back: hsl(220deg, 52%, 6%);
       --sunpillar-1: hsl(2deg, 100%, 73%);
@@ -98,13 +100,7 @@ export const useStyles = createStyles(({ css, cx }) => {
           hsl(200deg, 5%, 35%) 60%,
           hsl(320deg, 40%, 10%) 150%
         );
-
-        //background-size: 120% 150%;
-
         background-position: center center;
-
-        //mix-blend-mode: hard-light;
-
         opacity: calc(var(--card-opacity) * 0.75);
         mix-blend-mode: multiply;
         filter: brightness(1.5) contrast(1.4) saturate(1);

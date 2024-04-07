@@ -13,7 +13,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     width: 100%;
     padding: 8px 12px;
 
-    background-color: ${rgba(token.colorbglayout, 0.8)};
+    background-color: ${rgba(token.colorBgLayout, 0.8)};
     backdrop-filter: saturate(180%) blur(10px);
     border-top: 1px solid ${token.colorSplit};
   `,

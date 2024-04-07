@@ -68,7 +68,8 @@ export const createPlayListStore: StateCreator<
         if (currentPlayIndex > 0) {
           playItem(playlist[currentPlayIndex - 1]);
         } else {
-          playItem(playlist.at(-1));
+          const dance = playlist.at(-1);
+          if (dance) playItem(dance);
         }
       }
     },

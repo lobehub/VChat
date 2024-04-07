@@ -5,7 +5,6 @@ import Container from './components/Container';
 const useStyles = createStyles(({ css }) => ({
   img: css`
     transform-style: preserve-3d;
-    transform-style: preserve-3d;
 
     grid-area: 1/1;
 

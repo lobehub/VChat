@@ -14,7 +14,7 @@ export const useStyles = createStyles(({ css, token }) => ({
     margin-left: ${-DIALOG_WIDTH / 2}px;
     padding: ${token.paddingSM}px;
 
-    background-color: ${rgba(token.colorbglayout, 0.8)};
+    background-color: ${rgba(token.colorBgLayout, 0.8)};
     backdrop-filter: saturate(180%) blur(10px);
     border: 1px solid ${token.colorBorder};
     border-radius: ${token.borderRadius}px;

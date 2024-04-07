@@ -14,7 +14,7 @@ export const useStyles = createStyles(({ token, css, cx }) => ({
     padding-inline: 12px !important;
 
     opacity: 0;
-    background: ${rgba(token.colorbgcontainer, 0.5)};
+    background: ${rgba(token.colorBgContainer, 0.5)};
     border-color: ${token.colorFillTertiary} !important;
     border-radius: 16px !important;
   `),

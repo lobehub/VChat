@@ -28,16 +28,21 @@ export const useStyles = createStyles(({ css, cx }) => {
         hsla(0deg, 0%, 0%, 15%) 20%,
         hsla(0deg, 0%, 0%, 25%) 120%
       );
-    background-position: center center, 0% var(--background-y),
+    background-position:
+      center center,
+      0% var(--background-y),
       calc(var(--background-x) + (var(--background-y) * 0.2)) var(--background-y),
       var(--background-x) var(--background-y);
-    background-size: var(--imgsize), 200% 700%, 300% 100%, 200% 100%;
+    background-size:
+      var(--imgsize),
+      200% 700%,
+      300% 100%,
+      200% 100%;
     background-blend-mode: soft-light, hue, hard-light;
     filter: brightness(calc((var(--pointer-from-center) * 0.05) + 0.8)) contrast(1.75) saturate(1.2);
   `;
 
   const shineAfter = css`
-
     --space: 5%;
     --angle: 133deg;
     --imgsize: cover;
@@ -70,10 +75,16 @@ export const useStyles = createStyles(({ css, cx }) => {
         hsla(0deg, 0%, 0%, 15%) 20%,
         hsla(0deg, 0%, 0%, 25%) 120%
       );
-    background-position: center center, 0% var(--background-y),
+    background-position:
+      center center,
+      0% var(--background-y),
       calc((var(--background-x) + (var(--background-y) * 0.2)) * -1) calc(var(--background-y) * -1),
       var(--background-x) var(--background-y);
-    background-size: var(--imgsize), 200% 400%, 195% 100%, 200% 100%;
+    background-size:
+      var(--imgsize),
+      200% 400%,
+      195% 100%,
+      200% 100%;
     background-blend-mode: soft-light, hue, hard-light;
     filter: brightness(calc((var(--pointer-from-center) * 0.4) + 0.85)) contrast(2) saturate(0.5);
     mix-blend-mode: exclusion;
@@ -95,7 +106,6 @@ export const useStyles = createStyles(({ css, cx }) => {
     mix-blend-mode: screen;
 
     mask-image: none;
-    mask-image: none;
   `;
 
   const masked = css`
@@ -106,7 +116,6 @@ export const useStyles = createStyles(({ css, cx }) => {
   `;
 
   const nomasked = css`
-
     --mask: none;
     --foil: none;
     --imgsize: 20%;
@@ -119,7 +128,6 @@ export const useStyles = createStyles(({ css, cx }) => {
     composeShine: cx(
       'aha-shine',
       css`
-
         --space: 5%;
         --angle: 133deg;
         --imgsize: cover;
@@ -158,6 +166,8 @@ export const useStyles = createStyles(({ css, cx }) => {
           transform: translateZ(1px);
           grid-area: 1/1;
           border-radius: var(--card-radius);
+
+          ${shineBefore}
         }
 
         &::after {
@@ -171,17 +181,11 @@ export const useStyles = createStyles(({ css, cx }) => {
           transform: translateZ(1.2px);
           grid-area: 1/1;
           border-radius: var(--card-radius);
+
+          ${shineAfter}
         }
 
         ${shine};
-
-        &::before {
-          ${shineBefore}
-        }
-
-        &::after {
-          ${shineAfter}
-        }
       `,
     ),
 
