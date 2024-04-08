@@ -1,3 +1,4 @@
+import { V_CHAT_DEFAULT_AGENT_ID } from '@/constants/agent';
 import { DEFAULT_USER_AVATAR } from '@/constants/common';
 import { Agent } from '@/types/agent';
 import { ChatMessage } from '@/types/chat';
@@ -88,10 +89,18 @@ const getAgentById = (s: SessionStore) => {
   return (id: string): Agent | undefined => localAgentList.find((item) => item.agentId === id);
 };
 
+const isDefaultAgent = (s: SessionStore) => {
+  return (id: string): boolean => {
+    const agent = getAgentById(s)(id);
+    return agent?.agentId === V_CHAT_DEFAULT_AGENT_ID;
+  };
+};
+
 export const sessionSelectors = {
   currentAgent,
   currentAgentModel,
   currentChatIDs,
+  isDefaultAgent,
   currentChatMessage,
   currentChats,
   currentChatsString,
