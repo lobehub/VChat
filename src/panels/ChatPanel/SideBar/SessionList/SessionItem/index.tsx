@@ -13,7 +13,12 @@ interface SessionItemProps {
 const SessionItem = memo<SessionItemProps>(({ id, onClick }) => {
   const [open, setOpen] = useState(false);
   const [active] = useSessionStore((s) => [s.activeId === id]);
-  const [getAgentById] = useSessionStore((s) => [sessionSelectors.getAgentById(s)]);
+  const [getAgentById, isDefaultAgent] = useSessionStore((s) => [
+    sessionSelectors.getAgentById(s),
+    sessionSelectors.isDefaultAgent(s),
+  ]);
+
+  const isDefault = isDefaultAgent(id);
   const agent = getAgentById(id);
   const { name, description, avatar } = agent?.meta || {};
 
@@ -21,14 +26,14 @@ const SessionItem = memo<SessionItemProps>(({ id, onClick }) => {
 
   return (
     <ListItem
-        actions={actions}
-        active={active}
-        avatar={avatar || ''}
-        description={description || agent?.systemRole}
-        onClick={onClick}
-        showAction={open}
-        title={name}
-      />
+      actions={isDefault ? null : actions}
+      active={active}
+      avatar={avatar || ''}
+      description={description || agent?.systemRole}
+      onClick={onClick}
+      showAction={open}
+      title={name}
+    />
   );
 }, shallow);
 
