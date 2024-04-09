@@ -1,6 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-<h1>VChat.Chat</h1>
+<h1>VChat</h1>
 
 Make Virtual Idols Accessible To EveryOne!
 
