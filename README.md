@@ -1,6 +1,6 @@
 <div align="center"><a name="readme-top"></a>
 
-<h1>VChat.Chat</h1>
+<h1>@LobeHub/VChat</h1>
 
 Make Virtual Idols Accessible To EveryOne!
 
@@ -22,7 +22,8 @@ Make Virtual Idols Accessible To EveryOne!
 
 - [x] 💨 **Vroid Model Preview**: Using the Vroid Editor, you can create and upload your own virtual idol to the website, play with them;
 - [x] 💎 **Exquisite UI Design**: With a carefully designed interface, it offers an elegant appearance and smooth interaction. It supports light and dark themes. PWA support provides a more native-like experience;
-- [x] 🗣️ **MMD Dance Support**: With the support of mmd-parser, you can play vmd files with your favarite idol; Just Dance!
+- [x] 🎇 **MMD Dance Support**: With the support of mmd-parser, you can play vmd files with your favarite idol; Just Dance!
+- [x] 🗣️ **Smooth Conversation Experience**: Fluid responses ensure a smooth conversation experience. It fully supports Markdown rendering, including code highlighting, LaTex formulas and more.
 
 <div align="right">
 
@@ -71,16 +72,16 @@ Contributions of all types are more than welcome, if you are interested in contr
 
 ### More Products
 
-- **[VChat chat agents](https://github.com/v-idol/vidol-chat-agents)** - This is the Agent Index of VChat Chat. VChat Chat accesses index.json from this repo to show user the list of available agents.
-- **[VChat agent sample](https://github.com/v-idol/vidol-agent-sample)** - This is the sample repo to define an AI agent in vidol.chat.
-- **[VChat chat dances](https://github.com/v-idol/vidol-chat-dances)** - This is the Dance Index of VChat Chat. VChat Chat accesses index.json from this repo to show user the play list of available dances.
-- **[VChat dance sample](https://github.com/v-idol/vidol-dance-sample)** - This is the sample repo to define a dance in vidol.chat.
+- **[VChat chat market](https://github.com/v-idol/vidol-chat-agents)** - This is the Market Index of VChat Chat. VChat accesses index.json from this repo to show user the list of available agents.
+- **[VChat agent sample](https://github.com/v-idol/vidol-agent-sample)** - This is the sample repo to define an AI agent in VChat.
+- **[VChat dance sample](https://github.com/v-idol/vidol-dance-sample)** - This is the sample repo to define a dance in VChat.
 
 ### Credits
 
 - **mmd-parser** - <https://github.com/takahirox/mmd-parser>
 - **three-vrm** - <https://github.com/pixiv/three-vrm>
 - **tts-vue** - <https://github.com/LokerL/tts-vue>
+- **lobe-chat** - <https://github.com/lobehub/lobe-chat>
 
 <div align="right">
 
