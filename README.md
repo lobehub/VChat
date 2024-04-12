@@ -1,6 +1,12 @@
 <div align="center"><a name="readme-top"></a>
 
 
+<h1>⚠️ Maintenance Mode</h1>
+<p>VChat has moved into maintenance mode!</p>
+<p>Recommend using <a href="https://github.com/lobehub/lobe-vidol" target="_blank">Lobe Vidol</a> for more custom features</p>
+
+---
+
 <h1>@LobeHub/VChat</h1>
 
 Make Virtual Idols Accessible To EveryOne!
